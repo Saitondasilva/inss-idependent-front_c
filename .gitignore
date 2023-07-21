@@ -1,0 +1,24 @@
+# Comentários começam com "#" e são ignorados pelo Git
+
+# Ignorar arquivos de compilação
+*.o
+*.class
+*.exe
+
+# Ignorar diretórios e arquivos gerados por IDEs
+.idea/
+.vscode/
+
+# Ignorar arquivos temporários
+*.tmp
+*.log
+
+# Ignorar arquivos de configuração com chaves de API ou senhas
+config.ini
+secrets.json
+
+# Ignorar diretório node_modules em projetos JavaScript
+node_modules/
+
+# Ignorar arquivos de cache
+.cache/

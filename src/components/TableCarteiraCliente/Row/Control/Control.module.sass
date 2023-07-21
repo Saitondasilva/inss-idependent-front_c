@@ -1,0 +1,29 @@
+@import ../../../../styles/helpers
+
+.control
+    display: flex
+    align-items: center
+
+.button
+    flex-shrink: 0
+    padding: 10px
+    border-radius: 10%
+    color: #FF6A55
+    box-shadow: 0 0 0 2px #272b30 inset
+    background: #2a85ff
+    +d
+        background: $n3
+    +dark
+        background: $n7
+        +d
+            background: $n6
+    svg
+        fill: $n4
+        transition: fill .2s
+    &:hover
+        svg
+            fill: $p1
+    &:not(:last-child)
+        margin-right: 16px
+
+
