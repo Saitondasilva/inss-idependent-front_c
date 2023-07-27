@@ -11,7 +11,7 @@ import axios from "axios";
 
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
-  const [optionsType, setOptionsType] = useState(['Conta do cliente','Conta do profissional','Conta da empresa']);
+  const [optionsType, setOptionsType] = useState(['--Ecolhe o Banco--','BISTP','AFRILAND','ECOBANK']);
   const [type, setType] = useState(optionsType[0]);
   const [optionsTypeID, setOptionsTypeID] = useState([1,2,3]);
 
@@ -32,14 +32,14 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Dados da Conta"
+      title="Dados Bancario"
       classTitle="title-green"
       
     >
       <div className={styles.description}>
         <Dropdown
           className={styles.field}
-          label="Tipo de Conta"
+          label="Tipo de banco"
           name="type"
           setValue={setType}
           options={optionsType}
@@ -50,9 +50,9 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           className={styles.field}
           label="Senha *"
           name="senha"
-          type="password"
+          type="text"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          required
+          
           onChange={onChangeData}
           value={data1.senha}
         />
@@ -62,7 +62,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           name="senha1"
           type="password"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          required
+          
           onChange={onChangeData}
           value={data1.senha1}
         />

@@ -48,8 +48,9 @@ const SignUp = () => {
         <div className={styles.wrapper}>
         
           
-          <div className={cn("h2", styles.title)}>Registrar</div>
+          <div className={cn("h2", styles.title)}>Registro de Utente</div>
           {visible ? <Entry onConfirm={() => setVisible(false)} data1={data1} setData1={setData1} /> : <Code data1={data1} setData1={setData1}/>}
+
             
         </div>
       </div>

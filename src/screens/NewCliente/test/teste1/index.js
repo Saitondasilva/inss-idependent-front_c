@@ -120,32 +120,20 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       
     >
       <div className={styles.description}>
-      <hr></hr>
       <div className={styles.group}>
-      
-      <span className={styles.field}>
-       <Dropdown
-          className={styles.field1}
-          label="Tipo Documento"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setGenero}
-          options={optionsGenero}
-          onChange={data1.genero=genero}
-          value={genero}
-        /> </span>
-        <TextInput
-          className={styles.field}
-          label="Nº Documento"
-          name="bi"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.bi}
-        />
-       
         <TextInput
           className={styles.field}
           label="Nome *"
+          name="nome"
+          type="text"
+          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          required
+          onChange={onChangeData}
+          value={data1.nome}
+        />
+        <TextInput
+          className={styles.field}
+          label="Sobrenome *"
           name="apelido"
           type="text"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
@@ -153,7 +141,18 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           onChange={onChangeData}
           value={data1.apelido}
         />
-          <TextInput
+        <TextInput
+          className={styles.field}
+          label="Email *"
+          name="email"
+          type="email"
+          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          required
+          onChange={onChangeData}
+          value={data1.email}
+        />
+        
+        <TextInput
           className={styles.field}
           label="Data nascimento *"
           name="data_nasc"
@@ -165,27 +164,14 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         />
         <TextInput
           className={styles.field}
-          label="Nome pai"
-          name="Pai"
-          type="email"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          required
-          onChange={onChangeData}
-          value={data1.email}
-        />
-        
-        
-        <TextInput
-          className={styles.field}
-          label="Nome Mãe"
-          name="mae"
+          label="Whatsapp * ex: (DDD)(número)"
+          name="contacto"
           type="text"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           required
           onChange={onChangeData}
           value={data1.contacto}
         />
-      
         <TextInput
           className={styles.field}
           label="NIF"
@@ -196,7 +182,15 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           onChange={onChangeData}
           value={data1.cpf}
         />
-  
+        <TextInput
+          className={styles.field}
+          label="BI"
+          name="bi"
+          type="text"
+          required
+          onChange={onChangeData}
+          value={data1.bi}
+        />
         <TextInput
           className={styles.field}
           label="Profissão"
@@ -206,8 +200,26 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           onChange={onChangeData}
           value={data1.profissao}
         />
-      
-       
+        <span className={styles.field}>
+       <Dropdown
+          className={styles.field1}
+          label="Banco"
+          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          setValue={setGenero}
+          options={optionsGenero}
+          onChange={data1.banco=genero}
+          value={genero}
+        /> 
+       </span>
+       <TextInput
+          className={styles.field}
+          label="Nº Conta"
+          name="profissao"
+          type="text"
+          required
+          onChange={onChangeData}
+          value={data1.nconta}
+        />
        <span className={styles.field}>
        <Dropdown
           className={styles.field1}
@@ -242,27 +254,64 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           //value={data1.photo}
         />
         */}
-          <span className={styles.field}>
-       <Dropdown
-          className={styles.field1}
-          label="Nacionalidade"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setGenero}
-          options={optionsGenero}
-          onChange={data1.banco=genero}
-          value={genero}
-        /> 
-       </span>
-       
-  
        
       </div>
       
-      
-       
-         
+        <Dropdown
+          className={styles.field}
+          label="Nacionalidade"
+          name="pais"
+          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          setValue={setpais}
+          options={optionsPais}
+          onChange={data1.pais=pais}
+          value={pais}
+        /> 
+        <div className={styles.group} style={{marginBottom: "10px"}}>
+        <TextInput
+            className={styles.field1}
+            label="CEP *"
+            name="cep"
+            type="text"
+            required
+            onChange={onChangeData}
+            value={data1.cep}
+            onBlur={buscarCep}
+            style={{flex: "0 0 calc(90% - 12px)",width: "calc(100% - 12px)",margin: "0 6px 12px"}}
+          />
+          <TextInput
+            className={styles.field1}
+            label="Endereço"
+            name="adress"
+            type="text"
+            tooltip="Maximum 100 characters. No HTML or emoji allowed"
+            required
+            onChange={onChangeData}
+            value={data1.adress}
+            style={{flex: "0 0 calc(90% - 12px)",width: "calc(100% - 12px)",margin: "0 6px 12px"}}
+          />
+          <TextInput
+            className={styles.field1}
+            label="Nº"
+            name="numero_rua"
+            type="text"
+            required
+            onChange={onChangeData}
+            value={data1.numero_rua}
+            style={{flex: "0 0 calc(90% - 12px)",width: "calc(100% - 12px)",margin: "0 6px 12px"}}
+          />
+          <TextInput
+            className={styles.field1}
+            label="Complemento"
+            name="complemento"
+            type="text"
+            required
+            onChange={onChangeData}
+            value={data1.complemento}
+            style={{flex: "0 0 calc(90% - 12px)",width: "calc(100% - 12px)",margin: "0 6px 12px"}}
+          />
           
-      
+      </div>
       
       
         {

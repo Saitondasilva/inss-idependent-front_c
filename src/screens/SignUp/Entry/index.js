@@ -6,7 +6,8 @@ import Image from "../../../components/Image";
 import DadosPessoais from "../../NewCliente/DadosPessoais";
 import DadosSociais from "../../NewCliente/DadosSociais";
 import DadosPagamento from "../../NewCliente/DadosPagamento";
-import DadosConta from "../../NewCliente/DadosConta";
+import DadosConta from "../../NewCliente/DadosBancaria";
+import DadosContacto from "../../NewCliente/Contacto";
 import DadosProgresso from "../../NewCliente/DadosProgresso";
 import Panel from "../../NewCliente/Panel";
 import Loader from "../../../components/Loader";
@@ -172,9 +173,11 @@ function Save() {
       */}
       <div className={styles.body}>
       <div className={styles.row}>
-        <div className={styles.col}>
+        <div className={styles.col}>       
           <DadosPessoais className={styles.card} data1={data1} setData1={setData1}/>
           <DadosConta className={styles.card} data1={data1} setData1={setData1}/>
+          <DadosContacto className={styles.card} data1={data1} setData1={setData1}/>
+         
          {/* <DadosSociais className={styles.card} data1={data1} setData1={setData1}/> */} 
           {/*<DadosPagamento className={styles.card} data1={data1} setData1={setData1}/> */}
           <div className={styles.note}>
