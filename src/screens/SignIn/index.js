@@ -52,9 +52,6 @@ const SignIn = () => {
     if (!data1.password) {
       seterrorpassword("*Introduza a sua senha.");
       formIsValid = false;
-    } else if (data1.password.length < 6) {
-      seterrorpassword("*Introduza uma senha com mais de 6 caracteres");
-      formIsValid = false;
     } else {
       seterrorpassword("");
       formIsValid = true;
@@ -94,7 +91,7 @@ const SignIn = () => {
       id_type: data1.id_type
     };
       return axios
-        .post("/candidate/login", data)
+        .post("/login", data)
         .then((response) => {
            const token  =   response.data.data.token;
            const user   =   response.data.data;
@@ -107,10 +104,9 @@ const SignIn = () => {
          dispatch({ type: 'login', playload: user } )
           console.log(token);
           console.log(user);
-          if(data1.id_type===2)
+          
           navigate("/home");
-          if(data1.id_type===1)
-          navigate("/busca/profissional");
+        
           return response;
           
         })
@@ -194,27 +190,7 @@ const SignIn = () => {
           options={optionsPurchase}
         /> 
         */}
-        <Radio
-        className={styles.radio}
-        name="id_type"
-        value={radioType.cliente}
-        onChange={() => data1.id_type=1}
-        content="Cliente"
-      />
-      <Radio
-        className={styles.radio}
-        name="id_type"
-        value={radioType.profissional}
-        onChange={() => data1.id_type=2}
-        content="Profissional"
-      />
-      <Radio
-        className={styles.radio}
-        name="id_type"
-        value={radioType.empresa}
-        onChange={() => data1.id_type=3}
-        content="Empresa"
-      />
+        
           <TextInput
             className={styles.field}
             name="email"

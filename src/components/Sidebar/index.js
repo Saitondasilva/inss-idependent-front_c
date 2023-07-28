@@ -16,7 +16,6 @@ const Sidebar = ({className, onClose }) => {
   var user = localStorage.getItem("userData");
   var userData=JSON.parse(user);
 var navigation=[];
-if(userData && userData.id_type===2){
 
  navigation = [
   {
@@ -213,28 +212,7 @@ if(userData && userData.id_type===2){
   },
   */
 ];
-}
-else if(userData && userData.id_type===1){
- navigation = [
-  {
-    title: "Profissionais",
-    icon: "home",
-    url: "/busca/profissional",
-  },
-  {
-    title: "Minhas consultas",
-    icon: "home",
-    url: "/minhas/consultas",
-  },
-  {
-    title: "Pagamentos",
-    icon: "home",
-    url: "/meus/pagamentos",
-  }
-];
-}else{
- navigation =[];
-}
+
 
   return (
     <>

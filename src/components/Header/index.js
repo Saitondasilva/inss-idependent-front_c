@@ -27,8 +27,7 @@ const Header = ({ onOpen, userData }) => {
       
       
       <div className={styles.control} onClick={() => setVisible(false)}>
-        {
-        userData.id_type===2 &&
+        
         <>
           <Link className={cn("button", styles.button)} to="/cliente/add">
             <Icon name="add" size="24" />
@@ -36,7 +35,7 @@ const Header = ({ onOpen, userData }) => {
           </Link>
           
       </>
-        }
+       
         <Notification className={styles.notification} />
         <User className={styles.user} />
       </div>
