@@ -7,6 +7,9 @@ import Search from "./Search";
 import Messages from "./Messages";
 import Notification from "./Notification";
 import User from "./User";
+import Inscricao from "./Inscricao";
+import Contribuicao from "./Contribuicao";
+import Prestacao from "./Prestacao";
 
 const Header = ({ onOpen, userData }) => {
   const [visible, setVisible] = useState(false);
@@ -23,19 +26,20 @@ const Header = ({ onOpen, userData }) => {
         onClick={() => setVisible(!visible)}
       >
         <Icon name="search" size="24" />
-      </button>
+      </button>      
       
-      
-      <div className={styles.control} onClick={() => setVisible(false)}>
-        
-        <>
+      <div className={styles.control} onClick={() => setVisible(false)}>        
+        {/*<>
           <Link className={cn("button", styles.button)} to="/cliente/add">
             <Icon name="add" size="24" />
             <span>Novo Utente</span>
           </Link>
           
-      </>
-       
+  </>*/}
+      
+       <Inscricao className={styles.notification} />
+       <Contribuicao className={styles.notification} />
+       <Prestacao className={styles.notification} />
         <Notification className={styles.notification} />
         <User className={styles.user} />
       </div>

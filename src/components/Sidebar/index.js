@@ -18,19 +18,21 @@ const Sidebar = ({className, onClose }) => {
 var navigation=[];
 
  navigation = [
-  {
-    title: "Visão Geral",
-    icon: "home",
-    url: "/home",
-  },
+
   {
     title: "Pesquisa Geral",
-    icon: "profile-circle",
+    icon: "search",
     url: "/carteira/cliente",
   },
   {
+    title: "Estatística",
+    icon: "home",
+    url: "/home",
+  },
+ 
+  {
     title: "Contribuições",
-    icon: "diamond",
+    icon: "wright",
     url: "/jornada/cliente",
   },
  
@@ -40,7 +42,7 @@ var navigation=[];
     url: "/analise/progresso",
   },
   {
-    title: "Agregados",
+    title: "Lista Pensionista",
     icon: "heart-fill",
     url: "#",
   }, 

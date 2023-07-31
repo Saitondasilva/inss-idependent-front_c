@@ -98,6 +98,9 @@ const Notification = ({ className }) => {
           onClick={() => {setVisible(!visible); MarkAsRead_all()}}
         >
           <Icon name="notification" size="24" />
+          <span>Notificação</span>
+
+          
         </button>
         <div className={styles.body}>
           <div className={styles.top}>

@@ -209,14 +209,14 @@ data1.step="";
         </div>
         
       </div>
-      <Panel
+      {/*<Panel
         setVisiblePreview={setVisiblePreview}
         setVisibleSchedule={setVisibleModal}
         SaveProfissionalCliente={SaveProfissionalCliente}
         smsError={smsError}
         smsSucess={smsSucess}
         loader={loader}
-      />
+        />*/}
       <TooltipGlodal />
       <Modal visible={visibleModal} onClose={() => setVisibleModal(false)}>
         <Schedule

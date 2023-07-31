@@ -32,20 +32,45 @@ const items = [
 
   
  
-const Inscricao = ({ className }) => {
+const Contribuicao = ({ className }) => {
   const [visible, setVisible] = useState(false);
    const navigate= useNavigate()
 
+  const logout=()=>{ 
+    
+    localStorage.removeItem('user');
+    localStorage.removeItem('userData');
+    localStorage.removeItem('token');
+    const initialState = {
+
+      state: {
+          isFetching: false,
+      },
+      user:{
+    name:"finmap",
+    isAuthenticated:false
+  },
+  }
   
+  
+  const userSlice = createSlice({
+    name: "user",
+    initialState,
+    reducers: {
+      setIsFetching : (state) => {
+          state.state.isFetching = true;
+    }, 
+    }  
+  });
+    console.log("Logout")
+   }
   
   return (
     <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
       <div className={cn(styles.user, className, { [styles.active]: visible })}>
-        <button className={styles.head} onClick={() => {setVisible(!visible)}}>
-
-          
+        <button className={styles.head} onClick={() => setVisible(!visible)}>
         <Icon name="ticket" size="24" />
-         <label>Cadastro</label>
+         <label>Contribuição</label>
         
         </button>
         <div className={styles.body}>
@@ -55,17 +80,10 @@ const Inscricao = ({ className }) => {
                     to="/cliente/add"
                     key={0}
                   >                 
-                    Inscricao Beneficiário
+                    Registro de Contribuição
         </NavLink>
 
-                  <NavLink
-                    className={cn(styles.item)}
-                    activeClassName={styles.active}
-                    to="/cliente/add"
-                    key={0}
-                  >                 
-                    Inscricao Agregado
-                  </NavLink>
+              
           {/*items.map((item, index) => (
             <div className={styles.menu} key={index}>
               {item.menu.map((x, index) =>
@@ -98,4 +116,4 @@ const Inscricao = ({ className }) => {
   );
 };
 
-export default Inscricao;
+export default Contribuicao;

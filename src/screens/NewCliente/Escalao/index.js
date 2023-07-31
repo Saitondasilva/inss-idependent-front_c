@@ -25,9 +25,13 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
   const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
   const [optionsPais, setOptionsPais] = useState([]);
   const [pais, setpais] = useState(optionsPais[0]);
-  const [optionsBanco, setOptionsBanco] = useState(['--Ecolhe um Esclão--','1º Escalão','2º Escalão','3º Escalão','4º Escalão','5º Escalão']);
-  const [banco, setbanco] = useState(optionsBanco[0]);
+  const [optionsEscalao, setOptionsEscalao] = useState(['--Ecolhe um Esclão--','1º Escalão','2º Escalão','3º Escalão','4º Escalão','5º Escalão']);
+  const [escalao, setescalao] = useState(optionsEscalao[0]);
   const [optionsBancoID, setOptionsBancoID] = useState([1,2,3]);
+  const [optionsRegime, setOptionsRegime] = useState(['--Ecolhe um Esclão--','Regime 10%','Regime 14%']);
+  const [regime, setRegime] = useState(optionsRegime[0]);
+  const [optionsRegimeID, setOptionsRegimeID] = useState([1,2,3]);
+ 
   data1.descricao=content;
 
 
@@ -57,10 +61,10 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
           className={styles.field1}
           label="Esclão"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setbanco}
-          options={optionsBanco}
-          onChange={data1.banco=banco}
-          value={banco}
+          setValue={setescalao}
+          options={optionsEscalao}
+          onChange={data1.escalao=escalao}
+          value={escalao}
         /> 
         </span>
        
@@ -71,10 +75,10 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
           className={styles.field1}
           label="Regime Ogrigatório"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setbanco}
-          options={optionsBanco}
-          onChange={data1.banco=banco}
-          value={banco}
+          setValue={setRegime}
+          options={optionsRegime}
+          onChange={data1.regime=regime}
+          value={regime}
         /> 
         </span>
       
