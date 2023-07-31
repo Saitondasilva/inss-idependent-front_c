@@ -28,13 +28,13 @@ const Overview = ({ className,userData }) => {
   },[]);
   const nav = [
     {
-      title: "Gestão de Atendimentos",
+      title: "Total de utentes idependentes",
       counter: TCountCarteira,
       icon: "shopping-bag",
       color: "#B1E5FC",
     },
     {
-      title: "Turmas de mentoria",
+      title: "Total de Devedores",
       counter: TCountTurma,
       icon: "shopping-bag",
       color: "#B1E5FC",
@@ -44,13 +44,13 @@ const Overview = ({ className,userData }) => {
   const nav2 = [
     
     {
-      title: "Contratos pendentes de assinatura",
+      title: "Pag. aguardando confirmação",
       counter: TCountContratoPendente,
       icon: "shopping-bag",
       color: "#B1E5FC",
     },
     {
-      title: "Clientes Inadimplentes",
+      title: "Pag. Não Aprovados",
       counter: TCountContratoActivo,
       icon: "shopping-bag",
       color: "#B1E5FC",

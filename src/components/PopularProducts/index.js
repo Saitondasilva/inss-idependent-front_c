@@ -98,7 +98,7 @@ const PopularProducts = ({ className, views, getNameMounth, userData }) => {
     <>
       <Card
         className={cn(styles.card, className)}
-        title="Próximos atendimentos"
+        title="Ultimas Contribuições Aprovadas"
         classTitle="title-blue"
       >
         <div className={styles.popular}>
@@ -149,7 +149,7 @@ const PopularProducts = ({ className, views, getNameMounth, userData }) => {
             className={cn("button-stroke", styles.button)}
             to="/agenda/profissional"
           >
-            Toda Agenda
+            Todas Contribuições
           </Link>
         </div>
       </Card>
