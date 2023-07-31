@@ -75,7 +75,7 @@ const Scheduled = () => {
           <Table items={products} colluns={colluns} title="Scheduled for" />
         </div>
       </Card>
-      <Panel />
+      <Panel/>
     </>
   );
 };

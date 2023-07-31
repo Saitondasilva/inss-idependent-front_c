@@ -8,6 +8,8 @@ import DadosSociais from "../../NewCliente/DadosSociais";
 import DadosPagamento from "../../NewCliente/DadosPagamento";
 import DadosConta from "../../NewCliente/DadosBancaria";
 import DadosContacto from "../../NewCliente/Contacto";
+import DadosEndereco from "../../NewCliente/Escalao";
+import DadosEscalao from "../../NewCliente/Endereco";
 import DadosProgresso from "../../NewCliente/DadosProgresso";
 import Panel from "../../NewCliente/Panel";
 import Loader from "../../../components/Loader";
@@ -174,13 +176,16 @@ function Save() {
       <div className={styles.body}>
       <div className={styles.row}>
         <div className={styles.col}>       
-          <DadosPessoais className={styles.card} data1={data1} setData1={setData1}/>
+          <DadosPessoais className={styles.card} data1={data1} setData1={setData1}/>         
           <DadosConta className={styles.card} data1={data1} setData1={setData1}/>
+          <DadosEndereco className={styles.card} data1={data1} setData1={setData1}/>
           <DadosContacto className={styles.card} data1={data1} setData1={setData1}/>
+          <DadosEscalao className={styles.card} data1={data1} setData1={setData1}/>
+          
          
          {/* <DadosSociais className={styles.card} data1={data1} setData1={setData1}/> */} 
           {/*<DadosPagamento className={styles.card} data1={data1} setData1={setData1}/> */}
-          <div className={styles.note}>
+         Rodopé <div className={styles.note}>
             <span>
               Ao continuar você concorda com os
             <Link className={styles.link} to="/sign-in"> Temos e Condições </Link>
@@ -196,7 +201,7 @@ function Save() {
         SaveProfissionalCliente={Save}
         smsError={smsError}
         smsSucess={smsSucess}
-      />
+    />
         </div>
       </div>
         

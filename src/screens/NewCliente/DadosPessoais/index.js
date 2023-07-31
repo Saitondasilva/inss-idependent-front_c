@@ -17,14 +17,17 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsGenero, setOptionsGenero] = useState([]);
+  const [optionsGenero, setOptionsGenero] = useState(['--Sexo', 'Masculino', 'Feminino']);
   const [genero, setGenero] = useState(optionsGenero[0]);
-  const [optionsEstadocivil, setOptionsEstadocivil] = useState([]);
+  const [optionsEstadocivil, setOptionsEstadocivil] = useState(['--Escolha e --','Solteiro', 'Casado', 'Viuvo']);
   const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
   const [linguagem, setLinguagem] = useState(optionsLinguagem[0]);
   const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
   const [optionsPais, setOptionsPais] = useState([]);
   const [pais, setpais] = useState(optionsPais[0]);
+  const [optionsDocumento, setOptionsDocumento] = useState(['--Escolha um--', 'BI', 'Cédula PEsoal', 'Cartão estrangeiro']);
+  const [Documento, setDocum] = useState(optionsPais[0]);
+ 
   data1.descricao=content;
 
 
@@ -128,10 +131,10 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           className={styles.field1}
           label="Tipo Documento"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setGenero}
-          options={optionsGenero}
-          onChange={data1.genero=genero}
-          value={genero}
+          setValue={setDocum}
+          options={optionsDocumento}
+          onChange={data1.Documento=Documento}
+          value={Documento}
         /> </span>
         <TextInput
           className={styles.field}
@@ -253,6 +256,15 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           value={genero}
         /> 
        </span>
+       <TextInput
+          className={styles.field}
+          label="Anexo"
+          name="profissao"
+          type="file"
+          required
+          onChange={onChangeData}
+          value={data1.profissao}
+        />
        
   
        

@@ -109,7 +109,7 @@ const Overview = ({ className,userData }) => {
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Visão Geral "
+      title="Estatística"
       classTitle="title-red"
       head={
         <Dropdown

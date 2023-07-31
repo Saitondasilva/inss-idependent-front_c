@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import cn from "classnames";
 import { Link } from "react-router-dom";
-import styles from "./NameAndDescription.module.sass";
+import styles from "./Escalao.module.sass";
 import Card from "../../../components/Card";
 import Icon from "../../../components/Icon";
 import TextInput from "../../../components/TextInput";
@@ -15,7 +15,7 @@ const optionsLinguagem      = ["Português", "Inglês", "Françes", "Espanhol"];
 const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 // const optionsPais        = ["Brasil", "Portugal", "França", "Espanha"];
 
-const NameAndDescription = ({ className, data1, setData1 }) => {
+const EscalaoDesc = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
   const [optionsGenero, setOptionsGenero] = useState([]);
   const [genero, setGenero] = useState(optionsGenero[0]);
@@ -25,7 +25,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
   const [optionsPais, setOptionsPais] = useState([]);
   const [pais, setpais] = useState(optionsPais[0]);
-  const [optionsBanco, setOptionsBanco] = useState(['--Ecolhe o Distrito--','Água-grande','Mé-zochi','Lobata','Cantagalo','Lembá','Caué']);
+  const [optionsBanco, setOptionsBanco] = useState(['--Ecolhe um Esclão--','1º Escalão','2º Escalão','3º Escalão','4º Escalão','5º Escalão']);
   const [banco, setbanco] = useState(optionsBanco[0]);
   const [optionsBancoID, setOptionsBancoID] = useState([1,2,3]);
   data1.descricao=content;
@@ -43,7 +43,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   return (
     <Card    
       className={cn(styles.card, className)}      
-      title="Endereço"       
+      title="Escalao"       
       classTitle="title-green"        
     >
       <div className={styles.description}>
@@ -52,58 +52,24 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       <div className={styles.group}>   
         
         
-        <span className={styles.field}>
-        <TextInput
+      <span className={styles.field}>
+        <Dropdown
           className={styles.field1}
-          label="Lcalidade"
+          label="Esclão"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.nconta}
+          setValue={setbanco}
+          options={optionsBanco}
+          onChange={data1.banco=banco}
+          value={banco}
         /> 
-       </span>
-       <TextInput
-          className={styles.field}
-          label="Lugar ou Rua"
-          name="profissao"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.nconta}
-        />
+        </span>
+       
       
-      <TextInput
-          className={styles.field}
-          label="Nº Porta"
-          name="profissao"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.nconta}
-        />
-        <TextInput
-          className={styles.field}
-          label="Ponto de referencia"
-          name="profissao"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.nconta}
-        />
-        <TextInput
-          className={styles.field}
-          label="Ponto de referencia"
-          name="profissao"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.nconta}
-        />
+        
         <span className={styles.field}>
         <Dropdown
           className={styles.field1}
-          label="Distrito"
+          label="Regime Ogrigatório"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           setValue={setbanco}
           options={optionsBanco}
@@ -151,4 +117,4 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   );
 };
 
-export default NameAndDescription;
+export default EscalaoDesc;

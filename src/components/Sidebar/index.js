@@ -24,15 +24,16 @@ var navigation=[];
     url: "/home",
   },
   {
+    title: "Pesquisa Geral",
+    icon: "profile-circle",
+    url: "/carteira/cliente",
+  },
+  {
     title: "Contribuições",
     icon: "diamond",
     url: "/jornada/cliente",
   },
-  {
-    title: "Todos os Utentes",
-    icon: "profile-circle",
-    url: "/carteira/cliente",
-  },
+ 
   {
     title: "Folha de Pagamento",
     icon: "pie-chart",
@@ -49,7 +50,7 @@ var navigation=[];
     url: "#",
   },
   {
-    title: "Configurações",
+    title: "Parametrização",
     slug: "income",
     icon: "pie-chart",
     dropdown: [

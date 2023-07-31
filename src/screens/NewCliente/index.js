@@ -7,6 +7,10 @@ import DadosPessoais from "./DadosPessoais";
 import DadosSociais from "./DadosSociais";
 import DadosPagamento from "./DadosPagamento";
 import DadosProgresso from "./DadosProgresso";
+import DadosConta from "./DadosBancaria";
+import DadosContacto from "./Contacto";
+import DadosEndereco from "./Endereco";
+import DadosEscalao from "./Escalao";
 import Preview from "./Preview";
 import Panel from "./Panel";
 import axios from "axios";
@@ -175,10 +179,23 @@ data1.step="";
           <DadosPessoais className={styles.card} data1={data1} setData1={setData1}/>
           {
           
-          <DadosProgresso className={styles.card} data1={data1} setData1={setData1}/>
+          <DadosConta className={styles.card} data1={data1} setData1={setData1}/>
           /*
           <DadosPagamento className={styles.card} data1={data1} setData1={setData1} user={user}/>
           */}
+          {
+            <DadosEndereco className={styles.card} data1={data1} setData1={setData1}/>
+          }
+
+          {
+             <DadosContacto className={styles.card} data1={data1} setData1={setData1}/>
+          }
+
+          {
+             <DadosEscalao className={styles.card} data1={data1} setData1={setData1}/>
+          }
+
+
           {
           /*
             <ImagesAndCTA className={styles.card} />
