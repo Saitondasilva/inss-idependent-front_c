@@ -59,7 +59,7 @@ const ProductViews = ({ className, getNameMounth,userData }) => {
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Faturamento"
+      title="Contribuições"
       classTitle="title-purple"
       head={
         <Dropdown
