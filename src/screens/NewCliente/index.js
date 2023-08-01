@@ -11,6 +11,7 @@ import DadosConta from "./DadosBancaria";
 import DadosContacto from "./Contacto";
 import DadosEndereco from "./Endereco";
 import DadosEscalao from "./Escalao";
+import DadosAnexo from "./DadosAnexo";
 import Preview from "./Preview";
 import Panel from "./Panel";
 import axios from "axios";
@@ -193,6 +194,9 @@ data1.step="";
 
           {
              <DadosEscalao className={styles.card} data1={data1} setData1={setData1}/>
+          }
+          {
+             <DadosAnexo className={styles.card} data1={data1} setData1={setData1}/>
           }
 
 

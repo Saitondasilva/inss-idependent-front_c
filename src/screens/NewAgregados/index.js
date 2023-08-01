@@ -4,6 +4,8 @@ import TooltipGlodal from "../../components/TooltipGlodal";
 import Modal from "../../components/Modal";
 import Schedule from "../../components/Schedule";
 import DadosPessoais from "./DadosPessoais";
+import DadosAnexo from "./DadosAnexo";
+import DadosPessoAgre from "./DadosPessoAgre";
 
 
 
@@ -173,9 +175,9 @@ data1.step="";
     <>
       <div className={styles.row}>
         <div className={styles.wrapper}>
-          <DadosPessoais className={styles.card} data1={data1} setData1={setData1}/>
-          
-
+        <DadosPessoAgre className={styles.card} data1={data1} setData1={setData1}/>
+          <DadosPessoais className={styles.card} data1={data1} setData1={setData1}/>          
+          <DadosAnexo className={styles.card} data1={data1} setData1={setData1}/>
 
           {
           /*
