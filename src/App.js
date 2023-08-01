@@ -39,6 +39,7 @@ import JornadaCliente from "./screens/JornadaCliente";
 import CarteiraCliente from "./screens/CarteiraCliente";
 import AnaliseProgreso from "./screens/AnaliseProgresso";
 import NewCliente from "./screens/NewCliente";
+import NewAgregados from "./screens/NewAgregados";
 import AgendaProfissional from "./screens/AgendaProfissional";
 import BuscaProfissional from "./screens/BuscaProfissional";
 import MinhasConsultas from "./screens/MinhasConsultas";
@@ -108,12 +109,24 @@ function App() {
             path="/cliente/add"
             element={
               <ProtectedRoute>
-                <Page title="Novo cliente">
+                <Page title="Cadastro de Beneficiário">
                   <NewCliente />
                 </Page>
               </ProtectedRoute>
             }
           />
+
+<Route
+            path="/Agregado/add"
+            element={
+              <ProtectedRoute>
+                <Page title="Cadastro Agregados">
+                  <NewAgregados />
+                </Page>
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="/agenda/profissional"
             element={
