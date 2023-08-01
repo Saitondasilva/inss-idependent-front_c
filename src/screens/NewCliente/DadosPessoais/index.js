@@ -23,7 +23,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
   const [linguagem, setLinguagem] = useState(optionsLinguagem[0]);
   const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
-  const [optionsPais, setOptionsPais] = useState([]);
+  const [optionsPais, setOptionsPais] = useState(['--Escolha um--', 'Santomense', 'estrangeiro']);
   const [pais, setpais] = useState(optionsPais[0]);
   const [optionsDocumento, setOptionsDocumento] = useState(['--Escolha um--', 'BI', 'Cédula PEsoal', 'Cartão estrangeiro']);
   const [Documento, setDocum] = useState(optionsPais[0]);
@@ -250,10 +250,10 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           className={styles.field1}
           label="Nacionalidade"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setGenero}
-          options={optionsGenero}
-          onChange={data1.banco=genero}
-          value={genero}
+          setValue={setpais}
+          options={optionsPais}
+          onChange={data1.pais=pais}
+          value={pais}
         /> 
        </span>
        <TextInput
@@ -266,7 +266,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           value={data1.profissao}
         />
        
-  
+       
        
       </div>
       
