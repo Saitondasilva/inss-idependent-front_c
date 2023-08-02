@@ -34,7 +34,7 @@ const Overview = ({ className,userData }) => {
       color: "#B1E5FC",
     },
     {
-      title: "Total de Devedores",
+      title: "Total de Pensionista",
       counter: TCountTurma,
       icon: "shopping-bag",
       color: "#B1E5FC",

@@ -10,15 +10,15 @@ import Success from "./Success";
 
 const items = [
   {
-    title: "Current account balance",
-    counter: "$128k",
+    title: "Pensões a efectuar",
+    counter: "128k SDT",
     icon: "activity",
     color: "#B5E4CA",
     tooltip: "Small description Current account balance",
   },
   {
-    title: "Available for withdrawal",
-    counter: "$0.00",
+    title: "Subsidios a efectuar",
+    counter: "0.00 STD",
     icon: "pie-chart",
     color: "#CABDFF",
     tooltip: "Small description Available for withdrawal",
@@ -32,7 +32,7 @@ const Overview = ({ className }) => {
     <>
       <Card
         className={cn(styles.card, className)}
-        title="Current balance"
+        title="Balanço Actual"
         classTitle="title-blue"
       >
         <div className={styles.overview}>
@@ -64,7 +64,7 @@ const Overview = ({ className }) => {
             className={cn("button", styles.button)}
             onClick={() => setVisibleModal(true)}
           >
-            Withdraw balance
+            Mais Detalhes
           </button>
         </div>
       </Card>

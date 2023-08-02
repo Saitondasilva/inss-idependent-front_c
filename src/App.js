@@ -77,7 +77,7 @@ function App() {
             path="/jornada/cliente/:id_consulta?"
             element={
               <ProtectedRoute>
-                <Page title="Gestão de atendimentos" showCreator={1}>
+                <Page title="Gestão de Contribuições" showCreator={0}>
                   <JornadaCliente />
                 </Page>
               </ProtectedRoute>
@@ -88,7 +88,7 @@ function App() {
             path="/carteira/cliente"
             element={
               <ProtectedRoute>
-                <Page title="Carteira de Clientes">
+                <Page title="Pesquisa de Utentes">
                   <CarteiraCliente />
                 </Page>
               </ProtectedRoute>
@@ -116,7 +116,7 @@ function App() {
             }
           />
 
-<Route
+          <Route
             path="/Agregado/add"
             element={
               <ProtectedRoute>
@@ -233,7 +233,7 @@ function App() {
           <Route
             path="/profissional"
             element={
-              <Page title="Profissional">
+              <Page title="Pagamentos">
                 <Profissional />
               </Page>
             }
@@ -241,7 +241,7 @@ function App() {
           <Route
             path="/membro"
             element={
-              <Page title="Membros">
+              <Page title="Subsidios">
                 <Membro />
               </Page>
             }
@@ -273,11 +273,21 @@ function App() {
           <Route
             path="/customers/customer-list"
             element={
+              <Page title="Lista de Pensionista">
+                <CustomerList />
+              </Page>
+            }
+          />
+          {/*
+          <Route
+            path="/customers/customer-list"
+            element={
               <Page title="Customer list">
                 <CustomerList />
               </Page>
             }
           />
+          */}
           <Route
             path="/shop"
             element={
@@ -289,7 +299,7 @@ function App() {
           <Route
             path="/income/earning"
             element={
-              <Page title="Earning">
+              <Page title="Estatística">
                 <Earning />
               </Page>
             }

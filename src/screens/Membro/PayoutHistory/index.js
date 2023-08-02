@@ -31,7 +31,7 @@ const PayoutHistory = ({ className }) => {
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Lista do Membros"
+      title="Lista dos subsidios"
       classTitle="title-blue"
     >
       <div className={styles.wrapper}>

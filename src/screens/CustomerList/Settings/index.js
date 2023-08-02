@@ -6,13 +6,14 @@ import Dropdown from "../../../components/Dropdown";
 import Checkbox from "../../../components/Checkbox";
 import { Range, getTrackBackground } from "react-range";
 
-const options = ["Featured", "Popular", "New"];
+const options = ["Todos", "Agua-Grande", "Mé Zochi", "Caué", "Lemba", "Cantagalo", "Lobata", "Região Autonoma"];
 const filters = [
-  "All products",
-  "UI Kit",
-  "Illustration",
-  "Wireframe kit",
-  "Icons",
+  "Masculino",
+  "Feminino",
+  "Solteiro",
+  "Casado",
+  "Viuvo",
+  "Divorciado",
 ];
 
 const STEP = 1;
@@ -44,7 +45,7 @@ const Settings = () => {
         value={search}
         setValue={setSearch}
         onSubmit={() => handleSubmit()}
-        placeholder="Search for products"
+        placeholder="Pesquisar por codigo INSS"
         type="text"
         name="search"
         icon="search"
@@ -57,11 +58,11 @@ const Settings = () => {
             value={sorting}
             setValue={setSorting}
             options={options}
-            label="Sort by"
+            label="Pesquisa por distrito"
           />
         </div>
         <div className={styles.item}>
-          <div className={styles.label}>Showing</div>
+          <div className={styles.label}>Filtar</div>
           <div className={styles.list}>
             {filters.map((x, index) => (
               <Checkbox
@@ -76,7 +77,7 @@ const Settings = () => {
           </div>
         </div>
         <div className={styles.item}>
-          <div className={styles.label}>Lifetime</div>
+          <div className={styles.label}>Valor</div>
           <Range
             values={values}
             step={STEP}
@@ -151,8 +152,8 @@ const Settings = () => {
           />
         </div>
         <div className={styles.btns}>
-          <button className={cn("button-stroke", styles.button)}>Reset</button>
-          <button className={cn("button", styles.button)}>Apply</button>
+          <button className={cn("button-stroke", styles.button)}>Fechar</button>
+          <button className={cn("button", styles.button)}>Pesquisar</button>
         </div>
       </div>
     </div>

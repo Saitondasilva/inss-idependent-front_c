@@ -46,6 +46,8 @@ const Row = ({
             </div>
           </div>
         </div>
+        <div className={styles.col}>{item.comments}</div>
+        <div className={styles.col}>{item.likes}</div>
         <div className={styles.col}>
           <div className={styles.email}>{item.email}</div>
         </div>
@@ -60,8 +62,7 @@ const Row = ({
             <Balance className={styles.balance} value={item.balance} />
           </div>
         </div>
-        <div className={styles.col}>{item.comments}</div>
-        <div className={styles.col}>{item.likes}</div>
+       
       </div>
     </>
   );

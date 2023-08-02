@@ -7,6 +7,9 @@ import Icon from "../../../components/Icon";
 import Tooltip from "../../../components/Tooltip";
 import Modal from "../../../components/Modal";
 import Success from "./Success";
+import TextInput from "../../../components/TextInput";
+import { Switch } from "react-router/cjs/react-router.min";
+import Dropdown from "../../../components/Dropdown";
 
 const items = [
   {
@@ -27,46 +30,69 @@ const items = [
 
 const Overview = ({ className }) => {
   const [visibleModal, setVisibleModal] = useState(false);
+  const [resolution, setResolution] = useState(true);
 
+  const [optionsPlanejamento, setOptionsPlanejamento] = useState(["Doença ","Maternidade ", "Funeral "]);
+  const [planejamento, setPlanejamento] = useState(optionsPlanejamento[0]);
   return (
     <>
       <Card
         className={cn(styles.card, className)}
-        title="Current balance"
+        title="Pesquisa"
         classTitle="title-blue"
       >
-        <div className={styles.overview}>
-          <div className={styles.list}>
-            {items.map((x, index) => (
-              <div className={styles.item} key={index}>
-                <div
-                  className={styles.icon}
-                  style={{ backgroundColor: x.color }}
-                >
-                  <Icon name={x.icon} size="24" />
-                </div>
-                <div className={styles.details}>
-                  <div className={styles.label}>
-                    {x.title}
-                    <Tooltip
-                      className={styles.tooltip}
-                      title={x.tooltip}
-                      icon="info"
-                      place="top"
-                    />
-                  </div>
-                  <div className={styles.counter}>{x.counter}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <button
-            className={cn("button", styles.button)}
-            onClick={() => setVisibleModal(true)}
-          >
-            Withdraw balance
-          </button>
+        <div className={styles.description}>
+        <div className={styles.group}>
+
+        
+        <span className={styles.field}>
+          {/*
+        <TextInput
+          className={styles.field}
+          label="Ano"
+          name="amount"
+          type="text"
+          tooltip="Small description"
+          required
+          currency="$"
+          style={{width: "250px"}}
+        />
+      
+          <TextInput
+            className={styles.field}
+            classLabel={styles.label}
+            label="Mês"
+            name="minimum-amount"
+            type="text"
+            required
+            currency="$"
+            style={{width: "250px"}}
+          />
+       
+          <TextInput
+            className={styles.field}
+            classLabel={styles.label}
+            label="Suggested amount"
+            name="suggested-amount"
+            type="text"
+            required
+            currency="$"
+            style={{width: "250px"}}
+          />
+          */}
+        
+          <Dropdown
+              className={styles.field1}
+              label="Tipo de subsidio"
+              setValue={setPlanejamento}
+              options={optionsPlanejamento}
+              value={planejamento} 
+              style={{width: "250px"}}
+            /> 
+        </span>
+        </div>  
         </div>
+
       </Card>
       <TooltipGlodal />
       <Modal

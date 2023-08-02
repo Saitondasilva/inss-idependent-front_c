@@ -54,7 +54,7 @@ const ProductSales = ({ className }) => {
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Product sales"
+      title="Grafico Subsidio"
       classTitle="title-purple"
       head={
         <Dropdown

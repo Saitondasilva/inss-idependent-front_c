@@ -18,43 +18,47 @@ const Sidebar = ({className, onClose }) => {
 var navigation=[];
 
  navigation = [
-
   {
-    title: "Pesquisa Geral",
-    icon: "search",
-    url: "/carteira/cliente",
-  },
-  {
-    title: "Estatística",
+    title: "Home",
     icon: "home",
     url: "/home",
   },
- 
+  {
+    title: "Pesquisa Utente",
+    icon: "search",
+    url: "/carteira/cliente",
+  },
+   
   {
     title: "Contribuições",
-    icon: "wright",
+    icon: "diamond",
     url: "/jornada/cliente",
-  },
- 
-  {
-    title: "Folha de Pagamento",
-    icon: "pie-chart",
-    url: "/analise/progresso",
   },
   {
     title: "Lista Pensionista",
     icon: "heart-fill",
-    url: "#",
+    url: "/customers/customer-list",
   }, 
+ 
+  {
+    title: "Subsidios",
+    icon: "pie-chart",
+    url: "/membro",
+  },
   {
     title: "Pagamentos Efectuados",
-    icon: "basket",
-    url: "#",
+    icon: "promotion",
+    url: "/profissional",
+  },
+  {
+    title: "Estatística",
+    url: "/income/earning",
+    icon: "activity",
   },
   {
     title: "Parametrização",
     slug: "income",
-    icon: "pie-chart",
+    icon: "setting",
     dropdown: [
       {
         title: "Abertura e Fecho do Ano",
@@ -71,9 +75,9 @@ var navigation=[];
     ],
   },
   {
-    title: "Utilizadores",
+    title: "Stafs",
     url: "/user/admin",
-    icon: "promotion",
+    icon: "lightning",
     colorCounter: "#B5E4CA",
   },
   
@@ -156,7 +160,7 @@ var navigation=[];
       },
       {
         title: "Statements",
-        url: "/income/statements",
+        url: "/income/statements",bom
       },
     ],
   },
@@ -226,13 +230,16 @@ var navigation=[];
           <Icon name="close" size="24" />
         </button>
         <Link className={styles.logo} to="/" onClick={onClose}>
+        
           <Image
             className={styles.pic}
-            src="/images/logo-finmap-site.svg"
-            srcDark="/images/logo-finmap-site.svg"
-            alt="Core"
+            src="/images/n_logo_inss.png"
+            srcDark="/images/n_logo_inss.png"
+            alt="SITI"
                />
+              <div >SITI</div> 
         </Link>
+        
         <div className={styles.menu}>
           {navigation.map((x, index) =>
             x.url ? (

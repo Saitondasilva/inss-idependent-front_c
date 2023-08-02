@@ -9,7 +9,7 @@ import Balance from "../../../components/Balance";
 
 const items = [
   {
-    title: "Earning",
+    title: "Contribuições",
     counter: "$128k",
     icon: "activity",
     color: "#B5E4CA",
@@ -17,7 +17,7 @@ const items = [
     value: 37.8,
   },
   {
-    title: "Balance",
+    title: "Pensões",
     counter: "$512.64",
     icon: "pie-chart",
     color: "#CABDFF",
@@ -25,7 +25,7 @@ const items = [
     value: -17.8,
   },
   {
-    title: "Total value of sales",
+    title: "Subsidios",
     counter: "$64k",
     icon: "shopping-bag",
     color: "#B1E5FC",

@@ -9,7 +9,7 @@ import Table from "./Table";
 import Panel from "./Panel";
 import Details from "./Details";
 
-const navigation = ["Active", "New"];
+const navigation = ["Activo", "Suspenso", "Falecido"];
 
 const CustomerList = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -24,7 +24,7 @@ const CustomerList = () => {
     <>
       <Card
         className={styles.card}
-        title="Customer"
+        title="Pensionista"
         classTitle={cn("title-purple", styles.title)}
         classCardHead={cn(styles.head, { [styles.hidden]: visible })}
         head={
@@ -34,7 +34,7 @@ const CustomerList = () => {
               value={search}
               setValue={setSearch}
               onSubmit={() => handleSubmit()}
-              placeholder="Search by name or email"
+              placeholder="Pesquisar por nome"
               type="text"
               name="search"
               icon="search"
@@ -54,7 +54,7 @@ const CustomerList = () => {
             </div>
             <Filters
               className={styles.filters}
-              title="Showing 10 of 24 customer"
+              title="Apresentando 10 de 24 pensionistas"
             >
               <Settings />
             </Filters>

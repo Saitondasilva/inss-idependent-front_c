@@ -20,7 +20,7 @@ import { products } from "../../mocks/products";
 
 
 const sorting = ["list", "grid"];
-const colluns =["Nome","Nº Sessão realizadas","Idade", "Patrimônio", " Grupo mentoria"];
+const colluns =["Utente","NIF","Data nasc.", "Profição", "Data Contribuicao", "valor", "Operações"];
 
 
 const Drafts = () => {
@@ -174,7 +174,7 @@ function dellFile(){
       <Card
         className={styles.card}
         classCardHead={styles.head}
-        title="Atendimentos"
+        title="Contribuições"
         classTitle={cn("title-purple", styles.title)}
         head={
           <>
@@ -183,7 +183,7 @@ function dellFile(){
               value={search}
               setValue={setSearch}
               onSubmit={() => handleSubmit()}
-              placeholder="Procurar Cliente"
+              placeholder="Pesquisar por NIF"
               type="text"
               name="search"
               icon="search"
@@ -235,17 +235,7 @@ function dellFile(){
               
             </>
           )}
-          <br></br>
           
-          <button
-            className={cn("button", styles.button)}
-            onClick={() =>{ setVisibleModal(true);getNextSessao();}}
-          >
-
-            Proxima Sessão
-            <Icon name="arrow-next" size="24" />
-          </button>
-
 
 
         </div>

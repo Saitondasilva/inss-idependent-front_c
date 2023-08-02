@@ -5,34 +5,19 @@ import Card from "../../../components/Card";
 
 const countries = [
   {
-    title: "United States",
+    title: "Maternidade",
     flag: "🇺🇸",
     price: 876.77,
   },
   {
-    title: "Germany",
+    title: "Doença",
     flag: "🇩🇪",
     price: 128.77,
   },
   {
-    title: "Netherlands",
+    title: "Funeral",
     flag: "🇳🇱",
     price: 124.77,
-  },
-  {
-    title: "United Kingdom",
-    flag: "🇬🇧",
-    price: 82.36,
-  },
-  {
-    title: "Italy",
-    flag: "🇮🇹",
-    price: 32,
-  },
-  {
-    title: "Vietnam",
-    flag: "🇻🇳",
-    price: 41.89,
   },
 ];
 
@@ -40,7 +25,7 @@ const TopCountries = ({ className }) => {
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Top countries"
+      title="Subsidos por categoria"
       classTitle="title-blue"
     >
       <div className={styles.countries}>

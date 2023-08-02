@@ -34,11 +34,12 @@ const Table = ({ className, activeTable, setActiveTable }) => {
             />
           </div>
           <div className={styles.col}>Name</div>
+          <div className={styles.col}>Codigo</div>
+          <div className={styles.col}>NIF</div>
           <div className={styles.col}>Email</div>
-          <div className={styles.col}>Purchase</div>
-          <div className={styles.col}>Lifetime</div>
-          <div className={styles.col}>Comments</div>
-          <div className={styles.col}>Likes</div>
+          <div className={styles.col}>Idade</div>
+          <div className={styles.col}>Valor</div>
+          
         </div>
         {customers.map((x, index) => (
           <Row

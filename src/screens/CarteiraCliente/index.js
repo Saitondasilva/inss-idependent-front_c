@@ -15,7 +15,7 @@ import ConfirmDialog from "../../components/ConfirmDialog";
 import { products } from "../../mocks/products";
 
 const sorting = ["list", "grid"];
-const colluns =["Nome","Valor","Status","Inadimplente","Método de pagamento"];
+const colluns =["Nome","Data nasc.","BI","NIF","Profissão","Tel","Operações"];
 
 const Drafts = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -114,7 +114,7 @@ function NextStepConsulta(id_consulta) {
       <Card
         className={styles.card}
         classCardHead={styles.head}
-        title="Clientes"
+        title="Utentes"
         classTitle={cn("title-purple", styles.title)}
         head={
           <>
@@ -123,7 +123,7 @@ function NextStepConsulta(id_consulta) {
               value={search}
               setValue={setSearch}
               onSubmit={() => handleSubmit()}
-              placeholder="Procurar cliente"
+              placeholder="Pesquisar por BI/NIF/Nome "
               type="text"
               name="search"
               icon="search"
