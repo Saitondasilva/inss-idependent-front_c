@@ -56,6 +56,26 @@ var navigation=[];
     icon: "activity",
   },
   {
+    title: "Autorizações",
+    slug: "income",
+    icon: "lock",
+    dropdown: [
+      {
+        title: "Autorização DG",
+        url: "/payment/user/type/1",
+      },
+      {
+        title: "Autorização DF",
+        url: "/payment/user/type/2",
+      },
+      {
+        title: "Autorização DSS",
+        url: "/payment/user/type/3",
+      },
+      
+    ],
+  },
+  {
     title: "Parametrização",
     slug: "income",
     icon: "setting",
@@ -230,14 +250,15 @@ var navigation=[];
           <Icon name="close" size="24" />
         </button>
         <Link className={styles.logo} to="/" onClick={onClose}>
-        
+        {/*
           <Image
             className={styles.pic}
             src="/images/n_logo_inss.png"
             srcDark="/images/n_logo_inss.png"
             alt="SITI"
                />
-              <div >SITI</div> 
+               */}
+              <span className={styles.name}>SITI</span> 
         </Link>
         
         <div className={styles.menu}>
