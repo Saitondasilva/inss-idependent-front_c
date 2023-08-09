@@ -56,6 +56,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         <TextInput
           className={styles.field1}
           label="Lcalidade"
+          name="morada"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           type="text"
           required
@@ -63,47 +64,31 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           value={data1.nconta}
         /> 
        </span>
-       <TextInput
+      
+      
+      <TextInput
           className={styles.field}
-          label="Lugar ou Rua"
-          name="profissao"
+          label="Nº Porta"
+          name="N_porta"
+          type="text"
+          required
+          onChange={onChangeData}
+          value={data1.nconta}
+        />
+        <TextInput
+          className={styles.field}
+          label="Ponto de referencia"
+          name="ponto_referencia"
           type="text"
           required
           onChange={onChangeData}
           value={data1.nconta}
         />
       
-      <TextInput
-          className={styles.field}
-          label="Nº Porta"
-          name="profissao"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.nconta}
-        />
-        <TextInput
-          className={styles.field}
-          label="Ponto de referencia"
-          name="profissao"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.nconta}
-        />
-        <TextInput
-          className={styles.field}
-          label="Ponto de referencia"
-          name="profissao"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.nconta}
-        />
         <span className={styles.field}>
         <Dropdown
           className={styles.field1}
-          label="Distrito"
+          label="Distrito"          
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           setValue={setbanco}
           options={optionsBanco}

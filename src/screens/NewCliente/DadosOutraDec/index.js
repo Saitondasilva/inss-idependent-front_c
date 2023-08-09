@@ -8,7 +8,6 @@ import TextInput from "../../../components/TextInput";
 import Editor from "../../../components/Editor";
 import Dropdown from "../../../components/Dropdown";
 import axios from "axios";
-import Search from "../../AnaliseProgresso/Search";
 
 // const optionsGenero      = ["Masculino", "Feminino", "Outro"];
 // const optionsEstadocivil = ["Solteiro", "Casado", "Divorciado", "Viuvo"];
@@ -18,15 +17,15 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsGenero, setOptionsGenero] = useState(['--Sexo', 'Masculino', 'Feminino']);
+  const [optionsGenero, setOptionsGenero] = useState(['--Documento--', 'BI', 'Cédula Pessoal', 'Cartão Estrangeiro']);
   const [genero, setGenero] = useState(optionsGenero[0]);
-  const [optionsEstadocivil, setOptionsEstadocivil] = useState(['--Escolha e --','Solteiro', 'Casado', 'Viuvo']);
-  const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
+  const [optionsTipoPensao, setOptionsEstadocivil] = useState(['--Escolha e --','Solteiro', 'Casado', 'Viuvo']);
+  const [TipoPensao, setTipoPensaol] = useState(optionsTipoPensao[0]);
   const [linguagem, setLinguagem] = useState(optionsLinguagem[0]);
   const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
-  const [optionsPais, setOptionsPais] = useState(['--Escolha um--', 'Santomense', 'estrangeiro']);
+  const [optionsPais, setOptionsPais] = useState([]);
   const [pais, setpais] = useState(optionsPais[0]);
-  const [optionsDocumento, setOptionsDocumento] = useState(['--Escolha um--', 'BI', 'Cédula PEsoal', 'Cartão estrangeiro']);
+  const [optionsDocumento, setOptionsDocumento] = useState(['--Escolha um--', 'Sim', 'Não']);
   const [Documento, setDocum] = useState(optionsPais[0]);
  
   data1.descricao=content;
@@ -47,7 +46,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   })
     console.log("FILE", this.state.image)*/
   }
-  function getGenero(){
+  function getGenero(){/*
     return axios
     .get("/getGenero")
     .then((response) => {
@@ -62,8 +61,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       console.log("Error", err);
       return err.response;
     });
-  }
-  function getEstadoCivil(){
+  */}
+  function getEstadoCivil(){/*
     return axios
     .get("/getEstadoCivil")
     .then((response) => {
@@ -78,8 +77,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       console.log("Error", err);
       return err.response;
     });
-  }
-  function getPais(){
+  */}
+  function getPais(){/*
     return axios
     .get("/country")
     .then((response) => {
@@ -95,7 +94,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       console.log("Error", err);
       return err.response;
     });
-  }
+  */}
   useEffect(() => {
     getGenero()
     getEstadoCivil()
@@ -119,152 +118,77 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Identificação Do Beneficiário"
+      title="Outras Declarações"
       classTitle="title-green"
       
     >
       <div className={styles.description}>
       <hr></hr>
       <div className={styles.group}>
-      
-      <span className={styles.field}>
+    
+       
+       <span className={styles.field}>
+  
        <Dropdown
           className={styles.field1}
-          label="Tipo Documento"
+          label="Já esteve ,alguma vez ,inscrito na segurança Social"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setDocum}
-          options={optionsDocumento}
-          onChange={data1.Documento=Documento}
-          value={Documento}
-        /> </span>
-        <TextInput
-          className={styles.field}
-          label="Nº Documento"
-          name="bi"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.bi}
-        />
-       
-        <TextInput
-          className={styles.field}
-          label="Nome *"
-          name="nome"
-          type="text"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          required
-          onChange={onChangeData}
-          value={data1.nome}
-        />
-          <TextInput
-          className={styles.field}
-          label="Data nascimento *"
-          name="data_nasc"
-          type="date"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          required
-          onChange={onChangeData}
-          value={data1.data_nasc}
-        />
-        <TextInput
-          className={styles.field}
-          label="Nome pai"
-          name="nome_pai"
-          type="text"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          required
-          onChange={onChangeData}
-          value={data1.nome_pai}
-        />
-        
-        
-        <TextInput
-          className={styles.field}
-          label="Nome Mãe"
-          name="nome_mae"
-          type="text"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          required
-          onChange={onChangeData}
-          value={data1.nome_mae}
-          
+          setValue={setGenero}
+          options={optionsGenero}
+          onChange={data1.banco=genero}
+          value={genero}
+        /> 
+       </span>
 
-        />
-      
-        <TextInput
+       <TextInput
           className={styles.field}
-          label="NIF"
-          mask="99.999.999"
-          name="nif"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.nif}
-        />
-  
-        <TextInput
-          className={styles.field}
-          label="Profissão"
-          name="profisao"
+          label="Se sim  diz o nome da Entidade Empregadora"
+          name=""
           type="text"
           required
           onChange={onChangeData}
           value={data1.profissao}
         />
-      
-       
-       <span className={styles.field}>
-       <Dropdown
-          className={styles.field1}
-          label="Gênero"  
-          name="genero"        
-          setValue={setGenero}
-          options={optionsGenero}
-          onChange={data1.sexo=genero}
-          value={genero}
-        /> 
-       </span>
-       <span className={styles.field}>
-       <Dropdown
-          className={styles.field1}
-          label="Estado civil"
-          name="estado_civil"
-          setValue={setEstadocivil}
-          options={optionsEstadocivil}
-          onChange={data1.estadocivil=estadocivil}
-          value={estadocivil}
-        /> 
-       </span>
-       {/*
        <TextInput
           className={styles.field}
-          label="Foto"
-          name="photo"
-          type="file"
-          tooltip="Foto"
+          label="Tem outra entidade Empregadora"
+          name=""
+          type="text"
           required
-          onChange={onChangeFile}
-          //value={data1.photo}
+          onChange={onChangeData}
+          value={data1.profissao}
         />
-        */}
-          <span className={styles.field}>
-       <Dropdown
+           <span className={styles.field}>
+  
+        <Dropdown
           className={styles.field1}
-          label="Nacionalidade"
+          label="Recebe algum tipo de pensão?"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setpais}
-          options={optionsPais}
-          onChange={data1.pais=pais}
-          value={pais}
+          setValue={setGenero}
+          options={optionsGenero}
+          onChange={data1.banco=genero}
+          value={genero}
         /> 
-       </span>
-       
-       
+        </span>
+          <span className={styles.field}>
+  
+        <Dropdown
+          className={styles.field1}
+          label="se sim, diz qual"
+          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          setValue={setGenero}
+          options={optionsGenero}
+          onChange={data1.banco=genero}
+          value={genero}
+        /> 
+        </span>
+  
        
       </div>
+      
+      
        
-  
+         
           
       
       

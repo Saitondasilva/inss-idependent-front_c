@@ -56,8 +56,9 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         <TextInput
           className={styles.field1}
           label="Telemóvel"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          type="text"
+          name="tel"  
+          mask="9 99 99 99"        
+          type="tel"
           required
           onChange={onChangeData}
           value={data1.nconta}
@@ -65,8 +66,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
        </span>
        <TextInput
           className={styles.field}
-          label="Telefone"
-          name="profissao"
+          label="Caixa Postal"
+          name="caixa_postal"
           type="text"
           required
           onChange={onChangeData}
@@ -76,8 +77,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       <TextInput
           className={styles.field}
           label="Email"
-          name="profissao"
-          type="text"
+          name="email"
+          type="email"
           required
           onChange={onChangeData}
           value={data1.nconta}

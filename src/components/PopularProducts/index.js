@@ -107,7 +107,7 @@ const PopularProducts = ({ className, views, getNameMounth, userData }) => {
             {/*<div className={styles.stage}>Earning</div>*/}
           </div>
           <div className={styles.list}>
-            {produto1.map(
+            {products.map(
               (x, index) =>
                 views > index && (
                   <div

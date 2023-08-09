@@ -56,21 +56,21 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
        <TextInput
           className={styles.field}
           label="NIB"
-          name="profissao"
+          name="nib_conta"
           type="text"
           required
           onChange={onChangeData}
-          value={data1.nconta}
+          value={data1.nib_conta}
         />
       
       <TextInput
           className={styles.field}
           label="Nº Conta"
-          name="profissao"
+          name="n_conta"
           type="text"
           required
           onChange={onChangeData}
-          value={data1.nconta}
+          value={data1.n_conta}
         />
       
        {/*

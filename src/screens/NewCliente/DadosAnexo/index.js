@@ -38,15 +38,15 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
-  function onChangeFile(e){
+  function onChangeFile(e){/*
     let file = e.target.files
    /* data1.photo=this.state.image
     this.setState({
       photo: e.target.files[0]
   })
     console.log("FILE", this.state.image)*/
-  }
-  function getGenero(){
+}
+  function getGenero(){/*
     return axios
     .get("/getGenero")
     .then((response) => {
@@ -61,8 +61,9 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       console.log("Error", err);
       return err.response;
     });
-  }
-  function getEstadoCivil(){
+  */}
+
+  function getEstadoCivil(){/*
     return axios
     .get("/getEstadoCivil")
     .then((response) => {
@@ -77,7 +78,9 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       console.log("Error", err);
       return err.response;
     });
-  }
+  */}
+
+  {/*
   function getPais(){
     return axios
     .get("/country")
@@ -100,8 +103,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     getEstadoCivil()
     getPais()
   },[]);
-
-  function buscarCep() {
+*/}
+  {/*function buscarCep() {
      
     fetch(`http://viacep.com.br/ws/${data1.cep}/json/`, {mode: 'cors'})
      .then((res) => res.json())
@@ -114,7 +117,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
      })
      .catch(err =>{alert("Cep não existente");data1.cep="";});
 
-}
+}*/}
   return (
     <Card
       className={cn(styles.card, className)}
@@ -122,10 +125,15 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       classTitle="title-green"
       
     >
+      
+        
+       
+        
+      
       <div className={styles.description}>
       <hr></hr>
-      <div className={styles.group}>
-    
+      <p className={cn("buttona", styles.buttona)}  ><Icon name="add" size="24" />add</p>
+      <div className={styles.group}> 
       
        
        <span className={styles.field}>
@@ -144,23 +152,16 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
        <TextInput
           className={styles.field}
           label="Anexo"
-          name="profissao"
+          name="Documento_anexo"
           type="file"
+          tooltip="Foto"
           required
           onChange={onChangeData}
           value={data1.profissao}
         />
-       
-  
+      
        
       </div>
-      
-      
-       
-         
-          
-      
-      
       
         {
           /*

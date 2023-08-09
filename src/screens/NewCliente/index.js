@@ -12,6 +12,7 @@ import DadosContacto from "./Contacto";
 import DadosEndereco from "./Endereco";
 import DadosEscalao from "./Escalao";
 import DadosAnexo from "./DadosAnexo";
+import DadosOutraDec from "./DadosOutraDec";
 import Preview from "./Preview";
 import Panel from "./Panel";
 import axios from "axios";
@@ -36,33 +37,43 @@ const NewProduct = () => {
   },[]);
 function validateForm(){
 
+  {/*Validação de Dados do Utente */}
   if(!data1.nome || data1.nome===""){
     setSmsError("Por favor preencha o nome")
     return false;
   }
-  if(!data1.apelido || data1.apelido===""){
-    setSmsError("Por favor preencha o apelido")
+  if(!data1.bi || data1.bi===""){
+    setSmsError("Por favor preencha o nº Documento")
     return false;
   }
-  if(!data1.genero || data1.genero===""){
-    setSmsError("Por favor preencha o genero")
-    return false;
-  }
+
   if(!data1.email || data1.email===""){
     setSmsError("Por favor preencha o email")
     return false;
   }
-  if(!data1.contacto || data1.contacto===""){
-    setSmsError("Por favor preencha o contacto")
+  if(!data1.nome_pai || data1.nome_pai===""){
+    setSmsError("Por favor preencha o nome_pai")
     return false;
   }
-  /*
-  if(!data1.adress || data1.adress===""){
-    setSmsError("Por favor preencha o endereço")
+  if(!data1.nome_mae || data1.nome_mae===""){
+    setSmsError("Por favor preencha o nome_mae")
     return false;
   }
-  */
-  if(!data1.estado || data1.estado===""){
+  if(!data1.nif || data1.nif===""){
+    setSmsError("Por favor preencha o nif")
+    return false;
+  }
+  if(!data1.profisao || data1.profisao===""){
+    setSmsError("Por favor preencha o profissao")
+    return false;
+  }
+  
+ {/* if(!data1.estado_civil || data1.estado_civil===""){
+    setSmsError("Por favor preencha o estado_civil")
+    return false;
+  }
+  
+  if(!data1.data_nasc || data1.data_nasc===""){
     setSmsError("Por favor preencha o estado de residencia")
     return false;
   }
@@ -78,13 +89,25 @@ function validateForm(){
     setSmsError("Por favor preencha o estado civil")
     return false;
   }
-  /*
-  if(!data1.rgb || data1.rgb===""){
-    setSmsError("Por favor preencha o rgb")
+{/*Validação dos Dados de Endereço */}
+  {/*if(!data1.morada || data1.morada===""){
+    setSmsError("Por favor preencha o morada")
     return false;
   }
-  */
-  if(!data1.cep || data1.cep===""){
+
+  if(!data1.ponto_referencia || data1.ponto_referencia===-1){
+    setSmsError("Por favor preencha o ponto_referencia")
+    return false;
+  }
+  {/*Validação de Dados de Telemovel*/}
+  {/*if(!data1.tel || data1.tel===""){
+    setSmsError("Por favor preencha o contacto")
+    return false;
+  }
+  
+
+  {/*Validação de Dados do Utente */}
+  {/*if(!data1.cep || data1.cep===""){
     setSmsError("Por favor preencha o cep")
     return false;
   }
@@ -95,7 +118,7 @@ function validateForm(){
   if(!data1.cpf || data1.cpf===-1){
     setSmsError("Por favor preencha a etapa do progresso")
     return false;
-  }
+  }*/}
 
   return true;
   
@@ -104,36 +127,48 @@ function SaveProfissionalCliente() {
   setLoader(true)
   if(!validateForm()){setLoader(false); return false;}
   var data={
-    first_name: data1.nome,
-    last_name: data1.apelido,
-    gender: data1.genero[0],
-    //gender: 1,
+    nome: data1.nome,
+    nif: "123456789",
+    bi: "124356",
+    //sexo: data1.genero[0],
+    sexo:"Masculino",
+    caixa_postal: data1.caixa_postal,
     email: data1.email,
-    phone: data1.contacto,
-    address: data1.adress,
+    tel: data1.tel,
     country: data1.pais,
-    state: data1.estado,
-    city: data1.cidade,
     estado_civil: data1.estadocivil,
+    morada: data1.morada,
+    ponto_referencia: data1.ponto_referencia,
+    data_nasc: data1.data_nasc,
+    id_tipo_utente: 1,
+    id_distrito: 1,
+    id_banco: 1,
+    iban_conta: "11111111111111111111",
+    nib_conta: "22222222222222222",
+    n_conta: "21312345",
+    nome_pai: "Artur mendonça tavares",
+    nome_mae: "Maria Menezes de Deus Lima",
+    esta_instcrito: 1,
+    empresa_que_trabalhou: "2021/05/01",
+    tem_outro_trabalho:"aa",
+    outra_entidade_patronal: "aa",
+    outra_local_trabalho: "aa",
+    recebe_pensao: "aa",
+    pensao_que_recebe: "aa"
    // resume: data1.descricao,
-    resume: "data1.descricao",
-    facebook_url: data1.facebook,
-    twitter_url: data1.twitter,
-    google_plus_url: data1.google,
-    pinterest_url: data1.pintrest,
     //rgb: data1.rgb,
-    cep: data1.cep,
-    cpf: data1.cpf,
-    id_profission: userData.id,
-    value_consult: data1.valor,
-    step: data1.step,
-    payment_option: data1.tipoPagamento,
-    photo: data1.photo,
+   // cep: data1.cep,
+    
+    /*id_profission: userData.id,*/
+    //value_consult: data1.valor,
+    //step: data1.step,
+    //payment_option: data1.tipoPagamento,
+    //photo: data1.photo,
   }
   
   console.log("Data",data)
   return axios
-    .post("/candidate/registerClientByProfissional",data,{
+    .post("/utente/register",data,{
       headers: { Authorization: `Bearer ${userData.token}` },
     })
     .then((response) => {
@@ -151,28 +186,28 @@ function SaveProfissionalCliente() {
       return err.response;
     });
 };
-function clean(){
- data1.nome="";
- data1.apelido="";
-data1.genero="";
-data1.email="";
-data1.contacto="";
-data1.adress="";
-data1.pais="";
-data1.estado="";
-data1.cidade="";
-data1.estadocivil="";
- data1.facebook="";
-data1.twitter="";
- data1.google="";
-data1.pintrest="";
-data1.rgb="";
-data1.cep="";
-data1.cpf="";
-userData.id="";
-data1.valor="";
-data1.step="";
-}
+            function clean(){
+            data1.nome="";
+            data1.apelido="";
+            data1.genero="";
+            data1.email="";
+            data1.contacto="";
+            data1.adress="";
+            data1.pais="";
+            data1.estado="";
+            data1.cidade="";
+            data1.estadocivil="";
+            data1.facebook="";
+            data1.twitter="";
+            data1.google="";
+            data1.pintrest="";
+            data1.rgb="";
+            data1.cep="";
+            data1.cpf="";
+            userData.id="";
+            data1.valor="";
+            data1.step="";
+            }
   return (
     <>
       <div className={styles.row}>
@@ -198,6 +233,9 @@ data1.step="";
           {
              <DadosAnexo className={styles.card} data1={data1} setData1={setData1}/>
           }
+          {
+             <DadosOutraDec className={styles.card} data1={data1} setData1={setData1}/>
+          }
 
 
           {
@@ -213,14 +251,14 @@ data1.step="";
         </div>
         
       </div>
-      {/*<Panel
+      {<Panel
         setVisiblePreview={setVisiblePreview}
         setVisibleSchedule={setVisibleModal}
         SaveProfissionalCliente={SaveProfissionalCliente}
         smsError={smsError}
         smsSucess={smsSucess}
         loader={loader}
-        />*/}
+        />}
       <TooltipGlodal />
       <Modal visible={visibleModal} onClose={() => setVisibleModal(false)}>
         <Schedule

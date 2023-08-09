@@ -115,7 +115,7 @@ const Notification = ({ className }) => {
             */}
           </div>
           <div className={styles.list}>
-            {notifications.map((x, index) => (
+            {/*notifications.map((x, index) => (
               
               <Item
                 className={cn(styles.item, className)}
@@ -123,7 +123,7 @@ const Notification = ({ className }) => {
                 key={index}
                 onClose={() => setVisible(false)}
               />
-            ))}
+            ))*/}
           </div>
           <Link
             className={cn("button", styles.button)}

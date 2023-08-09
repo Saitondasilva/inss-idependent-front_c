@@ -5,7 +5,7 @@ import Icon from "../../../components/Icon";
 import Actions from "../../../components/Actions";
 import Loader from "../../../components/Loader";
 
-const Panel = ({setVisiblePreview, setVisibleSchedule, SaveProfissionalCliente,smsError, smsSucess, loader}) => {
+const Panel = ({setVisiblePreview, setVisibleSchedule, SaveProfissionalCliente, ClearProfissionalCliente, smsError, smsSucess, loader}) => {
   const actions = [
     {
       title: "Preview",
@@ -37,9 +37,9 @@ const Panel = ({setVisiblePreview, setVisibleSchedule, SaveProfissionalCliente,s
         {smsError!=="" && <p style={{color:"red"}}><Icon name="close-circle" size="24" />{smsError}</p>}
       </div>
       <div className={styles.btns}>
-        <button className={cn("button", styles.button)} onClick={SaveProfissionalCliente}>Enviar para assinatura</button>
-        <button className={cn("button", styles.button)} onClick={SaveProfissionalCliente}>Enviar para assinatura e gerar cobrança recorrente</button>
-        <button className={cn("button", styles.button)} onClick={SaveProfissionalCliente}>Enviar para assinatura e gerar cobrança avulsa</button>
+        <button className={cn("button", styles.button)} onClick={SaveProfissionalCliente} ><Icon name="add" size="24" />Guardar  </button>
+       {/*<button className={cn("button", styles.button)} onClick={SaveProfissionalCliente}>Enviar para assinatura e gerar cobrança recorrente</button>
+        <button className={cn("button", styles.button)} onClick={SaveProfissionalCliente}>Enviar para assinatura e gerar cobrança avulsa</button>*/} 
         
       </div>
     </div>
