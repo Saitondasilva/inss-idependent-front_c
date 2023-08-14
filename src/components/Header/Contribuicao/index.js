@@ -77,7 +77,7 @@ const Contribuicao = ({ className }) => {
         <NavLink
                     className={cn(styles.item)}
                     activeClassName={styles.active}
-                    to="/cliente/add"
+                    to="/Contribuicao/add"
                     key={0}
                   >                 
                     Registro de Contribuição

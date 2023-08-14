@@ -79,7 +79,7 @@ const List = ({ className }) => {
       }
       */
     >
-      <div className={styles.notifications}>
+      {/*<div className={styles.notifications}>
         <div className={styles.list}>
           {notifications.map((x, index) => (
             <Item className={cn(styles.item, className)} item={x} key={index} />
@@ -91,7 +91,7 @@ const List = ({ className }) => {
             <span>Load more</span>
           </button>
         </div>
-      </div>
+          </div>*/}
     </Card>
   );
 };

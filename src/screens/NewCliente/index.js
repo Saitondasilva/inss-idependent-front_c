@@ -13,6 +13,7 @@ import DadosEndereco from "./Endereco";
 import DadosEscalao from "./Escalao";
 import DadosAnexo from "./DadosAnexo";
 import DadosOutraDec from "./DadosOutraDec";
+import DadosProfissi from "./DadosProfissi";
 import Preview from "./Preview";
 import Panel from "./Panel";
 import axios from "axios";
@@ -232,6 +233,9 @@ function SaveProfissionalCliente() {
           }
           {
              <DadosAnexo className={styles.card} data1={data1} setData1={setData1}/>
+          }
+           {
+             <DadosProfissi className={styles.card} data1={data1} setData1={setData1}/>
           }
           {
              <DadosOutraDec className={styles.card} data1={data1} setData1={setData1}/>

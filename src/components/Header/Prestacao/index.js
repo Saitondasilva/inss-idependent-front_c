@@ -77,7 +77,7 @@ const Prestacao= ({ className }) => {
         <NavLink
                     className={cn(styles.item)}
                     activeClassName={styles.active}
-                    to="/cliente/add"
+                    to="/DinamicoForm/add"
                     key={0}
                   >                 
                     Pedido de Subídio de Doença

@@ -40,6 +40,8 @@ import CarteiraCliente from "./screens/CarteiraCliente";
 import AnaliseProgreso from "./screens/AnaliseProgresso";
 import NewCliente from "./screens/NewCliente";
 import NewAgregados from "./screens/NewAgregados";
+import NewContribuicao from "./screens/NewContribuicao";
+import DinamicoForm from "./screens/DinamicoForm";
 import AgendaProfissional from "./screens/AgendaProfissional";
 import BuscaProfissional from "./screens/BuscaProfissional";
 import MinhasConsultas from "./screens/MinhasConsultas";
@@ -122,6 +124,16 @@ function App() {
               <ProtectedRoute>
                 <Page title="Cadastro Agregados">
                   <NewAgregados />
+                </Page>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/Contribuicao/add"
+            element={
+              <ProtectedRoute>
+                <Page title="Cadastro Contribuição">
+                  <NewContribuicao />
                 </Page>
               </ProtectedRoute>
             }

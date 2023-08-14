@@ -22,7 +22,7 @@ const Notification = () => {
       <div className={styles.row1}>
         <List className={styles.card} />
       </div>
-      {/*
+      {
       <div className={styles.col}>
         <Filters
           className={styles.filters}
@@ -31,7 +31,7 @@ const Notification = () => {
           setSelectedFilters={setSelectedFilters}
         />
       </div>
-      */}
+      }
     </div>
   );
 };

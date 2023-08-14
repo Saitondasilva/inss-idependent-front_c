@@ -17,9 +17,18 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsBanco, setOptionsBanco] = useState(['--Ecolhe o Banco--','BISTP','AFRILAND','ECOBANK']);
+  const [optionsGenero, setOptionsGenero] = useState([]);
+  const [genero, setGenero] = useState(optionsGenero[0]);
+  const [optionsEstadocivil, setOptionsEstadocivil] = useState([]);
+  const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
+  const [linguagem, setLinguagem] = useState(optionsLinguagem[0]);
+  const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
+  const [optionsPais, setOptionsPais] = useState([]);
+  const [pais, setpais] = useState(optionsPais[0]);
+  const [optionsBanco, setOptionsBanco] = useState(['--Ecolhe o Distrito--','Água-grande','Mé-zochi','Lobata','Cantagalo','Lembá','Caué']);
   const [banco, setbanco] = useState(optionsBanco[0]);
-  //const [optionsBancoID, setOptionsBancoID] = useState([1,2,3]);
+  const [optionsBancoID, setOptionsBancoID] = useState([1,2,3]);
+  const [search, setSearch] = useState("");
   data1.descricao=content;
 
 
@@ -30,65 +39,46 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
-  
-  /*function getEstadoCivil(){
-    return axios
-    .get("/getBanco")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-      }
-      setOptionsBanco(a);
-      setOptionsBanco([optionsEstadocivil[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }*/
-
+  const handleSubmit = (e) => {
+    alert();
+  };
 
   return (
-    <Card
-      className={cn(styles.card, className)}
-      title="Dados da Conta Bancária"
-      classTitle="title-green"   
+    <Card    
+      className={cn(styles.card, className)}      
+      title="Situação Profissional"       
+      classTitle="title-green"        
     >
       <div className={styles.description}>
       <hr></hr> 
-      <div className={styles.group}>        
+       
+      <div className={styles.group}>  
         
-        <span className={styles.field}>
-       <Dropdown
-          className={styles.field1}
-          label="Banco"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setbanco}
-          options={optionsBanco}
-          onChange={data1.banco=banco}
-          value={banco}
-        /> 
-       </span>
+        
+        <TextInput
+          className={styles.field}
+          label="Profissão"
+          name="profisao"
+          type="text"
+          setValue={setSearch}
+          onSubmit={() => handleSubmit()}
+          value={data1.profissao}
+          icon="search"                   
+        />      
+       
+
        <TextInput
           className={styles.field}
-          label="NIB"
-          name="nib_conta"
-          type="text"
+          label="Data Inicio Actividade*"
+          name="data_nasc"
+          type="date"
+          tooltip="Maximum 100 characters. No HTML or emoji allowed"
           required
           onChange={onChangeData}
-          value={data1.nib_conta}
+          value={search}
         />
       
-      <TextInput
-          className={styles.field}
-          label="Nº Conta"
-          name="n_conta"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.n_conta}
-        />
+      
       
        {/*
        <TextInput
@@ -104,8 +94,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         */}
        
       </div>
-    
-        
+      
+   
           
       </div>
       
