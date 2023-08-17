@@ -37,10 +37,10 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     .then((response) => {
        var a = new Array();
       for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
+        a.push(response.data.data[i].nome)
       }
       setOptionsBanco(a);
-      setOptionsBanco([optionsBanco[0]])
+      setbanco([optionsBanco[0]])
     })
     .catch((err) => {
       console.log("Error", err);

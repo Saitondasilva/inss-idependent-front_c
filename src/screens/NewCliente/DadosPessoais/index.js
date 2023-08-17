@@ -24,10 +24,10 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
   const [linguagem, setLinguagem] = useState(optionsLinguagem[0]);
   const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
-  const [optionsPais, setOptionsPais] = useState(['--Escolha um--', 'Santomense', 'estrangeiro']);
+  const [optionsPais, setOptionsPais] = useState(['--Escolha um--', 'São Tomé e Príncipe>']);
   const [pais, setpais] = useState(optionsPais[0]);
   const [optionsDocumento, setOptionsDocumento] = useState(['--Escolha um--', 'BI', 'Cédula PEsoal', 'Cartão estrangeiro']);
-  const [Documento, setDocum] = useState(optionsPais[0]);
+  const [Documento, setDocum] = useState(optionsDocumento[0]);
  
   data1.descricao=content;
 
@@ -63,6 +63,22 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       return err.response;
     });
   }
+  function getTipoDocumentoUtente(){
+    return axios
+    .get("/getTipoDocumentoUtente")
+    .then((response) => {
+       var a = new Array();
+      for(var i=0; i<response.data.data.length; i++){
+        a.push(response.data.data[i].descricao)
+      }
+      setOptionsDocumento(a);
+      setDocum([optionsDocumento[0]])
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
+  }
   function getEstadoCivil(){
     return axios
     .get("/getEstadoCivil")
@@ -85,7 +101,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     .then((response) => {
        var a = new Array();
       for(var i=0; i<response.data.data.countries.length; i++){
-        a.push(response.data.data.countries[i].name)
+        a.push(response.data.data.countries[i].nome)
       }
       console.log(a)
       setOptionsPais(a);
@@ -100,6 +116,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     getGenero()
     getEstadoCivil()
     getPais()
+    getTipoDocumentoUtente()
   },[]);
 
   function buscarCep() {/*
@@ -206,8 +223,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
        <span className={styles.field}>
        <Dropdown
           className={styles.field1}
-          label="Gênero"  
-          name="genero"        
+          label="Gênero"             
           setValue={setGenero}
           options={optionsGenero}
           onChange={data1.sexo=genero}
@@ -217,8 +233,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
        <span className={styles.field}>
        <Dropdown
           className={styles.field1}
-          label="Estado civil"
-          name="estado_civil"
+          label="Estado civil"         
           setValue={setEstadocivil}
           options={optionsEstadocivil}
           onChange={data1.estadocivil=estadocivil}

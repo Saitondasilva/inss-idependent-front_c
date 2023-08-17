@@ -28,8 +28,8 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
   const [optionsEscalao, setOptionsEscalao] = useState(['--Ecolhe um Esclão--','1º Escalão','2º Escalão','3º Escalão','4º Escalão','5º Escalão']);
   const [escalao, setescalao] = useState(optionsEscalao[0]);
   const [optionsBancoID, setOptionsBancoID] = useState([1,2,3]);
-  const [optionsRegime, setOptionsRegime] = useState(['--Ecolhe um Esclão--','Regime 10%','Regime 14%']);
-  const [regime, setRegime] = useState(optionsRegime[0]);
+  const [optionsEsquema, setOptionsEsquema] = useState(['--Ecolhe um Esclão--','Esquema obrigatório','Esquema alargado']);
+  const [Esquema, setEsquema] = useState(optionsEsquema[0]);
   const [optionsRegimeID, setOptionsRegimeID] = useState([1,2,3]);
  
   data1.descricao=content;
@@ -42,8 +42,25 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
-  
-
+  function getEscalao(){
+    return axios
+    .get("/getEscalao")
+    .then((response) => {
+       var a = new Array();
+      for(var i=0; i<response.data.data.length; i++){
+        a.push(response.data.data[i].descricao)
+      }
+      setOptionsEsquema(a);
+      setEsquema([optionsEsquema[0]])
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
+  }
+  useEffect(() => {
+    getEscalao()
+  },[]);
   return (
     <Card    
       className={cn(styles.card, className)}      
@@ -67,18 +84,16 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
           value={escalao}
         /> 
         </span>
-       
-      
-        
+  
         <span className={styles.field}>
         <Dropdown
           className={styles.field1}
           label="Regime Ogrigatório"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setRegime}
-          options={optionsRegime}
-          onChange={data1.regime=regime}
-          value={regime}
+          setValue={setEsquema}
+          options={optionsEsquema}
+          onChange={data1.Esquema=Esquema}
+          value={Esquema}
         /> 
         </span>
       

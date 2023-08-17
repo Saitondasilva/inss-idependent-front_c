@@ -28,7 +28,7 @@ const Table = ({ items, legend, title }) => {
               onChange={() => setСhooseAll(!chooseAll)}
             />
           </div>
-          <div className={styles.col}>Product</div>
+          <div className={styles.col}>Beneficiário</div>
           <div className={styles.col}>
             <div className={styles.line}>
               <div className={styles.info}>{title}</div>

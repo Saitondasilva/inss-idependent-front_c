@@ -17,19 +17,11 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsGenero, setOptionsGenero] = useState([]);
-  const [genero, setGenero] = useState(optionsGenero[0]);
-  const [optionsEstadocivil, setOptionsEstadocivil] = useState([]);
-  const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
-  const [linguagem, setLinguagem] = useState(optionsLinguagem[0]);
-  const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
-  const [optionsPais, setOptionsPais] = useState([]);
-  const [pais, setpais] = useState(optionsPais[0]);
+  
   const [optionsBanco, setOptionsBanco] = useState(['--Ecolhe o Distrito--','Água-grande','Mé-zochi','Lobata','Cantagalo','Lembá','Caué']);
   const [banco, setbanco] = useState(optionsBanco[0]);
-  const [optionsBancoID, setOptionsBancoID] = useState([1,2,3]);
+ // const [optionsBancoID, setOptionsBancoID] = useState([1,2,3,4,5,6,7]);
   data1.descricao=content;
-
 
   function onChangeData(e) {
     console.log(e)
@@ -38,7 +30,28 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
-  
+
+  function getDistrito(){
+    return axios
+    .get("/getDistrito")
+    .then((response) => {
+       var a = new Array();
+      for(var i=0; i<response.data.length; i++){
+        a.push(response.data[i].descricao)
+      }
+      setOptionsBanco(a);
+      setbanco([optionsBanco[0]])
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
+  }
+  useEffect(() => {
+    getDistrito()
+    
+  },[]);
+
 
   return (
     <Card    
