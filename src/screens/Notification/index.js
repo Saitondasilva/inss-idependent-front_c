@@ -1,10 +1,33 @@
-import React, { useState } from "react";
+
+import React from "react";
+import cn from "classnames";
+import styles from "./ProductsDashboard.module.sass";
+import TooltipGlodal from "../../components/TooltipGlodal";
+//import Overview from "./Overview";
+//import ProductActivity from "./ProductActivity";
+//import ProductViews from "./ProductViews";
+import Products from "./Products";
+
+const ProductsDashboard = () => {
+  return (
+    <>
+      <div className={styles.section}>      
+        <Products />
+      </div>
+      <TooltipGlodal />
+    </>
+  );
+};
+
+export default ProductsDashboard;
+
+{/*import React, { useState } from "react";
 import cn from "classnames";
 import styles from "./Notification.module.sass";
 import List from "./List";
-import Filters from "./Filters";
+import Filters from "./Filters";*/}
 
-const filters = [
+{/*const filters = [
   "Comments",
   "Likes",
   "Review",
@@ -36,4 +59,4 @@ const Notification = () => {
   );
 };
 
-export default Notification;
+export default Notification;*/}

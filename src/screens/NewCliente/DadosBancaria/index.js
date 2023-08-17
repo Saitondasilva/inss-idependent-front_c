@@ -17,7 +17,7 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsBanco, setOptionsBanco] = useState(['--Ecolhe o Banco--','BISTP','AFRILAND','ECOBANK']);
+  const [optionsBanco, setOptionsBanco] = useState(['--Ecolhe o Banco--','BISTP','AFRILAND','ECOBANK','BGFI']);
   const [banco, setbanco] = useState(optionsBanco[0]);
   //const [optionsBancoID, setOptionsBancoID] = useState([1,2,3]);
   data1.descricao=content;
@@ -31,7 +31,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     }));
   }
   
-  /*function getEstadoCivil(){
+  function getBanco(){
     return axios
     .get("/getBanco")
     .then((response) => {
@@ -40,14 +40,17 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         a.push(response.data.data[i].descricao)
       }
       setOptionsBanco(a);
-      setOptionsBanco([optionsEstadocivil[0]])
+      setOptionsBanco([optionsBanco[0]])
     })
     .catch((err) => {
       console.log("Error", err);
       return err.response;
     });
-  }*/
-
+  }
+  useEffect(() => {   
+    getBanco()
+    
+  },[]);
 
   return (
     <Card
