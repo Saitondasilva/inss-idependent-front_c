@@ -17,16 +17,11 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsGenero, setOptionsGenero] = useState(['--Documento--', 'BI', 'Cédula Pessoal', 'Cartão Estrangeiro']);
-  const [genero, setGenero] = useState(optionsGenero[0]);
-  const [optionsTipoPensao, setOptionsEstadocivil] = useState(['--Escolha e --','Solteiro', 'Casado', 'Viuvo']);
-  const [TipoPensao, setTipoPensaol] = useState(optionsTipoPensao[0]);
-  const [linguagem, setLinguagem] = useState(optionsLinguagem[0]);
-  const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
-  const [optionsPais, setOptionsPais] = useState([]);
-  const [pais, setpais] = useState(optionsPais[0]);
-  const [optionsDocumento, setOptionsDocumento] = useState(['--Escolha um--', 'Sim', 'Não']);
-  const [Documento, setDocum] = useState(optionsPais[0]);
+ 
+  const [optionsEsteInsInss, setOptionsEsteInsInss] = useState(['--Escolha e --','Sim', 'Não']);
+  const [EsteInsInss, setEsteInsInss] = useState(optionsEsteInsInss[0]);
+  
+  
  
   data1.descricao=content;
 
@@ -46,60 +41,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   })
     console.log("FILE", this.state.image)*/
   }
-  function getGenero(){/*
-    return axios
-    .get("/getGenero")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-      }
-      setOptionsGenero(a);
-      setGenero([optionsGenero[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  */}
-  function getEstadoCivil(){/*
-    return axios
-    .get("/getEstadoCivil")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-      }
-      setOptionsEstadocivil(a);
-      setEstadocivil([optionsEstadocivil[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  */}
-  function getPais(){/*
-    return axios
-    .get("/country")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.countries.length; i++){
-        a.push(response.data.data.countries[i].name)
-      }
-      console.log(a)
-      setOptionsPais(a);
-      setpais([optionsPais[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  */}
-  useEffect(() => {
-    getGenero()
-    getEstadoCivil()
-    getPais()
-  },[]);
+ 
+  
 
   function buscarCep() {/*
      
@@ -133,55 +76,23 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           className={styles.field1}
           label="Já esteve ,alguma vez ,inscrito na segurança Social"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setGenero}
-          options={optionsGenero}
-          onChange={data1.banco=genero}
-          value={genero}
+          setValue={setEsteInsInss}
+          options={optionsEsteInsInss}
+          onChange={data1.EsteInsInss=EsteInsInss}
+          value={EsteInsInss}
         /> 
        </span>
 
        <TextInput
           className={styles.field}
           label="Se sim  diz o nome da Entidade Empregadora"
-          name=""
+          name="empresa_que_trabalhou"
           type="text"
           required
           onChange={onChangeData}
-          value={data1.profissao}
+          value={data1.empresa_que_trabalhou}
         />
-       <TextInput
-          className={styles.field}
-          label="Tem outra entidade Empregadora"
-          name=""
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.profissao}
-        />
-           <span className={styles.field}>
-  
-        <Dropdown
-          className={styles.field1}
-          label="Recebe algum tipo de pensão?"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setGenero}
-          options={optionsGenero}
-          onChange={data1.banco=genero}
-          value={genero}
-        /> 
-        </span>
-          <span className={styles.field}>
-  
-        <Dropdown
-          className={styles.field1}
-          label="se sim, diz qual"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setGenero}
-          options={optionsGenero}
-          onChange={data1.banco=genero}
-          value={genero}
-        /> 
-        </span>
+      
   
        
       </div>

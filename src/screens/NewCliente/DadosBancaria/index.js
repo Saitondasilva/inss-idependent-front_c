@@ -17,7 +17,7 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsBanco, setOptionsBanco] = useState(['--Ecolhe o Banco--','BISTP','AFRILAND','ECOBANK','BGFI']);
+  const [optionsBanco, setOptionsBanco] = useState(['AFRILAND','ECOBANK','BGFI']);
   const [banco, setbanco] = useState(optionsBanco[0]);
   //const [optionsBancoID, setOptionsBancoID] = useState([1,2,3]);
   data1.descricao=content;
@@ -40,7 +40,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         a.push(response.data.data[i].nome)
       }
       setOptionsBanco(a);
-      setbanco([optionsBanco[0]])
+      setbanco([setOptionsBanco[0]])
     })
     .catch((err) => {
       console.log("Error", err);
@@ -48,7 +48,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     });
   }
   useEffect(() => {   
-    getBanco()
+   getBanco()
     
   },[]);
 

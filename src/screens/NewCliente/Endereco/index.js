@@ -18,8 +18,8 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
   
-  const [optionsBanco, setOptionsBanco] = useState(['--Ecolhe o Distrito--','Água-grande','Mé-zochi','Lobata','Cantagalo','Lembá','Caué']);
-  const [banco, setbanco] = useState(optionsBanco[0]);
+  const [optionsDistrito, setOptionsDistrito] = useState(['--Ecolhe o Distrito--','Água-grande','Mé-zochi','Lobata','Cantagalo','Lembá','Caué']);
+  const [Distrito, setDistrito] = useState(optionsDistrito[0]);
  // const [optionsBancoID, setOptionsBancoID] = useState([1,2,3,4,5,6,7]);
   data1.descricao=content;
 
@@ -39,8 +39,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       for(var i=0; i<response.data.length; i++){
         a.push(response.data[i].descricao)
       }
-      setOptionsBanco(a);
-      setbanco([optionsBanco[0]])
+      setOptionsDistrito(a);
+      setDistrito([optionsDistrito[0]])
     })
     .catch((err) => {
       console.log("Error", err);
@@ -74,7 +74,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           type="text"
           required
           onChange={onChangeData}
-          value={data1.nconta}
+          value={data1.morada}
         /> 
        </span>
       
@@ -86,7 +86,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           type="text"
           required
           onChange={onChangeData}
-          value={data1.nconta}
+          value={data1.N_porta}
         />
         <TextInput
           className={styles.field}
@@ -95,7 +95,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           type="text"
           required
           onChange={onChangeData}
-          value={data1.nconta}
+          value={data1.ponto_referencia}
         />
       
         <span className={styles.field}>
@@ -103,10 +103,10 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           className={styles.field1}
           label="Distrito"          
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setbanco}
-          options={optionsBanco}
-          onChange={data1.banco=banco}
-          value={banco}
+          setValue={setDistrito}
+          options={optionsDistrito}
+          onChange={data1.Distrito=Distrito}
+          value={Distrito}
         /> 
         </span>
       

@@ -111,16 +111,16 @@ const Products = () => {
       <div className={styles.products}>
         <div className={styles.wrapper}>
           {activeTab === navigation[0] && <Market items={market} />}
-          {activeTab === navigation[1] && (
+          {/*activeTab === navigation[1] && (
             <Table
               title="Traffic source"
               items={traffic}
               legend={indicatorsTraffic}
             />
-          )}
-          {activeTab === navigation[2] && (
+          )*/}
+          {/*activeTab === navigation[2] && (
             <Table title="Viewers" items={viewers} legend={indicatorsViewers} />
-          )}
+          )*/}
         </div>
       </div>
     </Card>

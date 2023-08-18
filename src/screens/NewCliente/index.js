@@ -43,7 +43,7 @@ function validateForm(){
     setSmsError("Por favor preencha o nome")
     return false;
   }
-  if(!data1.bi || data1.bi===""){
+  if(!data1.numero_documento || data1.numero_documento===""){
     setSmsError("Por favor preencha o nº Documento")
     return false;
   }
@@ -129,33 +129,41 @@ function SaveProfissionalCliente() {
   if(!validateForm()){setLoader(false); return false;}
   var data={
     nome: data1.nome,
-    nif: "123456789",
-    bi: "124356",
-    //sexo: data1.genero[0],
-    sexo:"Masculino",
-    caixa_postal: data1.caixa_postal,
+    nif: data1.nif,
     email: data1.email,
+    caixa_postal: data1.caixa_postal,
+    tipo_documento: data1.Documento[0],
+    numero_documento: data1.numero_documento,
+    numero_porta: data1.N_porta,        
     tel: data1.tel,
-    country: data1.pais,
-    estado_civil: data1.estadocivil,
+    //country: data1.pais,
+   //estado_civil: data1.estadocivil,
     morada: data1.morada,
     ponto_referencia: data1.ponto_referencia,
     data_nasc: data1.data_nasc,
-    id_tipo_utente: 1,
-    id_distrito: 1,
-    id_banco: 1,
+    sexo : data1.sexo[0],
+    tipo_utente: 1,
+    distrito: data1.Distrito[0],
+    banco: data1.banco[0],
+    estado_civil: "Solteiro(a)",
+	  proficao: "teste",
+    nacionalidade: "Angola",
+	  data_inicio_actividade: "08/08/1994",
+    n_conta: data1.nib_conta,
     iban_conta: "11111111111111111111",
-    nib_conta: "22222222222222222",
-    n_conta: "21312345",
-    nome_pai: "Artur mendonça tavares",
-    nome_mae: "Maria Menezes de Deus Lima",
-    esta_instcrito: 1,
-    empresa_que_trabalhou: "2021/05/01",
-    tem_outro_trabalho:"aa",
-    outra_entidade_patronal: "aa",
-    outra_local_trabalho: "aa",
-    recebe_pensao: "aa",
-    pensao_que_recebe: "aa"
+    nib_conta: data1.nib_conta,    
+    nome_pai: data1.nome_pai,
+    nome_mae: data1.nome_mae,
+    escalao: "1º Escalão",
+    esquema: "Esquema alargado",
+    esta_instcrito: true,
+    empresa_que_trabalhou: "",
+    tem_outro_trabalho: false,
+    outra_entidade_patronal: "",
+    outra_local_trabalho: "",
+    recebe_pensao: false,
+    pensao_que_recebe: ""
+    
    // resume: data1.descricao,
     //rgb: data1.rgb,
    // cep: data1.cep,

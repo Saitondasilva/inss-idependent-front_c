@@ -32,7 +32,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   data1.descricao=content;
 
 
-  function onChangeData(e) {
+ {/* function onChangeData(e) {
     console.log(e)
     setData1((data1) => ({
       ...data1,
@@ -41,7 +41,15 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   }
   const handleSubmit = (e) => {
     alert();
-  };
+  };*/}
+
+  function onChangeData(e) {
+    console.log(e)
+    setData1((data1) => ({
+      ...data1,
+      [e.target.name]: e.target.value,
+    }));
+  }
 
   return (
     <Card    
@@ -55,7 +63,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       <div className={styles.group}>  
         
         
-        <TextInput
+        {/*<TextInput
           className={styles.field}
           label="Profissão"
           name="profisao"
@@ -64,13 +72,22 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           onSubmit={() => handleSubmit()}
           value={data1.profissao}
           icon="search"                   
-        />      
-       
+  />   */}   
+
+        <TextInput
+          className={styles.field}
+          label="Profissão"
+          name="profisao"
+          type="text"
+          required
+          onChange={onChangeData}
+          value={data1.profisao}
+        />
 
        <TextInput
           className={styles.field}
           label="Data Inicio Actividade*"
-          name="data_nasc"
+          name="data_inicio_activ"
           type="date"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           required

@@ -27,13 +27,13 @@ const Row = ({ item, value, onChange, up }) => {
             className={styles.item}
             onClick={() => setVisibleModalProduct(true)}
           >
-            <div className={styles.preview}>
+            {/*<div className={styles.preview}>
               <img
                 srcSet={`${item.image2x} 2x`}
                 src={item.image}
                 alt="Product"
-              />
-            </div>
+  />
+            </div>*/}
             <div className={styles.details}>
               <div className={styles.product}>{item.product}</div>
               <div className={styles.wrap}>

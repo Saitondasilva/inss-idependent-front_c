@@ -113,7 +113,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     });
   }
   useEffect(() => {
-    getGenero()
+    //getGenero()
     getEstadoCivil()
     getPais()
     getTipoDocumentoUtente()
@@ -157,11 +157,11 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         <TextInput
           className={styles.field}
           label="Nº Documento"
-          name="bi"
+          name="numero_documento"
           type="text"
           required
           onChange={onChangeData}
-          value={data1.bi}
+          value={data1.numero_documento}
         />
        
         <TextInput

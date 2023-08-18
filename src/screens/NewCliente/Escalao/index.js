@@ -88,7 +88,7 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
         <span className={styles.field}>
         <Dropdown
           className={styles.field1}
-          label="Regime Ogrigatório"
+          label="Esquema"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           setValue={setEsquema}
           options={optionsEsquema}
