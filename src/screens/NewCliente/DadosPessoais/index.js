@@ -113,7 +113,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     });
   }
   useEffect(() => {
-    //getGenero()
+    getGenero()
     getEstadoCivil()
     getPais()
     getTipoDocumentoUtente()
