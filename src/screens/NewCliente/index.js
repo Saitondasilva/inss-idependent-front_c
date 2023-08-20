@@ -126,25 +126,24 @@ function validateForm(){
 }
 function SaveProfissionalCliente() {
   setLoader(true)
-  if(!validateForm()){setLoader(false); return false;}
+  
+  //if(!validateForm()){setLoader(false); return false;}
   var data={
     nome: data1.nome,
     nif: data1.nif,
     email: data1.email,
     caixa_postal: data1.caixa_postal,
-    tipo_documento: data1.Documento[0],
+    tipo_documento: data1.Documento,
     numero_documento: data1.numero_documento,
     numero_porta: data1.N_porta,        
     tel: data1.tel,
-    //country: data1.pais,
-   //estado_civil: data1.estadocivil,
     morada: data1.morada,
     ponto_referencia: data1.ponto_referencia,
     data_nasc: data1.data_nasc,
-    sexo : data1.sexo[0],
+    sexo : data1.sexo,
     tipo_utente: 1,
-    distrito: data1.Distrito[0],
-    banco: data1.banco[0],
+    distrito: data1.Distrito,
+    banco: data1.banco,
     estado_civil: "Solteiro(a)",
 	  proficao: "teste",
     nacionalidade: "Angola",
@@ -174,8 +173,7 @@ function SaveProfissionalCliente() {
     //payment_option: data1.tipoPagamento,
     //photo: data1.photo,
   }
-  
-  console.log("Data",data)
+  console.log("DATA Sended",data)
   return axios
     .post("/utente/register",data,{
       headers: { Authorization: `Bearer ${userData.token}` },

@@ -18,7 +18,7 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
   const [optionsBanco, setOptionsBanco] = useState(['AFRILAND','ECOBANK','BGFI']);
-  const [banco, setbanco] = useState(optionsBanco[0]);
+  const [banco, setBanco] = useState(optionsBanco[0]);
   //const [optionsBancoID, setOptionsBancoID] = useState([1,2,3]);
   data1.descricao=content;
 
@@ -40,7 +40,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         a.push(response.data.data[i].nome)
       }
       setOptionsBanco(a);
-      setbanco([setOptionsBanco[0]])
+      setBanco([setOptionsBanco[0]])
     })
     .catch((err) => {
       console.log("Error", err);
@@ -49,7 +49,6 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   }
   useEffect(() => {   
    getBanco()
-    
   },[]);
 
   return (
@@ -67,7 +66,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           className={styles.field1}
           label="Banco"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setbanco}
+          setValue={setBanco}
           options={optionsBanco}
           onChange={data1.banco=banco}
           value={banco}
