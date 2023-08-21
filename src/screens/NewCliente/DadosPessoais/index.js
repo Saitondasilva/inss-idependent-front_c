@@ -18,15 +18,13 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsGenero, setOptionsGenero] = useState(['Masculino', 'Feminino']);
-  const [genero, setGenero] = useState(optionsGenero[0]);
-  const [optionsEstadocivil, setOptionsEstadocivil] = useState(['--Escolha e --','Solteiro', 'Casado', 'Viuvo']);
+  const [optionsSexo, setOptionsSexo] = useState(['--Sexo--', 'M', 'F']);
+  const [sexo, setSexo] = useState(optionsSexo[0]);
+  const [optionsEstadocivil, setOptionsEstadocivil] = useState(['--Estado Civil--','Solteiro', 'Casado', 'Viuvo']);
   const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
-  const [linguagem, setLinguagem] = useState(optionsLinguagem[0]);
-  const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
-  const [optionsPais, setOptionsPais] = useState(['--Escolha um--', 'São Tomé e Príncipe>']);
-  const [pais, setpais] = useState(optionsPais[0]);
-  const [optionsDocumento, setOptionsDocumento] = useState(['--Escolha um--', 'BI', 'Cédula PEsoal', 'Cartão estrangeiro']);
+  const [optionsPais, setOptionsPais] = useState(['--País--', 'São Tomé e Príncipe']);
+  const [pais, setPais] = useState(optionsPais[0]);
+  const [optionsDocumento, setOptionsDocumento] = useState(['--Documento--', 'BI', 'Cédula PEsoal']);
   const [Documento, setDocum] = useState(optionsDocumento[0]);
  
   data1.descricao=content;
@@ -55,8 +53,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       for(var i=0; i<response.data.data.length; i++){
         a.push(response.data.data[i].descricao)
       }
-      setOptionsGenero(a);
-      setGenero([optionsGenero[0]])
+      setOptionsSexo(a);
+      setSexo([optionsSexo[0]])
     })
     .catch((err) => {
       console.log("Error", err);
@@ -105,7 +103,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       }
       console.log(a)
       setOptionsPais(a);
-      setpais([optionsPais[0]])
+      setPais([optionsPais[0]])
     })
     .catch((err) => {
       console.log("Error", err);
@@ -131,6 +129,23 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         
      })
      .catch(err =>{alert("Cep não existente");data1.cep="";});
+     function getPais(){
+    return axios
+    .get("/country")
+    .then((response) => {
+       var a = new Array();
+      for(var i=0; i<response.data.data.countries.length; i++){
+        a.push(response.data.data.countries[i].nome)
+      }
+      console.log(a)
+      setOptionsPais(a);
+      setpais([optionsPais[0]])
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
+  }
 
     */}
   return (
@@ -224,10 +239,10 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
        <Dropdown
           className={styles.field1}
           label="Gênero"             
-          setValue={setGenero}
-          options={optionsGenero}
-          onChange={data1.sexo=genero}
-          value={genero}
+          setValue={setSexo}
+          options={optionsSexo}
+          onChange={data1.sexo=sexo}
+          value={sexo}
         /> 
        </span>
        <span className={styles.field}>
@@ -257,7 +272,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           className={styles.field1}
           label="Nacionalidade"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setpais}
+          setValue={setPais}
           options={optionsPais}
           onChange={data1.pais=pais}
           value={pais}

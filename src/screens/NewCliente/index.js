@@ -39,7 +39,7 @@ const NewProduct = () => {
 function validateForm(){
 
   {/*Validação de Dados do Utente */}
-  if(!data1.nome || data1.nome===""){
+  {/*if(!data1.nome || data1.nome===""){
     setSmsError("Por favor preencha o nome")
     return false;
   }
@@ -143,13 +143,13 @@ function SaveProfissionalCliente() {
     morada: data1.morada,
     ponto_referencia: data1.ponto_referencia,
     data_nasc: data1.data_nasc,
-    sexo : "Masculino",
+    sexo : data1.sexo,
     tipo_utente: 1,
     distrito: data1.Distrito,
-    banco: data1.banco,
-    estado_civil: "Solteiro(a)",
+    banco: data1.banco,//data1.banco,
+    estado_civil: data1.estadocivil,
 	  proficao: "teste",
-    nacionalidade: "Angola",
+    nacionalidade: data1.pais,
 	  data_inicio_actividade: "08/08/1994",
     n_conta: data1.nib_conta,
     iban_conta: "11111111111111111111",

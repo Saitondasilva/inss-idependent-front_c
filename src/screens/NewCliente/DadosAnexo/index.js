@@ -17,16 +17,8 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsGenero, setOptionsGenero] = useState(['--Documento--', 'BI', 'Cédula Pessoal', 'Cartão Estrangeiro']);
-  const [genero, setGenero] = useState(optionsGenero[0]);
-  const [optionsEstadocivil, setOptionsEstadocivil] = useState(['--Escolha e --','Solteiro', 'Casado', 'Viuvo']);
-  const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
-  const [linguagem, setLinguagem] = useState(optionsLinguagem[0]);
-  const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
-  const [optionsPais, setOptionsPais] = useState([]);
-  const [pais, setpais] = useState(optionsPais[0]);
-  const [optionsDocumento, setOptionsDocumento] = useState(['--Escolha um--', 'BI', 'Cédula PEsoal', 'Cartão estrangeiro']);
-  const [Documento, setDocum] = useState(optionsPais[0]);
+  const [optionsDocAnexo, setOptionsDocAnexo] = useState(['--Escolha um--', 'BI', 'Certidão', 'Cartão estrangeiro']);
+  const [docAnexo, setDocAnexo] = useState(optionsDocAnexo[0]);
  
   data1.descricao=content;
 
@@ -38,6 +30,23 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
+
+  function getDocAnexo(){
+    return axios
+    .get("/getDocAnexo")
+    .then((response) => {
+       var a = new Array();
+      for(var i=0; i<response.data.data.length; i++){
+        a.push(response.data.data[i].nome)
+      }
+      setOptionsDocAnexo(a);
+      setDocAnexo([optionsDocAnexo[0]])
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
+  }
   function onChangeFile(e){/*
     let file = e.target.files
    /* data1.photo=this.state.image
@@ -46,64 +55,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   })
     console.log("FILE", this.state.image)*/
 }
-  function getGenero(){/*
-    return axios
-    .get("/getGenero")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-      }
-      setOptionsGenero(a);
-      setGenero([optionsGenero[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  */}
+  
 
-  function getEstadoCivil(){/*
-    return axios
-    .get("/getEstadoCivil")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-      }
-      setOptionsEstadocivil(a);
-      setEstadocivil([optionsEstadocivil[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  */}
-
-  {/*
-  function getPais(){
-    return axios
-    .get("/country")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.countries.length; i++){
-        a.push(response.data.data.countries[i].name)
-      }
-      console.log(a)
-      setOptionsPais(a);
-      setpais([optionsPais[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  useEffect(() => {
-    getGenero()
-    getEstadoCivil()
-    getPais()
-  },[]);
-*/}
   {/*function buscarCep() {
      
     fetch(`http://viacep.com.br/ws/${data1.cep}/json/`, {mode: 'cors'})
@@ -118,34 +71,32 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
      .catch(err =>{alert("Cep não existente");data1.cep="";});
 
 }*/}
+
+useEffect(() => {
+  getDocAnexo()
+},[]);
   return (
     <Card
       className={cn(styles.card, className)}
       title="Anexo"
       classTitle="title-green"
-      
-    >
-      
-        
-       
-        
+    >   
       
       <div className={styles.description}>
       <hr></hr>
       <p className={cn("buttona", styles.buttona)}  ><Icon name="add" size="24" />add</p>
-      <div className={styles.group}> 
-      
+      <div className={styles.group}>       
        
        <span className={styles.field}>
   
        <Dropdown
           className={styles.field1}
-          label="Nacionalidade"
+          label="Documento Anexo"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setGenero}
-          options={optionsGenero}
-          onChange={data1.banco=genero}
-          value={genero}
+          setValue={setDocAnexo}
+          options={optionsDocAnexo}
+          onChange={data1.docAnexo=docAnexo}
+          value={docAnexo}
         /> 
        </span>
 

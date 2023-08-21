@@ -17,7 +17,7 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsBanco, setOptionsBanco] = useState(['AFRILAND','ECOBANK','BGFI']);
+  const [optionsBanco, setOptionsBanco] = useState(['--Banco--','AFRILAND','ECOBANK','BGFI']);
   const [banco, setBanco] = useState(optionsBanco[0]);
   //const [optionsBancoID, setOptionsBancoID] = useState([1,2,3]);
   data1.descricao=content;
@@ -40,7 +40,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         a.push(response.data.data[i].nome)
       }
       setOptionsBanco(a);
-      setBanco([setOptionsBanco[0]])
+      setBanco([optionsBanco[0]])
     })
     .catch((err) => {
       console.log("Error", err);

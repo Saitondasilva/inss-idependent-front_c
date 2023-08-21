@@ -47,7 +47,7 @@ const indicatorsViewers = [
 ];
 
 const Products = () => {
-  const navigation = ["Market", "Traffic sources", "Viewers"];
+  const navigation = ["Market"];
 
   const [activeTab, setActiveTab] = useState(navigation[0]);
   const [search, setSearch] = useState("");

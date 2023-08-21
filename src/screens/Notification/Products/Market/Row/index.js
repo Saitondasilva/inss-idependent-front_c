@@ -43,20 +43,7 @@ const Row = ({ item, value, onChange, up }) => {
             </div>
           </div>
         </div>
-        <div className={styles.col}>
-          <div className={styles.label}>Status</div>
-          {item.status ? (
-            <div className={cn("status-green", styles.status)}>Active</div>
-          ) : (
-            <div className={cn("status-red", styles.status)}>Deactive</div>
-          )}
-          <Control
-            className={styles.control}
-            visibleActions={visibleActions}
-            setVisibleActions={setVisibleActions}
-            up={up}
-          />
-        </div>
+        
         <div className={styles.col}>${item.price}</div>
         <div className={styles.col}>
           <div className={styles.label}>Sales</div>
@@ -82,21 +69,22 @@ const Row = ({ item, value, onChange, up }) => {
             </div>
           </div>
         </div>
+
         <div className={styles.col}>
-          <div className={styles.label}>Likes</div>
-          <div className={styles.box}>
-            <div className={styles.number}>{item.likes}</div>
-            <div className={styles.line}>
-              <div
-                className={styles.progress}
-                style={{
-                  backgroundColor: "#8E59FF",
-                  width: item.likesPercent,
-                }}
-              ></div>
-            </div>
-          </div>
+          <div className={styles.label}>Status</div>
+          {item.status ? (
+            <div className={cn("status-green", styles.status)}>Active</div>
+          ) : (
+            <div className={cn("status-red", styles.status)}>Deactive</div>
+          )}
+          <Control
+            className={styles.control}
+            visibleActions={visibleActions}
+            setVisibleActions={setVisibleActions}
+            up={up}
+          />
         </div>
+      
       </div>
       <ModalProduct
         visible={visibleModalProduct}
