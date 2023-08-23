@@ -6,12 +6,7 @@ import Schedule from "../../components/Schedule";
 import DadosContrib from "./DadosContrib";
 import DadosAnexo from "./DadosAnexo";
 import DadosTRansa from "./DadosTRansa";
-
-
-
-
-
-
+import Panel from "./Panel";
 
 import axios from "axios";
 
@@ -22,6 +17,7 @@ const NewProduct = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [data1, setData1] = useState({});
+  const [data,setData]=useState([{ano:"",mes:"",valor_pago:""}])
   const [userData, setuserData] = useState({});
   const [smsError, setSmsError] = useState("");
   const [smsSucess, setSmsSuccess] = useState("");
@@ -99,40 +95,24 @@ function validateForm(){
   return true;
   
 }
-function SaveProfissionalCliente() {
+function PagarContribuicao() {
   setLoader(true)
-  if(!validateForm()){setLoader(false); return false;}
-  var data={
-    first_name: data1.nome,
-    last_name: data1.apelido,
-    gender: data1.genero[0],
+  console.log("detalhes_pagamentos",data)
+  //if(!validateForm()){setLoader(false); return false;}
+  var data3={
+    forma_transacao: data1.forma_transacao,
+    data_transacao: data1.data_transacao,
+    codigo_transacao: data1.codigo_transacao,
     //gender: 1,
-    email: data1.email,
-    phone: data1.contacto,
-    address: data1.adress,
-    country: data1.pais,
-    state: data1.estado,
-    city: data1.cidade,
-    estado_civil: data1.estadocivil,
-   // resume: data1.descricao,
-    resume: "data1.descricao",
-    facebook_url: data1.facebook,
-    twitter_url: data1.twitter,
-    google_plus_url: data1.google,
-    pinterest_url: data1.pintrest,
-    //rgb: data1.rgb,
-    cep: data1.cep,
-    cpf: data1.cpf,
-    id_profission: userData.id,
-    value_consult: data1.valor,
-    step: data1.step,
-    payment_option: data1.tipoPagamento,
-    photo: data1.photo,
+    valor_total: data1.valor_total,
+    anexo: "teste",
+    id_utente: data1.id_utente,
+    detalhes_pagamentos: data,
+   
   }
   
-  console.log("Data",data)
   return axios
-    .post("/candidate/registerClientByProfissional",data,{
+    .post("/utente/pagarContribuicao",data3,{
       headers: { Authorization: `Bearer ${userData.token}` },
     })
     .then((response) => {
@@ -149,7 +129,9 @@ function SaveProfissionalCliente() {
       console.log("Error", err);
       return err.response;
     });
+    
 };
+
 function clean(){
  data1.nome="";
  data1.apelido="";
@@ -157,20 +139,7 @@ data1.genero="";
 data1.email="";
 data1.contacto="";
 data1.adress="";
-data1.pais="";
-data1.estado="";
-data1.cidade="";
-data1.estadocivil="";
- data1.facebook="";
-data1.twitter="";
- data1.google="";
-data1.pintrest="";
-data1.rgb="";
-data1.cep="";
-data1.cpf="";
-userData.id="";
-data1.valor="";
-data1.step="";
+
 }
   return (
     <>
@@ -180,29 +149,21 @@ data1.step="";
           <DadosContrib className={styles.card} data1={data1} setData1={setData1}/>          
          
           <DadosTRansa className={styles.card} data1={data1} setData1={setData1}/>
-          {<DadosAnexo className={styles.card} data1={data1} setData1={setData1}/>}
+          <DadosAnexo className={styles.card} data={data} setData={setData}/>
 
-          {
-          /*
-            <ImagesAndCTA className={styles.card} />
-            <Price className={styles.card} />
-            <CategoryAndAttibutes className={styles.card} />
-            <ProductFiles className={styles.card} />
-            <Discussion className={styles.card} />
-          */
-          }
+         
           
         </div>
         
       </div>
-      {/*<Panel
+      {<Panel
         setVisiblePreview={setVisiblePreview}
         setVisibleSchedule={setVisibleModal}
-        SaveProfissionalCliente={SaveProfissionalCliente}
+        SavePagarContribuicao={PagarContribuicao}
         smsError={smsError}
         smsSucess={smsSucess}
         loader={loader}
-        />*/}
+        />}
       <TooltipGlodal />
       <Modal visible={visibleModal} onClose={() => setVisibleModal(false)}>
         <Schedule

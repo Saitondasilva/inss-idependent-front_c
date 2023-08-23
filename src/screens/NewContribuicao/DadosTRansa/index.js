@@ -17,16 +17,8 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsGenero, setOptionsGenero] = useState(['--Documento--', 'BI', 'Cédula Pessoal', 'Cartão Estrangeiro']);
-  const [genero, setGenero] = useState(optionsGenero[0]);
-  const [optionsEstadocivil, setOptionsEstadocivil] = useState(['--Escolha e --','Solteiro', 'Casado', 'Viuvo']);
-  const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
-  const [linguagem, setLinguagem] = useState(optionsLinguagem[0]);
-  const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
-  const [optionsPais, setOptionsPais] = useState([]);
-  const [pais, setpais] = useState(optionsPais[0]);
-  const [optionsDocumento, setOptionsDocumento] = useState(['--Escolha um--', 'BI', 'Cédula PEsoal', 'Cartão estrangeiro']);
-  const [Documento, setDocum] = useState(optionsPais[0]);
+  const [optionsForma, setOptionsForma] = useState(['Transferencia Bancária', 'Deposito']);
+  const [forma, setForma] = useState(optionsForma[0]);
  
   data1.descricao=content;
 
@@ -46,60 +38,6 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   })
     console.log("FILE", this.state.image)*/
   }
-  function getGenero(){
-    return axios
-    .get("/getGenero")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-      }
-      setOptionsGenero(a);
-      setGenero([optionsGenero[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  function getEstadoCivil(){
-    return axios
-    .get("/getEstadoCivil")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-      }
-      setOptionsEstadocivil(a);
-      setEstadocivil([optionsEstadocivil[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  function getPais(){
-    return axios
-    .get("/country")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.countries.length; i++){
-        a.push(response.data.data.countries[i].name)
-      }
-      console.log(a)
-      setOptionsPais(a);
-      setpais([optionsPais[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  useEffect(() => {
-    getGenero()
-    getEstadoCivil()
-    getPais()
-  },[]);
 
   function buscarCep() {
      
@@ -126,90 +64,49 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       <hr></hr>
       <div className={styles.group}>
 
-     
-
-      
-      <span className={styles.field}>
-  <Dropdown
-     className={styles.field1}
-     label="Ano Contribuição"
-     tooltip="Maximum 100 characters. No HTML or emoji allowed"
-     setValue={setGenero}
-     options={optionsGenero}
-     onChange={data1.banco=genero}
-     value={genero}
-   /> 
-  </span>
-
-
-
-      <span className={styles.field}>
+  <span className={styles.field}>
   
   <Dropdown
      className={styles.field1}
      label="Forma de pagamento Contribuição"
      tooltip="Maximum 100 characters. No HTML or emoji allowed"
-     setValue={setGenero}
-     options={optionsGenero}
-     onChange={data1.banco=genero}
-     value={genero}
-   /> 
-  </span>
-
-  <span className={styles.field}>
-  <Dropdown
-     className={styles.field1}
-     label="Tipo de Moeda"
-     tooltip="Maximum 100 characters. No HTML or emoji allowed"
-     setValue={setGenero}
-     options={optionsGenero}
-     onChange={data1.banco=genero}
-     value={genero}
+     setValue={setForma}
+     options={optionsForma}
+     onChange={data1.forma_transacao=forma}
+     value={forma}
    /> 
   </span>
         
-               
-     <span className={styles.field}>
-    <Dropdown
-     className={styles.field1}
-     label="Periodo de Contribuição"
-     tooltip="Maximum 100 characters. No HTML or emoji allowed"
-     setValue={setGenero}
-     options={optionsGenero}
-     onChange={data1.banco=genero}
-     value={genero}
-   /> 
-     </span>
-      
-    <TextInput
+   <TextInput
           className={styles.field}
           label="Data de Transação"
-          name="bi"
+          name="data_transacao"
           type="date"
           required
           onChange={onChangeData}
-          value={data1.bi}
+          value={data1.data_transacao}
         />
-
-     
+ <TextInput
+          className={styles.field}
+          label="Codigo de Transação"
+          name="codigo_transacao"
+          type="text"
+          required
+          onChange={onChangeData}
+          value={data1.codigo_transacao}
+        />
+      <TextInput
+          className={styles.field}
+          label="Valor Total Pago"
+          name="valor_total"
+          type="text"
+          required
+          onChange={onChangeData}
+          value={data1.valor_total}
+        />
        
       </div>
-      
-  
-      
-        {
-          /*
-       <Editor
-          state={content}
-          onChange={setContent}
-          classEditor={styles.editor}
-          label="Sobre"
-          tooltip="Descrição"
-          name="descricao"
-          value={data1.descricao}
-          />
-        */}
-       
+             
       </div>
     </Card>
   );

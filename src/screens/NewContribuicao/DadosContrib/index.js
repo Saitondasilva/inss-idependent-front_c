@@ -18,16 +18,8 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsGenero, setOptionsGenero] = useState(['--Sexo', 'Masculino', 'Feminino']);
-  const [genero, setGenero] = useState(optionsGenero[0]);
-  const [optionsEstadocivil, setOptionsEstadocivil] = useState(['--Escolha e --','Solteiro', 'Casado', 'Viuvo']);
-  const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
-  const [linguagem, setLinguagem] = useState(optionsLinguagem[0]);
-  const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
-  const [optionsPais, setOptionsPais] = useState([]);
-  const [pais, setpais] = useState(optionsPais[0]);
-  const [optionsDocumento, setOptionsDocumento] = useState(['--Escolha um--', 'BI', 'Cédula PEsoal', 'Cartão estrangeiro']);
-  const [Documento, setDocum] = useState(optionsPais[0]);
+  const [nome, setNome] = useState();
+  const [dataNasc, setDataNasc] = useState();
  
   data1.descricao=content;
 
@@ -39,82 +31,38 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
-  function onChangeFile(e){
-    let file = e.target.files
-   /* data1.photo=this.state.image
-    this.setState({
-      photo: e.target.files[0]
-  })
-    console.log("FILE", this.state.image)*/
-  }
-  function getGenero(){
-    return axios
-    .get("/getGenero")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-      }
-      setOptionsGenero(a);
-      setGenero([optionsGenero[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  function getEstadoCivil(){
-    return axios
-    .get("/getEstadoCivil")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-      }
-      setOptionsEstadocivil(a);
-      setEstadocivil([optionsEstadocivil[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  function getPais(){
-    return axios
-    .get("/country")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.countries.length; i++){
-        a.push(response.data.data.countries[i].name)
-      }
-      console.log(a)
-      setOptionsPais(a);
-      setpais([optionsPais[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
+
+/*  
   useEffect(() => {
-    getGenero()
-    getEstadoCivil()
-    getPais()
-  },[]);
+    getUtente();
+  },[data1.nif]);
+*/
 
-  function buscarCep() {
-     
-    fetch(`http://viacep.com.br/ws/${data1.cep}/json/`, {mode: 'cors'})
-     .then((res) => res.json())
-     .then((data) => {
-           data1.cep=data.cep 
-           data1.cidade=data.localidade
-           data1.estado=data.logradouro
-           setData1(data1)
-        
-     })
-     .catch(err =>{alert("Cep não existente");data1.cep="";});
-
+function getUtenteByNif(){
+  console.log("GetUtent ",data1.nif)
+  return axios
+  .get("/utente/getUtenteByNIF/"+data1.nif)
+  .then((response) => {
+    if(response.data.data.Utente.length > 0){
+      console.log("Entreuii ",response.data.data.Utente[0].nome)
+      setNome(response.data.data.Utente[0].nome)
+      setDataNasc(response.data.data.Utente[0].data_nasc)
+      data1.id_utente=response.data.data.Utente[0].id
+     setData1(data1)
+    }else{
+      console.log("SAI ",data1.nif)
+      setNome("")
+      setDataNasc("")
+     setData1(data1)
+    }
+  })
+  .catch((err) => {
+    data1.nome=""
+      data1.data_nasc=""
+     setData1(data1)
+    console.log("Error", err);
+    return err.response;
+  });
 }
   return (
     <Card
@@ -127,55 +75,49 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       <hr></hr>
       <div className={styles.group}>
       
-          
       <TextInput
           className={styles.field}
-          label="Nome do Beneficiaário"
-          name="bi"
+          label="NIF"
+          name="nif"
           type="text"
+          icon="search"
           required
           onChange={onChangeData}
-          value={data1.bi}
+          onKeyUp={getUtenteByNif}
+          value={data1.nif}
         />
-
+          
         <TextInput
           className={styles.field}
           label="Numero de Beneficiário"
-          name="bi"
+          name="numero"
           type="text"
           required
           onChange={onChangeData}
-          value={data1.bi}
+          value={data1.numero}
         />
-       
-       <TextInput
-          className={styles.field}
-          label="NIF"
-          name="bi"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.bi}
-        />
+        </div>
+   
+      <div className={styles.group}>
       <TextInput
           className={styles.field}
-          label="Nome pai"
-          name="bi"
+          label="Nome do Beneficiaário"
+          name="nome"
           type="text"
           required
           onChange={onChangeData}
-          value={data1.bi}
+          value={nome}
         />
-          <TextInput
+       
+      <TextInput
           className={styles.field}
-          label="Nome Mãe"
-          name="bi"
+          label="Data Nascimento"
+          name="data_nasc"
           type="text"
           required
           onChange={onChangeData}
-          value={data1.bi}
+          value={dataNasc}
         />
-          
       </div>
    
       

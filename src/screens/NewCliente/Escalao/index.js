@@ -75,8 +75,10 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
     .get("/getEsquema")
     .then((response) => {
        var a = new Array();
+       var b = new Array();
       for(var i=0; i<response.data.data.length; i++){
         a.push(response.data.data[i].esquema)
+        b.push(response.data.data[i].id)
       } 
       setOptionsEsquema(a);
       setEsquemaID(b)
