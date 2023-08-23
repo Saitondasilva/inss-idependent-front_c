@@ -193,6 +193,45 @@ function SaveProfissionalCliente() {
       return err.response;
     });
 };
+
+
+function validateFile(){
+
+
+  return true;
+  
+}
+
+function SaveFile() {
+  
+  setLoader(true)
+  console.log("Data", data1)
+  if(!validateFile()){setLoader(false); return false;}
+  var data={   
+    
+    photo: data1.photo,
+  }
+  
+  console.log("Data",data)
+  return axios
+    .post("/utente/register",data,{
+      headers: { Authorization: `Bearer ${userData.token}` },
+    })
+    .then((response) => {
+      setSmsSuccess("Registro com sucesso!");
+      setSmsError("");
+      setLoader(false)
+      //clean();
+      console.log(response.data.data)
+    })
+    .catch((err) => {
+      setLoader(false);
+      setSmsSuccess("");
+      setSmsError(err.response.data.message);
+      console.log("Error", err);
+      return err.response;
+    });
+};
             function clean(){
             data1.nome="";
             data1.apelido="";

@@ -16,7 +16,7 @@ const optionsLinguagem      = ["Português", "Inglês", "Françes", "Espanhol"];
 const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 // const optionsPais        = ["Brasil", "Portugal", "França", "Espanha"];
 
-const NameAndDescription = ({ className, data1, setData1 }) => {
+const NameAndDescription = ({ className, handleSubmit, data1, setData1 }) => {
   const [content, setContent] = useState();
   const [nome, setNome] = useState();
   const [dataNasc, setDataNasc] = useState();

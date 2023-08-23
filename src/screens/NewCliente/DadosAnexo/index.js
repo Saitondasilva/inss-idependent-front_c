@@ -72,6 +72,11 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
 
 }*/}
 
+function SaveFile(params) {
+  
+  
+}
+
 useEffect(() => {
   getDocAnexo()
 },[]);
@@ -84,7 +89,7 @@ useEffect(() => {
       
       <div className={styles.description}>
       <hr></hr>
-      <p className={cn("buttona", styles.buttona)}  ><Icon name="add" size="24" />add</p>
+      <button onClick={SaveFile} className={styles.field1}  >ADD</button>
       <div className={styles.group}>       
        
        <span className={styles.field}>

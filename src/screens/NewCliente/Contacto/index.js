@@ -81,7 +81,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           type="email"
           required
           onChange={onChangeData}
-          value={data1.nconta}
+          value={data1.email}
+          currency="@"
         />
       
        {/*

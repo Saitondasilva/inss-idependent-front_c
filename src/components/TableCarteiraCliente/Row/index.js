@@ -62,25 +62,32 @@ const Row = ({ item, value, onChange ,setActiveIndex, setIdConsultaToNestStep, s
             </div>
           */}
             <div className={styles.details} >
-              <div className={styles.product}>{item.first_name+" "+item.last_name}</div>
-              <div className={styles.price}>${item.value}</div>
+              <div className={styles.link}>{item.nome}</div>              
+              
             </div>
           </div>
          
         </div>
         <div className={styles.col}>
-            <div className={styles.price}>${item.value}</div>
+            <div className={styles.link}>{item.data_nasc}</div>
         </div>
         <div className={styles.col}>
+            <div className={styles.link}>{item.nif}</div>
+        </div>
+        <div className={styles.col}>
+            <div className={styles.link}>{item.email}</div>
+        </div>
+        {/*<div className={styles.col}>
           <div className={styles.link}>Ativo</div>
+        </div>*/}
+        <div className={styles.col}>
+          <div className={styles.link}>{item.email}</div>
         </div>
         <div className={styles.col}>
-          <div className={styles.link}>Sim/Não</div>
+          <div className={styles.link}>{item.tel}</div>
         </div>
-        <div className={styles.col}>
-          <div className={styles.link}>Pix/Boleto/Boleto</div>
-        </div>
-        <div className={styles.col} onClick={()=>setIdConsultaToNestStep(item.id_consulta)}>
+       
+       {/* <div className={styles.col} onClick={()=>setIdConsultaToNestStep(item.id_consulta)}>
           <Control
             className={styles.control}
             startDate={startDate}
@@ -91,7 +98,7 @@ const Row = ({ item, value, onChange ,setActiveIndex, setIdConsultaToNestStep, s
             
             
           />
-        </div>
+      </div> */}
       </div>
       <ModalProduct
         visible={visibleModalProduct}

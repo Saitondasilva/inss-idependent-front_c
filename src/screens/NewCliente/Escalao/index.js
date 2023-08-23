@@ -139,8 +139,7 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
           value={esquema}
         /> 
         </span>
-      
-      
+ 
        {/*
        <TextInput
           className={styles.field}
@@ -155,12 +154,9 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
         */}
        
       </div>
-      
-   
-          
+     
       </div>
-      
-      
+     
         {
           /*
        <Editor
@@ -173,8 +169,7 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
           value={data1.descricao}
           />
         */}
-       
-      
+    
     </Card>
   );
 };
