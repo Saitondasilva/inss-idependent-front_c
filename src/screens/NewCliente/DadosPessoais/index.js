@@ -18,14 +18,19 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsSexo, setOptionsSexo] = useState(['--Sexo--', 'M', 'F']);
-  const [sexo, setSexo] = useState(optionsSexo[0]);
-  const [optionsEstadocivil, setOptionsEstadocivil] = useState(['--Estado Civil--','Solteiro', 'Casado', 'Viuvo']);
+  const [optionsGenero, setOptionsGenero] = useState([]);
+  const [genero, setGenero] = useState(optionsGenero[0]);
+  const [generoID, setGeneroID] = useState([]);
+  const [optionsEstadocivil, setOptionsEstadocivil] = useState([]);
   const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
-  const [optionsPais, setOptionsPais] = useState(['--País--', 'São Tomé e Príncipe']);
+  const [estadocivilID, setEstadocivilID] = useState([]);
+  const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
+  const [optionsPais, setOptionsPais] = useState(['--Escolha um--', 'Santomense', 'estrangeiro']);
   const [pais, setPais] = useState(optionsPais[0]);
-  const [optionsDocumento, setOptionsDocumento] = useState(['--Documento--', 'BI', 'Cédula PEsoal']);
-  const [Documento, setDocum] = useState(optionsDocumento[0]);
+  const [paisID, setPaisID] = useState([]);
+  const [optionsDocumento, setOptionsDocumento] = useState([]);
+  const [documento, setDocumento] = useState(optionsDocumento[0]);
+  const [documentoID, setDocumentoID] = useState([]);
  
   data1.descricao=content;
 
@@ -37,6 +42,25 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
+  useEffect(() => {
+    var position        =   optionsGenero.indexOf(genero);
+        data1.sexo_id=generoID[position];
+  }, [genero]);
+
+  useEffect(() => {
+    var position        =   optionsEstadocivil.indexOf(estadocivil);
+        data1.estadocivil_id  =   estadocivilID[position];
+  }, [estadocivil]);
+
+  useEffect(() => {
+    var position        =   optionsPais.indexOf(pais);
+        data1.pais_id  =   paisID[position];
+  }, [pais]);
+
+  useEffect(() => {
+    var position        =   optionsDocumento.indexOf(documento);
+        data1.documento_id  =   documentoID[position];
+  }, [documento]);
   function onChangeFile(e){
     let file = e.target.files
    /* data1.photo=this.state.image
@@ -49,28 +73,15 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     return axios
     .get("/getGenero")
     .then((response) => {
-       var a = new Array();
+      var a =new Array();
+      var b =new Array();
       for(var i=0; i<response.data.data.length; i++){
         a.push(response.data.data[i].descricao)
+        b.push(response.data.data[i].id)
       }
-      setOptionsSexo(a);
-      setSexo([optionsSexo[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  function getTipoDocumentoUtente(){
-    return axios
-    .get("/getTipoDocumentoUtente")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-      }
-      setOptionsDocumento(a);
-      setDocum([optionsDocumento[0]])
+      setOptionsGenero(a);
+      setGenero([optionsGenero[0]])
+      setGeneroID(b);
     })
     .catch((err) => {
       console.log("Error", err);
@@ -82,10 +93,13 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     .get("/getEstadoCivil")
     .then((response) => {
        var a = new Array();
+       var b = new Array();
       for(var i=0; i<response.data.data.length; i++){
         a.push(response.data.data[i].descricao)
+        b.push(response.data.data[i].id)
       }
       setOptionsEstadocivil(a);
+      setEstadocivilID(b);
       setEstadocivil([optionsEstadocivil[0]])
     })
     .catch((err) => {
@@ -98,12 +112,33 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     .get("/country")
     .then((response) => {
        var a = new Array();
+       var b = new Array();
       for(var i=0; i<response.data.data.countries.length; i++){
         a.push(response.data.data.countries[i].nome)
+        b.push(response.data.data.countries[i].id)
       }
-      console.log(a)
       setOptionsPais(a);
+      setPaisID(b);
       setPais([optionsPais[0]])
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
+  }
+  function getTipoDoc(){
+    return axios
+    .get("/getTipoDocumentoUtente")
+    .then((response) => {
+       var a = new Array();
+       var b = new Array();
+      for(var i=0; i<response.data.data.length; i++){
+        a.push(response.data.data[i].descricao)
+        b.push(response.data.data[i].id)
+      }
+      setOptionsDocumento(a);
+      setDocumentoID(b);
+      setDocumento([optionsDocumento[0]])
     })
     .catch((err) => {
       console.log("Error", err);
@@ -114,7 +149,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     getGenero()
     getEstadoCivil()
     getPais()
-    getTipoDocumentoUtente()
+    getTipoDoc()
   },[]);
 
   function buscarCep() {/*
@@ -164,10 +199,10 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           className={styles.field1}
           label="Tipo Documento"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setDocum}
+          setValue={setDocumento}
           options={optionsDocumento}
-          onChange={data1.Documento=Documento}
-          value={Documento}
+          onChange={data1.documento=documento}
+          value={documento}
         /> </span>
         <TextInput
           className={styles.field}
@@ -227,7 +262,6 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         <TextInput
           className={styles.field}
           label="NIF"
-          mask="99.999.999"
           name="nif"
           type="text"
           required
@@ -238,17 +272,19 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
        <span className={styles.field}>
        <Dropdown
           className={styles.field1}
-          label="Gênero"             
-          setValue={setSexo}
-          options={optionsSexo}
-          onChange={data1.sexo=sexo}
-          value={sexo}
+          label="Gênero"  
+          name="genero"        
+          setValue={setGenero}
+          options={optionsGenero}
+          onChange={data1.sexo=genero}
+          value={genero}
         /> 
        </span>
        <span className={styles.field}>
        <Dropdown
           className={styles.field1}
-          label="Estado civil"         
+          label="Estado civil"
+          name="estado_civil"
           setValue={setEstadocivil}
           options={optionsEstadocivil}
           onChange={data1.estadocivil=estadocivil}

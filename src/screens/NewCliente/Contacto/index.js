@@ -61,7 +61,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           type="tel"
           required
           onChange={onChangeData}
-          value={data1.tel}
+          value={data1.nconta}
         /> 
        </span>
        <TextInput
@@ -71,7 +71,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           type="text"
           required
           onChange={onChangeData}
-          value={data1.caixa_postal}
+          value={data1.nconta}
         />
       
       <TextInput

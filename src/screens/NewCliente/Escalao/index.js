@@ -17,11 +17,12 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const EscalaoDesc = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
- 
-  const [optionsEscalao, setOptionsEscalao] = useState(['--Escalão--','1º Escalão','2º Escalão','3º Escalão']);
+  const [optionsEscalao, setOptionsEscalao] = useState([]);
   const [escalao, setEscalao] = useState(optionsEscalao[0]);
-  const [optionsEsquema, setOptionsEsquema] = useState(['--Esquema--','Esquema obrigatório']);
-  const [esquema, setEsquema] = useState(optionsEsquema[0]); 
+  const [escalaoID, setEscalaoID] = useState([]);
+  const [optionsEsquema, setOptionsEsquema] = useState([]);
+  const [esquema, setEsquema] = useState(optionsEsquema[0]);
+  const [esquemaID, setEsquemaID] = useState([]);
  
   data1.descricao=content;
 
@@ -37,8 +38,29 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
     .get("/getEscalao")
     .then((response) => {
        var a = new Array();
+       var b = new Array();
       for(var i=0; i<response.data.data.length; i++){
         a.push(response.data.data[i].descricao)
+        b.push(response.data.data[i].id)
+      }
+      setOptionsEscalao(a);
+      setEscalaoID(b)
+      setEscalao([optionsEsquema[0]])
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
+  }
+  function getEsquema(){
+    return axios
+    .get("/getEsquema")
+    .then((response) => {
+       var a = new Array();
+       var b = new Array();
+      for(var i=0; i<response.data.data.length; i++){
+        a.push(response.data.data[i].esquema)
+        b.push(response.data.data[i].id)
       }
       setOptionsEscalao(a);
       setEscalao([optionsEscalao[0]])
@@ -55,8 +77,9 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
        var a = new Array();
       for(var i=0; i<response.data.data.length; i++){
         a.push(response.data.data[i].esquema)
-      }
+      } 
       setOptionsEsquema(a);
+      setEsquemaID(b)
       setEsquema([optionsEsquema[0]])
     })
     .catch((err) => {
@@ -68,6 +91,17 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
     getEscalao()
     getEsquema()
   },[]);
+  
+  useEffect(() => {
+    var position        =  optionsEscalao.indexOf(escalao);
+    data1.escalao_id   =  escalaoID[position];
+  }, [escalao]);
+  
+  useEffect(() => {
+    var position        =  optionsEsquema.indexOf(esquema);
+    data1.esquema_id   =  esquemaID[position];
+  }, [esquema]);
+
   return (
     <Card    
       className={cn(styles.card, className)}      
