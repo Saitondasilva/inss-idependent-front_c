@@ -90,7 +90,7 @@ function App() {
             path="/carteira/cliente"
             element={
               <ProtectedRoute>
-                <Page title="Pesquisa de Utentes">
+                <Page title="Todos Utentes">
                   <CarteiraCliente />
                 </Page>
               </ProtectedRoute>

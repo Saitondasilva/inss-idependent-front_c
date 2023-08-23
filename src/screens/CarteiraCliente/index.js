@@ -15,7 +15,7 @@ import ConfirmDialog from "../../components/ConfirmDialog";
 import { products } from "../../mocks/products";
 
 const sorting = ["list", "grid"];
-const colluns =["Nome","Data nasc.","BI","NIF","Profissão","Tel","Operações"];
+const colluns =["Nome","Data nasc.","BI","NIF","Profissão","Tel"];
 
 const Drafts = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -61,12 +61,12 @@ useEffect(() => {
   shearchCliente(JSON.parse(user));
 },[search]);
 
-function GetAllCliente(user) {
+function GetAllCliente() {
     return axios
-      .get("/candidate/getCarteiraCliente/"+user.id)
+      .get("/utente/getUtenteByNIF/12213123")
       .then((response) => {
        console.log(response.data.data)
-       setProduto1(response.data.data.Carteira);
+       setProduto1(response.data.data.Utente);
       })
       .catch((err) => {
         console.log("Error", err);
@@ -77,15 +77,15 @@ function GetAllCliente(user) {
 function shearchCliente(user) {
   
   var data = {
-    nome_cliente : search
+    nome : search
   }
   return axios
-    .post("/candidate/searchCarteiraCliente/"+user.id, data ,{
+    .post("/utente/getUtenteByNIF/12213123", data ,{
       headers: { Authorization: `Bearer ${userData.token}` },
     })
     .then((response) => {
      console.log(response.data.data)
-     setProduto1(response.data.data.Carteira);
+     setProduto1(response.data.data.Utente);
     })
     .catch((err) => {
       console.log("Error", err);

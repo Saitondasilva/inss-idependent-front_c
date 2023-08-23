@@ -89,7 +89,7 @@ useEffect(() => {
       
       <div className={styles.description}>
       <hr></hr>
-      <button onClick={SaveFile} className={cn("buttona", styles.buttonass)}  >ADD</button>
+      <button onClick={SaveFile} className={styles.field1}  >ADD</button>
       <div className={styles.group}>       
        
        <span className={styles.field}>
