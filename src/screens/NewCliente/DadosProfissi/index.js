@@ -92,7 +92,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           required
           onChange={onChangeData}
-          value={search}
+          value={data1.data_inicio_activ}
         />
       
       

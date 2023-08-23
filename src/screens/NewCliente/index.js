@@ -126,35 +126,35 @@ function validateForm(){
 }
 function SaveProfissionalCliente() {
   setLoader(true)
-  
+  console.log("DATA SEND ", data1.escalao_id);
   //if(!validateForm()){setLoader(false); return false;}
   var data={
     nome: data1.nome,
     nif: data1.nif,
     email: data1.email,
     caixa_postal: data1.caixa_postal,
-    tipo_documento: data1.Documento,
+    id_tipo_documento: data1.documento_id,
     numero_documento: data1.numero_documento,
     numero_porta: data1.N_porta,        
     tel: data1.tel,
     morada: data1.morada,
     ponto_referencia: data1.ponto_referencia,
     data_nasc: data1.data_nasc,
-    sexo : data1.sexo,
+    id_sexo : data1.sexo_id,
     tipo_utente: 1,
-    distrito: data1.Distrito,
-    banco: data1.banco,
-    estado_civil: "Solteiro(a)",
-	  proficao: "teste",
-    nacionalidade: "Angola",
-	  data_inicio_actividade: "08/08/1994",
+    id_distrito: data1.distrito_id,
+    id_banco: data1.banco_id,
+    id_estado_civil: data1.estadocivil_id,
+	  id_proficao: 1,
+    id_nacionalidade: data1.pais_id,
+	  data_inicio_actividade: data1.data_inicio_activ,
     n_conta: data1.nib_conta,
     iban_conta: "11111111111111111111",
     nib_conta: data1.nib_conta,    
     nome_pai: data1.nome_pai,
     nome_mae: data1.nome_mae,
-    escalao: "1º Escalão",
-    esquema: "Esquema alargado",
+    id_escalao: data1.escalao_id,
+    id_esquema: data1.esquema_id,
     esta_instcrito: true,
     empresa_que_trabalhou: "",
     tem_outro_trabalho: false,
@@ -173,7 +173,7 @@ function SaveProfissionalCliente() {
     //payment_option: data1.tipoPagamento,
     //photo: data1.photo,
   }
-  console.log("DATA Sended",data)
+  
   return axios
     .post("/utente/register",data,{
       headers: { Authorization: `Bearer ${userData.token}` },
@@ -225,7 +225,8 @@ function SaveProfissionalCliente() {
           <DadosConta className={styles.card} data1={data1} setData1={setData1}/>
           /*
           <DadosPagamento className={styles.card} data1={data1} setData1={setData1} user={user}/>
-          */}
+          */
+          }
           {
             <DadosEndereco className={styles.card} data1={data1} setData1={setData1}/>
           }

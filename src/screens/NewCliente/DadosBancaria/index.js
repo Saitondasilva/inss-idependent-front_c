@@ -19,7 +19,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
   const [optionsBanco, setOptionsBanco] = useState(['AFRILAND','ECOBANK','BGFI']);
   const [banco, setBanco] = useState(optionsBanco[0]);
-  //const [optionsBancoID, setOptionsBancoID] = useState([1,2,3]);
+  const [bancoID, setBancoID] = useState([]);
   data1.descricao=content;
 
 
@@ -36,11 +36,14 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     .get("/getBanco")
     .then((response) => {
        var a = new Array();
+       var b = new Array();
       for(var i=0; i<response.data.data.length; i++){
         a.push(response.data.data[i].nome)
+        b.push(response.data.data[i].id)
       }
       setOptionsBanco(a);
-      setBanco([setOptionsBanco[0]])
+      setBancoID(b);
+      setBanco([optionsBanco[0]])
     })
     .catch((err) => {
       console.log("Error", err);
@@ -50,6 +53,10 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   useEffect(() => {   
    getBanco()
   },[]);
+  useEffect(() => {
+    var position        =   optionsBanco.indexOf(banco);
+        data1.banco_id=bancoID[position];
+  }, [banco]);
 
   return (
     <Card
