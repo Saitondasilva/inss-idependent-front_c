@@ -17,17 +17,10 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsGenero, setOptionsGenero] = useState([]);
-  const [genero, setGenero] = useState(optionsGenero[0]);
-  const [optionsEstadocivil, setOptionsEstadocivil] = useState([]);
-  const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
-  const [linguagem, setLinguagem] = useState(optionsLinguagem[0]);
-  const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
-  const [optionsPais, setOptionsPais] = useState([]);
-  const [pais, setpais] = useState(optionsPais[0]);
-  const [optionsBanco, setOptionsBanco] = useState(['--Ecolhe o Distrito--','Água-grande','Mé-zochi','Lobata','Cantagalo','Lembá','Caué']);
-  const [banco, setbanco] = useState(optionsBanco[0]);
-  const [optionsBancoID, setOptionsBancoID] = useState([1,2,3]);
+  const [optionsProfisao, setOptionsProfisao] = useState(['--profissão', 'Horticultor', 'Marcineiro', 'Pedreiro']);
+  const [profisao, setProfisao] = useState(optionsProfisao[0]);
+  
+ 
   const [search, setSearch] = useState("");
   data1.descricao=content;
 
@@ -42,6 +35,25 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   const handleSubmit = (e) => {
     alert();
   };*/}
+  function getprofissao(){
+    return axios
+    .get("/getprofisao")
+    .then((response) => {
+       var a = new Array();
+      for(var i=0; i<response.data.data.length; i++){
+        a.push(response.data.data[i].nome)
+      }
+      setOptionsProfisao(a);
+      setProfisao([optionsProfisao[0]])
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
+  }
+  useEffect(() => {
+    getprofissao()
+  },[]);
 
   function onChangeData(e) {
     console.log(e)

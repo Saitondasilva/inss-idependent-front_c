@@ -39,7 +39,7 @@ const NewProduct = () => {
 function validateForm(){
 
   {/*Validação de Dados do Utente */}
-  if(!data1.nome || data1.nome===""){
+  {/*if(!data1.nome || data1.nome===""){
     setSmsError("Por favor preencha o nome")
     return false;
   }

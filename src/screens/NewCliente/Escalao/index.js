@@ -26,7 +26,6 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
  
   data1.descricao=content;
 
-
   function onChangeData(e) {
     console.log(e)
     setData1((data1) => ({
@@ -63,6 +62,22 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
         a.push(response.data.data[i].esquema)
         b.push(response.data.data[i].id)
       }
+      setOptionsEscalao(a);
+      setEscalao([optionsEscalao[0]])
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
+  }
+  function getEsquema(){
+    return axios
+    .get("/getEsquema")
+    .then((response) => {
+       var a = new Array();
+      for(var i=0; i<response.data.data.length; i++){
+        a.push(response.data.data[i].esquema)
+      } 
       setOptionsEsquema(a);
       setEsquemaID(b)
       setEsquema([optionsEsquema[0]])

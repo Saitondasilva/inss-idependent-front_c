@@ -164,6 +164,23 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         
      })
      .catch(err =>{alert("Cep não existente");data1.cep="";});
+     function getPais(){
+    return axios
+    .get("/country")
+    .then((response) => {
+       var a = new Array();
+      for(var i=0; i<response.data.data.countries.length; i++){
+        a.push(response.data.data.countries[i].nome)
+      }
+      console.log(a)
+      setOptionsPais(a);
+      setpais([optionsPais[0]])
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
+  }
 
     */}
   return (

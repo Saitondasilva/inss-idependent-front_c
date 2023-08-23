@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Control.module.sass";
+import { Link } from "react-router-dom";
 import cn from "classnames";
 import Icon from "../../../../components/Icon";
 import Actions from "../../../../components/Actions";
@@ -35,8 +36,13 @@ const actions = [
 const Control = ({ className, visibleActions, setVisibleActions, up }) => {
   return (
     <div className={cn(styles.control, className)}>
-      <button className={styles.button}>
-        <Icon name="edit" size="20" />
+      <button className={styles.button}> 
+        
+          <Link          
+            to="/products/add" >
+           <Icon name="edit" size="20" />  
+          </Link>          
+          
       </button>
       <button className={styles.button}>
         <Icon name="message" size="20" />

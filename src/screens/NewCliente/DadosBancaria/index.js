@@ -17,7 +17,7 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsBanco, setOptionsBanco] = useState(['AFRILAND','ECOBANK','BGFI']);
+  const [optionsBanco, setOptionsBanco] = useState(['--Banco--','AFRILAND','ECOBANK','BGFI']);
   const [banco, setBanco] = useState(optionsBanco[0]);
   const [bancoID, setBancoID] = useState([]);
   data1.descricao=content;
