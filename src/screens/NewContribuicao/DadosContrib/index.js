@@ -16,18 +16,9 @@ const optionsLinguagem      = ["Português", "Inglês", "Françes", "Espanhol"];
 const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 // const optionsPais        = ["Brasil", "Portugal", "França", "Espanha"];
 
-const NameAndDescription = ({ className, data1, setData1 }) => {
+const NameAndDescription = ({ className, handleSubmit, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsGenero, setOptionsGenero] = useState(['--Sexo', 'Masculino', 'Feminino']);
-  const [genero, setGenero] = useState(optionsGenero[0]);
-  const [optionsEstadocivil, setOptionsEstadocivil] = useState(['--Escolha e --','Solteiro', 'Casado', 'Viuvo']);
-  const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
-  const [linguagem, setLinguagem] = useState(optionsLinguagem[0]);
-  const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
-  const [optionsPais, setOptionsPais] = useState([]);
-  const [pais, setpais] = useState(optionsPais[0]);
-  const [optionsDocumento, setOptionsDocumento] = useState(['--Escolha um--', 'BI', 'Cédula PEsoal', 'Cartão estrangeiro']);
-  const [Documento, setDocum] = useState(optionsPais[0]);
+ 
  
   data1.descricao=content;
 
@@ -39,81 +30,18 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
-  function onChangeFile(e){
-    let file = e.target.files
-   /* data1.photo=this.state.image
-    this.setState({
-      photo: e.target.files[0]
-  })
-    console.log("FILE", this.state.image)*/
-  }
-  function getGenero(){
+  
+  function buscarNIF() {     
     return axios
-    .get("/getGenero")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-      }
-      setOptionsGenero(a);
-      setGenero([optionsGenero[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  function getEstadoCivil(){
-    return axios
-    .get("/getEstadoCivil")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-      }
-      setOptionsEstadocivil(a);
-      setEstadocivil([optionsEstadocivil[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  function getPais(){
-    return axios
-    .get("/country")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.countries.length; i++){
-        a.push(response.data.data.countries[i].name)
-      }
-      console.log(a)
-      setOptionsPais(a);
-      setpais([optionsPais[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  useEffect(() => {
-    getGenero()
-    getEstadoCivil()
-    getPais()
-  },[]);
-
-  function buscarCep() {
-     
-    fetch(`http://viacep.com.br/ws/${data1.cep}/json/`, {mode: 'cors'})
-     .then((res) => res.json())
+    .get("/utente/getUtenteByNIF/"+data1.nif)
      .then((data) => {
-           data1.cep=data.cep 
-           data1.cidade=data.localidade
-           data1.estado=data.logradouro
+
+           data1.nome=data.data.data.Utente.nome 
+             
            setData1(data1)
         
      })
-     .catch(err =>{alert("Cep não existente");data1.cep="";});
+     .catch(err =>{});
 
 }
   return (
@@ -131,50 +59,45 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       <TextInput
           className={styles.field}
           label="Nome do Beneficiaário"
-          name="bi"
+          name="nome"
           type="text"
           required
-          onChange={onChangeData}
-          value={data1.bi}
+         
+          value={data1.nome}
+         
         />
 
         <TextInput
           className={styles.field}
           label="Numero de Beneficiário"
-          name="bi"
+          name=""
           type="text"
           required
           onChange={onChangeData}
-          value={data1.bi}
+          value={data1.bi4}
         />
        
        <TextInput
           className={styles.field}
           label="NIF"
-          name="bi"
+          name="nif2"
           type="text"
           required
-          onChange={onChangeData}
-          value={data1.bi}
+          onClick={buscarNIF()}
+          
+          value={data1.nif}
         />
+      
       <TextInput
           className={styles.field}
-          label="Nome pai"
-          name="bi"
-          type="text"
+          label="Nascimento"
+          name=""
+          type="date"
           required
           onChange={onChangeData}
-          value={data1.bi}
+          value={data1.bi3}
         />
-          <TextInput
-          className={styles.field}
-          label="Nome Mãe"
-          name="bi"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.bi}
-        />
+          
           
       </div>
    

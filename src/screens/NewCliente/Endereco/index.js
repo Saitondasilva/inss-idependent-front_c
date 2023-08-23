@@ -33,7 +33,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
 
   function getDistrito(){
     return axios
-    .get("/getDistrito")
+    .get("/getDistrit")
     .then((response) => {
        var a = new Array();
       for(var i=0; i<response.data.length; i++){

@@ -103,30 +103,16 @@ function SaveProfissionalCliente() {
   setLoader(true)
   if(!validateForm()){setLoader(false); return false;}
   var data={
-    first_name: data1.nome,
-    last_name: data1.apelido,
-    gender: data1.genero[0],
-    //gender: 1,
-    email: data1.email,
-    phone: data1.contacto,
-    address: data1.adress,
-    country: data1.pais,
-    state: data1.estado,
-    city: data1.cidade,
+    
     estado_civil: data1.estadocivil,
    // resume: data1.descricao,
-    resume: "data1.descricao",
+   
     facebook_url: data1.facebook,
     twitter_url: data1.twitter,
     google_plus_url: data1.google,
     pinterest_url: data1.pintrest,
     //rgb: data1.rgb,
-    cep: data1.cep,
-    cpf: data1.cpf,
-    id_profission: userData.id,
-    value_consult: data1.valor,
-    step: data1.step,
-    payment_option: data1.tipoPagamento,
+  
     photo: data1.photo,
   }
   

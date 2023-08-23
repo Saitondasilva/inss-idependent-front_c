@@ -118,7 +118,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Transação"
+      title="Anexo de Transação"
       classTitle="title-green"
       
     >
@@ -126,53 +126,57 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       <hr></hr>
       <div className={styles.group}>
 
+      { /*<span className={styles.field}>
+ <Dropdown
+     className={styles.field1}
+     label="Ano Contribuição"
+     tooltip="Maximum 100 characters. No HTML or emoji allowed"
+     setValue={setGenero}
+     options={optionsGenero}
+     onChange={data1.banco=genero}
+     value={genero}
+   /> 
+  </span>*/}
 
-        <TextInput
-          className={styles.field}
-          label="Código de Transição"
-          name=""
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.bi}
-        />
 
-         <TextInput
-          className={styles.field}
-          label="Data de Transação"
-          name=""
-          type="date"
-          required
-          onChange={onChangeData}
-          value={data1.bi}
-        />
-
-        <TextInput
-          className={styles.field}
-          label="Valor da Transação"
-          name=""
-          type="test"
-         
-          required
-          onChange={onChangeData}
-          value={data1.bi}
-          currency="$"
-        />
-        
-        <span className={styles.field}>
+     <span className={styles.field}>
   
-          <Dropdown
-            className={styles.field1}
-            label="Forma de pagamento Contribuição"
-            tooltip="Maximum 100 characters. No HTML or emoji allowed"
-            setValue={setGenero}
-            options={optionsGenero}
-            onChange={data1.banco=genero}
-            value={genero}
-          /> 
-          </span>
+  <Dropdown
+     className={styles.field1}
+     label="Forma de pagamento Contribuição"
+     tooltip="Maximum 100 characters. No HTML or emoji allowed"
+     setValue={setGenero}
+     options={optionsGenero}
+     onChange={data1.banco=genero}
+     value={genero}
+   /> 
+  </span>
 
-          <TextInput
+  {/*<span className={styles.field}>
+  <Dropdown
+     className={styles.field1}
+     label="Tipo de Moeda"
+     tooltip="Maximum 100 characters. No HTML or emoji allowed"
+     setValue={setGenero}
+     options={optionsGenero}
+     onChange={data1.banco=genero}
+     value={genero}
+   /> 
+</span>*/}
+     
+     {/*<span className={styles.field}>
+    <Dropdown
+     className={styles.field1}
+     label="Periodo de Contribuição"
+     tooltip="Maximum 100 characters. No HTML or emoji allowed"
+     setValue={setGenero}
+     options={optionsGenero}
+     onChange={data1.banco=genero}
+     value={genero}
+   /> 
+</span>*/}
+      
+    <TextInput
           className={styles.field}
           label="Ficheiro"
           name="bi"
@@ -182,9 +186,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           value={data1.bi}
         />
   
-    
       </div>
-    
+      
         {
           /*
        <Editor
