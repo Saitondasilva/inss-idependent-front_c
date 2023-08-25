@@ -63,7 +63,7 @@ useEffect(() => {
 
 function GetAllCliente() {
     return axios
-      .get("/utente/getUtenteByNIF/12213123")
+      .get("/utente/getAllUtente")
       .then((response) => {
        console.log(response.data.data)
        setProduto1(response.data.data.Utente);

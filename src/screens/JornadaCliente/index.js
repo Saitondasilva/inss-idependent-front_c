@@ -20,7 +20,7 @@ import { products } from "../../mocks/products";
 
 
 const sorting = ["list", "grid"];
-const colluns =["Utente","NIF","Data nasc.", "Profição", "Data Contribuicao", "valor", "Operações"];
+const colluns =["Codigo de Transacao","Data Transaçao","Forma Transaçao", "valor", "Operações"];
 
 
 const Drafts = () => {
@@ -56,6 +56,7 @@ const Drafts = () => {
       setSelectedFilters((selectedFilters) => [...selectedFilters, id]);
     }
   };
+  /*
   useEffect(() => {
     setSmsSucess("");
     setSmsError("");
@@ -64,13 +65,17 @@ useEffect(() => {
   setSearch("")
     var user = localStorage.getItem("userData");
     user==null?setuserData([]):setuserData(JSON.parse(user));
-    getSessao(JSON.parse(user));
+    //getSessao(JSON.parse(user));
 },[id_consulta]);
 useEffect(() => {
   var user = localStorage.getItem("userData");
   user==null?setuserData([]):setuserData(JSON.parse(user));
   shearchCliente(JSON.parse(user));
 },[search]);
+*/
+useEffect(() => {
+  getContribuicao()
+},[]);
 
 function getNextSessao(){
   var i=0;
@@ -82,15 +87,15 @@ function getNextSessao(){
     }
   });
 }
-function getSessao(user) {
+function getContribuicao() {
   
     return axios
-      .get("/getSessaoConsulta/"+id_consulta ,{
+      .get("/utente/getAllContribuicao" ,{
         headers: { Authorization: `Bearer ${userData.token}` },
       })
       .then((response) => {
-       console.log("PRODUTO1===",response.data.data.sessions)
-       setProduto1(response.data.data.sessions);
+       console.log("PRODUTO1===",response.data.data.contribuicao)
+       setProduto1(response.data.data.contribuicao);
       })
       .catch((err) => {
         console.log("Error", err);
@@ -110,7 +115,7 @@ function SaveAnotacaoSessao(sessao) {
       headers: { Authorization: `Bearer ${userData.token}` },
     })
     .then((response) => {
-      getSessao(userData);
+      //getSessao(userData);
      setSmsSucess("Registo com exito");
      setSmsError("");
      setLoader(false)
@@ -150,7 +155,7 @@ function delAnotacao(id){
     .post("/candidate/delConsultaAnotation/"+id)
     .then((response) => {
       
-      getSessao(userData);     
+     // getSessao(userData);     
       
     }).then((response)=>{
       setLoader(false)
@@ -206,7 +211,7 @@ function dellFile(){
         }
       >
         <div className={styles.wrapper}>
-          {(activeIndex === 0) && <TableJornadaCliente items={produto2} colluns={colluns} setActiveIndex={setActiveIndex} title="Last edited" />}
+          {(activeIndex === 0) && <TableJornadaCliente items={produto1} colluns={colluns} setActiveIndex={setActiveIndex} title="Last edited" />}
           {activeIndex === 1 && (
             <>
               <div className={styles.list}>
@@ -260,7 +265,6 @@ function dellFile(){
           dellFile={dellFile}
           id_consulta={id_consulta}
           userData={userData}
-          getSessao={getSessao}
         />
       </Modal>
       <Modal 

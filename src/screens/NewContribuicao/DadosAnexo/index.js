@@ -8,7 +8,13 @@ import axios from "axios";
 import Icon from "../../../components/Icon";
 
 function DynamicTwoInput({ className, data, setData }){
-    
+  const [optionsAno, setOptionsAno] = useState(['2023', '2024']);
+  const [ano, setAno] = useState(optionsAno[0]);
+
+  const [optionsMes, setOptionsMes] = useState(['Janeiro', 'Fevereiro', 'Março',
+   'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']);
+  const [mes, setMes] = useState(optionsMes[0]);
+
     const handleClick=()=>{
         setData([...data,{ano:"",mes:"",valor_pago:""}])
     }
@@ -40,43 +46,40 @@ function DynamicTwoInput({ className, data, setData }){
       
                   <div className={styles.group}>
                   <span className={styles.field}>
-                  <Dropdown
-            className={styles.field1}
-            label="Ano"
-            tooltip="Maximum 100 characters. No HTML or emoji allowed"
-            setValue={setGenero}
-            options={optionsGenero}
-            onChange={data1.banco=genero}
-            value={genero}      
-          />  </span>
+                  <TextInput
+        className={styles.field1}
+          label="Ano"
+          name={"ano"}
+          type="text"
+          value={data.ano}
+          onChange={(e) => handleChange(e, i)} 
+          required   
+          style={{flex: "0 0 calc(90% - 12px)",width: "calc(90% - 12px)",margin: "0 2px 10px", display:"flex"}}       
+        />  </span>
 
           <span className={styles.field}>
-            
-            <Dropdown
-              className={styles.field1}
-              label="Mês"
-              tooltip="Maximum 100 characters. No HTML or emoji allowed"
-              setValue={setGenero}
-            options={optionsGenero}
-            onChange={data1.banco=genero}
-            value={genero}
-            /> 
+          <TextInput
+        className={styles.field1}
+          label="Mes"
+          name={"mes"}
+          type="text"
+          value={data.mes}
+          onChange={(e) => handleChange(e, i)} 
+          required  
+          style={{flex: "0 0 calc(90% - 12px)",width: "calc(90% - 12px)",margin: "0 2px 10px", display:"flex"}}        
+        />
             </span>
-
-           
-
-                  <TextInput
-          className={styles.field1}           className={styles.field}
+           <TextInput
+                    className={styles.field1}        
                     label="Valor Mensal"
                     name={"valor_pago"}
                     type="text"
                     value={data.valor_pago}
           onChange={(e) => handleChange(e, i)} 
           required
-                    onChange={onChangeData}
-                    style={{flex: "0 0 calc(90% - 12px)",width: "calc(90% - 12px)",margin: "0 2px 10px", display:"flex"}}
+                style={{flex: "0 0 calc(90% - 12px)",width: "calc(90% - 12px)",margin: "0 2px 10px", display:"flex"}}
                   />
-                    {/*<button className={styles.field2}  onClick={()=>handleDelete(i)}>Delete</button>*/}
+                    <button className={styles.field2}  onClick={()=>handleDelete(i)}>Delete</button>
                 </div>
                 </div>
                  
@@ -84,7 +87,7 @@ function DynamicTwoInput({ className, data, setData }){
             }
            {/*<p>{JSON.stringify(data)}</p>*/}
         
-       
+       </div>
     </Card>
   );
 }

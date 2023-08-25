@@ -68,29 +68,26 @@ const Row = ({ item, value, onChange, setActiveIndex }) => {
             </div>
             */}
             <div className={styles.details} onClick={() => go_to(item)}>
-              <div className={styles.product}>{item.first_name+" "+item.last_name}</div>
-              <div className={styles.link}>{item.step}</div>
+              <div className={styles.product}>{item.codigo_transacao}</div>
+              
             </div>
           </div>
          
         </div>
         <div className={styles.col}>
           {item.value > 0 ? (
-            <div className={styles.link}>3</div>
+            <div className={styles.link}>{item.data_transacao}</div>
           ) : (
-            <div className={styles.empty}>3</div>
+            <div className={styles.link}>{item.data_transacao}</div>
           )}
         </div>
-        <div className={styles.col}>
-          <div className={styles.link}>25</div>
-        </div>
-        
+       
         
         <div className={styles.col}>
-          <div className={styles.price}>5.680</div>
+          <div className={styles.price}>{item.forma_transacao}</div>
         </div>
         <div className={styles.col}>
-          <div className={styles.link}>XXXXXXXXXXXXX</div>
+          <div className={styles.link}>{item.value}</div>
           {/*
           <Control
             className={styles.control}
