@@ -19,7 +19,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
   const [optionsDocAnexo, setOptionsDocAnexo] = useState(['--Escolha um--', 'BI', 'Certidão', 'Cartão estrangeiro']);
   const [docAnexo, setDocAnexo] = useState(optionsDocAnexo[0]);
- 
+  const [userData, setuserData] = useState({});
+  const [file, setFile] = useState([0])
   data1.descricao=content;
 
 
@@ -47,35 +48,36 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       return err.response;
     });
   }
-  function onChangeFile(e){/*
-    let file = e.target.files
-   /* data1.photo=this.state.image
-    this.setState({
-      photo: e.target.files[0]
-  })
-    console.log("FILE", this.state.image)*/
+  function onChangeFile(e){
+    setFile(e.target.files[0])
+    console.log(e.target.files[0])
+
 }
   
 
-  {/*function buscarCep() {
-     
-    fetch(`http://viacep.com.br/ws/${data1.cep}/json/`, {mode: 'cors'})
-     .then((res) => res.json())
-     .then((data) => {
-           data1.cep=data.cep 
-           data1.cidade=data.localidade
-           data1.estado=data.logradouro
-           setData1(data1)
-        
-     })
-     .catch(err =>{alert("Cep não existente");data1.cep="";});
-
-}*/}
-
-function SaveFile(params) {
+function SaveFile() {
   
+  var data={  
+    
+    photo: data1.photo,
+  }
   
-}
+  console.log("Data",data)
+  return axios
+    .post("/utente/register",data,{
+      headers: { Authorization: `Bearer ${userData.token}` },
+    })
+    .then((response) => {
+      alert("Registro com sucesso!");
+    
+      //clean();
+      console.log(response.data.data)
+    })
+    
+    
+};
+
+
 
 useEffect(() => {
   getDocAnexo()
@@ -107,15 +109,14 @@ useEffect(() => {
 
        <TextInput
           className={styles.field}
-          label="Anexo"
-          name="Documento_anexo"
+          label="Foto"
+          name="photo"
           type="file"
           tooltip="Foto"
           required
-          onChange={onChangeData}
-          value={data1.profissao}
+          onChange={onChangeFile}
+          value={data1.photo}
         />
-      
        
       </div>
       

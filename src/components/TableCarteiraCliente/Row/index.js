@@ -11,6 +11,7 @@ import Control from "./Control";
 import {useNavigate} from 'react-router-dom';
 import { $CombinedState } from "redux";
 
+
 const Row = ({ item, value, onChange ,setActiveIndex, setIdConsultaToNestStep, setVisibleModal}) => {
   const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
@@ -48,9 +49,9 @@ const Row = ({ item, value, onChange ,setActiveIndex, setIdConsultaToNestStep, s
           />
         </div>
         <div className={styles.col}>
-          <div
+        <div
             className={styles.item}
-            onClick={() => setIdConsultaToNestStep(item.id)}
+            onClick={() => setVisibleModalProduct(true)}
           >
             {/*
             <div className={styles.preview}>
@@ -66,6 +67,7 @@ const Row = ({ item, value, onChange ,setActiveIndex, setIdConsultaToNestStep, s
               
             </div>
           </div>
+          
          
         </div>
         <div className={styles.col}>
@@ -87,7 +89,7 @@ const Row = ({ item, value, onChange ,setActiveIndex, setIdConsultaToNestStep, s
           <div className={styles.link}>{item.tel}</div>
         </div>
        
-       {/* <div className={styles.col} onClick={()=>setIdConsultaToNestStep(item.id_consulta)}>
+       <div className={styles.col} onClick={()=>setIdConsultaToNestStep(item.id_consulta)}>
           <Control
             className={styles.control}
             startDate={startDate}
@@ -95,10 +97,11 @@ const Row = ({ item, value, onChange ,setActiveIndex, setIdConsultaToNestStep, s
             startTime={startTime}
             setStartTime={setStartTime}
             setVisibleModal={setVisibleModal}
+            ModalProduct = {ModalProduct}
             
             
           />
-      </div> */}
+      </div> 
       </div>
       <ModalProduct
         visible={visibleModalProduct}

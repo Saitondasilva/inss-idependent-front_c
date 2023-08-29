@@ -130,7 +130,14 @@ const Notification = ({ className }) => {
             to="/notification"
             onClick={() => setVisible(false)}
           >
-            Ver todas as notificações
+           Validar Cadastro
+          </Link>
+          <Link
+            className={cn("button", styles.button)}
+            to="/notification"
+            onClick={() => setVisible(false)}
+          >
+            Corrigir Cadastro
           </Link>
         </div>
       </div>
