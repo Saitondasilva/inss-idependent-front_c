@@ -3,6 +3,7 @@ import styles from "./Control.module.sass";
 import cn from "classnames";
 import Icon from "../../../Icon";
 import Schedule from "../../../Schedule";
+import { Link } from "react-router-dom";
 
 
 const Control = ({
@@ -42,11 +43,13 @@ function showModalNextStep(){
       <div className={cn(styles.control, className)}>
         {actions.map((x, index) => (
           <button className={styles.button} key={index} onClick={()=>showModalNextStep()}>
-            {x.text} <Icon name={x.icon} size="20" />
+            {x.text} <Icon name={x.icon} size="20" />       
+         
           </button>
+          
         ))}
       </div>
-     
+           
     </>
   );
 };

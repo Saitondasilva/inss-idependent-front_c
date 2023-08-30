@@ -36,6 +36,7 @@ const NewProduct = () => {
     user==null?setuserData([]):setuserData(JSON.parse(user));
     //shearchCliente(JSON.parse(user));
   },[]);
+
 function validateForm(){
 
   //Validação de Dados do Utente 
@@ -124,6 +125,7 @@ function validateForm(){
   return true;
   
 }
+
 function SaveProfissionalCliente() {
   setLoader(true)
   console.log("DATA SEND ", data1.escalao_id);
@@ -226,7 +228,7 @@ function SaveProfissionalCliente() {
                 };
               
                 const codigo = gerarProximoCodigo();
-              }  */}     
+  } */}     
 
 
             

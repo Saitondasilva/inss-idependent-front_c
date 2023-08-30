@@ -23,11 +23,7 @@ const Product = () => {
         activeIndex={activeIndex}
         setActiveIndex={setActiveIndex}
       />
-      <Comments className={styles.comments} onClose={() => handleClose()} />
-      <Panel className={styles.panel} />
-      <button className={styles.next}>
-        <Icon name="arrow-right" size="24" />
-      </button>
+     
     </div>
   );
 };

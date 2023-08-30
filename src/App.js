@@ -4,6 +4,7 @@ import Page from "./components/Page";
 import Home from "./screens/Home";
 import ProductsDashboard from "./screens/ProductsDashboard";
 import NewProduct from "./screens/NewProduct";
+import NewClienteEdit from "./screens/NewClienteEdit";
 import Drafts from "./screens/Drafts";
 import Released from "./screens/Released";
 import Comments from "./screens/Comments";
@@ -37,6 +38,7 @@ import Pagamento from "./screens/Pagamento";
 /*********************************************** */
 import JornadaCliente from "./screens/JornadaCliente";
 import CarteiraCliente from "./screens/CarteiraCliente";
+import CarteiraPesquisa from "./screens/CarteiraPesquisa";
 import AnaliseProgreso from "./screens/AnaliseProgresso";
 import NewCliente from "./screens/NewCliente";
 import NewAgregados from "./screens/NewAgregados";
@@ -87,16 +89,28 @@ function App() {
             }
           />
           <Route
+            path="/carteira/Pesquisa"
+            element={
+              <ProtectedRoute>
+                <Page title="Todos Utentes">
+                  <CarteiraPesquisa />
+                </Page>
+              </ProtectedRoute>              
+            }
+          />
+
+          <Route
             path="/carteira/cliente"
             element={
               <ProtectedRoute>
                 <Page title="Todos Utentes">
                   <CarteiraCliente />
                 </Page>
-              </ProtectedRoute>
-              
+              </ProtectedRoute>              
             }
           />
+
+
           <Route
             path="/analise/progresso/:cliente?"
             element={
@@ -181,8 +195,8 @@ function App() {
           <Route
             path="/products/add"
             element={
-              <Page title="New product">
-                <NewProduct />
+              <Page title="Editar Utente">
+                <NewClienteEdit />
               </Page>
             }
           />
