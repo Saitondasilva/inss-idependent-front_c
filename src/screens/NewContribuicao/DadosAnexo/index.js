@@ -29,6 +29,7 @@ function DynamicTwoInput({ className, data, setData }){
         deleteVal.splice(i,1)
         setData(deleteVal)
     }
+    
 
     return(
       <Card
@@ -38,7 +39,7 @@ function DynamicTwoInput({ className, data, setData }){
     >
 
   <div className="App">
-            <button onClick={handleClick}><Icon name="add" size="24" />add</button>
+            {/*<button onClick={handleClick}><Icon name="add" size="24" />add</button>*/}
             {
                 data.map((val, i)=>
                
@@ -51,7 +52,7 @@ function DynamicTwoInput({ className, data, setData }){
           label="Ano"
           name={"ano"}
           type="text"
-          value={data.ano}
+          value={data[i].ano}
           onChange={(e) => handleChange(e, i)} 
           required   
           style={{flex: "0 0 calc(90% - 12px)",width: "calc(90% - 12px)",margin: "0 2px 10px", display:"flex"}}       
@@ -63,7 +64,7 @@ function DynamicTwoInput({ className, data, setData }){
           label="Mes"
           name={"mes"}
           type="text"
-          value={data.mes}
+          value={data[i].mes}
           onChange={(e) => handleChange(e, i)} 
           required  
           style={{flex: "0 0 calc(90% - 12px)",width: "calc(90% - 12px)",margin: "0 2px 10px", display:"flex"}}        
@@ -74,12 +75,12 @@ function DynamicTwoInput({ className, data, setData }){
                     label="Valor Mensal"
                     name={"valor_pago"}
                     type="text"
-                    value={data.valor_pago}
+                    value={data[i].valor_pago}
           onChange={(e) => handleChange(e, i)} 
           required
                 style={{flex: "0 0 calc(90% - 12px)",width: "calc(90% - 12px)",margin: "0 2px 10px", display:"flex"}}
                   />
-                    <button className={styles.field2}  onClick={()=>handleDelete(i)}>Delete</button>
+                   { /*<button className={styles.field2}  onClick={()=>handleDelete(i)}>Delete</button>*/}
                 </div>
                 </div>
                  

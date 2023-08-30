@@ -17,7 +17,7 @@ const NewProduct = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [data1, setData1] = useState({});
-  const [data,setData]=useState([{ano:"",mes:"",valor_pago:""}])
+  const [data,setData]=useState([])
   const [userData, setuserData] = useState({});
   const [smsError, setSmsError] = useState("");
   const [smsSucess, setSmsSuccess] = useState("");
@@ -29,66 +29,37 @@ const NewProduct = () => {
     user==null?setuserData([]):setuserData(JSON.parse(user));
     //shearchCliente(JSON.parse(user));
   },[]);
+
 function validateForm(){
 
-  if(!data1.nome || data1.nome===""){
-    setSmsError("Por favor preencha o nome")
+  if(!data1.id_utente || data1.id_utente===""){
+    setSmsError("Utente não encontrados")
     return false;
   }
-  if(!data1.apelido || data1.apelido===""){
-    setSmsError("Por favor preencha o apelido")
+  if(!data1.forma_transacao || data1.forma_transacao===""){
+    setSmsError("Por favor seleciona uma forma de transação")
     return false;
   }
-  if(!data1.genero || data1.genero===""){
-    setSmsError("Por favor preencha o genero")
+  if(!data1.banco || data1.banco===""){
+    setSmsError("Por favor seleciona um banco")
     return false;
   }
-  if(!data1.email || data1.email===""){
-    setSmsError("Por favor preencha o email")
+  if(!data1.data_transacao || data1.data_transacao===""){
+    setSmsError("Por favor seleciona uma data")
     return false;
   }
-  if(!data1.contacto || data1.contacto===""){
-    setSmsError("Por favor preencha o contacto")
+  if(!data1.valor_total || data1.valor_total==="" || data1.valor_total<=1){
+    setSmsError("Por favor introduza um valor valido")
     return false;
   }
-  /*
-  if(!data1.adress || data1.adress===""){
-    setSmsError("Por favor preencha o endereço")
+  if(!data1.vistoDetalhe){
+    setSmsError("Por favor, verifica os detalhes de pagamento!")
+    data1.valor_total=0
+    setData([])
     return false;
   }
-  */
-  if(!data1.estado || data1.estado===""){
-    setSmsError("Por favor preencha o estado de residencia")
-    return false;
-  }
-  if(!data1.pais || data1.pais===""){
-    setSmsError("Por favor preencha o país")
-    return false;
-  }
-  if(!data1.cidade || data1.cidade===""){
-    setSmsError("Por favor preencha a cidade")
-    return false;
-  }
-  if(!data1.estadocivil || data1.estadocivil===""){
-    setSmsError("Por favor preencha o estado civil")
-    return false;
-  }
-  /*
-  if(!data1.rgb || data1.rgb===""){
-    setSmsError("Por favor preencha o rgb")
-    return false;
-  }
-  */
-  if(!data1.cep || data1.cep===""){
-    setSmsError("Por favor preencha o cep")
-    return false;
-  }
-  if(!data1.cpf || data1.cpf===""){
-    setSmsError("Por favor preencha o cpf")
-    return false;
-  }
-  if(!data1.cpf || data1.cpf===-1){
-    setSmsError("Por favor preencha a etapa do progresso")
+  if(!data1.codigo_transacao || data1.codigo_transaca===""){
+    setSmsError("Por favor, introduza o codigo do documento Bancário")
     return false;
   }
 
@@ -97,29 +68,37 @@ function validateForm(){
 }
 function PagarContribuicao() {
   setLoader(true)
-  console.log("detalhes_pagamentos",data)
-  //if(!validateForm()){setLoader(false); return false;}
-  var data3={
+  if(!validateForm()){setLoader(false); return false;}
+   const formData = new FormData();
+      formData.append('forma_transacao', data1.forma_transacao);
+      formData.append('data_transacao', data1.data_transacao);
+      formData.append('codigo_transacao', data1.codigo_transacao);
+      formData.append('valor_total', data1.valor_total);
+      formData.append('id_utente', data1.id_utente);
+      formData.append('anexo', data1.anexo);
+      formData.append('detalhes_pagamentos', data);
+      console.log("Detalhes", formData)
+      
+  
+      var data3={
     forma_transacao: data1.forma_transacao,
     data_transacao: data1.data_transacao,
     codigo_transacao: data1.codigo_transacao,
-    //gender: 1,
     valor_total: data1.valor_total,
-    anexo: "teste",
+    anexo: data1.anexo,
     id_utente: data1.id_utente,
-    detalhes_pagamentos: data,
-   
+    detalhes_pagamentos: data, 
   }
   
   return axios
     .post("/utente/pagarContribuicao",data3,{
-      headers: { Authorization: `Bearer ${userData.token}` },
+      headers: { Authorization: `Bearer ${userData.token}`,'Content-Type': 'multipart/form-data' },
     })
     .then((response) => {
       setSmsSuccess("Registro com sucesso!");
       setSmsError("");
       setLoader(false)
-      //clean();
+      clean();
       console.log(response.data.data)
     })
     .catch((err) => {
@@ -133,13 +112,8 @@ function PagarContribuicao() {
 };
 
 function clean(){
- data1.nome="";
- data1.apelido="";
-data1.genero="";
-data1.email="";
-data1.contacto="";
-data1.adress="";
-
+ data1.nif="";
+ data1.valor_total="";
 }
   return (
     <>
@@ -148,7 +122,7 @@ data1.adress="";
        
           <DadosContrib className={styles.card} data1={data1} setData1={setData1}/>          
          
-          <DadosTRansa className={styles.card} data1={data1} setData1={setData1}/>
+          <DadosTRansa className={styles.card} data1={data1} data={data} setData={setData} setData1={setData1}/>
           <DadosAnexo className={styles.card} data={data} setData={setData}/>
 
          

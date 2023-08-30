@@ -20,6 +20,8 @@ const NameAndDescription = ({ className, handleSubmit, data1, setData1 }) => {
   const [content, setContent] = useState();
   const [nome, setNome] = useState();
   const [dataNasc, setDataNasc] = useState();
+  const [valorPrestacaoMensal, setValorPrestacaoMensal] = useState();
+  const [ultimaContribuicao, setUltimaContribuicao] = useState();
  
   data1.descricao=content;
 
@@ -39,21 +41,25 @@ const NameAndDescription = ({ className, handleSubmit, data1, setData1 }) => {
 */
 
 function getUtenteByNif(){
-  console.log("GetUtent ",data1.nif)
+  data1.vistoDetalhe=false;
   return axios
   .get("/utente/getUtenteByNIF/"+data1.nif)
   .then((response) => {
     if(response.data.data.Utente.length > 0){
-      console.log("Entreuii ",response.data.data.Utente[0].nome)
       setNome(response.data.data.Utente[0].nome)
       setDataNasc(response.data.data.Utente[0].data_nasc)
       data1.id_utente=response.data.data.Utente[0].id
-     setData1(data1)
+      
+     //setData1(data1)
+     CalcularContribuicaoMensal();
+     calcularMesesEmDivida();
     }else{
       console.log("SAI ",data1.nif)
       setNome("")
       setDataNasc("")
-     setData1(data1)
+      setValorPrestacaoMensal("")
+      setUltimaContribuicao("");
+     //setData1(data1)
     }
   })
   .catch((err) => {
@@ -64,6 +70,49 @@ function getUtenteByNif(){
     return err.response;
   });
 }
+function CalcularContribuicaoMensal(){
+  return axios
+  .get("/utente/calcularValorContribuicaoMensal/"+data1.id_utente)
+  .then((response) => {
+    data1.valorPrestacaoMensal=response.data.data.valor;
+    setValorPrestacaoMensal(response.data.data.valor)
+  })
+  .catch((err) => {
+    setValorPrestacaoMensal("")
+    console.log("Error", err);
+    return err.response;
+  });
+}
+function calcularMesesEmDivida(){
+  return axios
+  .get("/utente/calcularMesesEmDivida/"+data1.id_utente)
+  .then((response) => {
+   if (typeof response.data.data.UltimoMesPago === 'undefined' & typeof response.data.data.UltimoAnoPago === 'undefined'){
+      data1.TemContribuicao=response.data.data.TemContribuicao;
+      data1.UltimoValorPago=0;
+      data1.UltimoDiaPago=response.data.data.DiaRegistro
+      data1.UltimoAnoPago=response.data.data.AnoRegistro
+      data1.UltimoMesPago=response.data.data.MesRegistro
+      
+      setUltimaContribuicao("Registrado em: "+response.data.data.DiaRegistro+'/'+response.data.data.MesRegistro+'/'+response.data.data.AnoRegistro)
+    
+    }else {
+      data1.TemContribuicao=response.data.data.TemContribuicao;
+      data1.UltimoValorPago=response.data.data.UltimoValorPago;
+      data1.UltimoAnoPago=response.data.data.UltimoAnoPago
+      data1.UltimoMesPago=response.data.data.UltimoMesPago
+      
+      setUltimaContribuicao('Pago: '+response.data.data.UltimoValorPago+' Dbs, para '+response.data.data.UltimoMesPago+'/'+response.data.data.UltimoAnoPago)
+      
+    }
+  })
+  .catch((err) => {
+    setUltimaContribuicao("")
+    console.log("Error", err);
+    return err.response;
+  });
+}
+
   return (
     <Card
       className={cn(styles.card, className)}
@@ -77,7 +126,7 @@ function getUtenteByNif(){
       
       <TextInput
           className={styles.field}
-          label="NIF"
+          label="NIF *"
           name="nif"
           type="text"
           icon="search"
@@ -89,12 +138,14 @@ function getUtenteByNif(){
           
         <TextInput
           className={styles.field}
-          label="Numero de Beneficiário"
+          label="Numero de Beneficiário *"
           name="numero"
           type="text"
+          icon="search"
           required
           onChange={onChangeData}
           value={data1.numero}
+          
         />
         </div>
    
@@ -107,6 +158,7 @@ function getUtenteByNif(){
           required
           onChange={onChangeData}
           value={nome}
+          readOnly
         />
        
       <TextInput
@@ -117,22 +169,32 @@ function getUtenteByNif(){
           required
           onChange={onChangeData}
           value={dataNasc}
+          readOnly
         />
       </div>
    
-      
-        {
-          /*
-       <Editor
-          state={content}
-          onChange={setContent}
-          classEditor={styles.editor}
-          label="Sobre"
-          tooltip="Descrição"
-          name="descricao"
-          value={data1.descricao}
-          />
-        */}
+      <div className={styles.group}>
+      <TextInput
+          className={styles.field}
+          label="Valor de Prestação Mensal"
+          name="valor_prestacao_mensal"
+          type="text"
+          required
+          value={valorPrestacaoMensal}
+          readOnly
+        />
+       
+      <TextInput
+          className={styles.field}
+          label="Ultima Contribuição"
+          name="ultimo_pagamento"
+          type="text"
+          required
+          value={ultimaContribuicao}
+          readOnly
+        />
+        
+      </div>
        
       </div>
     </Card>

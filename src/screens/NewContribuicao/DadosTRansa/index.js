@@ -9,17 +9,16 @@ import Editor from "../../../components/Editor";
 import Dropdown from "../../../components/Dropdown";
 import axios from "axios";
 
-// const optionsGenero      = ["Masculino", "Feminino", "Outro"];
-// const optionsEstadocivil = ["Solteiro", "Casado", "Divorciado", "Viuvo"];
-const optionsLinguagem      = ["Português", "Inglês", "Françes", "Espanhol"];
-const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
-// const optionsPais        = ["Brasil", "Portugal", "França", "Espanha"];
 
-const NameAndDescription = ({ className, data1, setData1 }) => {
+const NameAndDescription = ({ className, data1,data,setData, setData1 }) => {
   const [content, setContent] = useState();
+  const [detalhes_pagamentos, setDetalhes_pagamentos] = useState();
   const [optionsForma, setOptionsForma] = useState(['Transferencia Bancária', 'Deposito']);
   const [forma, setForma] = useState(optionsForma[0]);
- 
+  const [optionsBanco, setOptionsBanco] = useState(['--Banco--','AFRILAND','ECOBANK','BGFI']);
+  const [banco, setBanco] = useState(optionsBanco[0]);
+  const [bancoID, setBancoID] = useState([]);
+
   data1.descricao=content;
 
 
@@ -30,29 +29,98 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
-  function onChangeFile(e){
-    let file = e.target.files
-   /* data1.photo=this.state.image
-    this.setState({
-      photo: e.target.files[0]
-  })
-    console.log("FILE", this.state.image)*/
+  
+  function getBanco(){
+    return axios
+    .get("/getBanco")
+    .then((response) => {
+       var a = new Array();
+       var b = new Array();
+      for(var i=0; i<response.data.data.length; i++){
+        a.push(response.data.data[i].nome)
+        b.push(response.data.data[i].id)
+      }
+      setOptionsBanco(a);
+      setBancoID(b);
+      setBanco([optionsBanco[0]])
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
   }
+  useEffect(() => {   
+   getBanco()
+  },[]);
+  useEffect(() => {   
+    calcularMesesAPagar()
+   },[data1.id_utente]);
+  useEffect(() => {
+    var position        =   optionsBanco.indexOf(banco);
+        data1.banco_id=bancoID[position];
+  }, [banco]);
 
-  function buscarCep() {
-     
-    fetch(`http://viacep.com.br/ws/${data1.cep}/json/`, {mode: 'cors'})
-     .then((res) => res.json())
-     .then((data) => {
-           data1.cep=data.cep 
-           data1.cidade=data.localidade
-           data1.estado=data.logradouro
-           setData1(data1)
-        
-     })
-     .catch(err =>{alert("Cep não existente");data1.cep="";});
+  const handleFileChange = (event) => {
+    data1.anexo=event.target.files[0];
+  };
 
+
+function calcularMesesAPagar(){
+  var valor_total = data1.valor_total;
+  var valorPrestacaoMensal = data1.valorPrestacaoMensal;
+  var array_data = [];
+  var valor_em_falta= data1.valorPrestacaoMensal-data1.UltimoValorPago;
+  var UltimoAnoPago= data1.UltimoAnoPago;
+  var UltimoMesPago= data1.UltimoMesPago;
+  if(valor_total===0) {return false;}
+  if(!data1.TemContribuicao){
+    
+    var dias_de_atraso = 30 - data1.UltimoDiaPago;
+    var valor_diario_a_pagar= valorPrestacaoMensal/30
+    var valor_total_a_pagar= (valor_diario_a_pagar*dias_de_atraso)
+
+    if(valor_total>=valor_total_a_pagar){
+    valor_total-=valor_total_a_pagar
+    array_data.push({ano:UltimoAnoPago, mes:UltimoMesPago, valor_pago: valor_total_a_pagar});
+    }else{
+     // alert("Por favor insira um valor superior a: "+valor_total_a_pagar);
+      array_data.push({ano:UltimoAnoPago, mes:UltimoMesPago, valor_pago: valor_total});
+      valor_total=0;
+    }
+  }
+  if( data1.TemContribuicao && data1.UltimoValorPago<valorPrestacaoMensal){ 
+    if(valor_total>=valor_em_falta){
+      valor_total-=valor_em_falta;
+      array_data.push({ano:UltimoAnoPago, mes:UltimoMesPago, valor_pago: valor_em_falta});
+    }else{
+      //alert("Por favor insira um valor superior a: "+valor_em_falta);
+      array_data.push({ano:UltimoAnoPago, mes:UltimoMesPago, valor_pago: valor_total});
+      valor_total=0;
+    }
+      
+  }
+  while(valor_total>0){
+    UltimoMesPago++;
+    if (UltimoMesPago > 12) {
+      UltimoMesPago = 1;
+      UltimoAnoPago++;
+    }
+    if(valor_total>=valorPrestacaoMensal){
+      
+      array_data.push({ ano: UltimoAnoPago, mes: UltimoMesPago, valor_pago: valorPrestacaoMensal });
+      valor_total -= valorPrestacaoMensal;
+      
+    }else{
+      array_data.push({ ano: UltimoAnoPago, mes: UltimoMesPago, valor_pago: valor_total});
+      valor_total=0;
+    }
+  };
+    //data1.mesesAPagar=data1.valor_total
+    //data.push(array_data)
+    setData(array_data);
+    data1.vistoDetalhe=true;
 }
+
   return (
     <Card
       className={cn(styles.card, className)}
@@ -69,17 +137,27 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   <Dropdown
      className={styles.field1}
      label="Forma de pagamento Contribuição"
-     tooltip="Maximum 100 characters. No HTML or emoji allowed"
      setValue={setForma}
      options={optionsForma}
      onChange={data1.forma_transacao=forma}
      value={forma}
    /> 
   </span>
+  <span className={styles.field}>
+       <Dropdown
+          className={styles.field1}
+          label="Banco"
+          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          setValue={setBanco}
+          options={optionsBanco}
+          onChange={data1.banco=banco}
+          value={banco}
+        /> 
+       </span>
         
    <TextInput
           className={styles.field}
-          label="Data de Transação"
+          label="Data de Transação *"
           name="data_transacao"
           type="date"
           required
@@ -88,7 +166,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         />
  <TextInput
           className={styles.field}
-          label="Codigo de Transação"
+          label="Codigo de Transação *"
           name="codigo_transacao"
           type="text"
           required
@@ -97,14 +175,33 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         />
       <TextInput
           className={styles.field}
-          label="Valor Total Pago"
+          label="Valor Total Pago (Dbs) *"
           name="valor_total"
-          type="text"
+          type="number"
           required
           onChange={onChangeData}
           value={data1.valor_total}
+          onKeyUp={calcularMesesAPagar}
+          onClick={calcularMesesAPagar}
         />
-       
+        <TextInput
+          className={styles.field}
+          label="Comprovativo de Pagamento"
+          name="comprovativo_pagamento"
+          type="file"
+          onChange={handleFileChange}
+          required
+        />
+        {/*<span className={styles.field}>
+        <button
+            className={cn("button-stroke-green button-small", styles.button)}
+            onClick={calcularMesesAPagar}
+          >
+            Ver detalhes de pagamento
+          </button>
+
+        </span>*/}
+        
       </div>
              
       </div>
