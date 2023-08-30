@@ -127,17 +127,17 @@ const Notification = ({ className }) => {
           </div>
           <Link
             className={cn("button", styles.button)}
-            to="/notification"
+            to="/carteira/cliente"
             onClick={() => setVisible(false)}
           >
-           Validar Cadastro
+           Ver Cadastro Utente
           </Link>
           <Link
             className={cn("button", styles.button)}
             to="/notification"
             onClick={() => setVisible(false)}
           >
-            Corrigir Cadastro
+            Ver Cadastro Agregado
           </Link>
         </div>
       </div>

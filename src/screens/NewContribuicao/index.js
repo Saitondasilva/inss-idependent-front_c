@@ -149,12 +149,8 @@ data1.adress="";
           <DadosContrib className={styles.card} data1={data1} setData1={setData1}/>          
          
           <DadosTRansa className={styles.card} data1={data1} setData1={setData1}/>
-          <DadosAnexo className={styles.card} data={data} setData={setData}/>
-
-         
-          
-        </div>
-        
+          <DadosAnexo className={styles.card} data={data} setData={setData}/>          
+        </div>        
       </div>
       {<Panel
         setVisiblePreview={setVisiblePreview}

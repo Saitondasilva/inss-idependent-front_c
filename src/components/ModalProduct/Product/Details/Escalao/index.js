@@ -139,18 +139,6 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
           value={esquema}
         /> 
         </span>
-
-        <span className={styles.field}>
-        <Dropdown
-          className={styles.field1}
-          label="Periodo contribuitivo"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setEsquema}
-          options={optionsEsquema}
-          onChange={data1.esquema=esquema}
-          value={esquema}
-        /> 
-        </span>
  
        {/*
        <TextInput

@@ -17,12 +17,10 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
- 
-  const [optionsAntigoNISS, setOptionsAntigoNISS] = useState(['Sim', 'Não']);
-  const [antigoNISS, setAntigoNISS] = useState(optionsAntigoNISS[0]);
-  
-  
- 
+  const [optionsDocAnexo, setOptionsDocAnexo] = useState(['--Escolha um--', 'BI', 'Certidão', 'Cartão estrangeiro']);
+  const [docAnexo, setDocAnexo] = useState(optionsDocAnexo[0]);
+  const [userData, setuserData] = useState({});
+  const [file, setFile] = useState([0])
   data1.descricao=content;
 
 
@@ -33,81 +31,95 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
-  function onChangeFile(e){
-    let file = e.target.files
-   /* data1.photo=this.state.image
-    this.setState({
-      photo: e.target.files[0]
-  })
-    console.log("FILE", this.state.image)*/
+
+  function getDocAnexo(){
+    return axios
+    .get("/getDocAnexo")
+    .then((response) => {
+       var a = new Array();
+      for(var i=0; i<response.data.data.length; i++){
+        a.push(response.data.data[i].nome)
+      }
+      setOptionsDocAnexo(a);
+      setDocAnexo([optionsDocAnexo[0]])
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
   }
- 
+  function onChangeFile(e){
+    setFile(e.target.files[0])
+    console.log(e.target.files[0])
+
+}
   
 
-  function buscarCep() {/*
-     
-    fetch(`http://viacep.com.br/ws/${data1.cep}/json/`, {mode: 'cors'})
-     .then((res) => res.json())
-     .then((data) => {
-           data1.cep=data.cep 
-           data1.cidade=data.localidade
-           data1.estado=data.logradouro
-           setData1(data1)
-        
-     })
-     .catch(err =>{alert("Cep não existente");data1.cep="";});
+function SaveFile() {
+  
+  var data={  
+    
+    photo: data1.photo,
+  }
+  
+  console.log("Data",data)
+  return axios
+    .post("/utente/register",data,{
+      headers: { Authorization: `Bearer ${userData.token}` },
+    })
+    .then((response) => {
+      alert("Registro com sucesso!");
+    
+      //clean();
+      console.log(response.data.data)
+    })
+    
+    
+};
 
-    */}
+
+
+useEffect(() => {
+  getDocAnexo()
+},[]);
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Outras Declarações"
+      title="Anexo"
       classTitle="title-green"
+    >   
       
-    >
       <div className={styles.description}>
       <hr></hr>
-      <div className={styles.group}>
-    
+      <button onClick={SaveFile} className={styles.field1}  >ADD</button>
+      <div className={styles.group}>       
        
        <span className={styles.field}>
   
        <Dropdown
           className={styles.field1}
-          label="Já esteve ,alguma vez ,inscrito na segurança Social"
+          label="Documento Anexo"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setAntigoNISS}
-          options={optionsAntigoNISS}
-          onChange={data1.antigoNISS=antigoNISS}
-          value={antigoNISS}
+          setValue={setDocAnexo}
+          options={optionsDocAnexo}
+          onChange={data1.docAnexo=docAnexo}
+          value={docAnexo}
         /> 
-       </span>      
-          
-        { antigoNISS=="Sim"&&(
+       </span>
+
        <TextInput
           className={styles.field}
-          label="Se sim  diz o nome da Entidade Empregadora"
-          name="empresa_que_trabalhou"
-          type="text"
+          label="Foto"
+          name="photo"
+          type="file"
+          tooltip="Foto"
           required
-          onChange={onChangeData}
-          value={data1.empresa_que_trabalhou}
-        />)}
-         { antigoNISS=="Sim"&&(
-         <TextInput
-          className={styles.field}
-          label="Antigo NISS"
-          name="antigo_niss"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.antigo_niss}
-        />      
-  
-        )}
-        
+          onChange={onChangeFile}
+          value={data1.photo}
+        />
+       
       </div>
-    
+      
         {
           /*
        <Editor

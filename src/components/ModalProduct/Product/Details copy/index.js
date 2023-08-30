@@ -5,9 +5,6 @@ import Icon from "../../../Icon";
 import Overview from "./Overview";
 import Products from "./Products";
 import DadosPessoais from "./DadosPessoais";
-import DadosBancario from "./DadosBancaria";
-import DadosEndereco from "./Endereco";
-
 import axios from "axios";
 
 const navigation = ["Product", "Comments"];
@@ -87,12 +84,9 @@ useEffect(() => {
           </button>
         </div>
             </div>*/}
-            <DadosPessoais />
-     
-      <DadosBancario/>
-      <DadosEndereco/>
+      <Overview />
       {/*<Products />*/}
-      
+      <DadosPessoais />
     </div>
   );
 };

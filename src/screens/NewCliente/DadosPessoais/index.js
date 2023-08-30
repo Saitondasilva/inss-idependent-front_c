@@ -256,7 +256,6 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           onChange={onChangeData}
           value={data1.nome_mae}
           
-
         />
       
         <TextInput
@@ -264,6 +263,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           label="NIF"
           name="nif"
           type="text"
+          mask="999999999"
           required
           onChange={onChangeData}
           value={data1.nif}

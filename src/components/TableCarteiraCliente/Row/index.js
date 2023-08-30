@@ -10,6 +10,7 @@ import Schedule from "../../Schedule";
 import Control from "./Control";
 import {useNavigate} from 'react-router-dom';
 import { $CombinedState } from "redux";
+import { Link } from "react-router-dom";
 
 
 const Row = ({ item, value, onChange ,setActiveIndex, setIdConsultaToNestStep, setVisibleModal}) => {
@@ -53,6 +54,7 @@ const Row = ({ item, value, onChange ,setActiveIndex, setIdConsultaToNestStep, s
             className={styles.item}
             onClick={() => setVisibleModalProduct(true)}
           >
+            
             {/*
             <div className={styles.preview}>
               <img
@@ -88,7 +90,13 @@ const Row = ({ item, value, onChange ,setActiveIndex, setIdConsultaToNestStep, s
         <div className={styles.col}>
           <div className={styles.link}>{item.tel}</div>
         </div>
-       
+        <div className={styles.col}>
+        <Link className={styles.control}         
+            to="/products/add" >
+           <Icon name="edit" size="20" />  
+          </Link> 
+        </div>                   
+     
        <div className={styles.col} onClick={()=>setIdConsultaToNestStep(item.id_consulta)}>
           <Control
             className={styles.control}
@@ -97,8 +105,7 @@ const Row = ({ item, value, onChange ,setActiveIndex, setIdConsultaToNestStep, s
             startTime={startTime}
             setStartTime={setStartTime}
             setVisibleModal={setVisibleModal}
-            ModalProduct = {ModalProduct}
-            
+            ModalProduct = {ModalProduct}            
             
           />
       </div> 
@@ -118,6 +125,9 @@ const Row = ({ item, value, onChange ,setActiveIndex, setIdConsultaToNestStep, s
           setStartTime={setStartTime}
         />
       </Modal>
+     
+           
+          
     </>
   );
 };

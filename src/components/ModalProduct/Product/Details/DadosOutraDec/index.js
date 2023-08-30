@@ -105,7 +105,6 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         />      
   
         )}
-        
       </div>
     
         {
