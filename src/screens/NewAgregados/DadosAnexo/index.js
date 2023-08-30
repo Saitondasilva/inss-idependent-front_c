@@ -8,6 +8,19 @@ import TextInput from "../../../components/TextInput";
 import Editor from "../../../components/Editor";
 import Dropdown from "../../../components/Dropdown";
 import axios from "axios";
+import Radio from "../../../components/Radio";
+
+const inputStyles = {
+  backgroundColor: '#1c1c1c', // Defina a cor de fundo desejada aqui
+  padding: '10px', // Exemplo de estilo adicional
+  borde:'1px solid #ccc', 
+  color: '#FFFFFF',
+  borderWidth: 1,
+  borderColor: "black",
+  borderadius:'20px',
+  borderBottom: '20px'
+
+,}
 
 // const optionsGenero      = ["Masculino", "Feminino", "Outro"];
 // const optionsEstadocivil = ["Solteiro", "Casado", "Divorciado", "Viuvo"];
@@ -17,19 +30,29 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsGenero, setOptionsGenero] = useState(['--Documento--', 'BI', 'Cédula Pessoal', 'Cartão Estrangeiro']);
-  const [genero, setGenero] = useState(optionsGenero[0]);
-  const [optionsEstadocivil, setOptionsEstadocivil] = useState(['--Escolha e --','Solteiro', 'Casado', 'Viuvo']);
-  const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
-  const [linguagem, setLinguagem] = useState(optionsLinguagem[0]);
-  const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
-  const [optionsPais, setOptionsPais] = useState([]);
-  const [pais, setpais] = useState(optionsPais[0]);
-  const [optionsDocumento, setOptionsDocumento] = useState(['--Escolha um--', 'BI', 'Cédula PEsoal', 'Cartão estrangeiro']);
-  const [Documento, setDocum] = useState(optionsPais[0]);
- 
+  const [optionsTd, setOptionsTd] = useState(['Sim', 'Não']);
+  const [td, setTd] = useState(optionsTd[0]);
+  
   data1.descricao=content;
 
+  {/*const options = [
+    { value: 'show', label: 'Sim' },
+    { value: 'hide', label: 'Não' },
+  ];  */}
+
+ // const [selectedOption, setSelectedOption] = useState(options[0].value);
+  //const [isFieldVisible, setIsFieldVisible] = useState(true);
+
+
+ {/* const handleSelect = newValue => {
+    setSelectedOption(newValue);
+
+    if (newValue === 'show') {
+      setIsFieldVisible(true);
+    } else {
+      setIsFieldVisible(false);
+    }
+  };*/}
 
   function onChangeData(e) {
     console.log(e)
@@ -46,6 +69,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   })
     console.log("FILE", this.state.image)*/
   }
+  /*
   function getGenero(){
     return axios
     .get("/getGenero")
@@ -62,45 +86,13 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       return err.response;
     });
   }
-  function getEstadoCivil(){
-    return axios
-    .get("/getEstadoCivil")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-      }
-      setOptionsEstadocivil(a);
-      setEstadocivil([optionsEstadocivil[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  function getPais(){
-    return axios
-    .get("/country")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.countries.length; i++){
-        a.push(response.data.data.countries[i].name)
-      }
-      console.log(a)
-      setOptionsPais(a);
-      setpais([optionsPais[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
+
+
   useEffect(() => {
     getGenero()
-    getEstadoCivil()
-    getPais()
+    
   },[]);
-
+*/
   function buscarCep() {
      
     fetch(`http://viacep.com.br/ws/${data1.cep}/json/`, {mode: 'cors'})
@@ -119,61 +111,60 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     <Card
       className={cn(styles.card, className)}
       title="Anexo"
-      classTitle="title-green"
-      
+      classTitle="title-green"      
     >
       <div className={styles.description}>
       <hr></hr>
       <div className={styles.group}>
     
       
-       
-       <span className={styles.field}>
-  
+ 
+       {/*<select className={styles.field} style={inputStyles} value={selectedOption} onChange={e => handleSelect(e.target.value)}>
+      
+      {options.map(option => (
+        <option style={inputStyles}  key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+      </select>*/}
+<span className={styles.field}>
        <Dropdown
           className={styles.field1}
-          label="Nacionalidade"
+          label="Tipo Documento"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setGenero}
-          options={optionsGenero}
-          onChange={data1.banco=genero}
-          value={genero}
-        /> 
-       </span>
+          setValue={setTd}
+          options={optionsTd}
+          onChange={data1.td=td}
+          value={td}
+        /> </span>
+       
+       {td=="Sim" && (
 
        <TextInput
           className={styles.field}
           label="Anexo"
           name="profissao"
-          type="file"
+          type="text"
           required
           onChange={onChangeData}
           value={data1.profissao}
         />
-       
-  
+        )}
+        {td=="Sim" && (
+        <TextInput
+        className={styles.field}
+        label="Código de Transição"
+        name=""
+        type="text"
+        required
+        onChange={onChangeData}
+        value={data1.bi}
+      />
+
+      )}
        
       </div>
-      
-      
-       
-         
-          
-      
-      
-      
-        {
-          /*
-       <Editor
-          state={content}
-          onChange={setContent}
-          classEditor={styles.editor}
-          label="Sobre"
-          tooltip="Descrição"
-          name="descricao"
-          value={data1.descricao}
-          />
-        */}
+     
        
       </div>
     </Card>
@@ -181,3 +172,4 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
 };
 
 export default NameAndDescription;
+

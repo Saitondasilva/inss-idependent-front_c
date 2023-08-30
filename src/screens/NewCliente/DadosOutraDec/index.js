@@ -18,8 +18,8 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
  
-  const [optionsEsteInsInss, setOptionsEsteInsInss] = useState(['--Escolha e --','Sim', 'Não']);
-  const [EsteInsInss, setEsteInsInss] = useState(optionsEsteInsInss[0]);
+  const [optionsAntigoNISS, setOptionsAntigoNISS] = useState(['Sim', 'Não']);
+  const [antigoNISS, setAntigoNISS] = useState(optionsAntigoNISS[0]);
   
   
  
@@ -76,13 +76,14 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           className={styles.field1}
           label="Já esteve ,alguma vez ,inscrito na segurança Social"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setEsteInsInss}
-          options={optionsEsteInsInss}
-          onChange={data1.EsteInsInss=EsteInsInss}
-          value={EsteInsInss}
+          setValue={setAntigoNISS}
+          options={optionsAntigoNISS}
+          onChange={data1.antigoNISS=antigoNISS}
+          value={antigoNISS}
         /> 
-       </span>
-
+       </span>      
+          
+        { antigoNISS=="Sim"&&(
        <TextInput
           className={styles.field}
           label="Se sim  diz o nome da Entidade Empregadora"
@@ -91,10 +92,19 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           required
           onChange={onChangeData}
           value={data1.empresa_que_trabalhou}
-        />
-      
+        />)}
+         { antigoNISS=="Sim"&&(
+         <TextInput
+          className={styles.field}
+          label="Antigo NISS"
+          name="antigo_niss"
+          type="text"
+          required
+          onChange={onChangeData}
+          value={data1.antigo_niss}
+        />      
   
-       
+        )}
       </div>
     
         {

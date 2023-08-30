@@ -18,7 +18,7 @@ const Control = ({
   const actions = [
     {
       icon: "arrow-next",
-      text: "Avançar etapa",
+      text: "Validar",
       action: () => setVisibleModal(true),
     },
     /*{
