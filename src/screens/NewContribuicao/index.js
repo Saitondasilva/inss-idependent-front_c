@@ -86,10 +86,11 @@ function PagarContribuicao() {
     codigo_transacao: data1.codigo_transacao,
     valor_total: data1.valor_total,
     anexo: data1.anexo,
+    banco: data1.banco,
     id_utente: data1.id_utente,
     detalhes_pagamentos: data, 
   }
-  
+  console.log("BANCO", data1.banco)
   return axios
     .post("/utente/pagarContribuicao",data3,{
       headers: { Authorization: `Bearer ${userData.token}`,'Content-Type': 'multipart/form-data' },
