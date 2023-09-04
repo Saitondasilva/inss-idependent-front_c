@@ -16,11 +16,15 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 // data
-import { products } from "../../mocks/products";
+import Dropdown from "../../components/Dropdown";
 
 
-const sorting = ["list", "grid"];
-const colluns =["Codigo de Transacao","Data Transaçao","Forma Transaçao", "valor", "Operações"];
+const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho","Julho", "Agosto", "Setembro",
+"Outubro", "Novembro","Dezembro"];
+
+const anos = ["2023", "2024","2025","2026","2027","2028","2029","2030"];
+const intervals = ["Recentes", "Não lidas"];
+const colluns =["Codigo de Transacao","Data Transaçao","Forma Transaçao", "valor"];
 
 
 const Drafts = () => {
@@ -42,6 +46,9 @@ const Drafts = () => {
   const [delresponse, setDelresponse] = useState();
   const [idToDel, setIdToDel] = useState(0);
   const [blob, setBlob] = useState('');
+  const [sorting, setSorting] = useState(intervals[0]);
+  const [ano, setAno] = useState(anos[0]);
+  const [mes, setMes] = useState(meses[0]);
 
   const handleSubmit = (e) => {
     alert();
@@ -56,23 +63,7 @@ const Drafts = () => {
       setSelectedFilters((selectedFilters) => [...selectedFilters, id]);
     }
   };
-  /*
-  useEffect(() => {
-    setSmsSucess("");
-    setSmsError("");
-  },[visibleModal]);
-useEffect(() => {
-  setSearch("")
-    var user = localStorage.getItem("userData");
-    user==null?setuserData([]):setuserData(JSON.parse(user));
-    //getSessao(JSON.parse(user));
-},[id_consulta]);
-useEffect(() => {
-  var user = localStorage.getItem("userData");
-  user==null?setuserData([]):setuserData(JSON.parse(user));
-  shearchCliente(JSON.parse(user));
-},[search]);
-*/
+
 useEffect(() => {
   getContribuicao()
 },[]);
@@ -194,52 +185,33 @@ function dellFile(){
               icon="search"
               onChange={shearchCliente}
             />
-            <div className={styles.sorting}>
-              {sorting.map((x, index) => (
-                <button
-                  className={cn(styles.link, {
-                    [styles.active]: index === activeIndex,
-                  })}
-                  onClick={() => setActiveIndex(index)}
-                  key={index}
-                >
-                  <Icon name={x} size="24" />
-                </button>
-              ))}
-            </div>
+
+            Mês:
+            <span >
+            <Dropdown
+            className={styles.dropdown}
+            classDropdownHead={styles.dropdownHead}
+            value={mes}
+            setValue={setMes}
+            options={meses}
+            />
+            </span>
+            Ano:
+            <span >
+            <Dropdown
+            className={styles.dropdown}
+            classDropdownHead={styles.dropdownHead}
+            value={ano}
+            setValue={setAno}
+            options={anos}
+            />
+            </span>
           </>
         }
       >
         <div className={styles.wrapper}>
-          {(activeIndex === 0) && <TableJornadaCliente items={produto1} colluns={colluns} setActiveIndex={setActiveIndex} title="Last edited" />}
-          {activeIndex === 1 && (
-            <>
-              <div className={styles.list}>
-                {produto1.map((x, index) => ( 
-                  x.item.length>0 ? (
-                    <>
-                        <Product
-                        className={styles.product}
-                        value={selectedFilters.includes(x.id)}
-                        onChange={() => handleChange(x.id)}
-                        item={x}
-                        key={index}
-                        released
-                        setVisibleModal={setVisibleModal}
-                        setVisibleDelModal={setVisibleDelModal}
-                        setActualSessao={setActualSessao}
-                        setVisibleVermaisModal={setVisibleVermaisModal}
-                        setIdToDel={setIdToDel}
-                      />
-                    </>  
-                  ) : 
-                  (<></>)
-                  
-                ))}
-              </div>
-              
-            </>
-          )}
+          <TableJornadaCliente items={produto1} colluns={colluns} setActiveIndex={setActiveIndex} title="Last edited" />
+        
           
 
 

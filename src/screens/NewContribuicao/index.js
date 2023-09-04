@@ -18,6 +18,7 @@ const NewProduct = () => {
   const [startTime, setStartTime] = useState(new Date());
   const [data1, setData1] = useState({});
   const [data,setData]=useState([])
+  const [Contribuicao,setContribuicao]=useState(null)
   const [userData, setuserData] = useState({});
   const [smsError, setSmsError] = useState("");
   const [smsSucess, setSmsSuccess] = useState("");
@@ -31,7 +32,7 @@ const NewProduct = () => {
   },[]);
 
 function validateForm(){
-
+  
   if(!data1.id_utente || data1.id_utente===""){
     setSmsError("Utente não encontrados")
     return false;
@@ -48,8 +49,17 @@ function validateForm(){
     setSmsError("Por favor seleciona uma data")
     return false;
   }
+  if(Contribuicao!==null){
+    console.log("Contribuicao", Contribuicao.utente)
+    setSmsError("Este Codigo de transação ja foi utilisado pelo:"+Contribuicao.utente.nome)
+    return false;
+  }
   if(!data1.valor_total || data1.valor_total==="" || data1.valor_total<=1){
     setSmsError("Por favor introduza um valor valido")
+    return false;
+  }
+  if(!data1.anexo || data1.anexo===""){
+    setSmsError("Por favor adiciona um ficheiro comprovativo")
     return false;
   }
   if(!data1.vistoDetalhe){
@@ -67,19 +77,10 @@ function validateForm(){
   
 }
 function PagarContribuicao() {
+  confirmarCodigo()
   setLoader(true)
   if(!validateForm()){setLoader(false); return false;}
-   const formData = new FormData();
-      formData.append('forma_transacao', data1.forma_transacao);
-      formData.append('data_transacao', data1.data_transacao);
-      formData.append('codigo_transacao', data1.codigo_transacao);
-      formData.append('valor_total', data1.valor_total);
-      formData.append('id_utente', data1.id_utente);
-      formData.append('anexo', data1.anexo);
-      formData.append('detalhes_pagamentos', data);
-      console.log("Detalhes", formData)
-      
-  
+   
       var data3={
     forma_transacao: data1.forma_transacao,
     data_transacao: data1.data_transacao,
@@ -111,7 +112,23 @@ function PagarContribuicao() {
     });
     
 };
-
+function confirmarCodigo() {
+  return axios
+    .get("/confirmaCodigoTransacao/"+data1.codigo_transacao,{
+      headers: { Authorization: `Bearer ${userData.token}` },
+    })
+    .then((response) => {
+     if(typeof (response.data.data) !== 'undefined'){
+      setContribuicao(response.data.data.Contribuicao)
+     }else{
+      setContribuicao(null)
+     }
+    })
+    .catch((err) => {
+      setContribuicao(null)
+    });
+    
+};
 function clean(){
  data1.nif="";
  data1.valor_total="";

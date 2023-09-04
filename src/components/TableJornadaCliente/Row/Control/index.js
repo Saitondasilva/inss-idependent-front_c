@@ -16,12 +16,8 @@ const Control = ({
 
   const actions = [
     {
-      icon: "calendar",
+      icon: "more-horizontal",
       action: () => setVisibleModal(true),
-    },
-    {
-      icon: "edit",
-      action: () => console.log("edit"),
     },
     {
       icon: "trash",

@@ -19,6 +19,7 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 const NameAndDescription = ({ className, handleSubmit, data1, setData1 }) => {
   const [content, setContent] = useState();
   const [nome, setNome] = useState();
+  const [numero, setNumero] = useState();
   const [dataNasc, setDataNasc] = useState();
   const [valorPrestacaoMensal, setValorPrestacaoMensal] = useState();
   const [ultimaContribuicao, setUltimaContribuicao] = useState();
@@ -47,28 +48,53 @@ function getUtenteByNif(){
   .then((response) => {
     if(response.data.data.Utente.length > 0){
       setNome(response.data.data.Utente[0].nome)
+      data1.numero=response.data.data.Utente[0].codigo
       setDataNasc(response.data.data.Utente[0].data_nasc)
       data1.id_utente=response.data.data.Utente[0].id
-      
-     //setData1(data1)
-     CalcularContribuicaoMensal();
-     calcularMesesEmDivida();
+      CalcularContribuicaoMensal();
+      calcularMesesEmDivida();
     }else{
-      console.log("SAI ",data1.nif)
-      setNome("")
-      setDataNasc("")
-      setValorPrestacaoMensal("")
-      setUltimaContribuicao("");
-     //setData1(data1)
+      cleanContrib()
+    
     }
   })
   .catch((err) => {
-    data1.nome=""
-      data1.data_nasc=""
-     setData1(data1)
+    cleanContrib()
     console.log("Error", err);
     return err.response;
   });
+}
+
+function getUtenteByCode(){
+  data1.vistoDetalhe=false;
+  return axios
+  .get("/utente/getUtenteByCode/"+data1.numero)
+  .then((response) => {
+    console.log("UTENTE",response.data.data.Utente)
+    if(response.data.data.Utente.length > 0){
+      setNome(response.data.data.Utente[0].nome)
+      data1.nif=response.data.data.Utente[0].nif
+      setDataNasc(response.data.data.Utente[0].data_nasc)
+      data1.id_utente=response.data.data.Utente[0].id
+     CalcularContribuicaoMensal();
+     calcularMesesEmDivida();
+    }else{
+      cleanContrib()
+    }
+  })
+  .catch((err) => {
+    cleanContrib()
+    console.log("Error", err);
+    return err.response;
+  });
+}
+function cleanContrib(){
+  setNome("")
+  setDataNasc("")
+  setValorPrestacaoMensal("")
+  setUltimaContribuicao("")
+  data1.numero=""
+  data1.id_utente=null
 }
 function CalcularContribuicaoMensal(){
   return axios
@@ -89,7 +115,7 @@ function calcularMesesEmDivida(){
   .then((response) => {
    if (typeof response.data.data.UltimoMesPago === 'undefined' & typeof response.data.data.UltimoAnoPago === 'undefined'){
       data1.TemContribuicao=response.data.data.TemContribuicao;
-      data1.UltimoValorPago=0;
+      data1.SomaPagUltimoMes=0;
       data1.UltimoDiaPago=response.data.data.DiaRegistro
       data1.UltimoAnoPago=response.data.data.AnoRegistro
       data1.UltimoMesPago=response.data.data.MesRegistro
@@ -98,11 +124,11 @@ function calcularMesesEmDivida(){
     
     }else {
       data1.TemContribuicao=response.data.data.TemContribuicao;
-      data1.UltimoValorPago=response.data.data.UltimoValorPago;
+      data1.SomaPagUltimoMes=response.data.data.SomaPagUltimoMes;
       data1.UltimoAnoPago=response.data.data.UltimoAnoPago
       data1.UltimoMesPago=response.data.data.UltimoMesPago
       
-      setUltimaContribuicao('Pago: '+response.data.data.UltimoValorPago+' Dbs, para '+response.data.data.UltimoMesPago+'/'+response.data.data.UltimoAnoPago)
+      setUltimaContribuicao('Pago: '+response.data.data.SomaPagUltimoMes+' Dbs, para '+response.data.data.UltimoMesPago+'/'+response.data.data.UltimoAnoPago)
       
     }
   })
@@ -144,6 +170,7 @@ function calcularMesesEmDivida(){
           icon="search"
           required
           onChange={onChangeData}
+          onKeyUp={getUtenteByCode}
           value={data1.numero}
           
         />

@@ -9,19 +9,18 @@ import Item from "./Item";
 import axios from "axios";
 
 // data
-import { notifications } from "../../../mocks/notifications";
 
-const intervals = ["Recent", "New", "This year"];
+const intervals = ["Recentes", "Não lidas"];
 
 const actions = [
   {
-    title: "Mark as read",
+    title: "Marcar como lidas",
     icon: "check",
     action: () => console.log("Mark as read"),
   },
   {
-    title: "Go setting",
-    icon: "setting",
+    title: "Eliminar todas",
+    icon: "Delete",
     action: () => console.log("Go setting"),
   },
 ];
@@ -36,10 +35,13 @@ const List = ({ className }) => {
     user==null?setuserData([]):setuserData(JSON.parse(user));
     getNotification(JSON.parse(user));
   },[]);
-  
+  useEffect(() => {
+    
+    handleChangeDropdown()
+  },[sorting]);
   function getNotification(user){
     const result= axios
-      .get("/candidate/getallnotification",{
+      .get("/utente/getallnotification",{
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
@@ -52,14 +54,38 @@ const List = ({ className }) => {
       });
       return result;
   };
+  function getNaoLidas(user){
+    const result= axios
+      .get("/utente/getnotreadnotification",{
+        headers: { Authorization: `Bearer ${user.token}` },
+      })
+      .then((response) => {
+        setNotifications(response.data);
+        return response;
+      })
+      .catch((err) => {
+        console.log("Error", err);
+        return err.response;
+      });
+      return result;
+  };
+  function handleChangeDropdown(){
+    console.log("Sorting", sorting);
+    
+    if(sorting==="Recentes"){
+      getNotification(userData)
+    }else if(sorting==="Não lidas"){
+      getNaoLidas(userData)
+    }
+    
+  }
 
   return (
     <Card
       className={cn(styles.card, className)}
-      title=""
+      title="Recentes"
       classTitle={cn("title-red", styles.title)}
       classCardHead={styles.head}
-      /*
       head={
         <>
           <Dropdown
@@ -68,7 +94,7 @@ const List = ({ className }) => {
             value={sorting}
             setValue={setSorting}
             options={intervals}
-            small
+            onChange={()=>handleChangeDropdown()}
           />
           <Actions
             className={styles.actions}
@@ -77,9 +103,9 @@ const List = ({ className }) => {
           />
         </>
       }
-      */
+      
     >
-      {/*<div className={styles.notifications}>
+      <div className={styles.notifications}>
         <div className={styles.list}>
           {notifications.map((x, index) => (
             <Item className={cn(styles.item, className)} item={x} key={index} />
@@ -91,7 +117,7 @@ const List = ({ className }) => {
             <span>Load more</span>
           </button>
         </div>
-          </div>*/}
+          </div>
     </Card>
   );
 };

@@ -2,13 +2,25 @@ import React, { useState } from "react";
 import cn from "classnames";
 import styles from "./Item.module.sass";
 import Control from "./Control";
+import { Link } from "react-router-dom";
 
-const Item = ({ className, item }) => {
+const Item = ({ className, item, onClose }) => {
   const [visible, setVisible] = useState(false);
   const [currentValue, setCurrentValue] = useState("");
-
+  var type="", message=JSON.parse(item.data);
+  if(item.type==="App\\Notifications\\PagContribuicaoNotification"){
+    type="Pagamento de Contribuição";
+    item.url="/jornada/cliente"
+  }else if(item.type==="App\\Notifications\\RegistroUtenteNotification"){
+    type="Registro de Utente";
+    item.url="/carteira/cliente"
+  }
   return (
-    <div className={cn(styles.item, { [styles.new]: item.new }, className)}>
+    <Link
+      className={cn(styles.item, { [styles.new]: item.read_at }, className)}
+      to={item.url}
+      onClick={onClose}
+    >
       {/*
       <div className={styles.avatar}>
         <img src={item.avatar} alt="Foto" />
@@ -19,13 +31,13 @@ const Item = ({ className, item }) => {
       */}
       <div className={styles.details}>
         <div className={styles.line}>
-          <div className={styles.subtitle}>{item.title}</div>
+          <div className={styles.subtitle}>{type}</div>
           <div className={styles.login}>{item.login}</div>
-          <div className={styles.time}>{item.time} </div>
+          <div className={styles.time}>{item.created_at} </div>
         </div>
         <div
           className={styles.content}
-          dangerouslySetInnerHTML={{ __html: item.content }}
+          dangerouslySetInnerHTML={{ __html: message.message  }}
         ></div>
         
         {/*
@@ -40,7 +52,7 @@ const Item = ({ className, item }) => {
         */
         }
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -88,7 +88,7 @@ const Row = ({ item, value, onChange, setActiveIndex }) => {
         </div>
         <div className={styles.col}>
           <div className={styles.link}>{item.value}</div>
-          {/*
+          
           <Control
             className={styles.control}
             startDate={startDate}
@@ -96,8 +96,8 @@ const Row = ({ item, value, onChange, setActiveIndex }) => {
             startTime={startTime}
             setStartTime={setStartTime}
           />
-          */
-          }
+          
+          
         </div>
       </div>
       <ModalProduct

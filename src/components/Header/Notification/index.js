@@ -9,15 +9,15 @@ import Item from "./Item";
 import axios from "axios";
 
 // data
-
+import { notifications } from "../../../mocks/notifications";
 const actions = [
   {
-    title: "Mark as read",
+    title: "Marcar como lidas",
     icon: "check",
     action: () => console.log("Mark as read"),
   },
   {
-    title: "Delete notifications",
+    title: "Eliminar Notificações",
     icon: "trash",
     action: () => console.log("Delete notifications"),
   },
@@ -38,7 +38,7 @@ const Notification = ({ className }) => {
   
   function getNotification(user){
     const result= axios
-      .get("/candidate/getallnotification",{
+      .get("/utente/getallnotification",{
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
@@ -54,7 +54,7 @@ const Notification = ({ className }) => {
 
   function MarkAsRead_all(){
     const result= axios
-      .get("/candidate/MarkAsRead_all",{
+      .get("/utente/MarkAsRead_all",{
         headers: { Authorization: `Bearer ${userData.token}` },
       })
       .then((response) => {
@@ -70,7 +70,7 @@ const Notification = ({ className }) => {
 
   function notReadyCount(user){
     const result= axios
-      .get("/candidate/notreadnotificationcount",{
+      .get("/utente/notreadnotificationcount",{
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
@@ -105,39 +105,33 @@ const Notification = ({ className }) => {
         <div className={styles.body}>
           <div className={styles.top}>
             <div className={styles.title}>Notificação</div>
-            {/*
+            
             <Actions
               className={styles.actions}
               classActionsHead={styles.actionsHead}
               items={actions}
               small
             />
-            */}
+            
           </div>
           <div className={styles.list}>
-            {/*notifications.map((x, index) => (
+            {notifications.map((x, index) => (
               
-              <Item
+                <Item
                 className={cn(styles.item, className)}
                 item={x}
                 key={index}
                 onClose={() => setVisible(false)}
               />
-            ))*/}
+              
+            ))}
           </div>
-          <Link
-            className={cn("button", styles.button)}
-            to="/carteira/cliente"
-            onClick={() => setVisible(false)}
-          >
-           Ver Cadastro Utente
-          </Link>
           <Link
             className={cn("button", styles.button)}
             to="/notification"
             onClick={() => setVisible(false)}
           >
-            Ver Cadastro Agregado
+            Todas as Notificações
           </Link>
         </div>
       </div>

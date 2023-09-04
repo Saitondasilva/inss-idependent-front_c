@@ -69,13 +69,13 @@ function calcularMesesAPagar(){
   var valor_total = data1.valor_total;
   var valorPrestacaoMensal = data1.valorPrestacaoMensal;
   var array_data = [];
-  var valor_em_falta= data1.valorPrestacaoMensal-data1.UltimoValorPago;
+  var valor_em_falta= data1.valorPrestacaoMensal-data1.SomaPagUltimoMes;
   var UltimoAnoPago= data1.UltimoAnoPago;
   var UltimoMesPago= data1.UltimoMesPago;
   if(valor_total===0) {return false;}
   if(!data1.TemContribuicao){
     
-    var dias_de_atraso = 30 - data1.UltimoDiaPago;
+    var dias_de_atraso = 31 - data1.UltimoDiaPago;
     var valor_diario_a_pagar= valorPrestacaoMensal/30
     var valor_total_a_pagar= (valor_diario_a_pagar*dias_de_atraso)
 
@@ -83,17 +83,15 @@ function calcularMesesAPagar(){
     valor_total-=valor_total_a_pagar
     array_data.push({ano:UltimoAnoPago, mes:UltimoMesPago, valor_pago: valor_total_a_pagar});
     }else{
-     // alert("Por favor insira um valor superior a: "+valor_total_a_pagar);
       array_data.push({ano:UltimoAnoPago, mes:UltimoMesPago, valor_pago: valor_total});
       valor_total=0;
     }
   }
-  if( data1.TemContribuicao && data1.UltimoValorPago<valorPrestacaoMensal){ 
+  if( data1.TemContribuicao && data1.SomaPagUltimoMes<valorPrestacaoMensal){ 
     if(valor_total>=valor_em_falta){
       valor_total-=valor_em_falta;
       array_data.push({ano:UltimoAnoPago, mes:UltimoMesPago, valor_pago: valor_em_falta});
     }else{
-      //alert("Por favor insira um valor superior a: "+valor_em_falta);
       array_data.push({ano:UltimoAnoPago, mes:UltimoMesPago, valor_pago: valor_total});
       valor_total=0;
     }

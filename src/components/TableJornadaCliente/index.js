@@ -46,10 +46,10 @@ const Table = ({ items,colluns, title,setActiveIndex }) => {
         ))}
       </div>
       <div className={styles.foot}>
-        {/*<button className={cn("button-stroke button-small", styles.button)}>
+        <button className={cn("button-stroke button-small", styles.button)}>
           <Loader className={styles.loader} />
           <span>Load more</span>
-        </button>*/}
+        </button>
       </div>
     </div>
   );
