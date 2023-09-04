@@ -157,13 +157,14 @@ function SaveProfissionalCliente() {
     nome_mae: data1.nome_mae,
     id_escalao: data1.escalao_id,
     id_esquema: data1.esquema_id,
-    esta_instcrito: true,
-    empresa_que_trabalhou: "",
+    esta_instcrito: data1.antigoNISS ==="Sim" ? true : false,
+    empresa_que_trabalhou: data1.empresa_que_trabalhou,
     tem_outro_trabalho: false,
     outra_entidade_patronal: "",
     outra_local_trabalho: "",
     recebe_pensao: false,
-    pensao_que_recebe: ""   
+    pensao_que_recebe: "",  
+    codigo_antigo:data1.codigo_antigo
   
   }
   

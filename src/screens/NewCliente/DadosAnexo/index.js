@@ -8,6 +8,7 @@ import TextInput from "../../../components/TextInput";
 import Editor from "../../../components/Editor";
 import Dropdown from "../../../components/Dropdown";
 import axios from "axios";
+import Panel from "./Panel";
 
 // const optionsGenero      = ["Masculino", "Feminino", "Outro"];
 // const optionsEstadocivil = ["Solteiro", "Casado", "Divorciado", "Viuvo"];
@@ -20,7 +21,10 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   const [optionsDocAnexo, setOptionsDocAnexo] = useState(['--Escolha um--', 'BI', 'Certidão', 'Cartão estrangeiro']);
   const [docAnexo, setDocAnexo] = useState(optionsDocAnexo[0]);
   const [userData, setuserData] = useState({});
-  const [file, setFile] = useState([0])
+  const [data,setData]=useState([])
+  const [smsError, setSmsError] = useState("");
+  const [smsSucess, setSmsSuccess] = useState("");
+  const [loader, setLoader] = useState(""); 
   data1.descricao=content;
 
 
@@ -48,34 +52,53 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       return err.response;
     });
   }
-  function onChangeFile(e){
-    setFile(e.target.files[0])
-    console.log(e.target.files[0])
 
-}
+  function validateForm(){
+
   
+    if(!data1.anexo || data1.anexo===""){
+      setSmsError("Por favor seleciona seleciona o anexo")
+      return false;
+    }
+    return true;
+  }
+
+const handleFileChange = (event) => {
+  data1.anexo=event.target.files[0];
+};
 
 function SaveFile() {
-  
-  var data={  
+  setLoader(true)
+  if(!validateForm()){setLoader(false); return false;}
+   const formData = new FormData();
     
-    photo: data1.photo,
-  }
+      formData.append('anexo', data1.anexo);      
   
-  console.log("Data",data)
+      var data3={
+   
+        tabela:'Utente',
+        file: data1.anexo,   
+  }  
   return axios
-    .post("/utente/register",data,{
-      headers: { Authorization: `Bearer ${userData.token}` },
+    .post("/sendanexo",data3,{
+      headers: { Authorization: `Bearer ${userData.token}`,'Content-Type': 'multipart/form-data' },
     })
     .then((response) => {
-      alert("Registro com sucesso!");
-    
-      //clean();
+      setSmsSuccess("Registro com sucesso!");
+      setSmsError("");
+      setLoader(false)
       console.log(response.data.data)
     })
-    
+    .catch((err) => {
+      setLoader(false);
+      setSmsSuccess("");
+      setSmsError(err.response.data.message);
+      console.log("Error", err);
+      return err.response;
+    });
     
 };
+
 
 
 
@@ -102,20 +125,18 @@ useEffect(() => {
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           setValue={setDocAnexo}
           options={optionsDocAnexo}
-          onChange={data1.docAnexo=docAnexo}
+          onChange={data1.tipo_doc=docAnexo}
           value={docAnexo}
         /> 
        </span>
 
        <TextInput
           className={styles.field}
-          label="Foto"
-          name="photo"
-          type="file"
-          tooltip="Foto"
+          label="Anexo"
+          name="anexo"
+          type="file"    
+          onChange={handleFileChange}
           required
-          onChange={onChangeFile}
-          value={data1.photo}
         />
        
       </div>
@@ -132,9 +153,16 @@ useEffect(() => {
           value={data1.descricao}
           />
         */}
-       
+        {<Panel
+        
+        SavePagarContribuicao={SaveFile}
+        smsError={smsError}
+        smsSucess={smsSucess}
+        loader={loader}
+        />}
       </div>
     </Card>
+    
   );
 };
 

@@ -7,11 +7,10 @@ import Products from "./Products";
 import DadosPessoais from "./DadosPessoais";
 import DadosBancario from "./DadosBancaria";
 import DadosEndereco from "./Endereco";
-
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const navigation = ["Product", "Comments"];
-
 
 
 
@@ -25,8 +24,9 @@ const Details = ({ className, setValue, activeIndex, setActiveIndex }) => {
 
   const [startDate, setStartDate] = useState(new Date());
 const [startTime, setStartTime] = useState(new Date());
-const [data1, setData1] = useState({});
 const [userData, setuserData] = useState({});
+const [data1, setData1] = useState({});
+const {id}=useParams();
 
 
 var user=null;
@@ -87,10 +87,10 @@ useEffect(() => {
           </button>
         </div>
             </div>*/}
-            <DadosPessoais />
+            <DadosPessoais id={id? Number.parseInt(id):null} data1={data1} setData1={setData1} />
      
-      <DadosBancario/>
-      <DadosEndereco/>
+      <DadosBancario id={id? Number.parseInt(id):null} data1={data1} setData1={setData1}/>
+      <DadosEndereco id={id? Number.parseInt(id):null} data1={data1} setData1={setData1}/>
       {/*<Products />*/}
       
     </div>

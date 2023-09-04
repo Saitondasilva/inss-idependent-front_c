@@ -48,6 +48,7 @@ import AgendaProfissional from "./screens/AgendaProfissional";
 import BuscaProfissional from "./screens/BuscaProfissional";
 import MinhasConsultas from "./screens/MinhasConsultas";
 import MeusPagamentos from "./screens/MeusPagamentos";
+import NotificationUtente from "./screens/NotificationUtente";
 
 
 
@@ -104,7 +105,7 @@ function App() {
             element={
               <ProtectedRoute>
                 <Page title="Todos Utentes">
-                  <CarteiraCliente />
+                  <NotificationUtente />
                 </Page>
               </ProtectedRoute>              
             }
@@ -193,7 +194,7 @@ function App() {
             }
           />
           <Route
-            path="/products/add"
+            path="/products/editar/:id"
             element={
               <Page title="Editar Utente">
                 <NewClienteEdit />

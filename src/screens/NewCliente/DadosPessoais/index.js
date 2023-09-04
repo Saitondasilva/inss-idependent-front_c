@@ -187,9 +187,9 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     <Card
       className={cn(styles.card, className)}
       title="Identificação Do Beneficiário"
-      classTitle="title-green"
-      
+      classTitle="title-green"      
     >
+      
       <div className={styles.description}>
       <hr></hr>
       <div className={styles.group}>
@@ -244,8 +244,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           onChange={onChangeData}
           value={data1.nome_pai}
         />
-        
-        
+
         <TextInput
           className={styles.field}
           label="Nome Mãe"
@@ -255,7 +254,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           required
           onChange={onChangeData}
           value={data1.nome_mae}
-          
+ 
         />
       
         <TextInput

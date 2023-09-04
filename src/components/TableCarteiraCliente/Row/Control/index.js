@@ -42,10 +42,10 @@ function showModalNextStep(){
     <>
       <div className={cn(styles.control, className)}>
         {actions.map((x, index) => (
-          <button className={styles.button} key={index} onClick={()=>showModalNextStep()}>
+          <div className={styles.button} key={index} onClick={()=>showModalNextStep()}>
             {x.text} <Icon name={x.icon} size="20" />       
          
-          </button>
+          </div>
           
         ))}
       </div>

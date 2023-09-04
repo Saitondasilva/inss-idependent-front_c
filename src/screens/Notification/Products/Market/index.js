@@ -32,7 +32,8 @@ const Market = ({ items }) => {
           <div className={styles.col}>Nome Beneficiário</div>          
           <div className={styles.col}>NISS</div>
           <div className={styles.col}>NIF</div>
-          <div className={styles.col}>Views</div>
+          <div className={styles.col}>Mãe</div>
+          <div className={styles.col}>Pai</div>
           <div className={styles.col}>Estado</div>
           
         </div>

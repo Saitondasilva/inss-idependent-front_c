@@ -11,21 +11,17 @@ const actions = [
     icon: "edit",
     action: () => console.log("Edit product"),
   },
-  {
+{/*  {
     title: "View comment",
     icon: "message",
     action: () => console.log("View comment"),
-  },
+  },*/},
   {
     title: "Edit title & description",
     icon: "edit",
     action: () => console.log("Edit title & description"),
   },
-  {
-    title: "Get shareable link",
-    icon: "link",
-    action: () => console.log("Get shareable link"),
-  },
+ 
   {
     title: "Delete forever",
     icon: "trash",
@@ -33,24 +29,24 @@ const actions = [
   },
 ];
 
-const Control = ({ className, visibleActions, setVisibleActions, up }) => {
+const Control = ({ className, visibleActions, setVisibleActions, up, item}) => {
   return (
     <div className={cn(styles.control, className)}>
       <button className={styles.button}> 
         
           <Link          
-            to="/products/add" >
+           to={`${"/products/editar/"+item.id}`}>
            <Icon name="edit" size="20" />  
           </Link>          
           
       </button>
-      <button className={styles.button}>
+      {/*<button className={styles.button}>
         <Icon name="message" size="20" />
-      </button>
+      </button>*/}
       <Actions
         className={styles.actions}
         classActionsHead={styles.actionsHead}
-        classActionsBody={styles.actionsBody}
+     
         classActionsOption={styles.actionsOption}
         items={actions}
         visible={visibleActions}

@@ -149,30 +149,9 @@ function NextStepConsulta(id_consulta) {
           {activeIndex === 0 && (
             <Table items={produto1} colluns={colluns} title="Last edited" setIdConsultaToNestStep={setIdConsultaToNestStep} setVisibleModal={setVisibleModal}/>
             )}
-          {activeIndex === 2 && (
-            <>
-              <div className={styles.list}>
-                {produto1.map((x, index) => (
-                  <Product
-                    className={styles.product}
-                    value={selectedFilters.includes(x.id)}
-                    onChange={() => handleChange(x.id)}
-                    item={x}
-                    key={index}
-                    released
-                  />
-                ))}
-              </div>
-              <div className={styles.foot}>
-                <button
-                  className={cn("button-stroke button-small", styles.button)}
-                >
-                  <Loader className={styles.loader} />
-                  <span>Load more</span>
-                </button>
-              </div>
-            </>
-          )}
+            {activeIndex === 1 && (
+            <Table items={produto1} colluns={colluns} title="Last edited" setIdConsultaToNestStep={setIdConsultaToNestStep} setVisibleModal={setVisibleModal}/>
+            )}
         </div>
       </Card>
 

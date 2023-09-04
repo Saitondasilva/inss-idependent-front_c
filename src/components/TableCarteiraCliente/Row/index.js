@@ -91,9 +91,13 @@ const Row = ({ item, value, onChange ,setActiveIndex, setIdConsultaToNestStep, s
           <div className={styles.link}>{item.tel}</div>
         </div>
         <div className={styles.col}>
-        <Link className={styles.control}         
-            to="/products/add" >
-           <Icon name="edit" size="20" />  
+        {/*<Link className={styles.control}         
+            to="/products/add/" >
+           <Icon name="edit" size="20" /> 
+      </Link> */}
+          <Link className={styles.control}         
+            to={`${"/products/editar/"+item.id}`}>
+           <Icon name="edit" size="20" /> 
           </Link> 
         </div>                   
      
@@ -106,15 +110,15 @@ const Row = ({ item, value, onChange ,setActiveIndex, setIdConsultaToNestStep, s
             setStartTime={setStartTime}
             setVisibleModal={setVisibleModal}
             ModalProduct = {ModalProduct}            
-            
           />
       </div> 
+      
       </div>
       <ModalProduct
         visible={visibleModalProduct}
         onClose={() => setVisibleModalProduct(false)}
       />
-      <Modal
+      {/*<Modal
         visible={visibleModalSchedule}
         onClose={() => setVisibleModalSchedule(false)}
       >
@@ -124,7 +128,7 @@ const Row = ({ item, value, onChange ,setActiveIndex, setIdConsultaToNestStep, s
           startTime={startTime}
           setStartTime={setStartTime}
         />
-      </Modal>
+    </Modal>*/}
      
            
           

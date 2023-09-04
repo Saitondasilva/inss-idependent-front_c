@@ -9,7 +9,6 @@ import TextInput from "../../../../../components/TextInput";
 import Dropdown from "../../../../../components/Dropdown";
 import axios from "axios";
 
-
 // const optionsGenero      = ["Masculino", "Feminino", "Outro"];
 // const optionsEstadocivil = ["Solteiro", "Casado", "Divorciado", "Viuvo"];
 const optionsLinguagem      = ["Português", "Inglês", "Françes", "Espanhol"];
@@ -18,7 +17,49 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
- 
+  
+  const [optionsDistrito, setOptionsDistrito] = useState([]);
+  const [distrito, setDistrito] = useState(optionsDistrito[0]);
+  const [distritoID, setDistritoID] = useState([]);
+  //data1.descricao=content;
+
+  function onChangeData(e) {
+    console.log(e)
+    setData1((data1) => ({
+      ...data1,
+      [e.target.name]: e.target.value,
+    }));
+  }
+
+  function getDistrito(){
+    return axios
+    .get("/getDistrit")
+    .then((response) => {
+       var a = new Array();
+       var b = new Array();
+      for(var i=0; i<response.data.data.length; i++){
+        a.push(response.data.data[i].nome)
+        b.push(response.data.data[i].id)
+
+      }
+      setOptionsDistrito(a);
+      setDistritoID(b)
+      setDistrito([optionsDistrito[0]])
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
+  }
+
+  useEffect(() => {
+    getDistrito()
+  },[]);
+
+  useEffect(() => {
+    var position        =   optionsDistrito.indexOf(distrito);
+    data1.distrito_id   =  distritoID[position];
+  }, [distrito]);
 
   return (
     <Card    
@@ -40,7 +81,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           type="text"
           required
-         
+          onChange={onChangeData}
+          value={data1.morada}
         /> 
        </span>
       
@@ -51,7 +93,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           name="N_porta"
           type="text"
           required
-         
+          onChange={onChangeData}
+          value={data1.N_porta}
         />
         <TextInput
           className={styles.field}
@@ -59,9 +102,21 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           name="ponto_referencia"
           type="text"
           required
-          
-        />     
-    
+          onChange={onChangeData}
+          value={data1.ponto_referencia}
+        />
+      
+        <span className={styles.field}>
+        <Dropdown
+          className={styles.field1}
+          label="Distrito"          
+          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          setValue={setDistrito}
+          options={optionsDistrito}
+          onChange={data1.distrito=distrito}
+          value={distrito}
+        /> 
+        </span>
       
       
        {/*
