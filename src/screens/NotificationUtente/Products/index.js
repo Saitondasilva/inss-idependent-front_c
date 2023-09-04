@@ -12,6 +12,7 @@ import axios from "axios";
 import { traffic } from "../../../mocks/traffic";
 import { viewers } from "../../../mocks/viewers";
 import { market } from "../../../mocks/market";
+import TextInput from "../../../components/TextInput";
 
 const indicatorsTraffic = [
   {
@@ -51,13 +52,22 @@ const Products = () => {
   const navigation = ["Market"];
 
   const [activeTab, setActiveTab] = useState(navigation[0]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState([]);
   const [userData, setuserData] = useState({});
   const [market, setProduto1] = useState([]);
+  const [nif, setNome] = useState([]);
 
   const handleSubmit = (e) => {
-    alert();
+    GetPesquisa()
   };
+
+  function onChangeSearch(e) {
+    console.log(e)
+    setSearch((search) => ({
+      ...search,
+      [e.target.name]: e.target.value,
+    }));
+  }
 
   useEffect(() => {
     var user = localStorage.getItem("userData");
@@ -74,11 +84,26 @@ function GetAllCliente() {
       .then((response) => {
        console.log(response.data.data)
        setProduto1(response.data.data.Utente);
+      
       })
       .catch((err) => {
         console.log("Error", err);
         return err.response;
       });
+};
+
+function GetPesquisa() {
+  return axios
+    .get("/utente/getUtenteByNIF/"+search.nome)
+    .then((response) => {
+     console.log(response.data.data)
+     setProduto1(response.data.data.Utente);
+    
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
 };
 
   return (
@@ -89,16 +114,16 @@ function GetAllCliente() {
       classCardHead={styles.head}
       head={
         <>
-          <Form
-            className={styles.form}
-            value={search}
-            setValue={setSearch}
-            onSubmit={() => handleSubmit()}
-            placeholder="Pesquisa Beneficiário"
-            type="text"
-            name="search"
-            icon="search"
-          />
+         <TextInput
+          className={styles.field}
+          name="nome"
+          type="text"
+          icon="search"
+          required
+          onKeyUp={GetPesquisa}
+          onChange={onChangeSearch}
+          value={search.nome}
+        />
           <div className={styles.control}>
             <button className={cn("button-stroke button-small", styles.button)}>
               Deleted
@@ -135,7 +160,7 @@ function GetAllCliente() {
     >
       <div className={styles.products}>
         <div className={styles.wrapper}>
-          {activeTab === navigation[0] && <Market items={market} />}
+          {activeTab === navigation[0] && <Market items={market}  />}
           {/*activeTab === navigation[1] && (
             <Table
               title="Traffic source"

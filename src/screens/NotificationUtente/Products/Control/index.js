@@ -29,19 +29,19 @@ const actions = [
   },
 ];
 
-const Control = ({item, className, visibleActions, setVisibleActions, up }) => {
+const Control = ({item, className, visibleActions, setVisibleActions, up, id}) => {
   return (
     <div className={cn(styles.control, className)}>
       <button className={styles.button}> 
         
-      <Link className={styles.control}         
-            to={"/products/editar/"}>
-           <Icon name="edit" size="20" /> 
-          </Link>       
+      <Link          
+           to={"/cliente/add"}>
+           <Icon name="edit" size="20" />  
+          </Link>        
           
       </button>
       {<button className={styles.button}>
-        <Icon name="message" size="20" />
+        <Icon name="heart" size="20" />
       </button>}
       <Actions
         className={styles.actions}

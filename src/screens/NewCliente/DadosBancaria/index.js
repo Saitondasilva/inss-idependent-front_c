@@ -84,6 +84,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           label="NIB"
           name="nib_conta"
           type="text"
+          mask="9999999999999999"
           required
           onChange={onChangeData}
           value={data1.nib_conta}
@@ -93,7 +94,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           className={styles.field}
           label="Nº Conta"
           name="n_conta"
-          type="text"
+          type="number"
           required
           onChange={onChangeData}
           value={data1.n_conta}

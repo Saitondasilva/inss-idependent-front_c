@@ -176,7 +176,7 @@ function SaveProfissionalCliente() {
       setSmsSuccess("Registro com sucesso!");
       setSmsError("");
       setLoader(false)
-      clean();
+      ///clean();
       console.log(response.data.data)
     })
     .catch((err) => {
@@ -187,13 +187,10 @@ function SaveProfissionalCliente() {
       return err.response;
     });
 };
-
-
-
             function clean(){
             data1.nome="";
             data1.nif="";
-            data1.emailo="";
+            data1.email="";
             data1.caixa_postal="";
             data1.documento_id="";
             data1.numero_documento="";

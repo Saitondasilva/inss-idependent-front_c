@@ -84,7 +84,7 @@ function SaveFile() {
       headers: { Authorization: `Bearer ${userData.token}`,'Content-Type': 'multipart/form-data' },
     })
     .then((response) => {
-      setSmsSuccess("Registro com sucesso!");
+      setSmsSuccess("Anexo Salvo!");
       setSmsError("");
       setLoader(false)
       console.log(response.data.data)
@@ -153,13 +153,13 @@ useEffect(() => {
           value={data1.descricao}
           />
         */}
-        {<Panel
+        <Panel
         
         SavePagarContribuicao={SaveFile}
         smsError={smsError}
         smsSucess={smsSucess}
         loader={loader}
-        />}
+        />
       </div>
     </Card>
     

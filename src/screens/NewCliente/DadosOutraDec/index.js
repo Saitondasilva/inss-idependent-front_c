@@ -98,7 +98,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           className={styles.field}
           label="Antigo NISS"
           name="codigo_antigo"
-          type="text"
+          type="number"
           required
           onChange={onChangeData}
           value={data1.codigo_antigo}

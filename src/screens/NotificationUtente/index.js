@@ -8,11 +8,11 @@ import TooltipGlodal from "../../components/TooltipGlodal";
 //import ProductViews from "./ProductViews";
 import Products from "./Products";
 
-const ProductsDashboard = () => {
+const ProductsDashboard = ({data1, setData1}) => {
   return (
     <>
       <div className={styles.section}>      
-        <Products />
+        <Products data1={data1} setData1={setData1} />
       </div>
       <TooltipGlodal />
     </>

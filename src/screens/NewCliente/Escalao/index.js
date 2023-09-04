@@ -23,6 +23,8 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
   const [optionsEsquema, setOptionsEsquema] = useState([]);
   const [esquema, setEsquema] = useState(optionsEsquema[0]);
   const [esquemaID, setEsquemaID] = useState([]);
+  const [optionsPeriodo, setOptionsPeriodo] = useState(['Mensal', 'Trimestral', 'Simenstral']);
+  const [periodo, setPeriodo] = useState(optionsPeriodo[0]);
  
   data1.descricao=content;
 
@@ -145,10 +147,10 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
           className={styles.field1}
           label="Periodo contribuitivo"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setEsquema}
-          options={optionsEsquema}
-          onChange={data1.esquema=esquema}
-          value={esquema}
+          setValue={setPeriodo}
+          options={optionsPeriodo}
+          onChange={data1.periodo=periodo}
+          value={periodo}
         /> 
         </span>
  

@@ -9,7 +9,7 @@ import Control from "../../Control";
 
 import { numberWithCommas } from "../../../../../utils.js";
 
-const Row = ({ item, value, onChange, up }) => {
+const Row = ({ item, value, onChange, up, id}) => {
   const [visibleActions, setVisibleActions] = useState(false);
   const [visibleModalProduct, setVisibleModalProduct] = useState(false);
 
@@ -80,12 +80,12 @@ const Row = ({ item, value, onChange, up }) => {
           ) : (
             <div className={cn("status-red", styles.status)}>Deactive</div>
           )}
-          <Control 
+          {<Control 
             className={styles.control}
             visibleActions={visibleActions}
             setVisibleActions={setVisibleActions}
             up={up}
-          />
+          />}
           </div>
       
       </div>
