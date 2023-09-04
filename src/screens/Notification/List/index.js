@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import cn from "classnames";
-import styles from "./List.module.sass";
+import styles from "./Market.module.sass";
 import Card from "../../../components/Card";
 import Dropdown from "../../../components/Dropdown";
 import Actions from "../../../components/Actions";
 import Loader from "../../../components/Loader";
 import Item from "./Item";
 import axios from "axios";
+import Icon from "../../../components/Icon";
 
 // data
 
@@ -29,24 +30,33 @@ const List = ({ className }) => {
   const [sorting, setSorting] = useState(intervals[0]);
   const [notifications, setNotifications] = useState([]);
   const [userData, setuserData] = useState({});
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   useEffect(() => {
     var user = localStorage.getItem("userData");
     user==null?setuserData([]):setuserData(JSON.parse(user));
-    getNotification(JSON.parse(user));
+     // Chama getNotification quando o componente é montado
+     getNotification(JSON.parse(user), currentPage).then((paginationInfo) => {
+      setTotalPages(Math.ceil(paginationInfo.total / paginationInfo.per_page));
+    });
   },[]);
   useEffect(() => {
     
     handleChangeDropdown()
   },[sorting]);
-  function getNotification(user){
+  function getNotification(user,page = 1){
+    const page_size = 2; // Número de itens por página
     const result= axios
-      .get("/utente/getallnotification",{
+      .get(`/utente/getallnotification?page=${page}&page_size=${page_size}`,{
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
-        setNotifications(response.data);
-        return response;
+        const { data, total, per_page, current_page } = response.data;
+  
+        setNotifications(data); // Define os dados da notificação
+  
+        return { total, per_page, current_page };
       })
       .catch((err) => {
         console.log("Error", err);
@@ -79,6 +89,19 @@ const List = ({ className }) => {
     }
     
   }
+  const handlePageChange = (newPage) => {
+    
+    var user = localStorage.getItem("userData");
+    user==null?setuserData([]):setuserData(JSON.parse(user));
+    console.log("USER",user)
+    console.log("TOTALPAGES",totalPages)
+    console.log("NEWPAGES",newPage)
+    if (newPage >= 1 && newPage <= totalPages) {
+      getNotification(JSON.parse(user), newPage).then(() => {
+        setCurrentPage(newPage);
+      });
+    }
+  };
 
   return (
     <Card
@@ -111,13 +134,19 @@ const List = ({ className }) => {
             <Item className={cn(styles.item, className)} item={x} key={index} />
           ))}
         </div>
-        <div className={styles.foot}>
-          <button className={cn("button-stroke button-small", styles.button)}>
-            <Loader className={styles.loader} />
-            <span>Load more</span>
-          </button>
-        </div>
-          </div>
+       
+      <div className={styles.foot}>
+        <button className={styles.arrow} onClick={() => handlePageChange(currentPage - 1)}>
+          <Icon name="arrow-left" size="20" />
+        </button>
+        {currentPage}
+        <button className={styles.arrow} onClick={() => handlePageChange(currentPage + 1)}>
+          <Icon name="arrow-right" size="20"  />
+        </button>
+      </div>
+      </div>
+
+      
     </Card>
   );
 };
