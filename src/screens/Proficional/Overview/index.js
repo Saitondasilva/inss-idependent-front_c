@@ -36,15 +36,15 @@ const Overview = ({ className }) => {
         classTitle="title-blue"
       >
         <div className={styles.overview}>
-          <div className={styles.list}>
-            {items.map((x, index) => (
+          {<div className={styles.list}>
+            {/*items.map((x, index) => (
               <div className={styles.item} key={index}>
                 <div
                   className={styles.icon}
                   style={{ backgroundColor: x.color }}
                 >
                   <Icon name={x.icon} size="24" />
-                </div>
+            </div>
                 <div className={styles.details}>
                   <div className={styles.label}>
                     {x.title}
@@ -55,11 +55,11 @@ const Overview = ({ className }) => {
                       place="top"
                     />
                   </div>
-                  <div className={styles.counter}>{x.counter}</div>
+                 { /*<div className={styles.counter}>{x.counter}</div>
                 </div>
               </div>
-            ))}
-          </div>
+            ))*/}
+            </div>}
           <button
             className={cn("button", styles.button)}
             onClick={() => setVisibleModal(true)}

@@ -95,7 +95,7 @@ var navigation=[];
     ],
   },
   {
-    title: "Stafs",
+    title: "Utilizador",
     url: "/user/admin",
     icon: "lightning",
     colorCounter: "#B5E4CA",

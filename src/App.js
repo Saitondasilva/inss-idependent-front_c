@@ -236,7 +236,7 @@ function App() {
           <Route
             path="/user/admin"
             element={
-              <Page title="Utilisadores">
+              <Page title="Utilizadores">
                 <Admin />
               </Page>
             }
