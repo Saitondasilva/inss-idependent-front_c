@@ -33,31 +33,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
-  function onChangeFile(e){
-    let file = e.target.files
-   /* data1.photo=this.state.image
-    this.setState({
-      photo: e.target.files[0]
-  })
-    console.log("FILE", this.state.image)*/
-  }
- 
-  
 
-  function buscarCep() {/*
-     
-    fetch(`http://viacep.com.br/ws/${data1.cep}/json/`, {mode: 'cors'})
-     .then((res) => res.json())
-     .then((data) => {
-           data1.cep=data.cep 
-           data1.cidade=data.localidade
-           data1.estado=data.logradouro
-           setData1(data1)
-        
-     })
-     .catch(err =>{alert("Cep não existente");data1.cep="";});
-
-    */}
   return (
     <Card
       className={cn(styles.card, className)}
@@ -96,7 +72,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
          { antigoNISS=="Sim"&&(
          <TextInput
           className={styles.field}
-          label="Antigo NISS"
+          label="Antigo NISS *"
           name="codigo_antigo"
           type="number"
           required

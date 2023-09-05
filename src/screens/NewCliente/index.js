@@ -38,89 +38,102 @@ const NewProduct = () => {
   },[]);
 
 function validateForm(){
-
   //Validação de Dados do Utente 
-  if(!data1.nome || data1.nome===""){
-    setSmsError("Por favor preencha o nome")
+  if(!data1.documento_id || data1.documento_id===""){
+    setSmsError("Por favor preencha o Tipo do Documento")
     return false;
   }
   if(!data1.numero_documento || data1.numero_documento===""){
     setSmsError("Por favor preencha o nº Documento")
     return false;
   }
-
-  if(!data1.email || data1.email===""){
-    setSmsError("Por favor preencha o email")
+  if(!data1.nome || data1.nome===""){
+    setSmsError("Por favor preencha o nome")
+    return false;
+  }
+  if(!data1.data_nasc || data1.data_nasc===""){
+    setSmsError("Por favor preencha o estado de residencia")
     return false;
   }
   if(!data1.nome_pai || data1.nome_pai===""){
-    setSmsError("Por favor preencha o nome_pai")
+    setSmsError("Por favor preencha o nome do pai")
     return false;
   }
   if(!data1.nome_mae || data1.nome_mae===""){
-    setSmsError("Por favor preencha o nome_mae")
+    setSmsError("Por favor preencha o nome da mãe")
     return false;
   }
   if(!data1.nif || data1.nif===""){
     setSmsError("Por favor preencha o nif")
     return false;
   }
+  if(!data1.sexo_id || data1.sexo_id===""){
+    setSmsError("Por favor preencha o genero")
+    return false;
+  }
+  if(!data1.estadocivil_id || data1.estadocivil_id===""){
+    setSmsError("Por favor preencha o Estado Civil")
+    return false;
+  }
+  if(!data1.pais_id || data1.pais_id===""){
+    setSmsError("Por favor preencha a Nacionalidade")
+    return false;
+  }
+  if(!data1.banco_id || data1.banco_id===""){
+    setSmsError("Por favor preencha o banco")
+    return false;
+  }
+  if(!data1.nib_conta || data1.nib_conta===""){
+    setSmsError("Por favor preencha o NIB")
+    return false;
+  }
+  if(!data1.n_conta || data1.n_conta===""){
+    setSmsError("Por favor preencha o número da conta")
+    return false;
+  }
+  if(!data1.morada || data1.morada===""){
+    setSmsError("Por favor preencha o Localidade")
+    return false;
+  }
+  if(!data1.ponto_referencia || data1.ponto_referencia===-1){
+    setSmsError("Por favor preencha o Ponto de Referencia")
+    return false;
+  }
+  if(!data1.distrito_id || data1.distrito_id===-1){
+    setSmsError("Por favor preencha o Distrito")
+    return false;
+  }
+  if(!data1.tel || data1.tel===""){
+    setSmsError("Por favor preencha o Telemovel")
+    return false;
+  }
+  if(!data1.email || data1.email===""){
+    setSmsError("Por favor preencha o email")
+    return false;
+  }
+  if(!data1.esquema_id || data1.esquema_id===""){
+    setSmsError("Por favor preencha o Esquema")
+    return false;
+  }
+  if(!data1.escalao_id || data1.escalao_id===""){
+    setSmsError("Por favor preencha o Escalão")
+    return false;
+  }
   if(!data1.profisao || data1.profisao===""){
     setSmsError("Por favor preencha o profissao")
     return false;
   }
-  
- {/* if(!data1.estado_civil || data1.estado_civil===""){
-    setSmsError("Por favor preencha o estado_civil")
+  if(!data1.data_inicio_activ || data1.data_inicio_activ===""){
+    setSmsError("Por favor preencha a Data de Inicio da Actividade")
     return false;
+  }
+  if(data1.antigoNISS==="Sim"){
+    if(!data1.codigo_antigo || data1.codigo_antigo===""){
+      setSmsError("Por favor preencha Código Antigo (NISS)")
+      return false;
+    }
   }
   
-  if(!data1.data_nasc || data1.data_nasc===""){
-    setSmsError("Por favor preencha o estado de residencia")
-    return false;
-  }
-  if(!data1.pais || data1.pais===""){
-    setSmsError("Por favor preencha o país")
-    return false;
-  }
-  if(!data1.cidade || data1.cidade===""){
-    setSmsError("Por favor preencha a cidade")
-    return false;
-  }
-  if(!data1.estadocivil || data1.estadocivil===""){
-    setSmsError("Por favor preencha o estado civil")
-    return false;
-  }
-{/*Validação dos Dados de Endereço */}
-  {/*if(!data1.morada || data1.morada===""){
-    setSmsError("Por favor preencha o morada")
-    return false;
-  }
-
-  if(!data1.ponto_referencia || data1.ponto_referencia===-1){
-    setSmsError("Por favor preencha o ponto_referencia")
-    return false;
-  }
-  {/*Validação de Dados de Telemovel*/}
-  {/*if(!data1.tel || data1.tel===""){
-    setSmsError("Por favor preencha o contacto")
-    return false;
-  }
-  
-
-  {/*Validação de Dados do Utente */}
-  {/*if(!data1.cep || data1.cep===""){
-    setSmsError("Por favor preencha o cep")
-    return false;
-  }
-  if(!data1.cpf || data1.cpf===""){
-    setSmsError("Por favor preencha o cpf")
-    return false;
-  }
-  if(!data1.cpf || data1.cpf===-1){
-    setSmsError("Por favor preencha a etapa do progresso")
-    return false;
-  }*/}
 
   return true;
   
@@ -128,7 +141,7 @@ function validateForm(){
 
 function SaveProfissionalCliente() {
   setLoader(true)
-  console.log("DATA SEND ", data1.escalao_id);
+ 
   if(!validateForm()){setLoader(false); return false;}
   var data={
     nome: data1.nome,
@@ -138,7 +151,8 @@ function SaveProfissionalCliente() {
     id_tipo_documento: data1.documento_id,
     numero_documento: data1.numero_documento,
     numero_porta: data1.N_porta,        
-    tel: data1.tel,
+    tel: data1.contacto1,
+    tel2: data1.contacto2,
     morada: data1.morada,
     ponto_referencia: data1.ponto_referencia,
     data_nasc: data1.data_nasc,
@@ -147,7 +161,7 @@ function SaveProfissionalCliente() {
     id_distrito: data1.distrito_id,
     id_banco: data1.banco_id,
     id_estado_civil: data1.estadocivil_id,
-	  id_proficao: 1,
+	  proficao: data1.profisao,
     id_nacionalidade: data1.pais_id,
 	  data_inicio_actividade: data1.data_inicio_activ,
     n_conta: data1.n_conta,
@@ -176,7 +190,7 @@ function SaveProfissionalCliente() {
       setSmsSuccess("Registro com sucesso!");
       setSmsError("");
       setLoader(false)
-      ///clean();
+      clean();
       console.log(response.data.data)
     })
     .catch((err) => {
@@ -213,22 +227,6 @@ function SaveProfissionalCliente() {
             data1.esquema_id="";
             }
 
-
- {/*  function CodigoIss() {
-                const prefixo = '105';
-                const [contador, setContador] = useState(1);
-              
-                // Função para gerar o próximo código autoincrementado
-                const gerarProximoCodigo = () => {
-                  const codigo = `${prefixo}${contador.toString().padStart(6, '0')}`;
-                  setContador(contador + 1);
-                  return codigo;
-                };
-              
-                const codigo = gerarProximoCodigo();
-  } */}     
-
-
             
   return (
     <>
@@ -238,9 +236,7 @@ function SaveProfissionalCliente() {
           {
           
           <DadosConta className={styles.card} data1={data1} setData1={setData1}/>
-          /*
-          <DadosPagamento className={styles.card} data1={data1} setData1={setData1} user={user}/>
-          */
+         
           }
           {
             <DadosEndereco className={styles.card} data1={data1} setData1={setData1}/>

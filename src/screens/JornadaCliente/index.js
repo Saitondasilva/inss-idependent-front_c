@@ -49,6 +49,8 @@ const Drafts = () => {
   const [sorting, setSorting] = useState(intervals[0]);
   const [ano, setAno] = useState(anos[0]);
   const [mes, setMes] = useState(meses[0]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const handleSubmit = (e) => {
     alert();
@@ -65,7 +67,11 @@ const Drafts = () => {
   };
 
 useEffect(() => {
-  getContribuicao()
+       // Chama getNotification quando o componente é montado
+       getContribuicao(currentPage).then((paginationInfo) => {
+        console.log("PAGINATIONINFO",paginationInfo)
+        setTotalPages(Math.ceil(paginationInfo.total / paginationInfo.per_page));
+      });
 },[]);
 
 function getNextSessao(){
@@ -78,20 +84,29 @@ function getNextSessao(){
     }
   });
 }
-function getContribuicao() {
-  
+function getContribuicao(page=1) {
+  const page_size = 10; // Número de itens por página
     return axios
-      .get("/utente/getAllContribuicao" ,{
+      .get(`/utente/getAllContribuicao?page=${page}&page_size=${page_size}` ,{
         headers: { Authorization: `Bearer ${userData.token}` },
       })
       .then((response) => {
        console.log("PRODUTO1===",response.data.data.contribuicao)
-       setProduto1(response.data.data.contribuicao);
+       const { contribuicao, total, per_page, current_page } = response.data.data;
+       setProduto1(contribuicao);
+       return { total, per_page, current_page };
       })
       .catch((err) => {
         console.log("Error", err);
         return err.response;
       });
+};
+const handlePageChange = (newPage) => {
+  if (newPage >= 1 && newPage <= totalPages) {
+    getContribuicao(newPage).then(() => {
+      setCurrentPage(newPage);
+    });
+  }
 };
 function SaveAnotacaoSessao(sessao) {
   console.log("Sessao",sessao)
@@ -185,7 +200,7 @@ function dellFile(){
               icon="search"
               onChange={shearchCliente}
             />
-
+{/*
             Mês:
             <span >
             <Dropdown
@@ -206,13 +221,22 @@ function dellFile(){
             options={anos}
             />
             </span>
+        */}
           </>
         }
       >
         <div className={styles.wrapper}>
           <TableJornadaCliente items={produto1} colluns={colluns} setActiveIndex={setActiveIndex} title="Last edited" />
         
-          
+          <div className={styles.foot}>
+            <button className={styles.arrow} onClick={() => handlePageChange(currentPage - 1)}>
+              <Icon name="arrow-left" size="20" />
+            </button>
+            {currentPage} / {totalPages}
+            <button className={styles.arrow} onClick={() => handlePageChange(currentPage + 1)}>
+              <Icon name="arrow-right" size="20"  />
+            </button>
+         </div>
 
 
         </div>

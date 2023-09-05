@@ -48,7 +48,6 @@ const Shop = () => {
       return result;
   };
   function marcar_consulta(){
-    //alert("id_agenda"+id_agenda+ " id_profissional "+id_profissional)
     setLoader(true)
     var data={
       "id_schedule": idAgenda,

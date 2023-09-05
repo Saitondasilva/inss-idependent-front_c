@@ -55,15 +55,25 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         <span className={styles.field}>
         <TextInput
           className={styles.field1}
-          label="Telemóvel"
-          name="tel"  
+          label="Telemóvel *"
+          name="contacto1"  
           mask="9 99 99 99"        
-          type="tel"
+          type="text"
           required
           onChange={onChangeData}
-          value={data1.nconta}
+          value={data1.contacto1}
         /> 
+        
        </span>
+       <TextInput
+          className={styles.field}
+          label="Contancto Alternativo"
+          name="contacto2"  
+          type="text" 
+          required
+          onChange={onChangeData}
+          value={data1.contacto2}
+        /> 
        <TextInput
           className={styles.field}
           label="Caixa Postal"
@@ -71,12 +81,12 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           type="text"
           required
           onChange={onChangeData}
-          value={data1.nconta}
+          value={data1.caixa_postal}
         />
       
       <TextInput
           className={styles.field}
-          label="Email"
+          label="Email *"
           name="email"
           type="email"
           required
@@ -84,40 +94,13 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           value={data1.email}
           currency="@"
         />
-      
-       {/*
-       <TextInput
-          className={styles.field}
-          label="Foto"
-          name="photo"
-          type="file"
-          tooltip="Foto"
-          required
-          onChange={onChangeFile}
-          //value={data1.photo}
-        />
-        */}
-       
+     
       </div>
       
    
           
       </div>
       
-      
-        {
-          /*
-       <Editor
-          state={content}
-          onChange={setContent}
-          classEditor={styles.editor}
-          label="Sobre"
-          tooltip="Descrição"
-          name="descricao"
-          value={data1.descricao}
-          />
-        */}
-       
       
     </Card>
   );

@@ -46,7 +46,7 @@ const List = ({ className }) => {
     handleChangeDropdown()
   },[sorting]);
   function getNotification(user,page = 1){
-    const page_size = 2; // Número de itens por página
+    const page_size = 10; // Número de itens por página
     const result= axios
       .get(`/utente/getallnotification?page=${page}&page_size=${page_size}`,{
         headers: { Authorization: `Bearer ${user.token}` },
@@ -64,14 +64,18 @@ const List = ({ className }) => {
       });
       return result;
   };
-  function getNaoLidas(user){
+  function getNaoLidas(user,page = 1){
+    const page_size = 10; // Número de itens por página
     const result= axios
-      .get("/utente/getnotreadnotification",{
+      .get(`/utente/getnotreadnotification?page=${page}&page_size=${page_size}`,{
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
-        setNotifications(response.data);
-        return response;
+        const { data, total, per_page, current_page } = response.data;
+  
+        setNotifications(data); // Define os dados da notificação
+  
+        return { total, per_page, current_page };
       })
       .catch((err) => {
         console.log("Error", err);
@@ -106,7 +110,7 @@ const List = ({ className }) => {
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Recentes"
+      title={sorting}
       classTitle={cn("title-red", styles.title)}
       classCardHead={styles.head}
       head={
@@ -139,7 +143,7 @@ const List = ({ className }) => {
         <button className={styles.arrow} onClick={() => handlePageChange(currentPage - 1)}>
           <Icon name="arrow-left" size="20" />
         </button>
-        {currentPage}
+        {currentPage} / {totalPages}
         <button className={styles.arrow} onClick={() => handlePageChange(currentPage + 1)}>
           <Icon name="arrow-right" size="20"  />
         </button>

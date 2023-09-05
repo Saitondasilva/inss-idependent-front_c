@@ -73,18 +73,6 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       <hr></hr> 
        
       <div className={styles.group}>  
-        
-        
-        {/*<TextInput
-          className={styles.field}
-          label="Profissão"
-          name="profisao"
-          type="text"
-          setValue={setSearch}
-          onSubmit={() => handleSubmit()}
-          value={data1.profissao}
-          icon="search"                   
-  />   */}   
 
         <TextInput
           className={styles.field}
@@ -98,30 +86,17 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
 
        <TextInput
           className={styles.field}
-          label="Data Inicio Actividade*"
+          label="Data Inicio Actividade *"
           name="data_inicio_activ"
           type="date"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          icon="date"
+          tooltip="Data em que começou a sua actividade"
           required
           onChange={onChangeData}
           value={data1.data_inicio_activ}
         />
       
       
-      
-       {/*
-       <TextInput
-          className={styles.field}
-          label="Foto"
-          name="photo"
-          type="file"
-          tooltip="Foto"
-          required
-          onChange={onChangeFile}
-          //value={data1.photo}
-        />
-        */}
-       
       </div>
       
    
