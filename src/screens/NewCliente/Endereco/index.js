@@ -76,7 +76,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         <span className={styles.field}>
         <TextInput
           className={styles.field1}
-          label="Lcalidade"
+          label="Lcalidade *"
           name="morada"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           type="text"
@@ -98,7 +98,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         />
         <TextInput
           className={styles.field}
-          label="Ponto de referencia"
+          label="Ponto de referencia *"
           name="ponto_referencia"
           type="text"
           required
@@ -109,7 +109,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         <span className={styles.field}>
         <Dropdown
           className={styles.field1}
-          label="Distrito"          
+          label="Distrito *"          
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           setValue={setDistrito}
           options={optionsDistrito}

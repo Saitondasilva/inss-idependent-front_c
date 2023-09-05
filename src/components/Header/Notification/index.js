@@ -42,7 +42,7 @@ const Notification = ({ className }) => {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
-        setNotifications(response.data);
+        setNotifications(response.data.data);
         return response;
       })
       .catch((err) => {
@@ -115,7 +115,7 @@ const Notification = ({ className }) => {
             
           </div>
           <div className={styles.list}>
-            {notifications.map((x, index) => (
+            {notifications.slice(0, 5).map((x, index) => (
               
                 <Item
                 className={cn(styles.item, className)}

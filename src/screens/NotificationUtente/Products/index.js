@@ -13,6 +13,7 @@ import { traffic } from "../../../mocks/traffic";
 import { viewers } from "../../../mocks/viewers";
 import { market } from "../../../mocks/market";
 import TextInput from "../../../components/TextInput";
+import Icon from "../../../components/Icon";
 
 const indicatorsTraffic = [
   {
@@ -56,6 +57,8 @@ const Products = () => {
   const [userData, setuserData] = useState({});
   const [market, setProduto1] = useState([]);
   const [nif, setNome] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const handleSubmit = (e) => {
     GetPesquisa()
@@ -73,25 +76,35 @@ const Products = () => {
     var user = localStorage.getItem("userData");
     user==null?setuserData([]):setuserData(JSON.parse(user));
     GetAllCliente(JSON.parse(user));
+
+     // Chama getNotification quando o componente é montado
+     GetAllCliente(currentPage,JSON.parse(user)).then((paginationInfo) => {
+      setTotalPages(Math.ceil(paginationInfo.total / paginationInfo.per_page));
+    });
    
 },[]);
 
-
-
-function GetAllCliente() {
+function GetAllCliente(page=1) {
+  const page_size = 1; // Número de itens por página
     return axios
-      .get("/utente/getAllUtente")
+      .get(`/utente/getAllUtente?page=${page}&page_size=${page_size}`)
       .then((response) => {
-       console.log(response.data.data)
-       setProduto1(response.data.data.Utente);
-      
+        const { Utente, total, per_page, current_page } = response.data.data;
+        setProduto1(Utente);
+        return { total, per_page, current_page };
       })
       .catch((err) => {
         console.log("Error", err);
         return err.response;
       });
 };
-
+const handlePageChange = (newPage) => {
+  if (newPage >= 1 && newPage <= totalPages) {
+    GetAllCliente(newPage).then(() => {
+      setCurrentPage(newPage);
+    });
+  }
+};
 function GetPesquisa() {
   return axios
     .get("/utente/getUtenteByNIF/"+search.nome)
@@ -160,6 +173,7 @@ function GetPesquisa() {
     >
       <div className={styles.products}>
         <div className={styles.wrapper}>
+        
           {activeTab === navigation[0] && <Market items={market}  />}
           {/*activeTab === navigation[1] && (
             <Table
@@ -171,6 +185,15 @@ function GetPesquisa() {
           {/*activeTab === navigation[2] && (
             <Table title="Viewers" items={viewers} legend={indicatorsViewers} />
           )*/}
+          <div className={styles.foot}>
+            <button className={styles.arrow} onClick={() => handlePageChange(currentPage - 1)}>
+              <Icon name="arrow-left" size="20" />
+            </button>
+            {currentPage} / {totalPages}
+            <button className={styles.arrow} onClick={() => handlePageChange(currentPage + 1)}>
+              <Icon name="arrow-right" size="20"  />
+            </button>
+          </div>
         </div>
       </div>
     </Card>

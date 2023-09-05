@@ -197,8 +197,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       <span className={styles.field}>
        <Dropdown
           className={styles.field1}
-          label="Tipo Documento"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          label="Tipo Documento *"
           setValue={setDocumento}
           options={optionsDocumento}
           onChange={data1.documento=documento}
@@ -206,7 +205,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         /> </span>
         <TextInput
           className={styles.field}
-          label="Nº Documento"
+          label="Nº Documento *"
           name="numero_documento"
           type="text"
           required
@@ -236,7 +235,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         />
         <TextInput
           className={styles.field}
-          label="Nome pai"
+          label="Nome pai *"
           name="nome_pai"
           type="text"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
@@ -247,7 +246,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
 
         <TextInput
           className={styles.field}
-          label="Nome Mãe"
+          label="Nome Mãe *"
           name="nome_mae"
           type="text"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
@@ -259,7 +258,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       
         <TextInput
           className={styles.field}
-          label="NIF"
+          label="NIF *"
           name="nif"
           type="text"
           mask="999999999"
@@ -271,7 +270,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
        <span className={styles.field}>
        <Dropdown
           className={styles.field1}
-          label="Gênero"  
+          label="Gênero *"  
           name="genero"        
           setValue={setGenero}
           options={optionsGenero}
@@ -282,7 +281,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
        <span className={styles.field}>
        <Dropdown
           className={styles.field1}
-          label="Estado civil"
+          label="Estado civil *"
           name="estado_civil"
           setValue={setEstadocivil}
           options={optionsEstadocivil}
@@ -290,22 +289,11 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           value={estadocivil}
         /> 
        </span>
-       {/*
-       <TextInput
-          className={styles.field}
-          label="Foto"
-          name="photo"
-          type="file"
-          tooltip="Foto"
-          required
-          onChange={onChangeFile}
-          //value={data1.photo}
-        />
-        */}
+      
           <span className={styles.field}>
        <Dropdown
           className={styles.field1}
-          label="Nacionalidade"
+          label="Nacionalidade *"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           setValue={setPais}
           options={optionsPais}

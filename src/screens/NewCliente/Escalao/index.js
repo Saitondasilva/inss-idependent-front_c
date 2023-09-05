@@ -54,6 +54,7 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
       return err.response;
     });
   }
+  /*
   function getEsquema(){
     return axios
     .get("/getEsquema")
@@ -64,7 +65,7 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
         a.push(response.data.data[i].esquema)
         b.push(response.data.data[i].id)
       }
-      setOptionsEscalao(a);
+      setOptionsEsquema(a);
       setEscalao([optionsEscalao[0]])
     })
     .catch((err) => {
@@ -72,6 +73,7 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
       return err.response;
     });
   }
+  */
   function getEsquema(){
     return axios
     .get("/getEsquema")
@@ -121,8 +123,7 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
       <span className={styles.field}>
         <Dropdown
           className={styles.field1}
-          label="Esclão"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          label="Escalão *"
           setValue={setEscalao}
           options={optionsEscalao}
           onChange={data1.escalao=escalao}
@@ -133,8 +134,7 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
         <span className={styles.field}>
         <Dropdown
           className={styles.field1}
-          label="Esquema"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          label="Esquema *"
           setValue={setEsquema}
           options={optionsEsquema}
           onChange={data1.esquema=esquema}
@@ -145,7 +145,7 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
         <span className={styles.field}>
         <Dropdown
           className={styles.field1}
-          label="Periodo contribuitivo"
+          label="Periodo contribuitivo "
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           setValue={setPeriodo}
           options={optionsPeriodo}
@@ -153,36 +153,11 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
           value={periodo}
         /> 
         </span>
- 
-       {/*
-       <TextInput
-          className={styles.field}
-          label="Foto"
-          name="photo"
-          type="file"
-          tooltip="Foto"
-          required
-          onChange={onChangeFile}
-          //value={data1.photo}
-        />
-        */}
        
       </div>
      
       </div>
      
-        {
-          /*
-       <Editor
-          state={content}
-          onChange={setContent}
-          classEditor={styles.editor}
-          label="Sobre"
-          tooltip="Descrição"
-          name="descricao"
-          value={data1.descricao}
-          />
-        */}
     
     </Card>
   );

@@ -47,14 +47,7 @@ const Market = ({ items }) => {
           />
         ))}
       </div>
-      <div className={styles.foot}>
-        <button className={styles.arrow}>
-          <Icon name="arrow-left" size="20" />
-        </button>
-        <button className={styles.arrow}>
-          <Icon name="arrow-right" size="20" />
-        </button>
-      </div>
+    
     </div> 
   );
 };

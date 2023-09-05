@@ -15,7 +15,7 @@ const Item = ({ className, item, onClose }) => {
   }
   return (
     <Link
-      className={cn(styles.item, { [styles.new]: item.read_at }, className)}
+      className={cn(styles.item, { [styles.new]: (!item.read_at) }, className)}
       to={item.url}
       onClick={onClose}
     >

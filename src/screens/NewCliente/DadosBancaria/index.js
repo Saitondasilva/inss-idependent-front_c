@@ -71,8 +71,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         <span className={styles.field}>
        <Dropdown
           className={styles.field1}
-          label="Banco"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          label="Banco *"
           setValue={setBanco}
           options={optionsBanco}
           onChange={data1.banco=banco}
@@ -81,7 +80,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
        </span>
        <TextInput
           className={styles.field}
-          label="NIB"
+          label="NIB *"
           name="nib_conta"
           type="text"
           mask="9999999999999999"
@@ -92,7 +91,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       
       <TextInput
           className={styles.field}
-          label="Nº Conta"
+          label="Nº Conta *"
           name="n_conta"
           type="number"
           required
