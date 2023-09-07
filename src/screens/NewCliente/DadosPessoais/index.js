@@ -33,7 +33,23 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   const [documentoID, setDocumentoID] = useState([]);
  
   data1.descricao=content;
-
+function read(){
+  if(data1.id>0){
+    // Documento
+    console.log("tipo_documento=",data1)
+    var position        =   documentoID.indexOf(data1.id_tipo_documento)
+    setDocumento(optionsDocumento[position])
+    //Estado Civil
+    var position1        =   estadocivilID.indexOf(data1.id_estado_civil)
+    setEstadocivil(optionsEstadocivil[position1])
+    //Genero
+    var position2        =   generoID.indexOf(data1.id_sexo)
+    setGenero(optionsGenero[position2])
+    //Nacionalidade
+    var position3        =   paisID.indexOf(data1.id_nacionalidade)
+    setGenero(optionsPais[position3])
+  }
+}
 
   function onChangeData(e) {
     console.log(e)
@@ -59,8 +75,12 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
 
   useEffect(() => {
     var position        =   optionsDocumento.indexOf(documento);
-        data1.documento_id  =   documentoID[position];
+        data1.id_tipo_documento  =   documentoID[position];
   }, [documento]);
+
+  useEffect(() => {
+    read()
+  }, [data1]);
   function onChangeFile(e){
     let file = e.target.files
    /* data1.photo=this.state.image
@@ -150,39 +170,10 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     getEstadoCivil()
     getPais()
     getTipoDoc()
+    
   },[]);
 
-  function buscarCep() {/*
-     
-    fetch(`http://viacep.com.br/ws/${data1.cep}/json/`, {mode: 'cors'})
-     .then((res) => res.json())
-     .then((data) => {
-           data1.cep=data.cep 
-           data1.cidade=data.localidade
-           data1.estado=data.logradouro
-           setData1(data1)
-        
-     })
-     .catch(err =>{alert("Cep não existente");data1.cep="";});
-     function getPais(){
-    return axios
-    .get("/country")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.countries.length; i++){
-        a.push(response.data.data.countries[i].nome)
-      }
-      console.log(a)
-      setOptionsPais(a);
-      setpais([optionsPais[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
 
-    */}
   return (
     <Card
       className={cn(styles.card, className)}
@@ -191,6 +182,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     >
       
       <div className={styles.description}>
+        
       <hr></hr>
       <div className={styles.group}>
       
@@ -200,7 +192,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           label="Tipo Documento *"
           setValue={setDocumento}
           options={optionsDocumento}
-          onChange={data1.documento=documento}
+          onChange={data1.tipo_documento=documento}
           value={documento}
         /> </span>
         <TextInput

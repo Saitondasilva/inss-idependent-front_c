@@ -34,7 +34,7 @@ const Preview = ({ visible, onClose }) => {
           <div className={styles.user}>
           <Icon name="mouse" size="20" />  
             <Link className={styles.control}         
-            to="/carteira/cliente" >
+            to="/utente/lista" >
            Back
           </Link>
           </div>

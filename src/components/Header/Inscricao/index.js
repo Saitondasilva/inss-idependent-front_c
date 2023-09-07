@@ -52,7 +52,7 @@ const Inscricao = ({ className }) => {
         <NavLink
                     className={cn(styles.item)}
                     activeClassName={styles.active}
-                    to="/cliente/add"
+                    to="/utente/add"
                     key={0}
                   >                 
                     Inscricao Beneficiário

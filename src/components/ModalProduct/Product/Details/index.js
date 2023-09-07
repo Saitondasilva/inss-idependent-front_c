@@ -42,9 +42,9 @@ useEffect(() => {
       nif: data1.nif,
       email: data1.email,
       caixa_postal: data1.caixa_postal,
-      id_tipo_documento: data1.documento_id,
+      id_tipo_documento: data1.id_tipo_documento,
       numero_documento: data1.numero_documento,
-      numero_porta: data1.N_porta,        
+      numero_porta: data1.numero_porta,        
        
     
     }

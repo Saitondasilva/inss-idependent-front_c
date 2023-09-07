@@ -56,23 +56,23 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         <TextInput
           className={styles.field1}
           label="Telemóvel *"
-          name="contacto1"  
+          name="tel"  
           mask="9 99 99 99"        
           type="text"
           required
           onChange={onChangeData}
-          value={data1.contacto1}
+          value={data1.tel}
         /> 
         
        </span>
        <TextInput
           className={styles.field}
           label="Contancto Alternativo"
-          name="contacto2"  
+          name="tel2"  
           type="text" 
           required
           onChange={onChangeData}
-          value={data1.contacto2}
+          value={data1.tel2}
         /> 
        <TextInput
           className={styles.field}
@@ -86,7 +86,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       
       <TextInput
           className={styles.field}
-          label="Email *"
+          label="Email "
           name="email"
           type="email"
           required

@@ -13,7 +13,7 @@ import axios from "axios";
 const NameAndDescription = ({ className, data1,data,setData, setData1 }) => {
   const [content, setContent] = useState();
   const [detalhes_pagamentos, setDetalhes_pagamentos] = useState();
-  const [optionsForma, setOptionsForma] = useState(['Transferencia Bancária', 'Deposito']);
+  const [optionsForma, setOptionsForma] = useState(['Transferencia Bancária', 'Deposito', 'Pag. POS']);
   const [forma, setForma] = useState(optionsForma[0]);
   const [optionsBanco, setOptionsBanco] = useState(['--Banco--','AFRILAND','ECOBANK','BGFI']);
   const [banco, setBanco] = useState(optionsBanco[0]);
@@ -92,10 +92,10 @@ function calcularMesesAPagar(){
 
   if(!data1.TemContribuicao){
     
-    var dias_de_atraso = 31 - data1.UltimoDiaPago;
-    var valor_diario_a_pagar= valorPrestacaoMensal/30
-    var valor_total_a_pagar= (valor_diario_a_pagar*dias_de_atraso)
-
+    //var dias_de_atraso = 31 - data1.UltimoDiaPago;
+    //var valor_diario_a_pagar = valorPrestacaoMensal/30
+   // var valor_total_a_pagar = (valor_diario_a_pagar*dias_de_atraso)
+   var valor_total_a_pagar = valorPrestacaoMensal
     if(valor_total>=valor_total_a_pagar){
     valor_total-=valor_total_a_pagar
     array_data.push({ano:UltimoAnoPago, mes:UltimoMesPago, valor_pago: parseFloat(valor_total_a_pagar).toFixed(2)});

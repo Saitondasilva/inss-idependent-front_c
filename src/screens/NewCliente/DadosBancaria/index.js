@@ -71,7 +71,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         <span className={styles.field}>
        <Dropdown
           className={styles.field1}
-          label="Banco *"
+          label="Banco "
           setValue={setBanco}
           options={optionsBanco}
           onChange={data1.banco=banco}
@@ -80,7 +80,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
        </span>
        <TextInput
           className={styles.field}
-          label="NIB *"
+          label="NIB "
           name="nib_conta"
           type="text"
           mask="9999999999999999"
@@ -91,26 +91,14 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       
       <TextInput
           className={styles.field}
-          label="Nº Conta *"
+          label="Nº Conta "
           name="n_conta"
           type="number"
           required
           onChange={onChangeData}
           value={data1.n_conta}
         />
-      
-       {/*
-       <TextInput
-          className={styles.field}
-          label="Foto"
-          name="photo"
-          type="file"
-          tooltip="Foto"
-          required
-          onChange={onChangeFile}
-          //value={data1.photo}
-        />
-        */}
+     
        
       </div>
     
@@ -118,21 +106,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           
       </div>
       
-      
-        {
-          /*
-       <Editor
-          state={content}
-          onChange={setContent}
-          classEditor={styles.editor}
-          label="Sobre"
-          tooltip="Descrição"
-          name="descricao"
-          value={data1.descricao}
-          />
-        */}
-       
-      
+     
     </Card>
   );
 };

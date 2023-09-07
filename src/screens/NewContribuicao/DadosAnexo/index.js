@@ -54,7 +54,8 @@ function DynamicTwoInput({ className, data, setData }){
           type="text"
           value={data[i].ano}
           onChange={(e) => handleChange(e, i)} 
-          required   
+          required 
+          readOnly
           style={{flex: "0 0 calc(90% - 12px)",width: "calc(90% - 12px)",margin: "0 2px 10px", display:"flex"}}       
         />  </span>
 
@@ -66,7 +67,8 @@ function DynamicTwoInput({ className, data, setData }){
           type="text"
           value={data[i].mes}
           onChange={(e) => handleChange(e, i)} 
-          required  
+          required
+          readOnly  
           style={{flex: "0 0 calc(90% - 12px)",width: "calc(90% - 12px)",margin: "0 2px 10px", display:"flex"}}        
         />
             </span>
@@ -78,6 +80,7 @@ function DynamicTwoInput({ className, data, setData }){
                     value={data[i].valor_pago}
           onChange={(e) => handleChange(e, i)} 
           required
+          readOnly
                 style={{flex: "0 0 calc(90% - 12px)",width: "calc(90% - 12px)",margin: "0 2px 10px", display:"flex"}}
                   />
                    { /*<button className={styles.field2}  onClick={()=>handleDelete(i)}>Delete</button>*/}
@@ -86,7 +89,6 @@ function DynamicTwoInput({ className, data, setData }){
                  
                 )
             }
-           {/*<p>{JSON.stringify(data)}</p>*/}
         
        </div>
     </Card>

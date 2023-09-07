@@ -3,7 +3,7 @@ import cn from "classnames";
 import styles from "./Preview.module.sass";
 import Card from "../../../components/Card";
 import Icon from "../../../components/Icon";
-
+import { Link } from "react-router-dom";
 const Preview = ({ visible, onClose }) => {
   return (
     <div className={cn(styles.preview, { [styles.visible]: visible })}>
@@ -32,12 +32,11 @@ const Preview = ({ visible, onClose }) => {
             <div className={styles.price}>$98</div>
           </div>
           <div className={styles.user}>
-            <div className={styles.avatar}>
-              <img src="/images/content/avatar.jpg" alt="Avatar" />
-            </div>
-            <div className={styles.text}>
-              by <span>Hortense</span>
-            </div>
+          <Icon name="mouse" size="20" />  
+            <Link className={styles.control}         
+            to="/carteira/cliente" >
+           Back
+          </Link>
           </div>
         </div>
       </Card>

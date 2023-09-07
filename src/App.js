@@ -37,18 +37,16 @@ import Membro from "./screens/Membro";
 import Pagamento from "./screens/Pagamento";
 /*********************************************** */
 import JornadaCliente from "./screens/JornadaCliente";
-import CarteiraCliente from "./screens/CarteiraCliente";
 import CarteiraPesquisa from "./screens/CarteiraPesquisa";
 import AnaliseProgreso from "./screens/AnaliseProgresso";
 import NewCliente from "./screens/NewCliente";
 import NewAgregados from "./screens/NewAgregados";
 import NewContribuicao from "./screens/NewContribuicao";
-import DinamicoForm from "./screens/DinamicoForm";
 import AgendaProfissional from "./screens/AgendaProfissional";
 import BuscaProfissional from "./screens/BuscaProfissional";
 import MinhasConsultas from "./screens/MinhasConsultas";
 import MeusPagamentos from "./screens/MeusPagamentos";
-import NotificationUtente from "./screens/NotificationUtente";
+import ListaUtente from "./screens/ListaUtente";
 
 
 
@@ -101,11 +99,11 @@ function App() {
           />
 
           <Route
-            path="/carteira/cliente"
+            path="/utente/lista"
             element={
               <ProtectedRoute>
                 <Page title="Todos Utentes">
-                  <NotificationUtente />
+                  <ListaUtente />
                 </Page>
               </ProtectedRoute>              
             }
@@ -123,7 +121,7 @@ function App() {
             }
           />
           <Route
-            path="/cliente/add"
+            path="/utente/add/:id?"
             element={
               <ProtectedRoute>
                 <Page title="Cadastro de Beneficiário">

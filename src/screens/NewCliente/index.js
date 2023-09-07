@@ -4,9 +4,6 @@ import TooltipGlodal from "../../components/TooltipGlodal";
 import Modal from "../../components/Modal";
 import Schedule from "../../components/Schedule";
 import DadosPessoais from "./DadosPessoais";
-import DadosSociais from "./DadosSociais";
-import DadosPagamento from "./DadosPagamento";
-import DadosProgresso from "./DadosProgresso";
 import DadosConta from "./DadosBancaria";
 import DadosContacto from "./Contacto";
 import DadosEndereco from "./Endereco";
@@ -14,11 +11,11 @@ import DadosEscalao from "./Escalao";
 import DadosAnexo from "./DadosAnexo";
 import DadosOutraDec from "./DadosOutraDec";
 import DadosProfissi from "./DadosProfissi";
-import Preview from "./Preview";
 import Panel from "./Panel";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
-const NewProduct = () => {
+const NewUtente = () => {
   const [visiblePreview, setVisiblePreview] = useState(false);
   const [visibleModal, setVisibleModal] = useState(false);
 
@@ -29,17 +26,18 @@ const NewProduct = () => {
   const [smsError, setSmsError] = useState("");
   const [smsSucess, setSmsSuccess] = useState("");
   const [loader, setLoader] = useState("");
-
+  const {id}=useParams();
   var user=null;
   useEffect(() => {
     user = localStorage.getItem("userData");
     user==null?setuserData([]):setuserData(JSON.parse(user));
     //shearchCliente(JSON.parse(user));
+   if(id)GetUtenteById()
   },[]);
 
 function validateForm(){
   //Validação de Dados do Utente 
-  if(!data1.documento_id || data1.documento_id===""){
+  if(!data1.id_tipo_documento || data1.id_tipo_documento===""){
     setSmsError("Por favor preencha o Tipo do Documento")
     return false;
   }
@@ -79,7 +77,8 @@ function validateForm(){
     setSmsError("Por favor preencha a Nacionalidade")
     return false;
   }
-  if(!data1.banco_id || data1.banco_id===""){
+ /*
+ if(!data1.banco_id || data1.banco_id===""){
     setSmsError("Por favor preencha o banco")
     return false;
   }
@@ -91,6 +90,7 @@ function validateForm(){
     setSmsError("Por favor preencha o número da conta")
     return false;
   }
+  */
   if(!data1.morada || data1.morada===""){
     setSmsError("Por favor preencha o Localidade")
     return false;
@@ -107,10 +107,10 @@ function validateForm(){
     setSmsError("Por favor preencha o Telemovel")
     return false;
   }
-  if(!data1.email || data1.email===""){
+  /*if(!data1.email || data1.email===""){
     setSmsError("Por favor preencha o email")
     return false;
-  }
+  }*/
   if(!data1.esquema_id || data1.esquema_id===""){
     setSmsError("Por favor preencha o Esquema")
     return false;
@@ -119,11 +119,15 @@ function validateForm(){
     setSmsError("Por favor preencha o Escalão")
     return false;
   }
-  if(!data1.profisao || data1.profisao===""){
+  if(!data1.periodo_id || data1.periodo_id===""){
+    setSmsError("Por favor preencha o periodo contributivo")
+    return false;
+  }
+  if(!data1.proficao || data1.proficao===""){
     setSmsError("Por favor preencha o profissao")
     return false;
   }
-  if(!data1.data_inicio_activ || data1.data_inicio_activ===""){
+  if(!data1.data_inicio_actividade || data1.data_inicio_actividade===""){
     setSmsError("Por favor preencha a Data de Inicio da Actividade")
     return false;
   }
@@ -134,10 +138,23 @@ function validateForm(){
     }
   }
   
-
   return true;
-  
 }
+function GetUtenteById() {
+  return axios
+    .get("/utente/getUtenteById/"+id)
+    .then((response) => {
+     console.log(response.data.data)
+     const Utente = response.data.data.Utente;
+     
+     setData1(Utente)
+     console.log("UTENTE EDITAR",Utente)
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
+};
 
 function SaveProfissionalCliente() {
   setLoader(true)
@@ -148,22 +165,23 @@ function SaveProfissionalCliente() {
     nif: data1.nif,
     email: data1.email,
     caixa_postal: data1.caixa_postal,
-    id_tipo_documento: data1.documento_id,
+    id_tipo_documento: data1.id_tipo_documento,
     numero_documento: data1.numero_documento,
-    numero_porta: data1.N_porta,        
-    tel: data1.contacto1,
-    tel2: data1.contacto2,
+    numero_porta: data1.numero_porta,        
+    tel: data1.tel,
+    tel2: data1.tel2,
     morada: data1.morada,
     ponto_referencia: data1.ponto_referencia,
     data_nasc: data1.data_nasc,
     id_sexo : data1.sexo_id,
     tipo_utente: 1,
+    periodo: data1.periodo_id,
     id_distrito: data1.distrito_id,
     id_banco: data1.banco_id,
     id_estado_civil: data1.estadocivil_id,
-	  proficao: data1.profisao,
+	  proficao: data1.proficao,
     id_nacionalidade: data1.pais_id,
-	  data_inicio_actividade: data1.data_inicio_activ,
+	  data_inicio_actividade: data1.data_inicio_actividade,
     n_conta: data1.n_conta,
     iban_conta: "11111111111111111111",
     nib_conta: data1.nib_conta,    
@@ -206,9 +224,9 @@ function SaveProfissionalCliente() {
             data1.nif="";
             data1.email="";
             data1.caixa_postal="";
-            data1.documento_id="";
+            data1.id_tipo_documento="";
             data1.numero_documento="";
-            data1.N_porta="";
+            data1.numero_porta="";
             data1.tel="";
             data1.morada="";
             data1.ponto_referencia="";
@@ -218,7 +236,7 @@ function SaveProfissionalCliente() {
             data1.banco_id="";
             data1.data1.estadocivil_id="";
             data1.data1.pais_id="";
-            data1.data_inicio_activ="";
+            data1.data_inicio_actividade="";
             data1.n_conta="";
             data1.nib_conta="";
             data1.nome_pai="";
@@ -232,43 +250,25 @@ function SaveProfissionalCliente() {
     <>
       <div className={styles.row}>
         <div className={styles.wrapper}>
-          <DadosPessoais className={styles.card} data1={data1} setData1={setData1}/>
-          {
-          
+         
+          <DadosOutraDec className={styles.card} data1={data1} setData1={setData1}/>
+
+          <DadosPessoais className={styles.card} data1={data1} setData1={setData1} />
+
           <DadosConta className={styles.card} data1={data1} setData1={setData1}/>
          
-          }
-          {
-            <DadosEndereco className={styles.card} data1={data1} setData1={setData1}/>
-          }
-
-          {
-             <DadosContacto className={styles.card} data1={data1} setData1={setData1}/>
-          }
-
-          {
-             <DadosEscalao className={styles.card} data1={data1} setData1={setData1}/>
-          }
-          {
-             <DadosAnexo className={styles.card} data1={data1} setData1={setData1}/>
-          }
-           {
-             <DadosProfissi className={styles.card} data1={data1} setData1={setData1}/>
-          }
-          {
-             <DadosOutraDec className={styles.card} data1={data1} setData1={setData1}/>
-          }
-
-
-          {
-          /*
-            <ImagesAndCTA className={styles.card} />
-            <Price className={styles.card} />
-            <CategoryAndAttibutes className={styles.card} />
-            <ProductFiles className={styles.card} />
-            <Discussion className={styles.card} />
-          */
-          }
+          <DadosEndereco className={styles.card} data1={data1} setData1={setData1}/>
+          
+          <DadosContacto className={styles.card} data1={data1} setData1={setData1}/>
+          
+          <DadosEscalao className={styles.card} data1={data1} setData1={setData1}/>
+                  
+          <DadosAnexo className={styles.card} data1={data1} setData1={setData1}/>
+          
+          <DadosProfissi className={styles.card} data1={data1} setData1={setData1}/>
+          
+          
+          
           
         </div>
        
@@ -295,4 +295,4 @@ function SaveProfissionalCliente() {
   );
 };
 
-export default NewProduct;
+export default NewUtente;

@@ -9,7 +9,6 @@ import Price from "./Price";
 import CategoryAndAttibutes from "./CategoryAndAttibutes";
 import ProductFiles from "./ProductFiles";
 import Discussion from "./Discussion";
-import Preview from "./Preview";
 import Panel from "./Panel";
 
 const NewProduct = () => {
@@ -30,12 +29,7 @@ const NewProduct = () => {
           <ProductFiles className={styles.card} />
           <Discussion className={styles.card} />
         </div>
-        <div className={styles.col}>
-          <Preview
-            visible={visiblePreview}
-            onClose={() => setVisiblePreview(false)}
-          />
-        </div>
+        
       </div>
       <Panel
         setVisiblePreview={setVisiblePreview}

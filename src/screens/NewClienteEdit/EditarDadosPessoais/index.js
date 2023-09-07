@@ -58,7 +58,7 @@ const NameAndDescription = ({ className, data1, setData1, id }) => {
 
   useEffect(() => {
     var position        =   optionsDocumento.indexOf(documento);
-        data1.documento_id  =   documentoID[position];
+        data1.id_tipo_documento  =   documentoID[position];
   }, [documento]);
   function onChangeFile(e){
     let file = e.target.files

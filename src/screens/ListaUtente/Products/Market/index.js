@@ -5,7 +5,7 @@ import Checkbox from "../../../../components/Checkbox";
 import Icon from "../../../../components/Icon";
 import Row from "./Row";
 
-const Market = ({ items }) => {
+const Market = ({ items,id_estado_utente }) => {
   const [chooseAll, setСhooseAll] = useState(false);
 
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -29,7 +29,7 @@ const Market = ({ items }) => {
               onChange={() => setСhooseAll(!chooseAll)}
             />
           </div>
-          <div className={styles.col}>Nome Beneficiário</div>          
+          <div className={styles.col}>Nome Beneficiário </div>          
           <div className={styles.col}>NISS</div>
           <div className={styles.col}>NIF</div>          
           <div className={styles.col}>Data Nascimento</div>
@@ -37,7 +37,17 @@ const Market = ({ items }) => {
           
           
         </div>
+        
         {items.map((x, index) => (
+          id_estado_utente === 0 ?
+          (<Row
+            item={x}
+            key={index}
+            up={items.length - index <= 2}
+            value={selectedFilters.includes(x.id)}
+            onChange={() => handleChange(x.id)}
+          />) :
+          (x.id_estado === id_estado_utente &&
           <Row
             item={x}
             key={index}
@@ -45,6 +55,8 @@ const Market = ({ items }) => {
             value={selectedFilters.includes(x.id)}
             onChange={() => handleChange(x.id)}
           />
+
+          )
         ))}
       </div>
     

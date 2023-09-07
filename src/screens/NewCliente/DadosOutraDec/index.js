@@ -37,7 +37,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Outras Declarações"
+      title="Primeiras Declarações"
       classTitle="title-green"
       
     >
@@ -84,18 +84,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         
       </div>
     
-        {
-          /*
-       <Editor
-          state={content}
-          onChange={setContent}
-          classEditor={styles.editor}
-          label="Sobre"
-          tooltip="Descrição"
-          name="descricao"
-          value={data1.descricao}
-          />
-        */}
+       
        
       </div>
     </Card>

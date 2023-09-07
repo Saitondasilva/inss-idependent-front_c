@@ -35,18 +35,17 @@ const Control = ({item, className, visibleActions, setVisibleActions, up, id}) =
       <button className={styles.button}> 
         
       <Link          
-           to={"/cliente/add"}>
+           to={"/utente/add/"+id}>
            <Icon name="edit" size="20" />  
           </Link>        
           
       </button>
-      {<button className={styles.button}>
+      {/*<button className={styles.button}>
         <Icon name="heart" size="20" />
-      </button>}
+      </button>*/}
       <Actions
         className={styles.actions}
         classActionsHead={styles.actionsHead}
-     
         classActionsOption={styles.actionsOption}
         items={actions}
         visible={visibleActions}

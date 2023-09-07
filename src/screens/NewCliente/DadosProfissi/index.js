@@ -77,23 +77,23 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         <TextInput
           className={styles.field}
           label="Profissão"
-          name="profisao"
+          name="proficao"
           type="text"
           required
           onChange={onChangeData}
-          value={data1.profisao}
+          value={data1.proficao}
         />
 
        <TextInput
           className={styles.field}
           label="Data Inicio Actividade *"
-          name="data_inicio_activ"
+          name="data_inicio_actividade"
           type="date"
           icon="date"
           tooltip="Data em que começou a sua actividade"
           required
           onChange={onChangeData}
-          value={data1.data_inicio_activ}
+          value={data1.data_inicio_actividade}
         />
       
       
@@ -104,21 +104,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       </div>
       
       
-        {
-          /*
-       <Editor
-          state={content}
-          onChange={setContent}
-          classEditor={styles.editor}
-          label="Sobre"
-          tooltip="Descrição"
-          name="descricao"
-          value={data1.descricao}
-          />
-        */}
-       
-      
-    </Card>
+    </Card> 
   );
 };
 

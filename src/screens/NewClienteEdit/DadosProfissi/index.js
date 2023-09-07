@@ -78,7 +78,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         {/*<TextInput
           className={styles.field}
           label="Profissão"
-          name="profisao"
+          name="proficao"
           type="text"
           setValue={setSearch}
           onSubmit={() => handleSubmit()}
@@ -89,22 +89,22 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         <TextInput
           className={styles.field}
           label="Profissão"
-          name="profisao"
+          name="proficao"
           type="text"
           required
           onChange={onChangeData}
-          value={data1.profisao}
+          value={data1.proficao}
         />
 
        <TextInput
           className={styles.field}
           label="Data Inicio Actividade*"
-          name="data_inicio_activ"
+          name="data_inicio_actividade"
           type="date"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           required
           onChange={onChangeData}
-          value={data1.data_inicio_activ}
+          value={data1.data_inicio_actividade}
         />
       
       

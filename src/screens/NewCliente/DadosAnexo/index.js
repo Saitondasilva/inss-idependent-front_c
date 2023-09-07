@@ -18,7 +18,7 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsDocAnexo, setOptionsDocAnexo] = useState(['--Escolha um--', 'BI', 'Certidão', 'Cartão estrangeiro']);
+  const [optionsDocAnexo, setOptionsDocAnexo] = useState(['--Escolha um--', 'BI', 'NIB', 'NIF','Passaport', 'Certidão', 'Cartão Estrangeiro', 'Cartão Residência',  'Licença de Actividade','Outro']);
   const [docAnexo, setDocAnexo] = useState(optionsDocAnexo[0]);
   const [userData, setuserData] = useState({});
   const [data,setData]=useState([])
@@ -122,7 +122,6 @@ useEffect(() => {
        <Dropdown
           className={styles.field1}
           label="Documento Anexo"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
           setValue={setDocAnexo}
           options={optionsDocAnexo}
           onChange={data1.tipo_doc=docAnexo}
@@ -141,18 +140,6 @@ useEffect(() => {
        
       </div>
       
-        {
-          /*
-       <Editor
-          state={content}
-          onChange={setContent}
-          classEditor={styles.editor}
-          label="Sobre"
-          tooltip="Descrição"
-          name="descricao"
-          value={data1.descricao}
-          />
-        */}
         <Panel
         
         SavePagarContribuicao={SaveFile}

@@ -23,8 +23,9 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
   const [optionsEsquema, setOptionsEsquema] = useState([]);
   const [esquema, setEsquema] = useState(optionsEsquema[0]);
   const [esquemaID, setEsquemaID] = useState([]);
-  const [optionsPeriodo, setOptionsPeriodo] = useState(['Mensal', 'Trimestral', 'Simenstral']);
+  const [optionsPeriodo, setOptionsPeriodo] = useState(['Mensal', 'Trimestral', 'Simenstral', 'Anual']);
   const [periodo, setPeriodo] = useState(optionsPeriodo[0]);
+  const [periodoID, setPeriodoID] = useState([1,3,6,12]);
  
   data1.descricao=content;
 
@@ -54,26 +55,7 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
       return err.response;
     });
   }
-  /*
-  function getEsquema(){
-    return axios
-    .get("/getEsquema")
-    .then((response) => {
-       var a = new Array();
-       var b = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].esquema)
-        b.push(response.data.data[i].id)
-      }
-      setOptionsEsquema(a);
-      setEscalao([optionsEscalao[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  */
+
   function getEsquema(){
     return axios
     .get("/getEsquema")
@@ -108,6 +90,10 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
     data1.esquema_id   =  esquemaID[position];
   }, [esquema]);
 
+  useEffect(() => {
+    var position        =  optionsPeriodo.indexOf(periodo);
+    data1.periodo_id   =  esquemaID[position];
+  }, [periodo]);
   return (
     <Card    
       className={cn(styles.card, className)}      

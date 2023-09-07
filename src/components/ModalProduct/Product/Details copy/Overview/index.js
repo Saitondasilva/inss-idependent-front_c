@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import cn from "classnames";
 import styles from "./NameAndDescription.module.sass";
 import Icon from "../../../../Icon";
-import ModalPreview from "../../../../ModalPreview";
 import Card from "../../../../../components/Card";
 
 import TextInput from "../../../../../components/TextInput";

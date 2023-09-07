@@ -1,65 +1,28 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Products.module.sass";
+import styles1 from "./Market.module.sass";
 import cn from "classnames";
 import Card from "../../../components/Card";
-import Form from "../../../components/Form";
 import Dropdown from "../../../components/Dropdown";
 import Market from "./Market";
-import Table from "./Table";
 import axios from "axios";
 
 // data
-import { traffic } from "../../../mocks/traffic";
-import { viewers } from "../../../mocks/viewers";
-import { market } from "../../../mocks/market";
+
 import TextInput from "../../../components/TextInput";
 import Icon from "../../../components/Icon";
 
-const indicatorsTraffic = [
-  {
-    title: "Market",
-    color: "#FFBC99",
-  },
-  {
-    title: "Social media",
-    color: "#CABDFF",
-  },
-  {
-    title: "Direct",
-    color: "#B5E4CA",
-  },
-  {
-    title: "UI8",
-    color: "#B1E5FC",
-  },
-  {
-    title: "Others",
-    color: "#FFD88D",
-  },
-];
-
-const indicatorsViewers = [
-  {
-    title: "Followers",
-    color: "#B5E4CA",
-  },
-  {
-    title: "Others",
-    color: "#CABDFF",
-  },
-];
-
 const Products = () => {
-  const navigation = ["Market"];
+  const [navigation, setNavigation] = useState(["Todos"]);
 
   const [activeTab, setActiveTab] = useState(navigation[0]);
+  const [activeTabID, setActiveTabID] = useState([]);
   const [search, setSearch] = useState([]);
   const [userData, setuserData] = useState({});
-  const [market, setProduto1] = useState([]);
-  const [nif, setNome] = useState([]);
+  const [produto1, setProduto1] = useState([]);
+  const [id, setId] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
   const handleSubmit = (e) => {
     GetPesquisa()
   };
@@ -75,22 +38,22 @@ const Products = () => {
   useEffect(() => {
     var user = localStorage.getItem("userData");
     user==null?setuserData([]):setuserData(JSON.parse(user));
-    GetAllCliente(JSON.parse(user));
-
-     // Chama getNotification quando o componente é montado
-     GetAllCliente(currentPage,JSON.parse(user)).then((paginationInfo) => {
+    getEstadoUtente();
+    
+     GetAllUtente(currentPage).then((paginationInfo) => {
       setTotalPages(Math.ceil(paginationInfo.total / paginationInfo.per_page));
     });
-   
+    
 },[]);
 
-function GetAllCliente(page=1) {
+function GetAllUtente(page=1) {
   const page_size = 1; // Número de itens por página
     return axios
       .get(`/utente/getAllUtente?page=${page}&page_size=${page_size}`)
       .then((response) => {
-        const { Utente, total, per_page, current_page } = response.data.data;
+        const { Utente, total, per_page, current_page } = response.data.data;      
         setProduto1(Utente);
+        
         return { total, per_page, current_page };
       })
       .catch((err) => {
@@ -100,7 +63,7 @@ function GetAllCliente(page=1) {
 };
 const handlePageChange = (newPage) => {
   if (newPage >= 1 && newPage <= totalPages) {
-    GetAllCliente(newPage).then(() => {
+    GetAllUtente(newPage).then(() => {
       setCurrentPage(newPage);
     });
   }
@@ -118,7 +81,34 @@ function GetPesquisa() {
       return err.response;
     });
 };
-
+function getEstadoUtente(){
+  return axios
+  .get("/getEstadoUtente")
+  .then((response) => {
+    var a =new Array();
+    var b =new Array();
+    a.push("Todos")
+    b.push(0);
+    for(var i=0; i<response.data.data.length; i++){
+      a.push(response.data.data[i].descricao)
+      b.push(response.data.data[i].id)
+    }
+    setNavigation(a);
+    setActiveTabID(b);
+    
+  })
+  .catch((err) => {
+    console.log("Error", err);
+    return err.response;
+  });
+}
+function changeTab(x){
+  setActiveTab(x)
+  var position          =   navigation.indexOf(x);
+ var id=activeTabID[position];
+ setId(id);
+  GetAllUtente(1)
+}
   return (
     <Card
       className={styles.card}
@@ -152,7 +142,7 @@ function GetPesquisa() {
                 className={cn(styles.link, {
                   [styles.active]: x === activeTab,
                 })}
-                onClick={() => setActiveTab(x)}
+                onClick={() => changeTab(x)}
                 key={index}
               >
                 {x}
@@ -166,7 +156,7 @@ function GetPesquisa() {
               setValue={setActiveTab}
               options={navigation}
               small
-            />
+            />  
           </div>
         </>
       }
@@ -174,23 +164,23 @@ function GetPesquisa() {
       <div className={styles.products}>
         <div className={styles.wrapper}>
         
-          {activeTab === navigation[0] && <Market items={market}  />}
+          {<Market items={produto1} id_estado_utente={id} />}
           {/*activeTab === navigation[1] && (
             <Table
               title="Traffic source"
-              items={traffic}
-              legend={indicatorsTraffic}
+              items={produto1}
+              legend={"indicatorsTraffic"}
             />
           )*/}
           {/*activeTab === navigation[2] && (
             <Table title="Viewers" items={viewers} legend={indicatorsViewers} />
           )*/}
-          <div className={styles.foot}>
-            <button className={styles.arrow} onClick={() => handlePageChange(currentPage - 1)}>
+          <div className={styles1.foot}>
+            <button className={styles1.arrow} onClick={() => handlePageChange(currentPage - 1)}>
               <Icon name="arrow-left" size="20" />
             </button>
             {currentPage} / {totalPages}
-            <button className={styles.arrow} onClick={() => handlePageChange(currentPage + 1)}>
+            <button className={styles1.arrow} onClick={() => handlePageChange(currentPage + 1)}>
               <Icon name="arrow-right" size="20"  />
             </button>
           </div>

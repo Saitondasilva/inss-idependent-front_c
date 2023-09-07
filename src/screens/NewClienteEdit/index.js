@@ -10,7 +10,6 @@ import EditarDadosEndereco from "./EditarDadosEndereco"
 import EditarDadosContactos from "./EditarDadosContactos"
 import EditarDadosProf  from "./DadosProfissi"
 import EditarDadosOuDec from "./DadosOutraDec"
-import Preview from "./Preview";
 import Panel from "./Panel";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -70,12 +69,7 @@ const NewProduct = () => {
           <EditarDadosOuDec className={styles.card} id={id? Number.parseInt(id):null} data1={data1} setData1={setData1} />
          
         </div>
-        <div className={styles.col}>
-          <Preview
-            visible={visiblePreview}
-            onClose={() => setVisiblePreview(false)}
-          />
-        </div>
+       
       </div>
       <Panel
         setVisiblePreview={setVisiblePreview}

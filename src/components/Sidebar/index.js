@@ -26,7 +26,7 @@ var navigation=[];
   {
     title: "Pesquisa Utente",
     icon: "search",
-    url: "/carteira/cliente",
+    url: "/utente/lista",
   },
    
   {

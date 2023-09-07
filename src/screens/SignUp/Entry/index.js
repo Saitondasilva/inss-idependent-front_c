@@ -4,13 +4,10 @@ import styles from "./Entry.module.sass";
 import TextInput from "../../../components/TextInput";
 import Image from "../../../components/Image";
 import DadosPessoais from "../../NewCliente/DadosPessoais";
-import DadosSociais from "../../NewCliente/DadosSociais";
-import DadosPagamento from "../../NewCliente/DadosPagamento";
 import DadosConta from "../../NewCliente/DadosBancaria";
 import DadosContacto from "../../NewCliente/Contacto";
 import DadosEndereco from "../../NewCliente/Escalao";
 import DadosEscalao from "../../NewCliente/Endereco";
-import DadosProgresso from "../../NewCliente/DadosProgresso";
 import Panel from "../../NewCliente/Panel";
 import Loader from "../../../components/Loader";
 import { Link } from "react-router-dom";
@@ -183,8 +180,6 @@ function Save() {
           <DadosEscalao className={styles.card} data1={data1} setData1={setData1}/>
           
          
-         {/* <DadosSociais className={styles.card} data1={data1} setData1={setData1}/> */} 
-          {/*<DadosPagamento className={styles.card} data1={data1} setData1={setData1}/> */}
          Rodopé <div className={styles.note}>
             <span>
               Ao continuar você concorda com os
