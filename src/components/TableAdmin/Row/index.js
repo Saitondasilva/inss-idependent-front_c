@@ -48,39 +48,38 @@ const Row = ({ item, value, onChange }) => {
             className={styles.item}
             onClick={() => setVisibleModalProduct(true)}
           >
-            <div className={styles.preview}>
+            {/*<div className={styles.preview}>
               <img
                 srcSet={`${item.image2x} 2x`}
                 src={item.image}
                 alt="Product"
               />
-            </div>
+            </div>*/}
             <div className={styles.details}>
-              <div className={styles.product}>{item.name}</div>
-              <div className={styles.link}>{item.email}</div>
-              <div className={styles.date}>
-                <Icon name="clock" size="20" /> {item.created_at}
-              </div>
-              {item.price > 0 ? (
-                <div className={styles.price}>${item.price}</div>
-              ) : (
-                <div className={styles.empty}>${item.price}</div>
-              )}
+              <div className={styles.product}>{item.nome}</div>           
+              
             </div>
-          </div>
-          <Actions
+
+          </div>        
+         
+        </div>
+        <div className={styles.col}>          
+            <div className={styles.link}>{item.email}</div>             
+          
+        </div>
+        <div className={styles.col}>          
+            <div className={styles.price}>{item.data_nasc}</div>             
+          
+        </div>
+        <div className={styles.col}>          
+            <div className={styles.link}>{item.email}</div>             
+          
+        </div>
+        <Actions
             className={styles.actions}
             classActionsHead={styles.actionsHead}
             items={actions}
           />
-        </div>
-        <div className={styles.col}>
-          {item.price > 0 ? (
-            <div className={styles.price}>${item.price}</div>
-          ) : (
-            <div className={styles.empty}>${item.mprice}</div>
-          )}
-        </div>
         <div className={styles.col}>
           {item.date}
           <Control
