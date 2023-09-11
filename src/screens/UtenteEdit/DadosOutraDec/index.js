@@ -33,18 +33,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
-  useEffect(() => {
-    read()
-  },[data1]);
 
-  function read(){
-
-    if(data1.id>0){
-      // Escalão
-      data1.codigo_antigo!==null ? setAntigoNISS('Sim') : setAntigoNISS('Não')
-     
-    }
-  }
   return (
     <Card
       className={cn(styles.card, className)}
@@ -70,7 +59,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
         /> 
        </span>      
           
-        { antigoNISS==="Sim"&&(
+        { antigoNISS=="Sim"&&(
        <TextInput
           className={styles.field}
           label="Se sim  diz o nome da Entidade Empregadora"
@@ -80,7 +69,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           onChange={onChangeData}
           value={data1.empresa_que_trabalhou}
         />)}
-         { antigoNISS==="Sim"&&(
+         { antigoNISS=="Sim"&&(
          <TextInput
           className={styles.field}
           label="Antigo NISS *"

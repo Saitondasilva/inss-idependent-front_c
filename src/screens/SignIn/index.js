@@ -118,78 +118,28 @@ const SignIn = () => {
         });
   };
 
-  
-  function loginGoogle() {
-
-      return axios
-        .post("/google/login")
-        .then((response) => {
-           const token  =   response.data.data.token;
-           const user   =   response.data.data;
-          
-          localStorage.setItem('token', token);
-          localStorage.setItem('userData', JSON.stringify(user));
-      
-         dispatch({ type: 'login', playload: user } )
-          console.log(token);
-          console.log(user);
-          if(data1.id_type===2)
-          navigate("/home");
-          if(data1.id_type===1)
-          navigate("/busca/profissional");
-          return response;
-          
-        })
-        .catch((err) => {
-          setLoader(false)
-          console.log("Error", err);
-          seterrorpassword(err.response.data.message)
-          return err.response;
-        });
-  };
-
   return (
     <div className={styles.login} style={{ minHeight: heightWindow }}>
       <div className={styles.wrapper}>
-        <Link className={styles.logo}>
+        {/*
           <Image
             className={styles.pic}
-            src="/images/logo-finmap-site1.svg"
-            srcDark="/images/logo-finmap-site1.svg"
-            alt="Core"
+            src="/images/n_logo_inss.png"
+            srcDark="/images/n_logo_inss.png"
+            alt="SITI"
           />
-        </Link>
-        {/*<div className={cn("h2", styles.title)}>Login</div>*/}
+          */}
+        
+        <div className={cn("h2", styles.title)}>SITI</div>
         <div className={styles.head}>
-          <div className={styles.subtitle}>Continue com a sua conta:</div>
-          <div className={styles.btns}>
+          <div className={styles.subtitle}>Sistema Integrado do Trabalhador Idependente</div>
+          
             
-              <button className={cn("button-stroke", styles.button)}>
-                <img src="/images/content/google.svg" alt="Google" />
-                Google
-              </button>
            
-            <button className={cn("button-stroke", styles.button)}>
-              <Image
-                className={styles.pic}
-                src="/images/content/apple-dark.svg"
-                srcDark="/images/content/apple-light.svg"
-                alt="Apple"
-              />
-              Apple ID
-            </button>
-          </div>
+           
         </div>
         <div className={styles.body}>
           <div className={styles.subtitle}></div>
-          {/*
-          <Dropdown
-          className={styles.field}
-          value={purchase}
-          setValue={setPurchase}
-          options={optionsPurchase}
-        /> 
-        */}
         
           <TextInput
             className={styles.field}
@@ -216,20 +166,7 @@ const SignIn = () => {
           {loader && <Loader className={styles.loader} />} 
           <button onClick={login} className={cn("button", styles.button)} >Logar</button>
           
-          <div className={styles.note}>
-            <span>
-            <Link className={styles.link} to="/sign-in"> Politica de Privacidade </Link>
-            e
-            <Link className={styles.link} to="/sign-in"> Temos de Uso </Link>             
-            </span>
-          </div>
           
-          <div className={styles.info}>
-            Ainda não tem conta?{" "}
-            <Link className={styles.link} to="/sign-up">
-              Registrar
-            </Link>
-          </div>
         </div>
       </div>
     </div>

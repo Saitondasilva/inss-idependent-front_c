@@ -4,7 +4,6 @@ import Page from "./components/Page";
 import Home from "./screens/Home";
 import ProductsDashboard from "./screens/ProductsDashboard";
 import NewProduct from "./screens/NewProduct";
-import NewClienteEdit from "./screens/NewClienteEdit";
 import Drafts from "./screens/Drafts";
 import Released from "./screens/Released";
 import Comments from "./screens/Comments";
@@ -40,6 +39,7 @@ import JornadaCliente from "./screens/JornadaCliente";
 import CarteiraPesquisa from "./screens/CarteiraPesquisa";
 import AnaliseProgreso from "./screens/AnaliseProgresso";
 import NewCliente from "./screens/NewCliente";
+import UtenteEdit from "./screens/UtenteEdit";
 import NewAgregados from "./screens/NewAgregados";
 import NewContribuicao from "./screens/NewContribuicao";
 import AgendaProfissional from "./screens/AgendaProfissional";
@@ -130,6 +130,16 @@ function App() {
               </ProtectedRoute>
             }
           />
+            <Route
+            path="/utente/edit/:id?"
+            element={
+              <ProtectedRoute>
+                <Page title="Aterar dados do Beneficiário">
+                  <UtenteEdit />
+                </Page>
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/Agregado/add"
@@ -188,14 +198,6 @@ function App() {
             element={
               <Page title="Products dashboard">
                 <ProductsDashboard />
-              </Page>
-            }
-          />
-          <Route
-            path="/products/editar/:id"
-            element={
-              <Page title="Editar Utente">
-                <NewClienteEdit />
               </Page>
             }
           />

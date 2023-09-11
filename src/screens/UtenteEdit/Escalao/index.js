@@ -36,8 +36,6 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
- 
-
   function getEscalao(){
     return axios
     .get("/getEscalao")
@@ -77,29 +75,11 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
       return err.response;
     });
   }
-  function read(){
-  
-    if(data1.id>0){
-     
-      // Escalão
-      var position        =   escalaoID.indexOf(data1.id_escalao)
-      setEscalao(optionsEscalao[position])
-      // Esquema
-      var position1        =   esquemaID.indexOf(data1.id_tipo_esquema)
-      setEsquema(optionsEsquema[position1])
-      // Periodo Contributivo
-      var position2       =   periodoID.indexOf(data1.numero_periodo)
-      setPeriodo(optionsPeriodo[position2])
-    }
-  }
   useEffect(() => {
     getEscalao()
     getEsquema()
   },[]);
-  useEffect(() => {
-    read()
-  },[data1]);
-
+  
   useEffect(() => {
     var position        =  optionsEscalao.indexOf(escalao);
     data1.escalao_id   =  escalaoID[position];
@@ -114,7 +94,6 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
     var position        =  optionsPeriodo.indexOf(periodo);
     data1.periodo_id   =  periodoID[position];
   }, [periodo]);
-
   return (
     <Card    
       className={cn(styles.card, className)}      

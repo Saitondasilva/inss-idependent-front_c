@@ -23,6 +23,7 @@ const Products = () => {
   const [id, setId] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  
   const handleSubmit = (e) => {
     GetPesquisa()
   };
@@ -47,7 +48,7 @@ const Products = () => {
 },[]);
 
 function GetAllUtente(page=1) {
-  const page_size = 1; // Número de itens por página
+  const page_size = 10; // Número de itens por página
     return axios
       .get(`/utente/getAllUtente?page=${page}&page_size=${page_size}`)
       .then((response) => {
@@ -108,6 +109,7 @@ function changeTab(x){
  var id=activeTabID[position];
  setId(id);
   GetAllUtente(1)
+  setCurrentPage(1)
 }
   return (
     <Card

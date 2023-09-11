@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import styles from "./NameAndDescription.module.sass";
-import Card from "../../../../../../components/Card";
-
-import TextInput from "../../../../../../components/TextInput";
-
-import Dropdown from "../../../../../../components/Dropdown";
+import Card from "../../../components/Card";
+import Icon from "../../../components/Icon";
+import TextInput from "../../../components/TextInput";
+import Editor from "../../../components/Editor";
+import Dropdown from "../../../components/Dropdown";
 import axios from "axios";
-
+import Search from "../../AnaliseProgresso/Search";
 
 // const optionsGenero      = ["Masculino", "Feminino", "Outro"];
 // const optionsEstadocivil = ["Solteiro", "Casado", "Divorciado", "Viuvo"];
@@ -16,7 +16,7 @@ const optionsLinguagem      = ["Português", "Inglês", "Françes", "Espanhol"];
 const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 // const optionsPais        = ["Brasil", "Portugal", "França", "Espanha"];
 
-const NameAndDescription = ({ className, data1, setData1, id}) => {
+const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
   const [optionsGenero, setOptionsGenero] = useState([]);
   const [genero, setGenero] = useState(optionsGenero[0]);
@@ -24,21 +24,34 @@ const NameAndDescription = ({ className, data1, setData1, id}) => {
   const [optionsEstadocivil, setOptionsEstadocivil] = useState([]);
   const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
   const [estadocivilID, setEstadocivilID] = useState([]);
-  
+  const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
   const [optionsPais, setOptionsPais] = useState(['--Escolha um--', 'Santomense', 'estrangeiro']);
   const [pais, setPais] = useState(optionsPais[0]);
   const [paisID, setPaisID] = useState([]);
   const [optionsDocumento, setOptionsDocumento] = useState([]);
-
-  const [optionsNivel, setOptionsNivel] = useState(['Administrador', 'Atendimento', 'Validador']);
-  const [nivel, setNivel] = useState([]);
-  
-  const [nome, setNome] = useState();
-  const [numero_documento, setNumeroDocumento] = useState();
-  const [data_nasc, setDataNasc] = useState();
+  const [documento, setDocumento] = useState(optionsDocumento[0]);
+  const [documentoID, setDocumentoID] = useState([]);
  
   data1.descricao=content;
-
+function read(){
+  if(data1.id>0){
+    // Documento
+    console.log("tipo_documento=",data1)
+    var position        =   documentoID.indexOf(data1.id_tipo_documento)
+    setDocumento(optionsDocumento[position])
+    //Estado Civil
+    var position1        =   estadocivilID.indexOf(data1.id_estado_civil)
+    setEstadocivil(optionsEstadocivil[position1])
+    //Genero
+    /*
+    var position2        =   generoID.indexOf(data1.id_sexo)
+    setGenero(optionsGenero[position2])
+    alert(data1.id_sexo)*/
+    //Nacionalidade
+    var position3        =   paisID.indexOf(data1.id_nacionalidade)
+    setGenero(optionsPais[position3])
+  }
+}
 
   function onChangeData(e) {
     console.log(e)
@@ -49,23 +62,27 @@ const NameAndDescription = ({ className, data1, setData1, id}) => {
   }
   useEffect(() => {
     var position        =   optionsGenero.indexOf(genero);
-        data1.sexo_id   =   generoID[position];
+        data1.sexo_id=generoID[position];
   }, [genero]);
 
   useEffect(() => {
-    var position              =   optionsEstadocivil.indexOf(estadocivil);
+    var position        =   optionsEstadocivil.indexOf(estadocivil);
         data1.estadocivil_id  =   estadocivilID[position];
   }, [estadocivil]);
 
   useEffect(() => {
     var position        =   optionsPais.indexOf(pais);
-        data1.pais_id   =   paisID[position];
+        data1.pais_id  =   paisID[position];
   }, [pais]);
 
   useEffect(() => {
-    var position            =   optionsDocumento.indexOf(documento);
-        data1.documento_id  =   documentoID[position];
+    var position        =   optionsDocumento.indexOf(documento);
+        data1.id_tipo_documento  =   documentoID[position];
   }, [documento]);
+
+  useEffect(() => {
+    read()
+  }, [data1]);
   function onChangeFile(e){
     let file = e.target.files
    /* data1.photo=this.state.image
@@ -85,8 +102,9 @@ const NameAndDescription = ({ className, data1, setData1, id}) => {
         b.push(response.data.data[i].id)
       }
       setOptionsGenero(a);
-      setGenero([optionsGenero[0]])
       setGeneroID(b);
+      setGenero([optionsGenero[0]]);
+     
     })
     .catch((err) => {
       console.log("Error", err);
@@ -150,98 +168,167 @@ const NameAndDescription = ({ className, data1, setData1, id}) => {
       return err.response;
     });
   }
-
-
-  function GetAllCliente() {
-    return axios
-      .get("/utente/getUtenteById/"+id)
-      .then((response) => {
-       console.log(response.data.data)
-       setNome(response.data.data.Utente.nome)
-       setDataNasc(response.data.data.Utente.data_nasc)
-       setNumeroDocumento(response.data.data.Utente.numero_documento)
-       setNomeMae(response.data.data.Utente.nome_mae)
-       setNomePai(response.data.data.Utente.nome_pai)
-       setNif(response.data.data.Utente.nif)
-       
-       data1.id_utente=response.data.data.Utente.id
-       
-      })
-    
-      .catch((err) => {
-        console.log("Error", err);
-        return err.response;
-      });
-};  
   useEffect(() => {
+    getGenero()
+    getEstadoCivil()
+    getPais()
+    getTipoDoc()
     
-  },[ id]);
+  },[]);
+
 
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Registro de Utilizador"
+      title="Identificação Do Beneficiário"
       classTitle="title-green"      
     >
+      
       <div className={styles.description}>
+        
       <hr></hr>
+      <button
+          className={cn(styles.head)}
+          onClick={() => read()}
+        >
+          <Icon name="more-horizontal" size="24" />
+        </button>
       <div className={styles.group}>
-
+      
+      <span className={styles.field}>
+       <Dropdown
+          className={styles.field1}
+          label="Tipo Documento *"
+          setValue={setDocumento}
+          options={optionsDocumento}
+          onChange={data1.tipo_documento=documento}
+          value={documento}
+        /> </span>
         <TextInput
           className={styles.field}
-          label="Utilizador*"
+          label="Nº Documento *"
+          name="numero_documento"
+          type="text"
+          required
+          onChange={onChangeData}
+          value={data1.numero_documento}
+        />
+       
+        <TextInput
+          className={styles.field}
+          label="Nome *"
           name="nome"
           type="text"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           required
           onChange={onChangeData}
-          value={data1.tilizador}
-        
+          value={data1.nome}
         />
           <TextInput
           className={styles.field}
-          label="Email"
-          name="email"
-          type="email"
+          label="Data nascimento *"
+          name="data_nasc"
+          type="date"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           required
           onChange={onChangeData}
-          value={data1.email}
+          value={data1.data_nasc}
         />
         <TextInput
           className={styles.field}
-          label="Password"
-          name="password"
-          type="password"
+          label="Nome pai *"
+          name="nome_pai"
+          type="text"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           required
           onChange={onChangeData}
-          value={data1.password}
+          value={data1.nome_pai}
         />
+
         <TextInput
           className={styles.field}
-          label="Confirmar Password"
-          name="repassword"
-          type="password"
+          label="Nome Mãe *"
+          name="nome_mae"
+          type="text"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           required
           onChange={onChangeData}
-          value={data1.repassword}
+          value={data1.nome_mae}
+ 
         />
-         <span className={styles.field}>
+      
+        <TextInput
+          className={styles.field}
+          label="NIF *"
+          name="nif"
+          type="text"
+          mask="999999999"
+          required
+          onChange={onChangeData}
+          value={data1.nif}
+        />      
+       
+       <span className={styles.field}>
        <Dropdown
           className={styles.field1}
-          label="Perfil de Utilizador*"
-          setValue={setNivel}
-          options={optionsNivel}
-          onChange={data1.nivel=nivel}
-          value={nivel}
-        /> </span>   
+          label="Gênero *"  
+          name="genero"        
+          setValue={setGenero}
+          options={optionsGenero}
+          onChange={data1.sexo=genero}
+          value={genero}
+        /> 
+       </span>
+       <span className={styles.field}>
+       <Dropdown
+          className={styles.field1}
+          label="Estado civil *"
+          name="estado_civil"
+          setValue={setEstadocivil}
+          options={optionsEstadocivil}
+          onChange={data1.estadocivil=estadocivil}
+          value={estadocivil}
+        /> 
+       </span>
       
-       </div>
- 
+          <span className={styles.field}>
+       <Dropdown
+          className={styles.field1}
+          label="Nacionalidade *"
+          name="pais"
+          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          setValue={setPais}
+          options={optionsPais}
+          onChange={data1.pais=pais}
+          value={pais}
+        /> 
+       </span>
+       
+       
+       
+      </div>
+       
+  
+          
+      
+      
+      
+        {
+          /*
+       <Editor
+          state={content}
+          onChange={setContent}
+          classEditor={styles.editor}
+          label="Sobre"
+          tooltip="Descrição"
+          name="descricao"
+          value={data1.descricao}
+          />
+        */}
+       
       </div>
     </Card>
   );
 };
+
 export default NameAndDescription;
