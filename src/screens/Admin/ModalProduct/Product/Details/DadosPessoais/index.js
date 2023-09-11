@@ -176,11 +176,7 @@ const NameAndDescription = ({ className, data1, setData1, id}) => {
       });
 };  
   useEffect(() => {
-    getGenero()
-    getEstadoCivil()
-    getPais()
-    getTipoDoc()
-    GetAllCliente() 
+    
   },[ id]);
 
   return (

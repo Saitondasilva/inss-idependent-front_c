@@ -5,12 +5,26 @@ import styles from "./Details.module.sass";
 import DadosPessoais from "./DadosPessoais";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Panel from "./Panel";
 
 const navigation = ["Product", "Comments"];
 
 
 
 const Details = ({ className, setValue, activeIndex, setActiveIndex }) => {
+  const [visiblePreview, setVisiblePreview] = useState(false);
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [data1, setData1] = useState({});
+  const [userData, setuserData] = useState({});
+  const [smsError, setSmsError] = useState("");
+  const [smsSucess, setSmsSuccess] = useState("");
+  const [loader, setLoader] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [startTime, setStartTime] = useState(new Date());
+  
+  const {id}=useParams();
+  
+
   const handleClick = (index) => {
     setActiveIndex(index);
     index === 0 && setValue(false);
@@ -18,12 +32,7 @@ const Details = ({ className, setValue, activeIndex, setActiveIndex }) => {
   };
 
 
-  const [startDate, setStartDate] = useState(new Date());
-const [startTime, setStartTime] = useState(new Date());
-const [userData, setuserData] = useState({});
-const [data1, setData1] = useState({});
-const {id}=useParams();
-
+ 
 
 var user=null;
 useEffect(() => {
@@ -86,9 +95,19 @@ useEffect(() => {
             <DadosPessoais data1={data1} setData1={setData1} />
      
       
-      {/*<Products />*/}
-      
+      {/*<Products />*/}  
+      <Panel
+    setVisiblePreview={setVisiblePreview}
+    setVisibleSchedule={setVisibleModal}
+    SaveProfissionalCliente={SaveProfissionalCliente}
+  
+    smsError={smsError}
+    smsSucess={smsSucess}
+    loader={loader}
+    />    
     </div>
+    
+
   );
 };
 
