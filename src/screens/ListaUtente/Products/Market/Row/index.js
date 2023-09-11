@@ -61,6 +61,7 @@ const Row = ({ item, value, onChange, up, id}) => {
       </div>
       
       <ModalProduct
+        item={item}
         visible={visibleModalProduct}
         onClose={() => setVisibleModalProduct(false)}
       />

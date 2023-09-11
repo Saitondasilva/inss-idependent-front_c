@@ -33,6 +33,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   const [documentoID, setDocumentoID] = useState([]);
  
   data1.descricao=content;
+  
 function read(){
   if(data1.id>0){
     // Documento
@@ -47,7 +48,7 @@ function read(){
     setGenero(optionsGenero[position2])
     //Nacionalidade
     var position3        =   paisID.indexOf(data1.id_nacionalidade)
-    setGenero(optionsPais[position3])
+    setPais(optionsPais[position3])
   }
 }
 
@@ -60,12 +61,12 @@ function read(){
   }
   useEffect(() => {
     var position        =   optionsGenero.indexOf(genero);
-        data1.sexo_id=generoID[position];
+        data1.id_sexo=generoID[position];
   }, [genero]);
 
   useEffect(() => {
     var position        =   optionsEstadocivil.indexOf(estadocivil);
-        data1.estadocivil_id  =   estadocivilID[position];
+        data1.id_estado_civil  =   estadocivilID[position];
   }, [estadocivil]);
 
   useEffect(() => {
@@ -100,8 +101,9 @@ function read(){
         b.push(response.data.data[i].id)
       }
       setOptionsGenero(a);
-      setGenero([optionsGenero[0]])
       setGeneroID(b);
+      setGenero([optionsGenero[0]])
+      
     })
     .catch((err) => {
       console.log("Error", err);
@@ -184,6 +186,12 @@ function read(){
       <div className={styles.description}>
         
       <hr></hr>
+      <button
+          className={cn(styles.head)}
+          onClick={() => read()}
+        >
+          <Icon name="more-horizontal" size="24" />
+        </button>
       <div className={styles.group}>
       
       <span className={styles.field}>
@@ -286,6 +294,7 @@ function read(){
        <Dropdown
           className={styles.field1}
           label="Nacionalidade *"
+          name="pais"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           setValue={setPais}
           options={optionsPais}

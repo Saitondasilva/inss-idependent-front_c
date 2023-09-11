@@ -17,12 +17,9 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
- 
-  const [optionsAntigoNISS, setOptionsAntigoNISS] = useState(['Sim', 'Não']);
-  const [antigoNISS, setAntigoNISS] = useState(optionsAntigoNISS[0]);
-  
-  
- 
+  const [optionsBanco, setOptionsBanco] = useState(['--Banco--','AFRILAND','ECOBANK','BGFI']);
+  const [banco, setBanco] = useState(optionsBanco[0]);
+  const [bancoID, setBancoID] = useState([]);
   data1.descricao=content;
 
 
@@ -33,71 +30,83 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
-  useEffect(() => {
-    read()
-  },[data1]);
-
-  function read(){
-
-    if(data1.id>0){
-      // Escalão
-      data1.codigo_antigo!==null ? setAntigoNISS('Sim') : setAntigoNISS('Não')
-     
-    }
+  
+  function getBanco(){
+    return axios
+    .get("/getBanco")
+    .then((response) => {
+       var a = new Array();
+       var b = new Array();
+      for(var i=0; i<response.data.data.length; i++){
+        a.push(response.data.data[i].nome)
+        b.push(response.data.data[i].id)
+      }
+      setOptionsBanco(a);
+      setBancoID(b);
+      setBanco([optionsBanco[0]])
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
   }
+  useEffect(() => {   
+   getBanco()
+  },[]);
+  useEffect(() => {
+    var position        =   optionsBanco.indexOf(banco);
+        data1.banco_id=bancoID[position];
+  }, [banco]);
+
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Primeiras Declarações"
-      classTitle="title-green"
-      
+      title="Dados da Conta Bancária"
+      classTitle="title-green"   
     >
       <div className={styles.description}>
-      <hr></hr>
-      <div className={styles.group}>
-    
-       
-       <span className={styles.field}>
-  
+      <hr></hr> 
+      <div className={styles.group}>        
+        
+        <span className={styles.field}>
        <Dropdown
           className={styles.field1}
-          label="Já esteve ,alguma vez ,inscrito na segurança Social"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setAntigoNISS}
-          options={optionsAntigoNISS}
-          onChange={data1.antigoNISS=antigoNISS}
-          value={antigoNISS}
+          label="Banco "
+          setValue={setBanco}
+          options={optionsBanco}
+          onChange={data1.banco=banco}
+          value={banco}
         /> 
-       </span>      
-          
-        { antigoNISS==="Sim"&&(
+       </span>
        <TextInput
           className={styles.field}
-          label="Se sim  diz o nome da Entidade Empregadora"
-          name="empresa_que_trabalhou"
+          label="NIB "
+          name="nib_conta"
           type="text"
+          mask="9999999999999999"
           required
           onChange={onChangeData}
-          value={data1.empresa_que_trabalhou}
-        />)}
-         { antigoNISS==="Sim"&&(
-         <TextInput
+          value={data1.nib_conta}
+        />
+      
+      <TextInput
           className={styles.field}
-          label="Antigo NISS *"
-          name="codigo_antigo"
+          label="Nº Conta "
+          name="n_conta"
           type="number"
           required
           onChange={onChangeData}
-          value={data1.codigo_antigo}
-        />      
-  
-        )}
-        
+          value={data1.n_conta}
+        />
+     
+       
       </div>
     
-       
-       
+        
+          
       </div>
+      
+     
     </Card>
   );
 };

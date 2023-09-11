@@ -30,13 +30,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
-  function read(){
-    if(data1.id>0){
-      // Documento
-      var position        =   distritoID.indexOf(data1.id_distrito)
-      setDistrito(optionsDistrito[position])
-    }
-  }
+
   function getDistrito(){
     return axios
     .get("/getDistrit")
@@ -63,12 +57,8 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   },[]);
 
   useEffect(() => {
-    read()
-  },[data1]);
-  
-  useEffect(() => {
     var position        =   optionsDistrito.indexOf(distrito);
-    data1.id_distrito   =  distritoID[position];
+    data1.distrito_id   =  distritoID[position];
   }, [distrito]);
 
   return (
@@ -127,11 +117,42 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           value={distrito}
         /> 
         </span>
-
+      
+      
+       {/*
+       <TextInput
+          className={styles.field}
+          label="Foto"
+          name="photo"
+          type="file"
+          tooltip="Foto"
+          required
+          onChange={onChangeFile}
+          //value={data1.photo}
+        />
+        */}
        
       </div>
+      
+   
+          
       </div>
- 
+      
+      
+        {
+          /*
+       <Editor
+          state={content}
+          onChange={setContent}
+          classEditor={styles.editor}
+          label="Sobre"
+          tooltip="Descrição"
+          name="descricao"
+          value={data1.descricao}
+          />
+        */}
+       
+      
     </Card>
   );
 };

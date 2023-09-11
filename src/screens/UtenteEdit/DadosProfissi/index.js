@@ -17,11 +17,43 @@ const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsBanco, setOptionsBanco] = useState(['--Banco--','AFRILAND','ECOBANK','BGFI']);
-  const [banco, setBanco] = useState(optionsBanco[0]);
-  const [bancoID, setBancoID] = useState([]);
+  const [optionsProfisao, setOptionsProfisao] = useState(['--profissão', 'Horticultor', 'Marcineiro', 'Pedreiro']);
+  const [profisao, setProfisao] = useState(optionsProfisao[0]);
+  
+ 
+  const [search, setSearch] = useState("");
   data1.descricao=content;
 
+
+ {/* function onChangeData(e) {
+    console.log(e)
+    setData1((data1) => ({
+      ...data1,
+      [e.target.name]: e.target.value,
+    }));
+  }
+  const handleSubmit = (e) => {
+    alert();
+  };*/}
+  function getprofissao(){
+    return axios
+    .get("/getprofisao")
+    .then((response) => {
+       var a = new Array();
+      for(var i=0; i<response.data.data.length; i++){
+        a.push(response.data.data[i].nome)
+      }
+      setOptionsProfisao(a);
+      setProfisao([optionsProfisao[0]])
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err.response;
+    });
+  }
+  useEffect(() => {
+    getprofissao()
+  },[]);
 
   function onChangeData(e) {
     console.log(e)
@@ -30,96 +62,49 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
-  
-  function read(){
-    if(data1.id>0){
-      // Banco
-      var position        =   bancoID.indexOf(data1.id_banco)
-      setBanco(optionsBanco[position])
-    }
-  }
 
-  function getBanco(){
-    return axios
-    .get("/getBanco")
-    .then((response) => {
-       var a = new Array();
-       var b = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].nome)
-        b.push(response.data.data[i].id)
-      }
-      setOptionsBanco(a);
-      setBancoID(b);
-      setBanco([optionsBanco[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  useEffect(() => {   
-   getBanco()
-  },[]);
-  useEffect(() => {
-    var position        =   optionsBanco.indexOf(banco);
-        data1.banco_id=bancoID[position];
-  }, [banco]);
-
-  useEffect(() => {
-    read()
-  }, [data1]);
   return (
-    <Card
-      className={cn(styles.card, className)}
-      title="Dados da Conta Bancária"
-      classTitle="title-green"   
+    <Card    
+      className={cn(styles.card, className)}      
+      title="Situação Profissional"       
+      classTitle="title-green"        
     >
       <div className={styles.description}>
       <hr></hr> 
-      <div className={styles.group}>        
-        
-        <span className={styles.field}>
-       <Dropdown
-          className={styles.field1}
-          label="Banco "
-          name="banco"
-          setValue={setBanco}
-          options={optionsBanco}
-          onChange={data1.banco=banco}
-          value={banco}
-        /> 
-       </span>
+       
+      <div className={styles.group}>  
+
+        <TextInput
+          className={styles.field}
+          label="Profissão"
+          name="proficao"
+          type="text"
+          required
+          onChange={onChangeData}
+          value={data1.proficao}
+        />
+
        <TextInput
           className={styles.field}
-          label="NIB "
-          name="nib_conta"
-          type="text"
-          mask="9999999999999999"
+          label="Data Inicio Actividade *"
+          name="data_inicio_actividade"
+          type="date"
+          icon="date"
+          tooltip="Data em que começou a sua actividade"
           required
           onChange={onChangeData}
-          value={data1.nib_conta}
+          value={data1.data_inicio_actividade}
         />
       
-      <TextInput
-          className={styles.field}
-          label="Nº Conta "
-          name="n_conta"
-          type="number"
-          required
-          onChange={onChangeData}
-          value={data1.n_conta}
-        />
-     
-       
+      
       </div>
-    
-        
+      
+   
           
       </div>
       
-     
-    </Card>
+      
+    </Card> 
   );
 };
 
