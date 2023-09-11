@@ -29,15 +29,13 @@ const NameAndDescription = ({ className, data1, setData1, id}) => {
   const [pais, setPais] = useState(optionsPais[0]);
   const [paisID, setPaisID] = useState([]);
   const [optionsDocumento, setOptionsDocumento] = useState([]);
-  const [documento, setDocumento] = useState(optionsDocumento[0]);
-  const [documentoID, setDocumentoID] = useState([]);
+
+  const [optionsNivel, setOptionsNivel] = useState(['Administrador', 'Atendimento', 'Validador']);
+  const [nivel, setNivel] = useState([]);
+  
   const [nome, setNome] = useState();
   const [numero_documento, setNumeroDocumento] = useState();
   const [data_nasc, setDataNasc] = useState();
-  const [nome_mae, setNomeMae] = useState();
-  const [nome_pai, setNomePai] = useState();
-  const [nif, setNif] = useState();
-  
  
   data1.descricao=content;
 
@@ -50,33 +48,6 @@ const NameAndDescription = ({ className, data1, setData1, id}) => {
     }));
   }
 
-
-
-  function GetAllCliente() {
-    return axios
-      .get("/utente/getUtenteById/"+id)
-      .then((response) => {
-       console.log(response.data.data)
-       setNome(response.data.data.Utente.nome)
-       setDataNasc(response.data.data.Utente.data_nasc)
-       setNumeroDocumento(response.data.data.Utente.numero_documento)
-       setNomeMae(response.data.data.Utente.nome_mae)
-       setNomePai(response.data.data.Utente.nome_pai)
-       setNif(response.data.data.Utente.nif)
-       
-       data1.id_utente=response.data.data.Utente.id
-       
-      })
-    
-      .catch((err) => {
-        console.log("Error", err);
-        return err.response;
-      });
-};  
-  useEffect(() => {
-    
-  },[ id]);
-
   return (
     <Card
       className={cn(styles.card, className)}
@@ -86,18 +57,16 @@ const NameAndDescription = ({ className, data1, setData1, id}) => {
       <div className={styles.description}>
       <hr></hr>
       <div className={styles.group}>
-            
-     
-        
+
         <TextInput
           className={styles.field}
-          label="Nome *"
+          label="Utilizador*"
           name="nome"
           type="text"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           required
           onChange={onChangeData}
-          value={nome}
+          value={data1.tilizador}
         
         />
           <TextInput
@@ -108,7 +77,7 @@ const NameAndDescription = ({ className, data1, setData1, id}) => {
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           required
           onChange={onChangeData}
-          value={data_nasc}
+          value={data1.email}
         />
         <TextInput
           className={styles.field}
@@ -118,7 +87,7 @@ const NameAndDescription = ({ className, data1, setData1, id}) => {
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           required
           onChange={onChangeData}
-          value={data_nasc}
+          value={data1.password}
         />
         <TextInput
           className={styles.field}
@@ -128,13 +97,20 @@ const NameAndDescription = ({ className, data1, setData1, id}) => {
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           required
           onChange={onChangeData}
-          value={data_nasc}
+          value={data1.repassword}
         />
-   
+         <span className={styles.field}>
+       <Dropdown
+          className={styles.field1}
+          label="Perfil de Utilizador*"
+          setValue={setNivel}
+          options={optionsNivel}
+          onChange={data1.nivel=nivel}
+          value={nivel}
+        /> </span>   
       
        </div>
-  
-       
+ 
       </div>
     </Card>
   );

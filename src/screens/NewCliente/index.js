@@ -50,7 +50,7 @@ function validateForm(){
     return false;
   }
   if(!data1.data_nasc || data1.data_nasc===""){
-    setSmsError("Por favor preencha o estado de residencia")
+    setSmsError("Por favor preencha a data de nascimento")
     return false;
   }
   if(!data1.nome_pai || data1.nome_pai===""){
@@ -208,7 +208,7 @@ function SaveProfissionalCliente() {
       setSmsSuccess("Registro com sucesso!");
       setSmsError("");
       setLoader(false)
-      clean();
+      //clean();
       console.log(response.data.data)
     })
     .catch((err) => {
