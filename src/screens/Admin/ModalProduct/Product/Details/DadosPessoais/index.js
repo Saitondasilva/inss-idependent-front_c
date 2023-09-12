@@ -47,25 +47,7 @@ const NameAndDescription = ({ className, data1, setData1, id}) => {
       [e.target.name]: e.target.value,
     }));
   }
-  useEffect(() => {
-    var position        =   optionsGenero.indexOf(genero);
-        data1.sexo_id   =   generoID[position];
-  }, [genero]);
-
-  useEffect(() => {
-    var position              =   optionsEstadocivil.indexOf(estadocivil);
-        data1.estadocivil_id  =   estadocivilID[position];
-  }, [estadocivil]);
-
-  useEffect(() => {
-    var position        =   optionsPais.indexOf(pais);
-        data1.pais_id   =   paisID[position];
-  }, [pais]);
-
-  useEffect(() => {
-    var position            =   optionsDocumento.indexOf(documento);
-        data1.documento_id  =   documentoID[position];
-  }, [documento]);
+ 
   function onChangeFile(e){
     let file = e.target.files
    /* data1.photo=this.state.image
@@ -74,109 +56,7 @@ const NameAndDescription = ({ className, data1, setData1, id}) => {
   })
     console.log("FILE", this.state.image)*/
   }
-  function getGenero(){
-    return axios
-    .get("/getGenero")
-    .then((response) => {
-      var a =new Array();
-      var b =new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-        b.push(response.data.data[i].id)
-      }
-      setOptionsGenero(a);
-      setGenero([optionsGenero[0]])
-      setGeneroID(b);
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  function getEstadoCivil(){
-    return axios
-    .get("/getEstadoCivil")
-    .then((response) => {
-       var a = new Array();
-       var b = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-        b.push(response.data.data[i].id)
-      }
-      setOptionsEstadocivil(a);
-      setEstadocivilID(b);
-      setEstadocivil([optionsEstadocivil[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  function getPais(){
-    return axios
-    .get("/country")
-    .then((response) => {
-       var a = new Array();
-       var b = new Array();
-      for(var i=0; i<response.data.data.countries.length; i++){
-        a.push(response.data.data.countries[i].nome)
-        b.push(response.data.data.countries[i].id)
-      }
-      setOptionsPais(a);
-      setPaisID(b);
-      setPais([optionsPais[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  function getTipoDoc(){
-    return axios
-    .get("/getTipoDocumentoUtente")
-    .then((response) => {
-       var a = new Array();
-       var b = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-        b.push(response.data.data[i].id)
-      }
-      setOptionsDocumento(a);
-      setDocumentoID(b);
-      setDocumento([optionsDocumento[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-
-
-  function GetAllCliente() {
-    return axios
-      .get("/utente/getUtenteById/"+id)
-      .then((response) => {
-       console.log(response.data.data)
-       setNome(response.data.data.Utente.nome)
-       setDataNasc(response.data.data.Utente.data_nasc)
-       setNumeroDocumento(response.data.data.Utente.numero_documento)
-       setNomeMae(response.data.data.Utente.nome_mae)
-       setNomePai(response.data.data.Utente.nome_pai)
-       setNif(response.data.data.Utente.nif)
-       
-       data1.id_utente=response.data.data.Utente.id
-       
-      })
-    
-      .catch((err) => {
-        console.log("Error", err);
-        return err.response;
-      });
-};  
-  useEffect(() => {
-    
-  },[ id]);
-
+  
   return (
     <Card
       className={cn(styles.card, className)}

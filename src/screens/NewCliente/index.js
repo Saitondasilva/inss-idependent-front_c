@@ -207,7 +207,7 @@ function SaveProfissionalCliente() {
       setSmsSuccess("Registro com sucesso!");
       setSmsError("");
       setLoader(false)
-      clean();
+      // clean();
       console.log("REGISTRO ",response.data.data)
     })
     .catch((err) => {
