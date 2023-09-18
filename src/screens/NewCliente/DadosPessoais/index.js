@@ -37,7 +37,6 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
 function read(){
   if(data1.id>0){
     // Documento
-    console.log("tipo_documento=",data1)
     var position        =   documentoID.indexOf(data1.id_tipo_documento)
     setDocumento(optionsDocumento[position])
     //Estado Civil

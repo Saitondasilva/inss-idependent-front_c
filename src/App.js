@@ -66,6 +66,17 @@ function App() {
             }
           />
           <Route
+            path="/home2"
+            element={
+            <ProtectedRoute>
+              <Page title="Dashboard">
+                <NewProduct />
+              </Page>
+            </ProtectedRoute>
+              
+            }
+          />
+          <Route
             path="/home"
             element={
             <ProtectedRoute>

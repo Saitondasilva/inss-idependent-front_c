@@ -54,7 +54,6 @@ function GetAllUtente(page=1) {
       .then((response) => {
         const { Utente, total, per_page, current_page } = response.data.data;      
         setProduto1(Utente);
-        
         return { total, per_page, current_page };
       })
       .catch((err) => {
@@ -167,16 +166,7 @@ function changeTab(x){
         <div className={styles.wrapper}>
         
           {<Market items={produto1} id_estado_utente={id} />}
-          {/*activeTab === navigation[1] && (
-            <Table
-              title="Traffic source"
-              items={produto1}
-              legend={"indicatorsTraffic"}
-            />
-          )*/}
-          {/*activeTab === navigation[2] && (
-            <Table title="Viewers" items={viewers} legend={indicatorsViewers} />
-          )*/}
+         
           <div className={styles1.foot}>
             <button className={styles1.arrow} onClick={() => handlePageChange(currentPage - 1)}>
               <Icon name="arrow-left" size="20" />

@@ -15,6 +15,7 @@ const Row = ({ item, value, onChange, up, id}) => {
 
   return (
     <>
+    
       <div className={styles.row} onMouseLeave={() => setVisibleActions(false)}>
         <div className={styles.col}>
           <Checkbox

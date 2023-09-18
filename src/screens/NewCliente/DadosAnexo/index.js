@@ -39,7 +39,7 @@ const NameAndDescription = ({ className, data1, setData1, data ,setData }) => {
 
   function getDocAnexo(){
     return axios
-    .get("/getDocAnexo/"+id)
+    .get("/getUtenteAnexo/"+id)
     .then((response) => {
       console.log("DOC ANEXO",response.data.data)
        if(response.data.data.length>0){

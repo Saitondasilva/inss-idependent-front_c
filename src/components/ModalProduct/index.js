@@ -37,7 +37,7 @@ const ModalProduct = ({ item,visible, onClose }) => {
     visible && (
       <div id="modal-product" className={styles.modal}>
         <div className={styles.control}>
-       
+        
           <button className={styles.close} onClick={onClose}>
             <Icon name="close" size="20" />
           </button>

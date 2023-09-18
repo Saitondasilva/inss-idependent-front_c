@@ -39,6 +39,7 @@ const Market = ({ items,id_estado_utente }) => {
         </div>
         
         {items.map((x, index) => (
+          // Listar todos caso o estado for 0
           id_estado_utente === 0 ?
           (<Row
             item={x}
