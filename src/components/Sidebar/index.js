@@ -97,7 +97,7 @@ var navigation=[];
   {
     title: "Utilizador",
     url: "/user/admin",
-    icon: "lightning",
+    icon: "setting",
     colorCounter: "#B5E4CA",
   },
   

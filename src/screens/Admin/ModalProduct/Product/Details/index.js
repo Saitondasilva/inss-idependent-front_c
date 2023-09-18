@@ -36,29 +36,38 @@ const Details = ({ className, setValue, activeIndex, setActiveIndex }) => {
 
 var user=null;
 useEffect(() => {
-  user = localStorage.getItem("userData");
-  user==null?setuserData([]):setuserData(JSON.parse(user));
-  //shearchCliente(JSON.parse(user));
+  
+  SaveProfissionalCliente();
 },[]);
+
   function SaveProfissionalCliente() {
    
     var data={
-      nome: data1.nome,
-      nif: data1.nif,
+      nome: data1.utilizador,
       email: data1.email,
-      caixa_postal: data1.caixa_postal,
-      id_tipo_documento: data1.documento_id,
-      numero_documento: data1.numero_documento,
-      numero_porta: data1.N_porta,        
-       
+      password: data1.password,
+      caixa_postal: data1.caixa_postal,       
     
     }
     
     return axios
-      .post("/utente/register",data,{
-        headers: { Authorization: `Bearer ${userData.token}` },
-      
-      });
+    .post("/utente/register",data,{
+      headers: { Authorization: `Bearer ${userData.token}` },
+    })
+    .then((response) => {
+      setSmsSuccess("Registro com sucesso!");
+      setSmsError("");
+      setLoader(false)
+      //clean();
+      console.log(response.data.data)
+    })
+    .catch((err) => {
+      setLoader(false);
+      setSmsSuccess("");
+      setSmsError(err.response.data.message);
+      console.log("Error", err);
+      return err.response;
+    });
   };
   
 
