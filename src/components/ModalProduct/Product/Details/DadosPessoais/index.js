@@ -26,6 +26,7 @@ const NameAndDescription = ({ className, item}) => {
     user==null?setuserData([]):setuserData(JSON.parse(user));
     getDocAnexo()
     if(valido>1)setResolution(true)
+    
   },[]);
   function onChangeData(e) {
     setData1((data1) => ({
@@ -42,6 +43,7 @@ const NameAndDescription = ({ className, item}) => {
         const Anexo = response.data.data
 
         setData(Anexo)
+        console.log("Anexo",Anexo)
        }
     })
     .catch((err) => {
@@ -138,7 +140,7 @@ const NameAndDescription = ({ className, item}) => {
               {loader && <Loader className={styles.loader} />} 
               {smsSucess!=="" && <p style={{color:"green"}}>{smsSucess}</p>}
               {smsError!=="" && <p style={{color:"red"}}>{smsError}</p>}
-            </div>
+            </div><br></br>
             <button className={cn("button-stroke-red", styles.button)} onClick={RecusarProcesso}>Recusar validação</button>
         </div>
       }
@@ -460,15 +462,12 @@ const NameAndDescription = ({ className, item}) => {
                
           <div className={styles.description}>
             <div className={styles.group}>
+            <Link className={cn("button", styles.button)} to={"http://127.0.0.1:8000/"+data[i].file}>
               <span className={styles.field}>
-                  <TextInput
-              className={styles.field1}
-                type="text"
-                value={data[i].tipo_anexo }
-                required 
-                readOnly
-              />  
+                {data[i].tipo_anexo }
               </span>
+            </Link>
+              
              
              
             </div>
