@@ -62,7 +62,7 @@ function App() {
                 <Home />
               </Page>
             </ProtectedRoute>
-              
+                 
             }
           />
           <Route
