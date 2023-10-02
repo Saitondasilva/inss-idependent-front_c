@@ -26,7 +26,6 @@ const NameAndDescription = ({ className, item}) => {
     user==null?setuserData([]):setuserData(JSON.parse(user));
     getDocAnexo()
     if(valido>1)setResolution(true)
-    
   },[]);
   function onChangeData(e) {
     setData1((data1) => ({
@@ -51,6 +50,39 @@ const NameAndDescription = ({ className, item}) => {
       return err.response;
     }); 
   }
+ 
+
+  const openFile = async (anexoId) => {
+    try {
+
+      // Faça a solicitação à API Laravel para baixar o arquivo
+      const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/utente/anexo/${anexoId}`,{
+        headers: { Authorization: `Bearer ${userData.token}`},
+      });
+
+      if (!response.ok) {
+        throw new Error('Falha ao baixar o arquivo.');
+      }
+
+      // Obtenha o conteúdo do arquivo como blob
+      const blob = await response.blob();
+
+      // Crie uma URL para o blob
+      const url = window.URL.createObjectURL(blob);
+
+      // Abra o arquivo em uma nova janela ou aba
+      const newWindow = window.open(url, '_blank');
+      if (!newWindow) {
+        throw new Error('Não foi possível abrir uma nova janela ou aba.');
+      }
+
+      // Libere o objeto URL após o uso
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   function Validacao(){
     if(resolution)return false;
     var confirmed = window.confirm('Tem certeza ues desejas validar esse processo?');
@@ -104,12 +136,16 @@ const NameAndDescription = ({ className, item}) => {
     >
         
       <div className={styles.description}>
+
+      { userData.id_tipo>1 &&
+      
         <div className={styles.group}>
           <div className={styles.field}> 
             <div className={styles.info}>
               Validação dos dados do utente{" "} 
             </div>
             <Switch
+            
               className={styles.switch}
               value={resolution}
               onChange={Validacao}
@@ -119,16 +155,12 @@ const NameAndDescription = ({ className, item}) => {
              
           
           <div className={styles.field}>
-            {valido >1 &&
-          <img src="/images/validado.png" width={"70px"} alt="Avatar" />
-            }
-          </div>
-          
-        </div>
-        { valido===1 &&
-        <div className={styles.field}>
+            {valido >1 ?
+            (<img src="/images/validado.png" width={"70px"} alt="Avatar" />):
+          (
+          <div className={styles.field1}>
             <TextInput
-              className={styles.field}
+              className={styles.field1}
               label="Caso não, Envia uma observação"
               name="observacao"
               type="text"
@@ -142,8 +174,15 @@ const NameAndDescription = ({ className, item}) => {
               {smsError!=="" && <p style={{color:"red"}}>{smsError}</p>}
             </div><br></br>
             <button className={cn("button-stroke-red", styles.button)} onClick={RecusarProcesso}>Recusar validação</button>
+          </div>
+          )
+            }
+          </div>
+          
         </div>
-      }
+  }
+       
+       
       <h2 className={styles.title} >Primeiras Declarações</h2><hr></hr>
         <div className={styles.group}>
       
@@ -462,11 +501,11 @@ const NameAndDescription = ({ className, item}) => {
                
           <div className={styles.description}>
             <div className={styles.group}>
-            <Link className={cn("button", styles.button)} to={"http://127.0.0.1:8000/"+data[i].file}>
+            <button className={cn("button", styles.button)} onClick={()=>openFile(data[i].id)}>
               <span className={styles.field}>
                 {data[i].tipo_anexo }
               </span>
-            </Link>
+            </button>
               
              
              

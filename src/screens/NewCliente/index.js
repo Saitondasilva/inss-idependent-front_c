@@ -207,7 +207,7 @@ function SaveProfissionalCliente() {
       setSmsSuccess("Registro com sucesso!");
       setSmsError("");
       setLoader(false)
-      // clean();
+      clean();
       console.log("REGISTRO ",response.data.data)
     })
     .catch((err) => {
@@ -273,12 +273,12 @@ function EditarUtente() {
       setSmsSuccess("Aleterado com sucesso!");
       setSmsError("");
       setLoader(false)
-      clean();
+      //clean();
     })
     .catch((err) => {
       setLoader(false);
       setSmsSuccess("");
-      setSmsError(err.response.data.message);
+      setSmsError(err.response);
       console.log("Error", err);
       return err.response;
     });
@@ -299,8 +299,8 @@ function EditarUtente() {
             data1.id_sexo="";
             data1.id_distrito="";
             data1.banco_id="";
-            data1.data1.id_estado_civil="";
-            data1.data1.pais_id="";
+            data1.id_estado_civil="";
+            data1.pais_id="";
             data1.data_inicio_actividade="";
             data1.n_conta="";
             data1.nib_conta="";

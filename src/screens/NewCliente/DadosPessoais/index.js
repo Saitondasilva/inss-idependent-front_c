@@ -60,7 +60,7 @@ function read(){
   }
   useEffect(() => {
     var position        =   optionsGenero.indexOf(genero);
-        data1.id_sexo=generoID[position];
+        data1.id_sexo   =   generoID[position];
   }, [genero]);
 
   useEffect(() => {
