@@ -14,6 +14,7 @@ const Actions = ({
   setVisible,
   small,
   up,
+  
 }) => {
   const [innerVisible, setInnerVisible] = useState(false);
 
