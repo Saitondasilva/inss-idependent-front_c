@@ -41,6 +41,7 @@ const Panel = ({setVisiblePreview, setVisibleSchedule, SaveProfissionalCliente, 
         ( <button className={cn("button", styles.button)} onClick={EditarUtente} ><Icon name="edit" size="24" />Aterar  </button>)
         :
         (<button className={cn("button", styles.button)} onClick={SaveProfissionalCliente} ><Icon name="add" size="24" />Guardar  </button>)
+       
         } 
     
         

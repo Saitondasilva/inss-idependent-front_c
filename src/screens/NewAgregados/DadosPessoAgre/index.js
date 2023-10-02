@@ -7,6 +7,7 @@ import Icon from "../../../components/Icon";
 import TextInput from "../../../components/TextInput";
 import Editor from "../../../components/Editor";
 import Dropdown from "../../../components/Dropdown";
+import Checkbox from "../../../components/Checkbox";
 import axios from "axios";
 
 // const optionsGenero      = ["Masculino", "Feminino", "Outro"];
@@ -15,18 +16,13 @@ const optionsLinguagem      = ["Português", "Inglês", "Françes", "Espanhol"];
 const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
 // const optionsPais        = ["Brasil", "Portugal", "França", "Espanha"];
 
-const NameAndDescription = ({ className, data1, setData1 }) => {
+const NameAndDescription = ({ className, handleSubmit, data1, setData1 }) => {
   const [content, setContent] = useState();
-  const [optionsGenero, setOptionsGenero] = useState(['--Sexo', 'Masculino', 'Feminino']);
-  const [genero, setGenero] = useState(optionsGenero[0]);
-  const [optionsEstadocivil, setOptionsEstadocivil] = useState(['--Escolha e --','Solteiro', 'Casado', 'Viuvo']);
-  const [estadocivil, setEstadocivil] = useState(optionsEstadocivil[0]);
-  const [linguagem, setLinguagem] = useState(optionsLinguagem[0]);
-  const [nacionalidade, setNacionalidade] = useState(optionsNacionalidade[0]);
-  const [optionsPais, setOptionsPais] = useState([]);
-  const [pais, setpais] = useState(optionsPais[0]);
-  const [optionsDocumento, setOptionsDocumento] = useState(['--Escolha um--', 'BI', 'Cédula PEsoal', 'Cartão estrangeiro']);
-  const [Documento, setDocum] = useState(optionsPais[0]);
+  const [nome, setNome] = useState();
+  const [numero, setNumero] = useState();
+  const [dataNasc, setDataNasc] = useState();
+  const [valorPrestacaoMensal, setValorPrestacaoMensal] = useState();
+  const [ultimaContribuicao, setUltimaContribuicao] = useState();
  
   data1.descricao=content;
 
@@ -38,173 +34,172 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
       [e.target.name]: e.target.value,
     }));
   }
-  function onChangeFile(e){
-    let file = e.target.files
-   /* data1.photo=this.state.image
-    this.setState({
-      photo: e.target.files[0]
-  })
-    console.log("FILE", this.state.image)*/
-  }
-  function getGenero(){
-    return axios
-    .get("/getGenero")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-      }
-      setOptionsGenero(a);
-      setGenero([optionsGenero[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  function getEstadoCivil(){
-    return axios
-    .get("/getEstadoCivil")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].descricao)
-      }
-      setOptionsEstadocivil(a);
-      setEstadocivil([optionsEstadocivil[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  function getPais(){
-    return axios
-    .get("/country")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.countries.length; i++){
-        a.push(response.data.data.countries[i].name)
-      }
-      console.log(a)
-      setOptionsPais(a);
-      setpais([optionsPais[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
+
+/*  
   useEffect(() => {
-    getGenero()
-    getEstadoCivil()
-    getPais()
-  },[]);
+    getUtente();
+  },[data1.nif]);
+*/
 
-  function buscarCep() {
-     
-    fetch(`http://viacep.com.br/ws/${data1.cep}/json/`, {mode: 'cors'})
-     .then((res) => res.json())
-     .then((data) => {
-           data1.cep=data.cep 
-           data1.cidade=data.localidade
-           data1.estado=data.logradouro
-           setData1(data1)
-        
-     })
-     .catch(err =>{alert("Cep não existente");data1.cep="";});
-
+function getUtenteByNif(){
+  data1.vistoDetalhe=false;
+  return axios
+  .get("/utente/getUtenteByNIF/"+data1.nif)
+  .then((response) => {
+    if(response.data.data.Utente.length > 0){
+      setNome(response.data.data.Utente[0].nome)
+      data1.numero=response.data.data.Utente[0].codigo
+      setDataNasc(response.data.data.Utente[0].data_nasc)
+      data1.id_utente=response.data.data.Utente[0].id
+      CalcularContribuicaoMensal();
+      calcularMesesEmDivida();
+    }else{
+      cleanContrib()
+    
+    }
+  })
+  .catch((err) => {
+    cleanContrib()
+    console.log("Error", err);
+    return err.response;
+  });
 }
+
+function getUtenteByCode(){
+  data1.vistoDetalhe=false;
+  return axios
+  .get("/utente/getUtenteByCode/"+data1.numero)
+  .then((response) => {
+    console.log("UTENTE",response.data.data.Utente)
+    if(response.data.data.Utente.length > 0){
+      setNome(response.data.data.Utente[0].nome)
+      data1.nif=response.data.data.Utente[0].nif
+      setDataNasc(response.data.data.Utente[0].data_nasc)
+      data1.id_utente=response.data.data.Utente[0].id
+     CalcularContribuicaoMensal();
+     calcularMesesEmDivida();
+    }else{
+      cleanContrib()
+    }
+  })
+  .catch((err) => {
+    cleanContrib()
+    console.log("Error", err);
+    return err.response;
+  });
+}
+function cleanContrib(){
+  setNome("")
+  setDataNasc("")
+  setValorPrestacaoMensal("")
+  setUltimaContribuicao("")
+  data1.numero=""
+  data1.id_utente=null
+}
+function CalcularContribuicaoMensal(){
+  return axios
+  .get("/utente/calcularValorContribuicaoMensal/"+data1.id_utente)
+  .then((response) => {
+    data1.valorPrestacaoMensal=response.data.data.valor;
+    setValorPrestacaoMensal(response.data.data.valor)
+  })
+  .catch((err) => {
+    setValorPrestacaoMensal("")
+    console.log("Error", err);
+    return err.response;
+  });
+}
+function calcularMesesEmDivida(){
+  return axios
+  .get("/utente/calcularMesesEmDivida/"+data1.id_utente)
+  .then((response) => {
+   if (typeof response.data.data.UltimoMesPago === 'undefined' & typeof response.data.data.UltimoAnoPago === 'undefined'){
+      data1.TemContribuicao=response.data.data.TemContribuicao;
+      data1.SomaPagUltimoMes=0;
+      data1.UltimoDiaPago=response.data.data.DiaRegistro
+      data1.UltimoAnoPago=response.data.data.AnoRegistro
+      data1.UltimoMesPago=response.data.data.MesRegistro
+      
+      setUltimaContribuicao("Registrado em: "+response.data.data.DiaRegistro+'/'+response.data.data.MesRegistro+'/'+response.data.data.AnoRegistro)
+    
+    }else {
+      data1.TemContribuicao=response.data.data.TemContribuicao;
+      data1.SomaPagUltimoMes=response.data.data.SomaPagUltimoMes;
+      data1.UltimoAnoPago=response.data.data.UltimoAnoPago
+      data1.UltimoMesPago=response.data.data.UltimoMesPago
+      
+      setUltimaContribuicao('Pago: '+response.data.data.SomaPagUltimoMes+' Dbs, para '+response.data.data.UltimoMesPago+'/'+response.data.data.UltimoAnoPago)
+      
+    }
+  })
+  .catch((err) => {
+    setUltimaContribuicao("")
+    console.log("Error", err);
+    return err.response;
+  });
+}
+
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Dados de Beneficiário"
+      title="Dados do Contribuinte"
       classTitle="title-green"
       
     >
       <div className={styles.description}>
       <hr></hr>
       <div className={styles.group}>
-    
       
       <TextInput
           className={styles.field}
-          label="Nome *"
-          name="apelido"
+          label="NIF *"
+          name="nif"
           type="text"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          icon="search"
           required
           onChange={onChangeData}
-          value={data1.apelido}
+          onKeyUp={getUtenteByNif}
+          value={data1.nif}
         />
-            
-         <TextInput
-          className={styles.field}
-          label="NIF"
-          mask="999.999.999-99"
-          name="cpf"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.cpf}
-        />
-      <TextInput
-          className={styles.field}
-          label="Nº SS"
-          name="bi"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.bi}
-        />
-       
-     
-     
-        <TextInput
-          className={styles.field}
-          label="Nome pai"
-          name="Pai"
-          type="email"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          required
-          onChange={onChangeData}
-          value={data1.email}
-        />        
-        
-        <TextInput
-          className={styles.field}
-          label="Nome Mãe"
-          name="mae"
-          type="text"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          required
-          onChange={onChangeData}
-          value={data1.contacto}
-        />
-       
-  
-       
-      </div>
-      
-      
-       
-         
           
-      
-      
-      
-        {
-          /*
-       <Editor
-          state={content}
-          onChange={setContent}
-          classEditor={styles.editor}
-          label="Sobre"
-          tooltip="Descrição"
-          name="descricao"
-          value={data1.descricao}
-          />
-        */}
+        <TextInput
+          className={styles.field}
+          label="Numero de Beneficiário *"
+          name="numero"
+          type="text"
+          icon="search"
+          required
+          onChange={onChangeData}
+          onKeyUp={getUtenteByCode}
+          value={data1.numero}
+          
+        />
+        </div>
+   
+      <div className={styles.group}>
+      <TextInput
+          className={styles.field}
+          label="Nome do Beneficiaário"
+          name="nome"
+          type="text"
+          required
+          onChange={onChangeData}
+          value={nome}
+          readOnly
+        />
+       
+      <TextInput
+          className={styles.field}
+          label="Data Nascimento"
+          name="data_nasc"
+          type="text"
+          required
+          onChange={onChangeData}
+          value={dataNasc}
+          readOnly
+        />
+      </div>
+
        
       </div>
     </Card>

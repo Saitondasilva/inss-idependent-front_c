@@ -95,7 +95,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           label="NIB "
           name="nib_conta"
           type="text"
-          mask="9999999999999999"
+          mask="99999999999999999999"
           required
           onChange={onChangeData}
           value={data1.nib_conta}

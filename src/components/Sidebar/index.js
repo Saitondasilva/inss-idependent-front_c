@@ -91,6 +91,10 @@ var navigation=[];
       {
         title: "Bancos",
         url: "/payment/user/type/3",
+      },
+      {
+        title: "Unidade de Conta",
+        url: "/payment/user/type/4",
       }
     ],
   },
