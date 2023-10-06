@@ -44,6 +44,11 @@ const Control = ({item, className, visibleActions, setVisibleActions, up, id}) =
         icon: "edit",
         action: ()  => setVisibleModal(item.id),
       },
+      {
+        title: "Mudar de Escalão",
+        icon: "edit",
+        action: ()  => setVisibleModal(item.id),
+      },
     ];
     
   return (
@@ -71,7 +76,7 @@ const Control = ({item, className, visibleActions, setVisibleActions, up, id}) =
         visible={visibleModal}
         onClose={() => setVisibleModal(false)}
       >
-        <Success className={styles.card} data1={data1} setData1={setData1}/>
+        <Success className={styles.card} data1={data1} setData1={setData1} item={item}/>
       </Modal>
     </div>
 

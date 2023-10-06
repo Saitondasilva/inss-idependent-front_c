@@ -10,7 +10,7 @@ const Success = () => {
           🎉
         </span>
       </div>
-      <div className={styles.info}>Success!</div>
+      <div className={styles.info}>Mudar Escalão!</div>
       <div className={cn("h2", styles.price)}>$128,000</div>
       <div className={styles.text}>
         Has been sent to your <span>Paypal: tam@ui8.net</span>

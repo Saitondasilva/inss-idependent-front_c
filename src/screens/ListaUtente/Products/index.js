@@ -73,8 +73,7 @@ function GetPesquisa() {
     .get("/utente/getUtenteByNIF/"+search.nome)
     .then((response) => {
      console.log(response.data.data)
-     setProduto1(response.data.data.Utente);
-    
+     setProduto1(response.data.data.Utente);    
     })
     .catch((err) => {
       console.log("Error", err);
@@ -93,6 +92,7 @@ function getEstadoUtente(){
       a.push(response.data.data[i].descricao)
       b.push(response.data.data[i].id)
     }
+    
     setNavigation(a);
     setActiveTabID(b);
     

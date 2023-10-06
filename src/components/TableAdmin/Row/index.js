@@ -56,7 +56,7 @@ const Row = ({ item, value, onChange }) => {
               />
             </div>*/}
             <div className={styles.details}>
-              <div className={styles.product}>{item.nome}</div>           
+              <div className={styles.product}>{item.name}</div>           
               
             </div>
 
@@ -68,13 +68,10 @@ const Row = ({ item, value, onChange }) => {
           
         </div>
         <div className={styles.col}>          
-            <div className={styles.price}>{item.data_nasc}</div>             
+            <div className={styles.price}>{item.id_tipo}</div>             
           
         </div>
-        <div className={styles.col}>          
-            <div className={styles.link}>{item.email}</div>             
-          
-        </div>
+        
         <Actions
             className={styles.actions}
             classActionsHead={styles.actionsHead}

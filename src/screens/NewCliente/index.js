@@ -78,20 +78,7 @@ function validateForm(){
     setSmsError("Por favor preencha a Nacionalidade")
     return false;
   }
- /*
- if(!data1.banco_id || data1.banco_id===""){
-    setSmsError("Por favor preencha o banco")
-    return false;
-  }
-  if(!data1.nib_conta || data1.nib_conta===""){
-    setSmsError("Por favor preencha o NIB")
-    return false;
-  }
-  if(!data1.n_conta || data1.n_conta===""){
-    setSmsError("Por favor preencha o número da conta")
-    return false;
-  }
-  */
+ 
   if(!data1.morada || data1.morada===""){
     setSmsError("Por favor preencha o Localidade")
     return false;

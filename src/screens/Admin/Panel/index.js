@@ -1,22 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import cn from "classnames";
 import styles from "./Panel.module.sass";
-import Icon from "../../../components/Icon";
+import Icon from "../../../../components/Icon";
+import Modal from "../../../../../Modal";
 
-const Panel = () => {
+
+const Panel = ({ className }) => {
+  const [visibleModal, setVisibleModal] = useState(false);
+
   return (
-    <div className={cn("panel", styles.panel)}>
-      <div className={styles.info}>
-        <Icon name="check-all" size="24" />2 products selected
-      </div>
-      <div className={styles.btns}>
-        <button className={cn("button-stroke-red", styles.button)}>
-          <Icon name="calendar" size="24" />
-          <span>Reschedule</span>
+    <>
+      <div className={cn(styles.panel, className)}>
+        <div className={styles.avatar}>
+          <img src="/images/content/avatar.jpg" alt="Avatar" />
+        </div>
+        <div className={styles.brand}>
+          <img src="/images/content/figma.png" alt="Figma" />
+          <div className={styles.counter}>3</div>
+        </div>
+        <button className={styles.share} onClick={() => setVisibleModal(true)}>
+          <Icon name="share" size="24" />
         </button>
-        <button className={cn("button", styles.button)}>Publish now</button>
       </div>
-    </div>
+      <Modal
+        outerClassName={styles.outer}
+        visible={visibleModal}
+        onClose={() => setVisibleModal(false)}
+      >
+        
+      </Modal>
+    </>
   );
 };
 

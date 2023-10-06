@@ -7,10 +7,10 @@ import Icon from "../../components/Icon";
 import Table from "../../components/TableAdmin";
 import Product from "../../components/Product";
 import Loader from "../../components/Loader";
-import Panel from "./Panel";
+
 import axios from "axios";
 import styles from "./Overview.module.sass";
-import Modal from "../../components/Modal";
+//import Modal from "../../components/Modal";
 import ModalProduct from "./ModalProduct";
 
 // data
@@ -41,10 +41,10 @@ const Scheduled = () => {
   },[]);
   function getAdmins(){
        const result=axios
-         .get("/utente/getAllUtente")
+         .get("/getAllUsers")
          .then((response) => {
-          
-          setProducts(response.data.data.Utente);
+      
+          setProducts(response.data.data.User);
          // console.log(products);
          })
          .catch((err) => {
