@@ -80,7 +80,7 @@ function shearchCliente(user) {
     nome : search
   }
   return axios
-    .post("/utente/getUtenteByNIF/12213123", data ,{
+    .get("/utente/getUtenteByNIF/12213123", data ,{
       headers: { Authorization: `Bearer ${userData.token}` },
     })
     .then((response) => {
