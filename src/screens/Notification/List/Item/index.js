@@ -13,7 +13,10 @@ const Item = ({ className, item, onClose }) => {
     item.url="/jornada/cliente"
   }else if(item.type==="App\\Notifications\\RegistroUtenteNotification"){
     type="Registro de Utente";
-    item.url="/carteira/cliente"
+    item.url="/utente/lista"
+  }else if(item.type==="App\\Notifications\\RegistroAgregadoNotification"){
+    type="Registro de Agregado";
+    item.url="/utente/lista"
   }
   return (
     <Link
@@ -21,14 +24,7 @@ const Item = ({ className, item, onClose }) => {
       to={item.url}
       onClick={onClose}
     >
-      {/*
-      <div className={styles.avatar}>
-        <img src={item.avatar} alt="Foto" />
-        <div className={styles.icon} style={{ backgroundColor: item.color }}>
-          <img src={item.icon} alt="Status" />
-        </div>
-      </div>
-      */}
+     
       <div className={styles.details}>
         <div className={styles.line}>
           <div className={styles.subtitle}>{type}</div>

@@ -21,7 +21,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   const [optionsDistrito, setOptionsDistrito] = useState([]);
   const [distrito, setDistrito] = useState(optionsDistrito[0]);
   const [distritoID, setDistritoID] = useState([]);
-  //data1.descricao=content;
+  data1.descricao=content;
 
   function onChangeData(e) {
     console.log(e)

@@ -308,7 +308,7 @@ function EditarUtente() {
             data1.nome_mae="";
             data1.escalao_id="";
             data1.esquema_id="";
-            setData(null)
+            setData([{}])
             }
 
             

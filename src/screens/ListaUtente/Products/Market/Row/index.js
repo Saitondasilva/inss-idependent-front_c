@@ -29,10 +29,11 @@ const Row = ({ item, value, onChange, up, id}) => {
             className={styles.item}
             onClick={() => setVisibleModalProduct(item.id)}
           >
-          
             <div className={styles.details}>
               <div className={styles.product}>{item.nome}</div>
-             
+              <div className={styles.wrap}>
+                <div className={styles.category}>{item.morada}</div>
+              </div>
             </div>
           </div>
         </div>

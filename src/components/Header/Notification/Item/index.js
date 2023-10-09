@@ -11,7 +11,10 @@ const Item = ({ className, item, onClose }) => {
     item.url="/jornada/cliente"
   }else if(item.type==="App\\Notifications\\RegistroUtenteNotification"){
     type="Reg. de Utente";
-    item.url="/carteira/cliente"
+    item.url="/utente/lista"
+  }else if(item.type==="App\\Notifications\\RegistroAgregadoNotification"){
+    type="Reg. Agregado";
+    item.url="/utente/lista"
   }
   return (
     <Link

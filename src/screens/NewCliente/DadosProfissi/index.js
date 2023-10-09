@@ -22,7 +22,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   
  
   const [search, setSearch] = useState("");
-  data1.descricao=content;
+ // data1.descricao=content;
 
 
  {/* function onChangeData(e) {
