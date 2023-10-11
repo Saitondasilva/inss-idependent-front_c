@@ -4,7 +4,7 @@
 *.o
 *.class
 *.exe
-
+.env
 # Ignorar diretórios e arquivos gerados por IDEs
 .idea/
 .vscode/
