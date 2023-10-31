@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef} from "react";
-import { format } from 'date-fns';
+//import { format } from 'date-fns';
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import styles from "./NameAndDescription.module.sass";
@@ -216,7 +216,7 @@ function read(){
       
          <div className={styles.group}>
                
-            <p>Serve a presente para comunicar a V.EX.cia que apartir de {format(data1.created_at, 'dd/MM/yyyy')} encontra-se inscrito(o) no Regime de Segurança Social dos
+            <p>Serve a presente para comunicar a V.EX.cia que apartir de {data1.created_at} encontra-se inscrito(o) no Regime de Segurança Social dos
              Trabalhadores Independente sob o Número {data1.codigo}.</p>
             </div>
                 <div className={styles.group}><br></br><br></br>
