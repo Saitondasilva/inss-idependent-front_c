@@ -7,6 +7,7 @@ import axios from "axios";
 import Loader from "./Loader";
 
 
+
 const Success = ({ className, item}) => {
   const [content, setContent] = useState();
   const [optionsGenero, setOptionsGenero] = useState(['', 'Suspensão', 'Falecimento', 'Reactivação']);

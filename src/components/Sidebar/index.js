@@ -105,13 +105,13 @@ var navigation=[];
     colorCounter: "#B5E4CA",
   },
   
-  /*
+ 
   {
-    title: "Agenda",
+    title: "teste",
     icon: "calendar",
     url: "/agenda/profissional",
   },
-
+/*
 
   {
     title: "Products",

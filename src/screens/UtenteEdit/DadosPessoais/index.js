@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef} from "react";
+import { format } from 'date-fns';
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import styles from "./NameAndDescription.module.sass";
@@ -9,6 +10,8 @@ import Editor from "../../../components/Editor";
 import Dropdown from "../../../components/Dropdown";
 import axios from "axios";
 import Search from "../../AnaliseProgresso/Search";
+import {useReactToPrint} from 'react-to-print';
+
 
 // const optionsGenero      = ["Masculino", "Feminino", "Outro"];
 // const optionsEstadocivil = ["Solteiro", "Casado", "Divorciado", "Viuvo"];
@@ -31,6 +34,14 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
   const [optionsDocumento, setOptionsDocumento] = useState([]);
   const [documento, setDocumento] = useState(optionsDocumento[0]);
   const [documentoID, setDocumentoID] = useState([]);
+
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: ()=>componentRef.current,
+    documentTitle: 'emp-data',
+    //onAfterPrint: ()=>alert('print sucess')
+  
+  });
  
   data1.descricao=content;
 function read(){
@@ -180,153 +191,76 @@ function read(){
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Identificação Do Beneficiário"
+      
       classTitle="title-green"      
     >
-      
-      <div className={styles.description}>
+      <div ref={componentRef} style={{width: '100%', height: 'window.innerHeigh'}}>
+      <div className={styles.t_print}>
+        <h2>REPUBLICA DEMOCRÁTICA DE SÃO TOMÉ E PRINCIPE</h2>
+        <img src="/images/n_logo_inss.png" width={50} height={50} alt="INSS" />
+        <h3>INSTITUTO NACIONAL DE SEGURANÇA SOCIAL</h3>       
         
-      <hr></hr>
-      <button
-          className={cn(styles.head)}
-          onClick={() => read()}
-        >
-          <Icon name="more-horizontal" size="24" />
-        </button>
-      <div className={styles.group}>
-      
-      <span className={styles.field}>
-       <Dropdown
-          className={styles.field1}
-          label="Tipo Documento *"
-          setValue={setDocumento}
-          options={optionsDocumento}
-          onChange={data1.tipo_documento=documento}
-          value={documento}
-        /> </span>
-        <TextInput
-          className={styles.field}
-          label="Nº Documento *"
-          name="numero_documento"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.numero_documento}
-        />
-       
-        <TextInput
-          className={styles.field}
-          label="Nome *"
-          name="nome"
-          type="text"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          required
-          onChange={onChangeData}
-          value={data1.nome}
-        />
-          <TextInput
-          className={styles.field}
-          label="Data nascimento *"
-          name="data_nasc"
-          type="date"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          required
-          onChange={onChangeData}
-          value={data1.data_nasc}
-        />
-        <TextInput
-          className={styles.field}
-          label="Nome pai *"
-          name="nome_pai"
-          type="text"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          required
-          onChange={onChangeData}
-          value={data1.nome_pai}
-        />
+      </div>
 
-        <TextInput
-          className={styles.field}
-          label="Nome Mãe *"
-          name="nome_mae"
-          type="text"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          required
-          onChange={onChangeData}
-          value={data1.nome_mae}
- 
-        />
+      <div className={styles.description}><br></br><br></br>
+      <div className={styles.p_corpo}>
+      <p>Ao Beneficiário: {data1.nome}</p>
+            <p>Residencia: {data1.morada
+            
+            
+            
+            }</p>
+            <p>Profissão: {data1.proficao}</p>
+
+            <p>Assunto: Inscrição do Utente</p><br></br><br></br>
       
-        <TextInput
-          className={styles.field}
-          label="NIF *"
-          name="nif"
-          type="text"
-          mask="999999999"
-          required
-          onChange={onChangeData}
-          value={data1.nif}
-        />      
-       
-       <span className={styles.field}>
-       <Dropdown
-          className={styles.field1}
-          label="Gênero *"  
-          name="genero"        
-          setValue={setGenero}
-          options={optionsGenero}
-          onChange={data1.sexo=genero}
-          value={genero}
-        /> 
-       </span>
-       <span className={styles.field}>
-       <Dropdown
-          className={styles.field1}
-          label="Estado civil *"
-          name="estado_civil"
-          setValue={setEstadocivil}
-          options={optionsEstadocivil}
-          onChange={data1.estadocivil=estadocivil}
-          value={estadocivil}
-        /> 
-       </span>
-      
-          <span className={styles.field}>
-       <Dropdown
-          className={styles.field1}
-          label="Nacionalidade *"
-          name="pais"
-          tooltip="Maximum 100 characters. No HTML or emoji allowed"
-          setValue={setPais}
-          options={optionsPais}
-          onChange={data1.pais=pais}
-          value={pais}
-        /> 
-       </span>
-       
-       
-       
-      </div>
-       
-  
-          
-      
-      
-      
-        {
-          /*
-       <Editor
-          state={content}
-          onChange={setContent}
-          classEditor={styles.editor}
-          label="Sobre"
-          tooltip="Descrição"
-          name="descricao"
-          value={data1.descricao}
-          />
-        */}
-       
-      </div>
+         <div className={styles.group}>
+               
+            <p>Serve a presente para comunicar a V.EX.cia que apartir de {format(data1.created_at, 'dd/MM/yyyy')} encontra-se inscrito(o) no Regime de Segurança Social dos
+             Trabalhadores Independente sob o Número {data1.codigo}.</p>
+            </div>
+                <div className={styles.group}><br></br><br></br>
+                  <p>Com os nossos melhores cumprimentos</p>
+                </div>
+                </div>
+                <div className={styles.respon_p}>
+                <div ><br></br><br></br>
+                  <p>O Responsavel</p>
+                  <br></br>
+                 
+                </div>                
+
+                <div ><br></br>                  
+                  <br></br>
+                  <p>{data1.mae}</p>
+                </div>
+                <div ><br></br>
+                  
+                 <p>Data: {data1.created_at}</p>
+                </div><br></br>
+                </div>
+                    
+                    <div className={styles.foot_print}>
+                    <hr></hr>
+                <div ><br></br>
+                  <i>Rua Engº Salustino da Graça Caixa Postal 145</i>
+                </div>
+                <div ><br></br>
+                <i>Tel.2224603/fax 2234609</i>                                  
+                </div>
+                <div ><br></br>
+                <i>Email:inss@cstome.net</i>                                  
+                </div>
+                <div ><br></br>
+                <i>São Tomé e Príncipe </i>                               
+                </div>
+                </div>
+
+      </div></div>
+                <div className={styles.p_button}>
+
+                <button onClick={handlePrint}>Imprimir</button>
+                </div>
     </Card>
   );
 };

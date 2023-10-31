@@ -40,9 +40,18 @@ import CarteiraPesquisa from "./screens/CarteiraPesquisa";
 import AnaliseProgreso from "./screens/AnaliseProgresso";
 import NewCliente from "./screens/NewCliente";
 import UtenteEdit from "./screens/UtenteEdit";
+import UtentePrint from "./screens/UtentePrint";
 import NewAgregados from "./screens/NewAgregados";
 import NewContribuicao from "./screens/NewContribuicao";
-import AgendaProfissional from "./screens/AgendaProfissional";
+/********************* */
+import NewPedidoSubD from "./screens/NewPedidoSubD";
+import NewPedidoSubFu from "./screens/NewPedidoSubFu";
+import NewPedidoSubsideoMater from "./screens/NewPedidoSubsideoMater";
+import NewPedidoPensaoVe_Inv from "./screens/NewPedidoPensaoVe_Inv";
+import NewPedidoPensaoSob from "./screens/NewPedidoPensaoSob";
+
+/************************************ */
+import Teste from "./screens/Teste";
 import BuscaProfissional from "./screens/BuscaProfissional";
 import MinhasConsultas from "./screens/MinhasConsultas";
 import MeusPagamentos from "./screens/MeusPagamentos";
@@ -151,6 +160,16 @@ function App() {
               </ProtectedRoute>
             }
           />
+                 <Route
+            path="/utente/Print/:id?"
+            element={
+              <ProtectedRoute>
+                <Page title="">
+                  <UtentePrint />
+                </Page>
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/Agregado/add"
@@ -173,12 +192,72 @@ function App() {
             }
           />
 
+          
+          <Route
+            path="Subsideo/add"
+            element={
+              <ProtectedRoute>
+                <Page title="Pedido de Subsídio de Doença">
+                  <NewPedidoSubD />
+                </Page>
+              </ProtectedRoute>
+            }
+          />
+
+         <Route
+            path="/Subsideo/add/1"
+            element={
+              <ProtectedRoute>
+                <Page title="Pedido de Subsídio de Maternidade">
+                  <NewPedidoSubsideoMater />
+                </Page>
+              </ProtectedRoute>
+            }
+          />
+
+
+
+          <Route
+            path="/Subsideo/add/2"
+            element={
+              <ProtectedRoute>
+                <Page title="Pedido de Subsídio de Funeral">
+                  <NewPedidoSubFu />
+                </Page>
+              </ProtectedRoute>
+            }
+          />
+
+           <Route
+            path="/Pensao/add"
+            element={
+              <ProtectedRoute>
+                <Page title="Pedido de Pensão de Velhice/Invalidez">
+                  <NewPedidoPensaoVe_Inv />
+                </Page>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/Pensao/add/1"
+            element={
+              <ProtectedRoute>
+                <Page title="Pedido de Pensão de Sobrivivencia">
+                  <NewPedidoPensaoSob />
+                </Page>
+              </ProtectedRoute>
+            }
+          />
+
+
+
           <Route
             path="/agenda/profissional"
             element={
               <ProtectedRoute>
                 <Page title="Agenda do profissional">
-                <AgendaProfissional />
+                <Teste />
               </Page>
               </ProtectedRoute>
             }

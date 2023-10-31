@@ -77,57 +77,42 @@ const Prestacao= ({ className }) => {
         <NavLink
                     className={cn(styles.item)}
                     activeClassName={styles.active}
-                    to="/DinamicoForm/add"
+                    to="/Subsideo/add"
                     key={0}
                   >                 
-                    Pedido de Subídio de Doença
+                    Pedido de Subídio de Doença Comum
         </NavLink>
         <NavLink
                     className={cn(styles.item)}
                     activeClassName={styles.active}
-                    to="/cliente/add"
+                    to="/Subsideo/add/1"
                     key={0}
                   >                 
-                    Pedido de Subídio de Doença
+                    Pedido de Subídio de Parentalidade (Maternidade)
         </NavLink>
         <NavLink
                     className={cn(styles.item)}
                     activeClassName={styles.active}
-                    to="/cliente/add"
+                    to="/Subsideo/add/2"
                     key={0}
                   >                 
-                    Pedido de Subídio de Doença
+                    Pedido de Subídio de Funeral
         </NavLink>
+       
         <NavLink
                     className={cn(styles.item)}
                     activeClassName={styles.active}
-                    to="/cliente/add"
+                    to="/Pensao/add"
                     key={0}
                   >                 
-                    Pedido de Subídio de Doença
-        </NavLink>
-        <NavLink
-                    className={cn(styles.item)}
-                    activeClassName={styles.active}
-                    to="/cliente/add"
-                    key={0}
-                  >                 
-                    Pedido de Pensão de Velhive
+                    Pedido de Pensão de Velhive/Invalidez
                   </NavLink>
+                
 
                   <NavLink
                     className={cn(styles.item)}
                     activeClassName={styles.active}
-                    to="/cliente/add"
-                    key={0}
-                  >                 
-                    Pedido de Pensão de Invalidez
-                  </NavLink>
-
-                  <NavLink
-                    className={cn(styles.item)}
-                    activeClassName={styles.active}
-                    to="/cliente/add"
+                    to="/Pensao/add/1"
                     key={0}
                   >                 
                     Pedido de Pensão de Sobrivivencia
