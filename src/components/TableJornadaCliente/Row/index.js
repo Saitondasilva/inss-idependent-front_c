@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Row.module.sass";
 import cn from "classnames";
 import Checkbox from "../../Checkbox";
@@ -18,7 +18,12 @@ const Row = ({ item, value, onChange, setActiveIndex }) => {
   const [visibleModalProduct, setVisibleModalProduct] = useState(false);
   const [visibleModalSchedule, setVisibleModalSchedule] = useState(false);
   const navigate = useNavigate();
+  const [userData, setuserData] = useState({});
 
+  useEffect(() => {
+    var user = localStorage.getItem("userData"); 
+    user==null?setuserData([]):setuserData(JSON.parse(user));
+  },[]);
   const actions = [
     {
       title: "Schedule product",
@@ -37,11 +42,41 @@ const Row = ({ item, value, onChange, setActiveIndex }) => {
     },
   ];
   function go_to(item){
-    navigate("/jornada/cliente/"+item.id_consulta,{replace: true})
+    navigate("/contribuicao/utente/"+item.id_consulta,{replace: true})
     localStorage.setItem('SelectedClient',JSON.stringify(item))
     window.dispatchEvent(new Event('storage'))
     setActiveIndex(1)
     }
+  const openFile = async (anexoId) => {
+    try {
+
+      // Faça a solicitação à API Laravel para baixar o arquivo
+      const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/utente/anexo/contribuicao/${anexoId}`,{
+        headers: { Authorization: `Bearer ${userData.token}`},
+      });
+
+      if (!response.ok) {
+        throw new Error('Falha ao baixar o arquivo.');
+      }
+
+      // Obtenha o conteúdo do arquivo como blob
+      const blob = await response.blob();
+
+      // Crie uma URL para o blob
+      const url = window.URL.createObjectURL(blob);
+
+      // Abra o arquivo em uma nova janela ou aba
+      const newWindow = window.open(url, '_blank');
+      if (!newWindow) {
+        throw new Error('Não foi possível abrir uma nova janela ou aba.');
+      }
+
+      // Libere o objeto URL após o uso
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
      <>
       <div className={styles.row}>
@@ -69,7 +104,9 @@ const Row = ({ item, value, onChange, setActiveIndex }) => {
             */}
             <div className={styles.details} onClick={() => go_to(item)}>
               <div className={styles.product}>{item.codigo_transacao}</div>
-              
+              <div className={styles.wrap}>
+                <div className={styles.category}>{item.nome}</div>
+              </div>
             </div>
           </div>
          
@@ -82,12 +119,21 @@ const Row = ({ item, value, onChange, setActiveIndex }) => {
           )}
         </div>
        
-        
         <div className={styles.col}>
-          <div className={styles.price}>{item.forma_transacao}</div>
+          <div className={styles.link}>{item.nif}</div>
         </div>
         <div className={styles.col}>
-          <div className={styles.link}>{item.value}</div>
+          <div className={styles.link}>{item.codigo}</div>
+        </div>
+        <div className={styles.col}>
+            <button className={cn("button button-small", styles.button)} onClick={()=>openFile(item.id)}>
+              <span className={styles.field}>
+              {item.forma_transacao}
+              </span>
+            </button>
+        </div>
+        <div className={styles.col}>
+          <div className={styles.price}>{item.value}</div>
           
           <Control
             className={styles.control}
@@ -95,26 +141,13 @@ const Row = ({ item, value, onChange, setActiveIndex }) => {
             setStartDate={setStartDate}
             startTime={startTime}
             setStartTime={setStartTime}
+            id_do_contribute={item.id}
           />
           
           
         </div>
       </div>
-      <ModalProduct
-        visible={visibleModalProduct}
-        onClose={() => setVisibleModalProduct(false)}
-      />
-      <Modal
-        visible={visibleModalSchedule}
-        onClose={() => setVisibleModalSchedule(false)}
-      >
-        <Schedule
-          startDate={startDate}
-          setStartDate={setStartDate}
-          startTime={startTime}
-          setStartTime={setStartTime}
-        />
-      </Modal>
+      
     </>
   );
 };

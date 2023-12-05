@@ -8,7 +8,7 @@ const Item = ({ className, item, onClose }) => {
   var type="", message=JSON.parse(item.data);
   if(item.type==="App\\Notifications\\PagContribuicaoNotification"){
     type="Pag. Contribuição";
-    item.url="/jornada/cliente"
+    item.url="/contribuicao/utente"
   }else if(item.type==="App\\Notifications\\RegistroUtenteNotification"){
     type="Reg. de Utente";
     item.url="/utente/lista"

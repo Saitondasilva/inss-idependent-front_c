@@ -77,7 +77,7 @@ function SaveFile() {
   
       formData.append('anexo', data1.anexo);      
       var data3={
-        tabela:'Utente',
+        tabela:'pedido_prestacao',
         file: data1.anexo,   
         tipo_anexo: data1.tipo_doc,   
   }  
@@ -117,13 +117,7 @@ function DeleteAnexo(id,i){
     return err.response;
   });
 }
-/*
-const handleDelete=(i)=>{
-  const deleteVal = [...data]
-  deleteVal.splice(i,1)
-  setData(deleteVal)
-}
-*/
+
 
 useEffect(() => {
   getDocAnexo()

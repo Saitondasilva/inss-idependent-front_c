@@ -35,7 +35,7 @@ import Membro from "./screens/Membro";
 //import Payment from "./screens/Settings/Payment";
 import Pagamento from "./screens/Pagamento";
 /*********************************************** */
-import JornadaCliente from "./screens/JornadaCliente";
+import GestaoContribuicao from "./screens/JornadaCliente";
 import CarteiraPesquisa from "./screens/CarteiraPesquisa";
 import AnaliseProgreso from "./screens/AnaliseProgresso";
 import NewCliente from "./screens/NewCliente";
@@ -97,11 +97,22 @@ function App() {
             }
           />
           <Route
-            path="/jornada/cliente/:id_consulta?"
+            path="/contribuicao/utente/:id_utente?"
             element={
               <ProtectedRoute>
-                <Page title="Gestão de Contribuições" showCreator={0}>
-                  <JornadaCliente />
+                <Page title="Lista das Contribuições" showCreator={0}>
+                  <GestaoContribuicao tipoContribuicao={0} />
+                </Page>
+              </ProtectedRoute>
+              
+            }
+          />
+          <Route
+            path="/contribuicao/utente/:id_utente?"
+            element={
+              <ProtectedRoute>
+                <Page title="Lista das Contribuições por Meses" showCreator={0}>
+                  <GestaoContribuicao tipoContribuicao={1} />
                 </Page>
               </ProtectedRoute>
               

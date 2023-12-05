@@ -4,7 +4,7 @@ import styles from "./Drafts.module.sass";
 import Card from "../../components/Card";
 import Form from "../../components/Form";
 import Icon from "../../components/Icon";
-import TableJornadaCliente from "../../components/TableJornadaCliente";
+import TableGestaoContribuicao from "../../components/TableJornadaCliente";
 import Modal from "../../components/Modal";
 import Anotacao from "./Anotacao";
 
@@ -200,7 +200,7 @@ function delAnotacao(id){
         }
       >
         <div className={styles.wrapper}>
-          {(activeIndex === 0) && <TableJornadaCliente items={produto2} colluns={colluns} setActiveIndex={setActiveIndex} title="Last edited" />}
+          {(activeIndex === 0) && <TableGestaoContribuicao items={produto2} colluns={colluns} setActiveIndex={setActiveIndex} title="Last edited" />}
           {activeIndex === 1 && (
             <>
               <div className={styles.list}>
