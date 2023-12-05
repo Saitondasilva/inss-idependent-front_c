@@ -56,7 +56,10 @@ import BuscaProfissional from "./screens/BuscaProfissional";
 import MinhasConsultas from "./screens/MinhasConsultas";
 import MeusPagamentos from "./screens/MeusPagamentos";
 import ListaUtente from "./screens/ListaUtente";
+import ContributeHisto from "./screens/ContributeHisto";
 
+/************************** */
+import Prestacao from "./screens/Prestacao";
 
 
 function App() {
@@ -102,6 +105,18 @@ function App() {
               <ProtectedRoute>
                 <Page title="Gestão de Contribuições" showCreator={0}>
                   <JornadaCliente />
+                </Page>
+              </ProtectedRoute>
+              
+            }
+          />
+
+        <Route
+            path="/Historico/contributo"
+            element={
+              <ProtectedRoute>
+                <Page>
+                  <ContributeHisto />
                 </Page>
               </ProtectedRoute>
               
@@ -367,7 +382,15 @@ function App() {
             path="/payment/user/type/:id_type_user"
             element={
               <Page title="Pagamentos">
-                <Pagamento />
+                <ListaUtente/>
+              </Page>
+            }
+          />
+               <Route
+            path="/Prestacao/Calculo/type/:id_type_user"
+            element={
+              <Page title="Prestações">
+                <Prestacao/>
               </Page>
             }
           />

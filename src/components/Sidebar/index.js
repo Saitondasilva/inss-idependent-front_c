@@ -35,6 +35,11 @@ var navigation=[];
     url: "/jornada/cliente",
   },
   {
+    title: "Historico de contribuição",
+    icon: "diamond",
+    url: "/Historico/contributo",
+  },
+  {
     title: "Lista Pensionista",
     icon: "heart-fill",
     url: "/customers/customer-list",
@@ -44,6 +49,21 @@ var navigation=[];
     title: "Subsidios",
     icon: "pie-chart",
     url: "/membro",
+  },
+  {
+    title: "Prestação",
+    slug: "income",
+    icon: "setting",
+    dropdown: [
+      {
+        title: "Tecnico de Prestação",
+        url: "/Prestacao/Calculo/type/1",
+      },
+      {
+        title: "Chefe de Prestação",
+        url: "/payment/user/type/2",
+      }
+    ],
   },
   {
     title: "Pagamentos Efectuados",

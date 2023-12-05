@@ -52,6 +52,11 @@ const Control = ({item, className, visibleActions, setVisibleActions, up, id}) =
         icon: "edit",
         action: ()  => setVisibleModal(item.id),
       },
+      {
+        title: "Mudar de Escalão",
+        icon: "edit",
+        action: ("/utente/add/"+id),
+      },
   
     ];
     

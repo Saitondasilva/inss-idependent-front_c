@@ -119,6 +119,10 @@ function validateForm(){
     setSmsError("Por favor preencha a Data de Inicio da Actividade")
     return false;
   }
+  if(!data1.data_inscricao || data1.data_inscricao===""){
+    setSmsError("Por favor preencha a Data de Inscrição")
+    return false;
+  }
   if(data1.antigoNISS==="Sim"){
     if(!data1.codigo_antigo || data1.codigo_antigo===""){
       setSmsError("Por favor preencha Código Antigo (NISS)")
@@ -169,6 +173,7 @@ function SaveProfissionalCliente() {
 	  proficao: data1.proficao,
     id_nacionalidade: data1.pais_id,
 	  data_inicio_actividade: data1.data_inicio_actividade,
+    data_inscricao:data1.data_inscricao,
     n_conta: data1.n_conta,
     iban_conta: "11111111111111111111",
     nib_conta: data1.nib_conta,    
@@ -184,6 +189,7 @@ function SaveProfissionalCliente() {
     recebe_pensao: false,
     pensao_que_recebe: "",  
     codigo_antigo:data1.codigo_antigo
+    
   } 
  
   return axios
@@ -289,6 +295,7 @@ function EditarUtente() {
             data1.id_estado_civil="";
             data1.pais_id="";
             data1.data_inicio_actividade="";
+            data1.data_inscricao="";
             data1.n_conta="";
             data1.nib_conta="";
             data1.nome_pai="";

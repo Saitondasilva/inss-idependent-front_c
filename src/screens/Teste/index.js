@@ -1,26 +1,23 @@
+import React, { useState } from 'react';
 
-import React, {useRef}from 'react';
-import {useReactToPrint} from 'react-to-print';
-//import ComponentToPrint from './DadosPessoais';
+const EsconderMostrarDiv = () => {
+  const [divVisivel, setDivVisivel] = useState(null);
 
-const ReactePDFPrint = () => {
-  const componentRef = useRef();
-  const handlePrint = useReactToPrint({
-    content: ()=>componentRef.current,
-    documentTitle: 'emp-data',
-    onAfterPrint: ()=>alert('print sucess')
-  
-  });
-
+  const handleClick = (nomeDiv) => {
+    setDivVisivel(nomeDiv === divVisivel ? null : nomeDiv);
+  };
 
   return (
-    <> <div ref={componentRef} style={{width: '100%', height: 'window.innerHeigh'}}>
-      <h1>Employee data</h1> 
-  </div> 
-  <button onClick={handlePrint}>Print this out</button>
-  </>
-   
+    <div>
+      <button onClick={() => handleClick('div1')}>Mostrar Div 1</button>
+      <button onClick={() => handleClick('div2')}>Mostrar Div 2</button>
+      <button onClick={() => handleClick('div3')}>Mostrar Div 3</button>
+
+      {divVisivel === 'div1' && <div>Conteúdo da Div 1</div>}
+      {divVisivel === 'div2' && <div>Conteúdo da Div 2</div>}
+      {divVisivel === 'div3' && <div>Conteúdo da Div 3</div>}
+    </div>
   );
 };
 
-export default ReactePDFPrint ;
+export default EsconderMostrarDiv;

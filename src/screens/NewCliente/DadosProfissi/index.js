@@ -95,6 +95,18 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
           onChange={onChangeData}
           value={data1.data_inicio_actividade}
         />
+
+        <TextInput
+          className={styles.field}
+          label="Data de Inscrição *"
+          name="data_inscricao"
+          type="date"
+          icon="date"
+          tooltip="Data em que foi inscrito no Sistema"
+          required
+          onChange={onChangeData}
+          value={data1.data_inscricao}
+        />
       
       
       </div>

@@ -187,7 +187,7 @@ function read(){
     
   },[]);
 
-
+ 
   return (
     <Card
       className={cn(styles.card, className)}
@@ -201,12 +201,11 @@ function read(){
         <h3>INSTITUTO NACIONAL DE SEGURANÇA SOCIAL</h3>       
         
       </div>
-
+    
       <div className={styles.description}><br></br><br></br>
       <div className={styles.p_corpo}>
       <p>Ao Beneficiário: {data1.nome}</p>
-            <p>Residencia: {data1.morada
-            
+            <p>Residencia: {data1.morada    
             
             
             }</p>
