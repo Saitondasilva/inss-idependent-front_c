@@ -28,11 +28,20 @@ var navigation=[];
     icon: "search",
     url: "/utente/lista",
   },
-   
   {
     title: "Contribuições",
     icon: "diamond",
-    url: "/jornada/cliente",
+    slug: "income",
+    dropdown: [
+      {
+        title: "Listagem Geral",
+        url: "/contribuicao/utente",
+      },
+      {
+        title: "Listagem por Mês",
+        url: "/contribuicao/utente/PorMes",
+      },
+    ],
   },
   {
     title: "Historico de contribuição",

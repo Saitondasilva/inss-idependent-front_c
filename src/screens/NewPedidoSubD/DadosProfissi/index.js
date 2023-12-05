@@ -25,16 +25,7 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
  // data1.descricao=content;
 
 
- {/* function onChangeData(e) {
-    console.log(e)
-    setData1((data1) => ({
-      ...data1,
-      [e.target.name]: e.target.value,
-    }));
-  }
-  const handleSubmit = (e) => {
-    alert();
-  };*/}
+
   function getprofissao(){
     return axios
     .get("/getprofisao")
@@ -77,20 +68,20 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
        <TextInput
           className={styles.field}
           label="Nome do Email *"
-          name="codigo_antigo"
+          name="email"
           type="number"
           required
           onChange={onChangeData}
-          value={data1.codigo_antigo}
+          value={data1.email}
         /> 
              <TextInput
           className={styles.field}
           label="Nº de Móvel *"
-          name="codigo_antigo"
+          name="tel"
           type="number"
           required
           onChange={onChangeData}
-          value={data1.codigo_antigo}
+          value={data1.tel}
         /> 
         
       </div>

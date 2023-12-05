@@ -10,11 +10,8 @@ import Dropdown from "../../../components/Dropdown";
 import axios from "axios";
 import Search from "../../AnaliseProgresso/Search";
 
-// const optionsGenero      = ["Masculino", "Feminino", "Outro"];
-// const optionsEstadocivil = ["Solteiro", "Casado", "Divorciado", "Viuvo"];
 const optionsLinguagem      = ["Português", "Inglês", "Françes", "Espanhol"];
 const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
-// const optionsPais        = ["Brasil", "Portugal", "França", "Espanha"];
 
 const NameAndDescription = ({ className, handleSubmit, data1, setData1 }) => {
   const [content, setContent] = useState();
@@ -52,8 +49,6 @@ function getUtenteByNif(){
       data1.numero=response.data.data.Utente[0].codigo
       setDataNasc(response.data.data.Utente[0].data_nasc)
       data1.id_utente=response.data.data.Utente[0].id
-      CalcularContribuicaoMensal();
-      calcularMesesEmDivida();
     }else{
       cleanContrib()
     
@@ -78,8 +73,6 @@ function getUtenteByCode(){
       data1.nif=response.data.data.Utente[0].nif
       setDataNasc(response.data.data.Utente[0].data_nasc)
       data1.id_utente=response.data.data.Utente[0].id
-     CalcularContribuicaoMensal();
-     calcularMesesEmDivida();
     }else{
       cleanContrib()
     }
@@ -98,48 +91,7 @@ function cleanContrib(){
   data1.numero=""
   data1.id_utente=null
 }
-function CalcularContribuicaoMensal(){
-  return axios
-  .get("/utente/calcularValorContribuicaoMensal/"+data1.id_utente)
-  .then((response) => {
-    data1.valorPrestacaoMensal=response.data.data.valor;
-    setValorPrestacaoMensal(response.data.data.valor)
-  })
-  .catch((err) => {
-    setValorPrestacaoMensal("")
-    console.log("Error", err);
-    return err.response;
-  });
-}
-function calcularMesesEmDivida(){
-  return axios
-  .get("/utente/calcularMesesEmDivida/"+data1.id_utente)
-  .then((response) => {
-   if (typeof response.data.data.UltimoMesPago === 'undefined' & typeof response.data.data.UltimoAnoPago === 'undefined'){
-      data1.TemContribuicao=response.data.data.TemContribuicao;
-      data1.SomaPagUltimoMes=0;
-      data1.UltimoDiaPago=response.data.data.DiaRegistro
-      data1.UltimoAnoPago=response.data.data.AnoRegistro
-      data1.UltimoMesPago=response.data.data.MesRegistro
-      
-      setUltimaContribuicao("Registrado em: "+response.data.data.DiaRegistro+'/'+response.data.data.MesRegistro+'/'+response.data.data.AnoRegistro)
-    
-    }else {
-      data1.TemContribuicao=response.data.data.TemContribuicao;
-      data1.SomaPagUltimoMes=response.data.data.SomaPagUltimoMes;
-      data1.UltimoAnoPago=response.data.data.UltimoAnoPago
-      data1.UltimoMesPago=response.data.data.UltimoMesPago
-      
-      setUltimaContribuicao('Pago: '+response.data.data.SomaPagUltimoMes+' Dbs, para '+response.data.data.UltimoMesPago+'/'+response.data.data.UltimoAnoPago)
-      
-    }
-  })
-  .catch((err) => {
-    setUltimaContribuicao("")
-    console.log("Error", err);
-    return err.response;
-  });
-}
+
 
 
   return (
@@ -225,7 +177,7 @@ function calcularMesesEmDivida(){
           readOnly
         />
 
-<TextInput
+      <TextInput
           className={styles.field}
           label="Genero"
           name="ultimo_pagamento"
@@ -242,7 +194,8 @@ function calcularMesesEmDivida(){
           required
           value={ultimaContribuicao}
           readOnly
-        /> <TextInput
+        /> 
+        <TextInput
         className={styles.field}
         label="Genero"
         name="ultimo_pagamento"
@@ -251,8 +204,6 @@ function calcularMesesEmDivida(){
         value={ultimaContribuicao}
         readOnly
       />
-        
-
       </div>
 
       </div>

@@ -5,9 +5,8 @@ import Checkbox from "../Checkbox";
 import Loader from "../Loader";
 import Row from "./Row";
  
-const Table = ({ items,colluns, title,setActiveIndex }) => {
+const Table = ({ items,colluns, title,setActiveIndex, loader }) => {
   const [chooseAll, setСhooseAll] = useState(false);
-
   const [selectedFilters, setSelectedFilters] = useState([]);
 
   const handleChange = (id) => {
@@ -34,7 +33,9 @@ const Table = ({ items,colluns, title,setActiveIndex }) => {
           ))
           }
         </div>
-        {items.map((x, index) => (
+        {
+        !loader?
+        items.map((x, index) => (
           <Row
             item={x}
             key={index}
@@ -43,14 +44,17 @@ const Table = ({ items,colluns, title,setActiveIndex }) => {
             onChange={() => handleChange(x.id)}
             setActiveIndex={setActiveIndex}
           />
-        ))}
-      </div>
-      <div className={styles.foot}>
+        ))
+        :
+        <div className={styles.foot}>
         <button className={cn("button-stroke button-small", styles.button)}>
           <Loader className={styles.loader} />
-          <span>Load more</span>
+          <span>Procurando</span>
         </button>
       </div>
+        }
+      </div>
+      
     </div>
   );
 };

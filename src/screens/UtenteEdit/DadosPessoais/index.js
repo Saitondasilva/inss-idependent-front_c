@@ -215,7 +215,7 @@ function read(){
       
          <div className={styles.group}>
                
-            <p>Serve a presente para comunicar a V.EX.cia que apartir de {data1.created_at} encontra-se inscrito(o) no Regime de Segurança Social dos
+            <p>Serve a presente para comunicar a V.EX.cia que apartir de {new Date(data1.created_at).getDate()+"/"+(new Date(data1.created_at).getMonth()+1)+"/"+new Date(data1.created_at).getFullYear()} encontra-se inscrito(o) no Regime de Segurança Social dos
              Trabalhadores Independente sob o Número {data1.codigo}.</p>
             </div>
                 <div className={styles.group}><br></br><br></br>
@@ -235,7 +235,7 @@ function read(){
                 </div>
                 <div ><br></br>
                   
-                 <p>Data: {data1.created_at}</p>
+                 <p>Data: {new Date(data1.created_at).getDate()+"/"+(new Date(data1.created_at).getMonth()+1)+"/"+new Date(data1.created_at).getFullYear()}</p>
                 </div><br></br>
                 </div>
                     

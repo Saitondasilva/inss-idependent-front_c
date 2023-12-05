@@ -74,9 +74,13 @@ function calcularMesesAPagar(){
   var UltimoMesPago= data1.UltimoMesPago;
    // Converta valor_total para um número
    valor_total = parseFloat(valor_total);
-
+   console.error('valor_em_falta = '+valor_em_falta+
+   "data1.valorPrestacaoMensal="+valorPrestacaoMensal+
+   "data1.SomaPagUltimoMes="+data1.SomaPagUltimoMes);
     if (valor_total === '0.00') {
+      console.error('valor total = 0.00');
       return false;
+      
     }
    // Verifique se valor_total é um número válido
    if (isNaN(valor_total)) {
@@ -88,8 +92,7 @@ function calcularMesesAPagar(){
  
    // Formate o valor_total para aceitar apenas milésimas (duas casas decimais)
   // valor_total = valor_total.toFixed(2);
- 
-
+  
   if(!data1.TemContribuicao){
     
     //var dias_de_atraso = 31 - data1.UltimoDiaPago;
@@ -104,7 +107,10 @@ function calcularMesesAPagar(){
       valor_total='0.00';
     }
   }
-  if( data1.TemContribuicao && data1.SomaPagUltimoMes<valorPrestacaoMensal){ 
+  
+  if(data1.TemContribuicao && data1.SomaPagUltimoMes<valorPrestacaoMensal){ 
+    
+
     if(valor_total>=valor_em_falta){
       valor_total-=valor_em_falta;
       array_data.push({ano:UltimoAnoPago, mes:UltimoMesPago, valor_pago: parseFloat(valor_em_falta).toFixed(2)});

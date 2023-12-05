@@ -130,23 +130,23 @@ const EscalaoDesc = ({ className, data1, setData1 }) => {
       <TextInput
           className={styles.field}
           label="Data de Inicio*"
-          name="data_nasc"
+          name="data_inicio"
           type="date"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           required
           onChange={onChangeData}
-          value={data1.data_nasc}
+          value={data1.data_inicio}
         />
   
   <TextInput
           className={styles.field}
           label="Numero de dias*"
-          name="data_nasc"
+          name="n_dias"
           type="number"
           tooltip="Maximum 100 characters. No HTML or emoji allowed"
           required
           onChange={onChangeData}
-          value={data1.data_nasc}
+          value={data1.n_dias}
         />
 
         

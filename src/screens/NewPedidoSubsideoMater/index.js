@@ -6,7 +6,7 @@ import Schedule from "../../components/Schedule";
 import DadosPessoais from "./DadosPessoais";
 import DadosConta from "../NewPedidoSubD/DadosBancaria";
 
-import DadosEscalao from "../NewPedidoSubD/Escalao";
+import DadosEscalao from "../NewPedidoSubD/Periodo";
 import DadosAnexo from "../NewPedidoSubD/DadosAnexo";
 
 import DadosProfissi from "../NewPedidoSubD/DadosProfissi";
