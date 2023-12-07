@@ -71,7 +71,7 @@ const Control = ({item, className, visibleActions, setVisibleActions, up, id}) =
       </button>
       {<button className={styles.button}>
       <Link className="{style.control}"          
-           to={"/Historico/contributo/"+id}>
+           to={"/utente/Print/"+id}>
         <Icon name="info" size="20" />
         </Link> 
       </button>}

@@ -3,14 +3,14 @@ import cn from "classnames";
 import { Link } from "react-router-dom";
 import styles from "./NameAndDescription.module.sass";
 import Card from "../../../components/Card";
-
+import Icon from "../../../components/Icon";
 import TextInput from "../../../components/TextInput";
 import axios from "axios";
 
 import Switch from "../../Switch";
 import Loader from "../../Loader";
 
-const NameAndDescription = ({ className, item}) => {
+const NameAndDescription = ({ className, item, id}) => {
 
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
@@ -152,7 +152,7 @@ const NameAndDescription = ({ className, item}) => {
             />
          
           </div>
-             
+          
           
           <div className={styles.field}>
             {valido >1 ?
@@ -514,8 +514,10 @@ const NameAndDescription = ({ className, item}) => {
         )
         
       }
+     
       </div>
       </div>
+      
       </Card>
   );
 };

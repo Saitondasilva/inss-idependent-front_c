@@ -123,7 +123,7 @@ function App() {
           />
 
         <Route
-            path="/Historico/contributo"
+            path="/Historico/contributo/:id?"
             element={
               <ProtectedRoute>
                 <Page>
@@ -382,7 +382,7 @@ function App() {
             }
           />
           <Route
-            path="/membro"
+            path="/membro/Processo"
             element={
               <Page title="Subsidios">
                 <Membro />

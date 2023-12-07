@@ -43,11 +43,7 @@ var navigation=[];
       },
     ],
   },
-  {
-    title: "Historico de contribuição",
-    icon: "diamond",
-    url: "/Historico/contributo",
-  },
+ 
   {
     title: "Lista Pensionista",
     icon: "heart-fill",
@@ -55,9 +51,9 @@ var navigation=[];
   }, 
  
   {
-    title: "Subsidios",
+    title: "Consulta Processo",
     icon: "pie-chart",
-    url: "/membro",
+    url: "/membro/Processo",
   },
   {
     title: "Prestação",
