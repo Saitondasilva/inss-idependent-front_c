@@ -46,7 +46,7 @@ function getUtenteByNif(){
     if(response.data.data.Utente.length > 0){
       setNome(response.data.data.Utente[0].nome)
       setPai(response.data.data.Utente[0].nome_pai)
-      data1.numero=response.data.data.Utente[0].codigo
+      data1.codigo=response.data.data.Utente[0].codigo
       setDataNasc(response.data.data.Utente[0].data_nasc)
       data1.id_utente=response.data.data.Utente[0].id
     }else{
@@ -64,7 +64,7 @@ function getUtenteByNif(){
 function getUtenteByCode(){
   data1.vistoDetalhe=false;
   return axios
-  .get("/utente/getUtenteByCode/"+data1.numero)
+  .get("/utente/getUtenteByCode/"+data1.codigo)
   .then((response) => {
     console.log("UTENTE",response.data.data.Utente)
     if(response.data.data.Utente.length > 0){
@@ -88,7 +88,7 @@ function cleanContrib(){
   setDataNasc("")
   setValorPrestacaoMensal("")
   setUltimaContribuicao("")
-  data1.numero=""
+  data1.codigo=""
   data1.id_utente=null
 }
 
@@ -126,7 +126,7 @@ function cleanContrib(){
           required
           onChange={onChangeData}
           onKeyUp={getUtenteByCode}
-          value={data1.numero}
+          value={data1.codigo}
           
         />
         </div>
@@ -177,33 +177,6 @@ function cleanContrib(){
           readOnly
         />
 
-      <TextInput
-          className={styles.field}
-          label="Genero"
-          name="ultimo_pagamento"
-          type="text"
-          required
-          value={ultimaContribuicao}
-          readOnly
-        />
-         <TextInput
-          className={styles.field}
-          label="Genero"
-          name="ultimo_pagamento"
-          type="text"
-          required
-          value={ultimaContribuicao}
-          readOnly
-        /> 
-        <TextInput
-        className={styles.field}
-        label="Genero"
-        name="ultimo_pagamento"
-        type="text"
-        required
-        value={ultimaContribuicao}
-        readOnly
-      />
       </div>
 
       </div>

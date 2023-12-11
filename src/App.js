@@ -45,9 +45,6 @@ import NewAgregados from "./screens/NewAgregados";
 import NewContribuicao from "./screens/NewContribuicao";
 /********************* */
 import NewPedidoSubD from "./screens/NewPedidoSubD";
-import NewPedidoSubFu from "./screens/NewPedidoSubFu";
-import NewPedidoSubsideoMater from "./screens/NewPedidoSubsideoMater";
-import NewPedidoPensaoVe_Inv from "./screens/NewPedidoPensaoVe_Inv";
 import NewPedidoPensaoSob from "./screens/NewPedidoPensaoSob";
 
 /************************************ */
@@ -186,7 +183,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-                 <Route
+          <Route
             path="/utente/Print/:id?"
             element={
               <ProtectedRoute>
@@ -218,53 +215,16 @@ function App() {
             }
           />
 
-          
-          <Route
-            path="Subsideo/add"
+         <Route
+            path="/Subsideo/add/:id?"
             element={
               <ProtectedRoute>
-                <Page title="Pedido de Subsídio de Doença">
+                <Page title="Pedido de Subsídio de Maternidade">
                   <NewPedidoSubD />
                 </Page>
               </ProtectedRoute>
             }
           />
-
-         <Route
-            path="/Subsideo/add/1"
-            element={
-              <ProtectedRoute>
-                <Page title="Pedido de Subsídio de Maternidade">
-                  <NewPedidoSubsideoMater />
-                </Page>
-              </ProtectedRoute>
-            }
-          />
-
-
-
-          <Route
-            path="/Subsideo/add/2"
-            element={
-              <ProtectedRoute>
-                <Page title="Pedido de Subsídio de Funeral">
-                  <NewPedidoSubFu />
-                </Page>
-              </ProtectedRoute>
-            }
-          />
-
-           <Route
-            path="/Pensao/add"
-            element={
-              <ProtectedRoute>
-                <Page title="Pedido de Pensão de Velhice/Invalidez">
-                  <NewPedidoPensaoVe_Inv />
-                </Page>
-              </ProtectedRoute>
-            }
-          />
-
           <Route
             path="/Pensao/add/1"
             element={
@@ -275,8 +235,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-
-
 
           <Route
             path="/agenda/profissional"

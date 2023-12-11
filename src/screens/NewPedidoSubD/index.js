@@ -32,7 +32,7 @@ const NewSubsidio = () => {
     user = localStorage.getItem("userData");
     user==null?setuserData([]):setuserData(JSON.parse(user));
     //shearchCliente(JSON.parse(user));
-   if(id)GetUtenteById()
+   if(id)GetPedidoPrestacaoById()
   },[]);
 
 function validateForm(){
@@ -49,18 +49,20 @@ function validateForm(){
     setSmsError("Por favor preencha o nnib da conta")
     return false;
   }
-  
-  
   return true;
 }
-function GetUtenteById() {
+function GetPedidoPrestacaoById() {
+  user = localStorage.getItem("userData");
+  user==null?setuserData([]):setuserData(JSON.parse(user));
   return axios
-    .get("/utente/getUtenteById/"+id)
+    .get("/utente/getallpedidoprestacaoById/"+id,{
+      headers: { Authorization: `Bearer ${JSON.parse(user).token}` },
+    })
     .then((response1) => {
-     console.log("UTENTE ANTES",response1.data.data)
-     const Utente = response1.data.data.Utente;
-     setData1(Utente)
-     console.log("UTENTE EDITAR",Utente)
+     console.log("Pedido ANTES",response1.data.data)
+     const Pedido = response1.data.data.pedido_prestacao;
+     setData1(Pedido)
+     console.log("Pedido EDITAR",Pedido)
     })
     .catch((err) => {
       console.log("Error", err);
@@ -75,7 +77,7 @@ function SaveProfissionalCliente() {
   var data3={
     id_banco: data1.banco_id,
     iban: data1.iban_conta,
-    nib: data1.nib_conta,
+    nib: data1.nib,
     n_conta: data1.n_conta,
     id_utente: data1.id_utente,
     n_dias: data1.n_dias,
@@ -84,10 +86,8 @@ function SaveProfissionalCliente() {
     tel: data1.tel,
     email: data1.email,
     anexos:data,
-    observacao: "data1.descricao"
-    
+    observacao: "data1.descricao" 
   } 
- 
   return axios
     .post("/utente/pedirprestacao",data3,{
       headers: { Authorization: `Bearer ${userData.token}` },
@@ -129,7 +129,7 @@ function AlterarPedido() {
   } 
  
   return axios
-    .patch("/utente/"+id,data3,{
+    .patch("/editPedirprestacao/"+id,data3,{
       headers: { Authorization: `Bearer ${userData.token}` },
     })
     .then((response) => {
@@ -170,7 +170,6 @@ function AlterarPedido() {
 
           <DadosConta className={styles.card} data1={data1} setData1={setData1}/>
          
-          
           <Periodo className={styles.card} data1={data1} setData1={setData1}/>
                   
           <DadosAnexo className={styles.card} data1={data1} setData1={setData1} data={data} setData={setData}/>

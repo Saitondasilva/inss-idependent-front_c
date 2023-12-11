@@ -39,12 +39,13 @@ const NameAndDescription = ({ className, data1, setData1, data ,setData }) => {
 
   function getDocAnexo(){
     return axios
-    .get("/getUtenteAnexo/"+id)
+    .get("/anexo/prestacao/"+id,{
+      headers: { Authorization: `Bearer ${userData.token}`},
+    })
     .then((response) => {
       console.log("DOC ANEXO",response.data.data)
        if(response.data.data.length>0){
         const Anexo = response.data.data
-
         setData(Anexo)
        }
     })

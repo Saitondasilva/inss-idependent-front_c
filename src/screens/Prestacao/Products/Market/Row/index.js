@@ -39,7 +39,10 @@ const Row = ({ item, value, onChange, up, id}) => {
         </div>
         
         <div className={styles.col}>{item.codigo}</div>
-        <div className={styles.col}>{item.nif}</div>
+        <div className={styles.col}>{item.id_processo}</div>
+        <div className={styles.col}>{item.estado}</div>
+        <div className={styles.col}>{item.created_at}</div>
+        <div className={styles.col}>{item.descr_prestacao}</div>
        
        
 
