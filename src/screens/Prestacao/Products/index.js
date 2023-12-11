@@ -102,9 +102,6 @@ function GetAllPedidoPrestacao(page=1) {
   const page_size = 10; // Número de itens por página
   console.log(" userData", userData)  
     return axios
-      .get(`/utente/getallpedidoprestacao/4`,{
-        headers: { Authorization: `Bearer ${userData.token}` },
-      })
       .get(`/utente/getallpedidoprestacao?page=${page}&page_size=${page_size}`, {
         headers: { Authorization: `Bearer ${JSON.parse(user).token}` },
       })
