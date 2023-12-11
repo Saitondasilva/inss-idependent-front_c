@@ -53,8 +53,6 @@ const Products = ({ className, data1, setData1 }) => {
       return axios
       .get("/getPrestacao")
       .then((response) => {        
-      .get("/getPrestacao")
-      .then((response) => {
         var a =new Array();
         var b =new Array();
         a.push("Todos")
@@ -111,8 +109,6 @@ function GetAllPedidoPrestacao(page=1) {
         headers: { Authorization: `Bearer ${JSON.parse(user).token}` },
       })
       .then((response) => {
-        const { contribuicao, total, per_page, current_page } = response.data.data;      
-        setProduto1(contribuicao);
         const { pedido_prestacao, total, per_page, current_page } = response.data.data;   
         console.log(" pedido prestacao", pedido_prestacao)   
         setProduto1(pedido_prestacao);
