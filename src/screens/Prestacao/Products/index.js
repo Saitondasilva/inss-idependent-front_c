@@ -57,10 +57,12 @@ const Products = ({ className, data1, setData1 }) => {
   
     function getGenero(){
       return axios
-      .get("/getEstadoUtente")
-      .then((response) => {
+      .get("/getPrestacao")
+      .then((response) => {        
         var a =new Array();
         var b =new Array();
+        a.push("Todos")
+        b.push(0);
         for(var i=0; i<response.data.data.length; i++){
           a.push(response.data.data[i].descricao)
           b.push(response.data.data[i].id)
@@ -103,14 +105,19 @@ const Products = ({ className, data1, setData1 }) => {
     });
     
 },[]);
+{/*get(`/utente/getallpedidoprestacao?page=${page}&page_size=${page_size}`,{
+        headers: { Authorization: `Bearer ${userData.token}` },
+      })*/}
 
 function GetAllUtente(page=1) {
   const page_size = 10; // Número de itens por página
     return axios
-      .get(`/utente/getAllUtente?page=${page}&page_size=${page_size}`)
+      .get(`/utente/getallpedidoprestacao/4`,{
+        headers: { Authorization: `Bearer ${userData.token}` },
+      })
       .then((response) => {
-        const { Utente, total, per_page, current_page } = response.data.data;      
-        setProduto1(Utente);
+        const { contribuicao, total, per_page, current_page } = response.data.data;      
+        setProduto1(contribuicao);
         return { total, per_page, current_page };
       })
       .catch((err) => {

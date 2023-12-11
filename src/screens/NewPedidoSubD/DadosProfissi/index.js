@@ -26,25 +26,6 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
 
 
 
-  function getprofissao(){
-    return axios
-    .get("/getprofisao")
-    .then((response) => {
-       var a = new Array();
-      for(var i=0; i<response.data.data.length; i++){
-        a.push(response.data.data[i].nome)
-      }
-      setOptionsProfisao(a);
-      setProfisao([optionsProfisao[0]])
-    })
-    .catch((err) => {
-      console.log("Error", err);
-      return err.response;
-    });
-  }
-  useEffect(() => {
-    getprofissao()
-  },[]);
 
   function onChangeData(e) {
     console.log(e)
@@ -67,16 +48,16 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
     
        <TextInput
           className={styles.field}
-          label="Nome do Email *"
+          label="Email "
           name="email"
-          type="number"
+          type="email"
           required
           onChange={onChangeData}
           value={data1.email}
         /> 
              <TextInput
           className={styles.field}
-          label="Nº de Móvel *"
+          label="Nº de Móvel "
           name="tel"
           type="number"
           required

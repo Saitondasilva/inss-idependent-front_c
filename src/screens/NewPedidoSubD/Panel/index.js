@@ -5,7 +5,7 @@ import Icon from "../../../components/Icon";
 import Actions from "../../../components/Actions";
 import Loader from "../../../components/Loader";
 
-const Panel = ({setVisiblePreview, setVisibleSchedule, SaveProfissionalCliente, utente_id,ClearProfissionalCliente, smsError, smsSucess, loader,EditarUtente}) => {
+const Panel = ({setVisiblePreview, setVisibleSchedule, SaveProfissionalCliente, utente_id, ClearProfissionalCliente, smsError, smsSucess, loader, AlterarPedido}) => {
   const actions = [
     {
       title: "Preview",
@@ -38,7 +38,7 @@ const Panel = ({setVisiblePreview, setVisibleSchedule, SaveProfissionalCliente, 
       </div>
       <div className={styles.btns}>
         {utente_id ? 
-        ( <button className={cn("button", styles.button)} onClick={EditarUtente} ><Icon name="edit" size="24" />Aterar  </button>)
+        ( <button className={cn("button", styles.button)} onClick={AlterarPedido} ><Icon name="edit" size="24" />Aterar  </button>)
         :
         (<button className={cn("button", styles.button)} onClick={SaveProfissionalCliente} ><Icon name="add" size="24" />Guardar  </button>)
        
