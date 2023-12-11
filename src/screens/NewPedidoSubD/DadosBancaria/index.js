@@ -93,12 +93,12 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
        <TextInput
           className={styles.field}
           label="NIB "
-          name="nib_conta"
+          name="nib"
           type="text"
           mask="99999999999999999999"
           required
           onChange={onChangeData}
-          value={data1.nib_conta}
+          value={data1.nib}
         />
       
       <TextInput

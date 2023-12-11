@@ -32,7 +32,7 @@ const NewSubsidio = () => {
     user = localStorage.getItem("userData");
     user==null?setuserData([]):setuserData(JSON.parse(user));
     //shearchCliente(JSON.parse(user));
-   if(id)GetUtenteById()
+   if(id)GetPedidoPrestacaoById()
   },[]);
 
 function validateForm(){
@@ -49,18 +49,20 @@ function validateForm(){
     setSmsError("Por favor preencha o nnib da conta")
     return false;
   }
-  
-  
   return true;
 }
-function GetUtenteById() {
+function GetPedidoPrestacaoById() {
+  user = localStorage.getItem("userData");
+  user==null?setuserData([]):setuserData(JSON.parse(user));
   return axios
-    .get("/utente/getUtenteById/"+id)
+    .get("/utente/getallpedidoprestacaoById/"+id,{
+      headers: { Authorization: `Bearer ${JSON.parse(user).token}` },
+    })
     .then((response1) => {
-     console.log("UTENTE ANTES",response1.data.data)
-     const Utente = response1.data.data.Utente;
-     setData1(Utente)
-     console.log("UTENTE EDITAR",Utente)
+     console.log("Pedido ANTES",response1.data.data)
+     const Pedido = response1.data.data.pedido_prestacao;
+     setData1(Pedido)
+     console.log("Pedido EDITAR",Pedido)
     })
     .catch((err) => {
       console.log("Error", err);
@@ -75,7 +77,7 @@ function SaveProfissionalCliente() {
   var data3={
     id_banco: data1.banco_id,
     iban: data1.iban_conta,
-    nib: data1.nib_conta,
+    nib: data1.nib,
     n_conta: data1.n_conta,
     id_utente: data1.id_utente,
     n_dias: data1.n_dias,
@@ -84,10 +86,8 @@ function SaveProfissionalCliente() {
     tel: data1.tel,
     email: data1.email,
     anexos:data,
-    observacao: "data1.descricao"
-    
+    observacao: "data1.descricao" 
   } 
- 
   return axios
     .post("/utente/pedirprestacao",data3,{
       headers: { Authorization: `Bearer ${userData.token}` },
@@ -109,53 +109,26 @@ function SaveProfissionalCliente() {
     
 };
 
-
 function EditarUtente() {
   setLoader(true)
   if(!validateForm()){setLoader(false); return false;}
   var data3={
-    nome: data1.nome,
-    nif: data1.nif,
-    email: data1.email,
-    caixa_postal: data1.caixa_postal,
-    id_tipo_documento: data1.id_tipo_documento,
-    numero_documento: data1.numero_documento,
-    numero_porta: data1.numero_porta,        
-    tel: data1.tel,
-    tel2: data1.tel2,
-    morada: data1.morada,
-    ponto_referencia: data1.ponto_referencia,
-    data_nasc: data1.data_nasc,
-    id_sexo : data1.id_sexo,
-    tipo_utente: 1,
-    anexos:data,
-    periodo_contribute: data1.periodo_id,
-    id_distrito: data1.id_distrito,
     id_banco: data1.banco_id,
-    id_estado_civil: data1.id_estado_civil,
-	  proficao: data1.proficao,
-    id_nacionalidade: data1.pais_id,
-	  data_inicio_actividade: data1.data_inicio_actividade,
+    iban: data1.iban_conta,
+    nib: data1.nib,
     n_conta: data1.n_conta,
-    iban_conta: "11111111111111111111",
-    nib_conta: data1.nib_conta,    
-    nome_pai: data1.nome_pai,
-    nome_mae: data1.nome_mae,
-    id_escalao: data1.escalao_id,
-    id_esquema: data1.esquema_id,
-    esta_instcrito: data1.antigoNISS ==="Sim" ? true : false,
-    empresa_que_trabalhou: data1.empresa_que_trabalhou,
-    tem_outro_trabalho: false,
-    outra_entidade_patronal: "",
-    outra_local_trabalho: "",
-    recebe_pensao: false,
-    pensao_que_recebe: "",  
-    codigo_antigo:data1.codigo_antigo,
-    id_utente_contribute:data1.id_utente_contribute
+    id_utente: data1.id_utente,
+    n_dias: data1.n_dias,
+    data_inicio: data1.data_inicio,
+    id_prestacao: 4,        
+    tel: data1.tel,
+    email: data1.email,
+    anexos:data,
+    observacao: "data1.descricao" 
   } 
  
   return axios
-    .patch("/utente/"+id,data3,{
+    .patch("/editPedirprestacao/"+id,data3,{
       headers: { Authorization: `Bearer ${userData.token}` },
     })
     .then((response) => {
@@ -173,32 +146,32 @@ function EditarUtente() {
     });
     
 };
-            function clean(){
-            data1.nome="";
-            data1.nif="";
-            data1.email="";
-            data1.caixa_postal="";
-            data1.id_tipo_documento="";
-            data1.numero_documento="";
-            data1.numero_porta="";
-            data1.tel="";
-            data1.morada="";
-            data1.ponto_referencia="";
-            data1.data_nasc="";
-            data1.id_sexo="";
-            data1.id_distrito="";
-            data1.banco_id="";
-            data1.id_estado_civil="";
-            data1.pais_id="";
-            data1.data_inicio_actividade="";
-            data1.n_conta="";
-            data1.nib_conta="";
-            data1.nome_pai="";
-            data1.nome_mae="";
-            data1.escalao_id="";
-            data1.esquema_id="";
-            setData([{}])
-            }
+function clean(){
+  data1.nome="";
+  data1.nif="";
+  data1.email="";
+  data1.caixa_postal="";
+  data1.id_tipo_documento="";
+  data1.numero_documento="";
+  data1.numero_porta="";
+  data1.tel="";
+  data1.morada="";
+  data1.ponto_referencia="";
+  data1.data_nasc="";
+  data1.id_sexo="";
+  data1.id_distrito="";
+  data1.banco_id="";
+  data1.id_estado_civil="";
+  data1.pais_id="";
+  data1.data_inicio_actividade="";
+  data1.n_conta="";
+  data1.nib_conta="";
+  data1.nome_pai="";
+  data1.nome_mae="";
+  data1.escalao_id="";
+  data1.esquema_id="";
+  setData([{}])
+}
 
             
   return (
@@ -210,7 +183,6 @@ function EditarUtente() {
 
           <DadosConta className={styles.card} data1={data1} setData1={setData1}/>
          
-          
           <Periodo className={styles.card} data1={data1} setData1={setData1}/>
                   
           <DadosAnexo className={styles.card} data1={data1} setData1={setData1} data={data} setData={setData}/>

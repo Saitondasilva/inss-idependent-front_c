@@ -5,7 +5,7 @@ import Checkbox from "../../../../components/Checkbox";
 import Icon from "../../../../components/Icon";
 import Row from "./Row";
 
-const Market = ({ items,id_estado_utente }) => {
+const Market = ({ items,id_prestacao }) => {
   const [chooseAll, setСhooseAll] = useState(false);
 
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -30,8 +30,11 @@ const Market = ({ items,id_estado_utente }) => {
             />
           </div>
           <div className={styles.col}>Beneficiário/Contribuições</div>          
-          <div className={styles.col}>Processo</div>
-          <div className={styles.col}>estado</div>          
+          <div className={styles.col}>NISS</div>
+          <div className={styles.col}>Nº Processo</div>
+          <div className={styles.col}>Estado</div>          
+          <div className={styles.col}>Data Reg</div>          
+          <div className={styles.col}>Tipo Prestação</div>          
           
           <div className={styles.col}>Calcular</div>
           
@@ -40,23 +43,23 @@ const Market = ({ items,id_estado_utente }) => {
         
         {items.map((x, index) => (
           // Listar todos caso o estado for 0
-          id_estado_utente === 0 ?
-          (<Row
-            item={x}
-            key={index}
-            up={items.length - index <= 2}
-            value={selectedFilters.includes(x.id)}
-            onChange={() => handleChange(x.id)}
-          />) :
-          (x.id_estado === id_estado_utente &&
+          id_prestacao > 0 ?
+          (x.id_prestacao === id_prestacao &&
+            <Row
+              item={x}
+              key={index}
+              up={items.length - index <= 2}
+              value={selectedFilters.includes(x.id)}
+              onChange={() => handleChange(x.id)}
+            />) :
+          (
           <Row
-            item={x}
-            key={index}
-            up={items.length - index <= 2}
-            value={selectedFilters.includes(x.id)}
-            onChange={() => handleChange(x.id)}
-          />
-
+          item={x}
+          key={index}
+          up={items.length - index <= 2}
+          value={selectedFilters.includes(x.id)}
+          onChange={() => handleChange(x.id)}
+        />
           )
         ))}
       </div>
