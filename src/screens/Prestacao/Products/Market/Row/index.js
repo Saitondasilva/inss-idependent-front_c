@@ -46,23 +46,6 @@ const Row = ({ item, value, onChange, up, id}) => {
        
        
 
-        <div className={styles.col}>
-        <Control 
-            item={item}
-            className={styles.control}
-            visibleActions={visibleActions}
-            setVisibleActions={setVisibleActions}
-            up={up}
-            id={item.id}
-          />
-          {/*item.status ? (
-            <div className={cn("status-green", styles.status)}>Active</div>
-          ) : (
-            <div className={cn("status-red", styles.status)}>Deactive</div>
-          )*/}
-         
-          </div>
-          
       </div>
       
       <ModalPrestacao

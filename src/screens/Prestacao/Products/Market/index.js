@@ -34,10 +34,7 @@ const Market = ({ items,id_prestacao }) => {
           <div className={styles.col}>Nº Processo</div>
           <div className={styles.col}>Estado</div>          
           <div className={styles.col}>Data Reg</div>          
-          <div className={styles.col}>Tipo Prestação</div>          
-          
-          <div className={styles.col}>Calcular</div>
-          
+          <div className={styles.col}>Tipo Prestação</div>            
           
         </div>
         

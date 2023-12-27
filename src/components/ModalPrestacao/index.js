@@ -6,6 +6,7 @@ import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 import styles from "./ModalProduct.module.sass";
 import Icon from "../Icon";
 import Product from "./Product";
+import DadosPessoais from "./Product/DadosPessoais";
 
 const ModalProduct = ({ item,visible, onClose }) => {
   const escFunction = useCallback(
@@ -43,7 +44,7 @@ const ModalProduct = ({ item,visible, onClose }) => {
           </button>
         </div>
         <div className={styles.outer}>
-          <Product item={item}/>
+        <DadosPessoais item={item} />
         </div>
       </div>
     ),
