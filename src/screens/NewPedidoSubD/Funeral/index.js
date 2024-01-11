@@ -9,14 +9,13 @@ import Editor from "../../../components/Editor";
 import Dropdown from "../../../components/Dropdown";
 import axios from "axios";
 import Search from "../../AnaliseProgresso/Search";
+import DadosAnexo from "./../DadosAnexo";
 
-// const optionsGenero      = ["Masculino", "Feminino", "Outro"];
-// const optionsEstadocivil = ["Solteiro", "Casado", "Divorciado", "Viuvo"];
+
 const optionsLinguagem      = ["Português", "Inglês", "Françes", "Espanhol"];
 const optionsNacionalidade  = ["Brasil", "Portugal", "França", "Espanha"];
-// const optionsPais        = ["Brasil", "Portugal", "França", "Espanha"];
 
-const NameAndDescription = ({ className, handleSubmit, data1, setData1 }) => {
+const NameAndDescription = ({ className, handleSubmit, data1, setData1, data, setData }) => {
   const [content, setContent] = useState();
   const [nome, setNome] = useState();
   const [nome_pai, setPai] = useState();
@@ -24,9 +23,19 @@ const NameAndDescription = ({ className, handleSubmit, data1, setData1 }) => {
   const [dataNasc, setDataNasc] = useState();
   const [valorPrestacaoMensal, setValorPrestacaoMensal] = useState();
   const [ultimaContribuicao, setUltimaContribuicao] = useState();
+  const [optionsBanco, setOptionsBanco] = useState(['--Banco--','AFRILAND','ECOBANK','BGFI']);
+  const [banco, setBanco] = useState(optionsBanco[0]);
+  const [bancoID, setBancoID] = useState([]);
  
   data1.descricao=content;
   
+  function read(){
+    if(data1.id>0){
+      // Banco
+      var position        =   bancoID.indexOf(data1.id_banco)
+      setBanco(optionsBanco[position])
+    }
+  }
   function onChangeData(e) {
     console.log(e)
     setData1((data1) => ({
@@ -49,11 +58,9 @@ function getUtenteByNif(){
     if(response.data.data.Utente.length > 0){
       setNome(response.data.data.Utente[0].nome)
       setPai(response.data.data.Utente[0].nome_pai)
-      data1.numero=response.data.data.Utente[0].codigo
+      data1.codigo=response.data.data.Utente[0].codigo
       setDataNasc(response.data.data.Utente[0].data_nasc)
       data1.id_utente=response.data.data.Utente[0].id
-      CalcularContribuicaoMensal();
-      calcularMesesEmDivida();
     }else{
       cleanContrib()
     
@@ -69,7 +76,7 @@ function getUtenteByNif(){
 function getUtenteByCode(){
   data1.vistoDetalhe=false;
   return axios
-  .get("/utente/getUtenteByCode/"+data1.numero)
+  .get("/utente/getUtenteByCode/"+data1.codigo)
   .then((response) => {
     console.log("UTENTE",response.data.data.Utente)
     if(response.data.data.Utente.length > 0){
@@ -78,8 +85,6 @@ function getUtenteByCode(){
       data1.nif=response.data.data.Utente[0].nif
       setDataNasc(response.data.data.Utente[0].data_nasc)
       data1.id_utente=response.data.data.Utente[0].id
-     CalcularContribuicaoMensal();
-     calcularMesesEmDivida();
     }else{
       cleanContrib()
     }
@@ -95,62 +100,52 @@ function cleanContrib(){
   setDataNasc("")
   setValorPrestacaoMensal("")
   setUltimaContribuicao("")
-  data1.numero=""
+  data1.codigo=""
   data1.id_utente=null
 }
-function CalcularContribuicaoMensal(){
+
+function getBanco(){
   return axios
-  .get("/utente/calcularValorContribuicaoMensal/"+data1.id_utente)
+  .get("/getBanco")
   .then((response) => {
-    data1.valorPrestacaoMensal=response.data.data.valor;
-    setValorPrestacaoMensal(response.data.data.valor)
-  })
-  .catch((err) => {
-    setValorPrestacaoMensal("")
-    console.log("Error", err);
-    return err.response;
-  });
-}
-function calcularMesesEmDivida(){
-  return axios
-  .get("/utente/calcularMesesEmDivida/"+data1.id_utente)
-  .then((response) => {
-   if (typeof response.data.data.UltimoMesPago === 'undefined' & typeof response.data.data.UltimoAnoPago === 'undefined'){
-      data1.TemContribuicao=response.data.data.TemContribuicao;
-      data1.SomaPagUltimoMes=0;
-      data1.UltimoDiaPago=response.data.data.DiaRegistro
-      data1.UltimoAnoPago=response.data.data.AnoRegistro
-      data1.UltimoMesPago=response.data.data.MesRegistro
-      
-      setUltimaContribuicao("Registrado em: "+response.data.data.DiaRegistro+'/'+response.data.data.MesRegistro+'/'+response.data.data.AnoRegistro)
-    
-    }else {
-      data1.TemContribuicao=response.data.data.TemContribuicao;
-      data1.SomaPagUltimoMes=response.data.data.SomaPagUltimoMes;
-      data1.UltimoAnoPago=response.data.data.UltimoAnoPago
-      data1.UltimoMesPago=response.data.data.UltimoMesPago
-      
-      setUltimaContribuicao('Pago: '+response.data.data.SomaPagUltimoMes+' Dbs, para '+response.data.data.UltimoMesPago+'/'+response.data.data.UltimoAnoPago)
-      
+     var a = new Array();
+     var b = new Array();
+    for(var i=0; i<response.data.data.length; i++){
+      a.push(response.data.data[i].nome)
+      b.push(response.data.data[i].id)
     }
+    setOptionsBanco(a);
+    setBancoID(b);
+    setBanco([optionsBanco[0]])
   })
   .catch((err) => {
-    setUltimaContribuicao("")
     console.log("Error", err);
     return err.response;
   });
 }
+useEffect(() => {   
+  getBanco()
+ },[]);
+ useEffect(() => {
+   var position        =   optionsBanco.indexOf(banco);
+       data1.banco_id=bancoID[position];
+ }, [banco]);
+
+ useEffect(() => {
+   read()
+ }, [data1]);
 
 
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Identificação Do Beneficiário"
+      title="Subsídio de Funeral"
       classTitle="title-green"      
     >
       
-      <div className={styles.description}>
-      <hr></hr>
+      
+
+<h3 className={styles.title} >Dados Bancários</h3><hr></hr>
       <div className={styles.group}>
       
       <TextInput
@@ -168,13 +163,13 @@ function calcularMesesEmDivida(){
         <TextInput
           className={styles.field}
           label="Numero de Beneficiário *"
-          name="numero"
+          name="codigo"
           type="text"
           icon="search"
           required
           onChange={onChangeData}
           onKeyUp={getUtenteByCode}
-          value={data1.numero}
+          value={data1.codigo}
           
         />
         </div>
@@ -225,38 +220,99 @@ function calcularMesesEmDivida(){
           readOnly
         />
 
-<TextInput
-          className={styles.field}
-          label="Genero"
-          name="ultimo_pagamento"
-          type="text"
-          required
-          value={ultimaContribuicao}
-          readOnly
-        />
-         <TextInput
-          className={styles.field}
-          label="Genero"
-          name="ultimo_pagamento"
-          type="text"
-          required
-          value={ultimaContribuicao}
-          readOnly
-        /> <TextInput
-        className={styles.field}
-        label="Genero"
-        name="ultimo_pagamento"
-        type="text"
-        required
-        value={ultimaContribuicao}
-        readOnly
-      />
+      
+
+      </div><br></br>
+
+      <h2 className={styles.title} >Dados Bancários</h2><hr></hr>
+      
+      <div className={styles.group}>        
         
+        <span className={styles.field}>
+       <Dropdown
+          className={styles.field1}
+          label="Banco "
+          name="banco"
+          setValue={setBanco}
+          options={optionsBanco}
+          onChange={data1.banco=banco}
+          value={banco}
+        /> 
+       </span>
+       <TextInput
+          className={styles.field}
+          label="NIB "
+          name="nib"
+          type="text"
+          mask="99999999999999999999"
+          required
+          onChange={onChangeData}
+          value={data1.nib}
+        />
+      
+      <TextInput
+          className={styles.field}
+          label="IBAN "
+          name="iban"
+          type="text"
+          required
+          onChange={onChangeData}
+          value={data1.iban}
+        />
+        
+           <TextInput
+          className={styles.field}
+          label="Nº Conta "
+          name="n_conta"
+          type="number"
+          required
+          onChange={onChangeData}
+          value={data1.n_conta}
+        />
+     
+          
+      </div>
+      
+     
+  
+      <br></br>
 
+<h2 className={styles.title} >Periodo de Baixa</h2><hr></hr>
+      
+       
+      <div className={styles.group}>   
+        
+        
+      <TextInput
+          className={styles.field}
+          label="Data de Inicio*"
+          name="data_inicio"
+          type="date"
+          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          required
+          onChange={onChangeData}
+          value={data1.data_inicio}
+        />
+  
+  <TextInput
+          className={styles.field}
+          label="Numero de dias*"
+          name="n_dias"
+          type="number"
+          tooltip="Maximum 100 characters. No HTML or emoji allowed"
+          required
+          onChange={onChangeData}
+          value={data1.n_dias}
+        />
+   
       </div>
 
-      </div>
+
+     { /*<DadosAnexo className={styles.card} data1={data1} setData1={setData1} data={data} setData={setData}/>*/}
+     
+
     </Card>
+
   );
 };
 

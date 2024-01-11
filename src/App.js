@@ -45,7 +45,7 @@ import NewAgregados from "./screens/NewAgregados";
 import NewContribuicao from "./screens/NewContribuicao";
 /********************* */
 import NewPedidoSubD from "./screens/NewPedidoSubD";
-import NewPedidoPensaoSob from "./screens/NewPedidoPensaoSob";
+
 
 /************************************ */
 import Teste from "./screens/Teste";
@@ -219,22 +219,13 @@ function App() {
             path="/Subsideo/add/:id?"
             element={
               <ProtectedRoute>
-                <Page title="Pedido de Subsídio de Maternidade">
+                <Page title="Pedido das Prestações">
                   <NewPedidoSubD />
                 </Page>
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/Pensao/add/1"
-            element={
-              <ProtectedRoute>
-                <Page title="Pedido de Pensão de Sobrivivencia">
-                  <NewPedidoPensaoSob />
-                </Page>
-              </ProtectedRoute>
-            }
-          />
+      
 
           <Route
             path="/agenda/profissional"
@@ -351,7 +342,7 @@ function App() {
             path="/payment/user/type/:id_type_user"
             element={
               <Page title="Pagamentos">
-                <ListaUtente/>
+               <Prestacao/>
               </Page>
             }
           />

@@ -139,7 +139,7 @@ useEffect(() => {
   return (
     <Card
       className={cn(styles.card, className)}
-      title="Subsídio de Doença"
+      title="Pensão de Sobrivivencia"
       classTitle="title-green"      
     >
       
@@ -308,7 +308,7 @@ useEffect(() => {
       </div>
 
 
-    
+    { /* <DadosAnexo className={styles.card} data1={data1} setData1={setData1} data={data} setData={setData}/>*/}
      
 
     </Card>

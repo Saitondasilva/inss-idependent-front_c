@@ -4,12 +4,16 @@ import TooltipGlodal from "../../components/TooltipGlodal";
 import Modal from "../../components/Modal";
 import Schedule from "../../components/Schedule";
 import DadosPessoais from "./DadosPessoais";
-import DadosConta from "./DadosBancaria";
 
-import Periodo from "./Periodo";
 import DadosAnexo from "./DadosAnexo";
 
 import DadosProfissi from "./DadosProfissi";
+
+import SubMaternid from "./SubMaternid";
+import Funeral from "./Funeral";
+import Velhice from "./Veclhice";
+import Invalidez from "./Invalidez";
+import Sobrivivencia from "./Sobrivivencia";
 import Panel from "./Panel";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -41,12 +45,12 @@ function validateForm(){
     setSmsError("Utente não Encontrado")
     return false;
   }
-  if(!data1.banco_id || data1.banco_id===""){
+  if(!data1.banco || data1.banco===""){
     setSmsError("Por favor preencha o banco")
     return false;
   }
-  if(!data1.nib_conta || data1.nib_conta===""){
-    setSmsError("Por favor preencha o nnib da conta")
+  if(!data1.nib || data1.nib===""){
+    setSmsError("Por favor preencha o nib da conta")
     return false;
   }
   return true;
@@ -165,17 +169,42 @@ function AlterarPedido() {
     <>
       <div className={styles.row}>
         <div className={styles.wrapper}>
+          
+          {   id==="-1"&&     
          
-          <DadosPessoais className={styles.card} data1={data1} setData1={setData1} />
+          <DadosPessoais className={styles.card} data1={data1} setData1={setData1} />   }          
+     
+        
+       {   id==="-2"&&   
 
-          <DadosConta className={styles.card} data1={data1} setData1={setData1}/>
-         
-          <Periodo className={styles.card} data1={data1} setData1={setData1}/>
-                  
-          <DadosAnexo className={styles.card} data1={data1} setData1={setData1} data={data} setData={setData}/>
-          
-          <DadosProfissi className={styles.card} data1={data1} setData1={setData1}/>         
-          
+       <SubMaternid className={styles.card} data1={data1} setData1={setData1}/> 
+
+       }
+        {   id==="-3"&&   
+
+        <Funeral className={styles.card} data1={data1} setData1={setData1}/> 
+
+        }
+        {   id==="-4"&&   
+
+        <Velhice className={styles.card} data1={data1} setData1={setData1}/> 
+
+        }
+        {   id==="-5"&&   
+
+        <Invalidez className={styles.card} data1={data1} setData1={setData1}/> 
+
+        }
+
+      {   id==="-6"&&   
+
+      <Sobrivivencia className={styles.card} data1={data1} setData1={setData1}/> 
+
+      }
+    
+     <DadosAnexo className={styles.card} data1={data1} setData1={setData1} data={data} setData={setData}/>
+
+    <DadosProfissi className={styles.card} data1={data1} setData1={setData1}/> 
  
         </div>
        

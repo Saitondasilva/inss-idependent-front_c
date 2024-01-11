@@ -13,7 +13,7 @@ import Products from "./Products";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const navigation=["Perfil", "Agregado", "Contribuição" , "Prestação" , "Histórico"];
+const navigation=["Perfil", "Anexos", "Agregado", "Contribuição" , "Prestação" , "Histórico"];
 const CustomerList = ({ className, item}) => {
 
   //const [navigation, setnavigation]=useState(["Perfil", "Agregado", "Contribuição" , "Prestação" , "Histórico"]);
@@ -70,13 +70,13 @@ const CustomerList = ({ className, item}) => {
       <Card
         className={styles.card}
         
-        title="Pensionista"
+        title="Histórico do Utente"
         classTitle={cn("title-purple", styles.title)}
         classCardHead={cn(styles.head, { [styles.hidden]: visible })}
         >
         
           <>
-          
+          <div className={styles.link}>
           <p>Tipo Utente: Beneficiário</p>
           <hr></hr>
             <h4>Nº Utente: {data1.codigo} </h4>    
@@ -94,7 +94,7 @@ const CustomerList = ({ className, item}) => {
             <p>Esquema: {data1.esquema}</p>  
             <hr ></hr>
             <p>Estado: Activo</p>
-     
+            </div>
         <br></br><br></br>
       <h3>Menu</h3>
         

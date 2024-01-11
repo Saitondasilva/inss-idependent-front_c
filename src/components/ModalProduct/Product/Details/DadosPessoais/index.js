@@ -3,14 +3,14 @@ import cn from "classnames";
 import { Link } from "react-router-dom";
 import styles from "./NameAndDescription.module.sass";
 import Card from "../../../../../components/Card";
-
+import Icon from "../../../../../components/Icon";
 import TextInput from "../../../../../components/TextInput";
 import axios from "axios";
 import Tooltip from "../../../../Tooltip";
 import Switch from "../../../../Switch";
 import Loader from "../../../../Loader";
 
-const NameAndDescription = ({ className, item}) => {
+const NameAndDescription = ({ className, item, id}) => {
 
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
@@ -516,6 +516,19 @@ const NameAndDescription = ({ className, item}) => {
       }
       </div>
       </div>
+
+      <div className={styles.description}>
+        <h2 className={styles.title}>Comprovativo</h2><hr></hr>
+        <button className={styles.button}>
+      <Link className="{style.control}"          
+           to={"/utente/Print/"+item.id}>                    
+        
+        <h2>Imprimir Compravativo</h2>
+        
+        </Link> 
+      </button>
+        
+        </div>
       </Card>
   );
 };

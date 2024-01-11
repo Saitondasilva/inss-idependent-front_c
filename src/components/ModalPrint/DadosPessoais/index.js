@@ -518,6 +518,8 @@ const NameAndDescription = ({ className, item, id}) => {
       </div>
       </div>
       
+      
+      
       </Card>
   );
 };

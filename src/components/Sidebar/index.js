@@ -70,11 +70,7 @@ var navigation=[];
       }
     ],
   },
-  {
-    title: "Pagamentos Efectuados",
-    icon: "promotion",
-    url: "/profissional",
-  },
+
   {
     title: "Estatística",
     url: "/income/earning",
@@ -88,11 +84,7 @@ var navigation=[];
       {
         title: "Autorização DG",
         url: "/payment/user/type/1",
-      },
-      {
-        title: "Autorização DF",
-        url: "/payment/user/type/2",
-      },
+      },      
       {
         title: "Autorização DSS",
         url: "/payment/user/type/3",
@@ -100,6 +92,28 @@ var navigation=[];
       
     ],
   },
+
+  {
+    title: "Pagamentos das Atribuições",
+    slug: "income",
+    icon: "activity",
+    dropdown: [
+      {
+        title: "Autorização DAF",
+        url: "/payment/user/type/1",
+      },      
+      {
+        title: "Efectuar Pagamentos",
+        url: "/payment/user/type/3",
+      },
+      {
+        title: "Pagamentos Efectuados",
+        url: "/payment/user/type/3",
+      },
+      
+    ],
+  },
+
   {
     title: "Parametrização",
     slug: "income",

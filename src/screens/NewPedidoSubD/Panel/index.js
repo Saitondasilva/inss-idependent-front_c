@@ -37,7 +37,7 @@ const Panel = ({setVisiblePreview, setVisibleSchedule, SaveProfissionalCliente, 
         {smsError!=="" && <p style={{color:"red"}}><Icon name="close-circle" size="24" />{smsError}</p>}
       </div>
       <div className={styles.btns}>
-        {utente_id ? 
+        {utente_id>0? 
         ( <button className={cn("button", styles.button)} onClick={AlterarPedido} ><Icon name="edit" size="24" />Aterar  </button>)
         :
         (<button className={cn("button", styles.button)} onClick={SaveProfissionalCliente} ><Icon name="add" size="24" />Guardar  </button>)

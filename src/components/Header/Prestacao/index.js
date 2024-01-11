@@ -77,7 +77,7 @@ const Prestacao= ({ className }) => {
         <NavLink
                     className={cn(styles.item)}
                     activeClassName={styles.active}
-                    to="/Subsideo/add"
+                    to="/Subsideo/add/-1"
                     key={0}
                   >                 
                     Pedido de Subídio de Doença Comum
@@ -85,7 +85,7 @@ const Prestacao= ({ className }) => {
         <NavLink
                     className={cn(styles.item)}
                     activeClassName={styles.active}
-                    to="/Subsideo/add/1"
+                    to="/Subsideo/add/-2"
                     key={0}
                   >                 
                     Pedido de Subídio de Parentalidade (Maternidade)
@@ -93,7 +93,7 @@ const Prestacao= ({ className }) => {
         <NavLink
                     className={cn(styles.item)}
                     activeClassName={styles.active}
-                    to="/Subsideo/add/2"
+                    to="/Subsideo/add/-3"
                     key={0}
                   >                 
                     Pedido de Subídio de Funeral
@@ -102,21 +102,29 @@ const Prestacao= ({ className }) => {
         <NavLink
                     className={cn(styles.item)}
                     activeClassName={styles.active}
-                    to="/Pensao/add"
+                    to="/Subsideo/add/-4"
+                    key={0}
+                  >                 
+                    Pedido de Pensão de Velhive
+       </NavLink>
+       <NavLink
+                    className={cn(styles.item)}
+                    activeClassName={styles.active}
+                    to="/Subsideo/add/-5"
                     key={0}
                   >                 
                     Pedido de Pensão de Velhive/Invalidez
-                  </NavLink>
+       </NavLink>
                 
 
-                  <NavLink
+      <NavLink
                     className={cn(styles.item)}
                     activeClassName={styles.active}
-                    to="/Pensao/add/1"
+                    to="/Subsideo/add/-6"
                     key={0}
                   >                 
                     Pedido de Pensão de Sobrivivencia
-                  </NavLink>
+      </NavLink>
 
                   
           {/*items.map((item, index) => (
