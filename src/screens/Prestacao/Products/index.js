@@ -92,9 +92,7 @@ const Products = ({ className, data1, setData1 }) => {
     });
   
 },[]);
-{/*get(`/utente/getallpedidoprestacao?page=${page}&page_size=${page_size}`,{
-        headers: { Authorization: `Bearer ${userData.token}` },
-      })*/}
+
 
 function GetAllPedidoPrestacao(page=1) {
   var user = localStorage.getItem("userData");

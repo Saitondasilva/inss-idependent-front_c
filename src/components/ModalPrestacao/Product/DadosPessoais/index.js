@@ -56,7 +56,7 @@ const NameAndDescription = ({ className, item}) => {
   }
  function calcTotal(){
   var total = 0;
-  total=1*APagar+1*data1.vProposto;
+  total=1*data1.vProposto;
   setTotalAPagar(total)
  }
 
@@ -91,18 +91,17 @@ const NameAndDescription = ({ className, item}) => {
     }
   };
 
-  function Validacao(){
+  function ValidaCalculo(){
     if(resolution)return false;
     var confirmed = window.confirm('Tem certeza ues desejas validar esse processo?');
     if(confirmed){
         return axios
-        .get("/utente/validarUtente/"+item.id,{
+        .post("/utente/validarCalculo/"+item.id,{
           headers: { Authorization: `Bearer ${userData.token}`},
         })
         .then((response) => {
-          const rs = response.data.data.Utente
-          setValido(rs.id_estado);
-          if(rs.id_estado>1)setResolution(true)
+          const rs = response.data.data
+          console.log("SSSSSSSSSSSSSSSSS", rs)
         })
         .catch((err) => {
           console.log("Error", err);
@@ -285,7 +284,7 @@ const NameAndDescription = ({ className, item}) => {
           <button className={cn("button-stroke-red", styles.button)} >Recuar Processo</button>
         </div>
                 <div className={styles.field}>
-                <button className={cn("button-stroke-green", styles.button)} >Validar & Avançar</button>
+                <button className={cn("button-stroke-green", styles.button)} onClick={ValidaCalculo}>Validar & Avançar</button>
                 </div>   
           </div> 
       </div> 
