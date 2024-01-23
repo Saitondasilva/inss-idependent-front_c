@@ -38,10 +38,12 @@ const NewUtente = () => {
 
 function validateForm(){
   //Validação de Dados do Utente 
+  
   if(!data1.id_tipo_documento || data1.id_tipo_documento===""){
     setSmsError("Por favor preencha o Tipo do Documento")
     return false;
   }
+  
   if(!data1.numero_documento || data1.numero_documento===""){
     setSmsError("Por favor preencha o nº Documento")
     return false;

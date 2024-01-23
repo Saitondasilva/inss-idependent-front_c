@@ -71,27 +71,30 @@ const NameAndDescription = ({ className, data1, setData1 }) => {
        </span>      
           
         { antigoNISS==="Sim"&&(
-       <TextInput
-          className={styles.field}
-          label="Se sim  diz o nome da Entidade Empregadora"
-          name="empresa_que_trabalhou"
-          type="text"
-          required
-          onChange={onChangeData}
-          value={data1.empresa_que_trabalhou}
-        />)}
-         { antigoNISS==="Sim"&&(
-         <TextInput
-          className={styles.field}
-          label="Antigo NISS *"
-          name="codigo_antigo"
-          type="number"
-          required
-          onChange={onChangeData}
-          value={data1.codigo_antigo}
-        />      
-  
+          <>
+            <TextInput
+            className={styles.field}
+            label="Se sim  diz o nome da Entidade Empregadora"
+            name="empresa_que_trabalhou"
+            type="text"
+            required
+            onChange={onChangeData}
+            value={data1.empresa_que_trabalhou}
+          />
+            <TextInput
+            className={styles.field}
+            label="Antigo NISS *"
+            name="codigo_antigo"
+            type="number"
+            required
+            onChange={onChangeData}
+            value={data1.codigo_antigo}
+            />
+          </>
+       
+        
         )}
+       
         
       </div>
     
