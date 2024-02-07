@@ -94,14 +94,20 @@ const NameAndDescription = ({ className, item}) => {
   function ValidaCalculo(){
     if(resolution)return false;
     var confirmed = window.confirm('Tem certeza ues desejas validar esse processo?');
+    console.log("userData.token=========", userData.token)
+    var data={
+      valor_calculado: APagar,
+      valor_proposto: data1.vProposto,
+      valor_final: TotalAPagar,
+    }
     if(confirmed){
         return axios
-        .post("/utente/validarCalculo/"+item.id,{
+        .post("/utente/validarCalculo/"+item.id,data,{
           headers: { Authorization: `Bearer ${userData.token}`},
         })
         .then((response) => {
-          const rs = response.data.data
-          console.log("SSSSSSSSSSSSSSSSS", rs)
+          const rs = response.data
+          setSmsSuccess(rs.message)
         })
         .catch((err) => {
           console.log("Error", err);
@@ -209,13 +215,15 @@ const NameAndDescription = ({ className, item}) => {
           <p>Observação: {item.observacao}</p> 
           <hr></hr>
         </div>
+        
 
+      { !((item.valor_final * 1) > 0) && (
        <div className={styles.description}>
-        <h2 className={styles.title}>Calculo</h2><hr></hr>
+        <h2 className={styles.title}>Calculo </h2><hr></hr>
           <button className={cn("button", styles.button)} onClick={ApresentarCalculo}>
-                      <span className={styles.field}>
-                        Apresentar Calculo
-                      </span>
+              <span className={styles.field}>
+                Apresentar Calculo
+              </span>
           </button><br></br>
           <div className={styles.description}>
           <div className={styles.group}>
@@ -242,9 +250,7 @@ const NameAndDescription = ({ className, item}) => {
               </div> 
               <hr></hr>  
               </>
-              )
-              
-                  
+              )   
               )
             }
             <TextInput
@@ -264,6 +270,8 @@ const NameAndDescription = ({ className, item}) => {
           </div>
 
       </div>
+      )}
+
       <div className={styles.description}>
           <div className={styles.group}>
           <div className={styles.field}>
@@ -278,8 +286,8 @@ const NameAndDescription = ({ className, item}) => {
           />
            <div className={styles.info}>
             {loader && <Loader className={styles.loader} />} 
-            {smsSucess!=="" && <p style={{color:"green"}}>{smsSucess}</p>}
-            {smsError!=="" && <p style={{color:"red"}}>{smsError}</p>}
+            {smsSucess  !== "" && <p style={{color:"green"}}>{smsSucess}</p>}
+            {smsError   !== "" && <p style={{color:"red"}}>{smsError}</p>}
           </div><br></br>
           <button className={cn("button-stroke-red", styles.button)} >Recuar Processo</button>
         </div>
@@ -287,6 +295,7 @@ const NameAndDescription = ({ className, item}) => {
                 <button className={cn("button-stroke-green", styles.button)} onClick={ValidaCalculo}>Validar & Avançar</button>
                 </div>   
           </div> 
+        
       </div> 
       </Card>
   );

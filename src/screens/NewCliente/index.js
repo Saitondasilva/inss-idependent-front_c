@@ -190,7 +190,7 @@ function SaveProfissionalCliente() {
     outra_local_trabalho: "",
     recebe_pensao: false,
     pensao_que_recebe: "",  
-    codigo_antigo:data1.codigo_antigo
+    codigo_antigo:data1.codigo_antigo,
     
   } 
  
@@ -257,7 +257,8 @@ function EditarUtente() {
     recebe_pensao: false,
     pensao_que_recebe: "",  
     codigo_antigo:data1.codigo_antigo,
-    id_utente_contribute:data1.id_utente_contribute
+    id_utente_contribute:data1.id_utente_contribute,
+    data_inscricao:data1.data_inscricao
   } 
  
   return axios
