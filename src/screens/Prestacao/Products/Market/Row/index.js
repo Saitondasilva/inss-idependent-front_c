@@ -5,6 +5,7 @@ import Checkbox from "../../../../../components/Checkbox";
 import Balance from "../../../../../components/Balance";
 import ModalPrestacao from "../../../../../components/ModalPrestacao";
 import Control from "../../Control";
+import { useNavigate } from "react-router-dom";
 
 
 import { numberWithCommas } from "../../../../../utils.js";
@@ -12,6 +13,11 @@ import { numberWithCommas } from "../../../../../utils.js";
 const Row = ({ item, value, onChange, up, id}) => {
   const [visibleActions, setVisibleActions] = useState(false);
   const [visibleModalProduct, setVisibleModalProduct] = useState(false);
+  const navigate = useNavigate();
+  
+    const handleImprimir = () => {
+      navigate(`/imprimir-prestacao/${item.id}`); // Redireciona para página de impressão
+    };
 
   return (
     <>
@@ -42,9 +48,10 @@ const Row = ({ item, value, onChange, up, id}) => {
         <div className={styles.col}>{item.id_processo}</div>
         <div className={styles.col}>{item.estado}</div>
         <div className={styles.col}>{item.created_at}</div>
-        <div className={styles.col}>{item.descr_prestacao}</div>
-       
-       
+        <div className={styles.col}>{item.descr_prestacao}</div>       
+        <div className={styles.col}>
+          <button onClick={handleImprimir}>Imprimir</button>
+        </div>
 
       </div>
       

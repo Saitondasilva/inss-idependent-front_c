@@ -39,7 +39,7 @@ import GestaoContribuicao from "./screens/JornadaCliente";
 import CarteiraPesquisa from "./screens/CarteiraPesquisa";
 import AnaliseProgreso from "./screens/AnaliseProgresso";
 import NewCliente from "./screens/NewCliente";
-import UtenteEdit from "./screens/UtenteEdit";
+//import UtenteEdit from "./screens/UtenteEdit";
 import UtentePrint from "./screens/UtentePrint";
 import NewAgregados from "./screens/NewAgregados";
 import NewContribuicao from "./screens/NewContribuicao";
@@ -57,6 +57,10 @@ import ContributeHisto from "./screens/ContributeHisto";
 
 /************************** */
 import Prestacao from "./screens/Prestacao";
+import PagaPresta from "./screens/PagaPresta";
+import PrintPed from "./screens/Prestacao/Print";
+
+/*import Pagamento from "./screens/UtenteEdit";*/
 
 
 function App() {
@@ -173,7 +177,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-            <Route
+           {/*<Route
             path="/utente/edit/:id?"
             element={
               <ProtectedRoute>
@@ -182,7 +186,7 @@ function App() {
                 </Page>
               </ProtectedRoute>
             }
-          />
+          />*/}
           <Route
             path="/utente/Print/:id?"
             element={
@@ -238,15 +242,38 @@ function App() {
             }
           />
           <Route
-            path="/busca/profissional"
+            path="/Pagamento/:id"
             element={
               <ProtectedRoute>
-                <Page title="Encontre seu especialista">
-                  <BuscaProfissional />
+                <Page title="Pagamento das Prestações">
+                  <PagaPresta />
                 </Page>
               </ProtectedRoute>
               }
           />
+
+           <Route
+            path="/Pagamento/autor/:id"
+            element={
+              <ProtectedRoute>
+                <Page title="Autorização de Pagamento DAF">
+                  <PagaPresta />
+                </Page>
+              </ProtectedRoute>
+              }
+          />
+            <Route
+            path="/imprimir-prestacao/:id"
+            element={
+              <ProtectedRoute>
+                <Page title="Autorização de Pagamento DAF">
+                  <PrintPed />
+                </Page>
+              </ProtectedRoute>
+              }
+          />
+
+
           <Route
             path="/minhas/consultas"
             element={
@@ -341,15 +368,15 @@ function App() {
           <Route
             path="/payment/user/type/:id_type_user"
             element={
-              <Page title="Pagamentos">
-               <Prestacao/>
+              <Page title="Validação Chefe de DSS">
+               <Prestacao />
               </Page>
             }
           />
                <Route
             path="/Prestacao/Calculo/type/:id_type_user"
             element={
-              <Page title="Prestações">
+              <Page title="Cálculo prestação">
                 <Prestacao/>
               </Page>
             }
@@ -365,16 +392,16 @@ function App() {
           <Route
             path="/customers/overview"
             element={
-              <Page title="Customers">
-                <Customers />
+              <Page title=" Lista de Pensionista">
+                < CustomerList />
               </Page>
             }
           />
           <Route
             path="/customers/customer-list"
             element={
-              <Page title="Lista de Pensionista">
-                <CustomerList />
+              <Page title="Customers">
+                <Customers />
               </Page>
             }
           />

@@ -1,0 +1,23 @@
+/* print.css */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-content, .print-content * {
+    visibility: visible;
+  }
+
+  .print-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 40px;
+    font-family: Georgia, serif;
+  }
+
+  .no-print {
+    display: none;
+  }
+}

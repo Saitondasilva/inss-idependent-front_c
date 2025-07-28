@@ -70,7 +70,7 @@ const handlePageChange = (newPage) => {
 };
 function GetPesquisa() {
   return axios
-    .get("/utente/getUtenteByNIF/"+search.nome)
+    .get("/utente/getUtenteByNome/"+search.nome)
     .then((response) => {
      console.log(response.data.data)
      setProduto1(response.data.data.Utente);    

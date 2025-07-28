@@ -47,7 +47,7 @@ var navigation=[];
   {
     title: "Lista Pensionista",
     icon: "heart-fill",
-    url: "/customers/customer-list",
+    url: "/customers/overview",
   }, 
  
   {
@@ -71,12 +71,12 @@ var navigation=[];
     ],
   },
 
-  {
+  /*{
     title: "Estatística",
     url: "/income/earning",
     icon: "activity",
-  },
-  {
+  },*/
+  /*{
     title: "Autorizações",
     slug: "income",
     icon: "lock",
@@ -91,7 +91,7 @@ var navigation=[];
       },
       
     ],
-  },
+  },*/
 
   {
     title: "Pagamentos das Atribuições",
@@ -100,21 +100,17 @@ var navigation=[];
     dropdown: [
       {
         title: "Autorização DAF",
-        url: "/payment/user/type/1",
+        url: "/Pagamento/autor/2",
       },      
       {
-        title: "Efectuar Pagamentos",
-        url: "/payment/user/type/3",
+        title: "Pagamentos",
+        url: "/Pagamento/1",
       },
-      {
-        title: "Pagamentos Efectuados",
-        url: "/payment/user/type/3",
-      },
-      
+     
     ],
   },
 
-  {
+  /*{
     title: "Parametrização",
     slug: "income",
     icon: "setting",
@@ -136,7 +132,7 @@ var navigation=[];
         url: "/payment/user/type/4",
       }
     ],
-  },
+  },*/
   {
     title: "Utilizador",
     url: "/user/admin",

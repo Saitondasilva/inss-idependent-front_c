@@ -29,12 +29,18 @@ const Notification = ({ className }) => {
   const [userData, setuserData] = useState({});
   const [styleActive, setstyleActive] = useState(false);
 
-  useEffect(() => {
-    var user = localStorage.getItem("userData"); 
-    user==null?setuserData([]):setuserData(JSON.parse(user));
-    getNotification(JSON.parse(user));
-    notReadyCount(JSON.parse(user));
-  },[]);
+ useEffect(() => {
+  const storedUser = localStorage.getItem("userData");
+
+  if (storedUser) {
+    const parsedUser = JSON.parse(storedUser);
+    setuserData(parsedUser);
+    getNotification(parsedUser);
+    notReadyCount(parsedUser);
+  } else {
+    setuserData({});
+  }
+}, []);
   
   function getNotification(user){
     const result= axios
